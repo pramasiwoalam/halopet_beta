@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "128062410584",
+    "project_id": "halopet-backend",
+    "storage_bucket": "halopet-backend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128062410584:android:7cab0e9e8f8f8dc21d1f2d",
+        "android_client_info": {
+          "package_name": "com.example.halopet_beta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128062410584-7l543daca44k6pu4o96rjruo7v5o4vhn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.halopet_beta",
+            "certificate_hash": "aa29be51d014f36ba98354e77a4f2b51860fcd86"
+          }
+        },
+        {
+          "client_id": "128062410584-nb8eokmd23dpc0fot2fa13v3o3e45se9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSNDhXe8LkzuKAxl48H_2ceRHCnYDDes0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128062410584-nb8eokmd23dpc0fot2fa13v3o3e45se9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
