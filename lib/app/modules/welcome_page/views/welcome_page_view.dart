@@ -13,9 +13,13 @@ class WelcomePageView extends GetView<WelcomePageController> {
         centerTitle: true,
       ),
       body: Center(
-        child: Text(
-          'WelcomePageView is working',
-          style: TextStyle(fontSize: 20),
+        child: Column(
+          children: [
+            Text(
+              'WelcomePageView is working',
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
         ),
       ),
     );
