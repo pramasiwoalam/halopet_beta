@@ -16,6 +16,10 @@ dependencies:
   dropdown_search: ^2.0.1
   get_storage: ^2.0.3
   intl: ^0.17.0
+  awesome_dialog: ^2.1.2
+  flutter_svg: ^1.0.3
+  google_fonts: ^2.2.0
+  
 
 dev_dependencies: 
   flutter_lints: ^1.0.0
@@ -24,4 +28,11 @@ dev_dependencies:
 
 flutter: 
   uses-material-design: true
+  assets:
+    - assets/images/user.png
+    - assets/images/bg1.png
+    - assets/images/vet-card.jpg
+    - assets/images/grooming-card.jpg
+    - assets/images/hotel-card.jpg
+    - assets/images/petshop-1.jpg
 

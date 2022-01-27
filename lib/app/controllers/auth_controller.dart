@@ -1,8 +1,9 @@
-import 'dart:ffi';
-
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:halopet_beta/app/modules/homepage/controllers/homepage_controller.dart';
@@ -81,6 +82,15 @@ class AuthController extends GetxController {
         "role": "Member",
         "petshopOwner": false
       });
+
+      // AwesomeDialog(
+      //   context: context,
+      //   dialogType: DialogType.INFO,
+      //   animType: AnimType.BOTTOMSLIDE,
+      //   title: 'Welcome',
+      //   desc: 'Welcome to HaloPet',
+      //   btnOkOnPress: () {},
+      // )..show();
 
       Get.defaultDialog(
           title: "Register Success",

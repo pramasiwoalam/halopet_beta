@@ -24,6 +24,7 @@ abstract class Routes {
   static const SELLER_PROFILE = _Paths.SELLER_PROFILE;
   static const SELLER_ORDER_DETAIL = _Paths.SELLER_ORDER_DETAIL;
   static const ADMIN_PETSHOP_APPROVAL = _Paths.ADMIN_PETSHOP_APPROVAL;
+  static const WELCOME_PAGE = _Paths.WELCOME_PAGE;
 }
 
 abstract class _Paths {
@@ -49,4 +50,5 @@ abstract class _Paths {
   static const SELLER_PROFILE = '/seller-profile';
   static const SELLER_ORDER_DETAIL = '/seller-order-detail';
   static const ADMIN_PETSHOP_APPROVAL = '/admin-petshop-approval';
+  static const WELCOME_PAGE = '/welcome-page';
 }

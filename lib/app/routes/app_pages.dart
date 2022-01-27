@@ -44,6 +44,8 @@ import '../modules/seller_profile/bindings/seller_profile_binding.dart';
 import '../modules/seller_profile/views/seller_profile_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+import '../modules/welcome_page/bindings/welcome_page_binding.dart';
+import '../modules/welcome_page/views/welcome_page_view.dart';
 
 part 'app_routes.dart';
 
@@ -157,6 +159,11 @@ class AppPages {
       name: _Paths.ADMIN_PETSHOP_APPROVAL,
       page: () => AdminPetshopApprovalView(),
       binding: AdminPetshopApprovalBinding(),
+    ),
+    GetPage(
+      name: _Paths.WELCOME_PAGE,
+      page: () => WelcomePageView(),
+      binding: WelcomePageBinding(),
     ),
   ];
 }

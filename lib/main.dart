@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
           localStorage.write('currentUserId', snapshot.data?.uid);
           var userId = localStorage.read('currentUserId');
           if (snapshot.connectionState == ConnectionState.active) {
-            print('userId: $userId');
             return GetMaterialApp(
               home: snapshot.data != null && userId != null
                   ?

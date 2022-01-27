@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -126,7 +127,7 @@ class ProfileView extends GetView<ProfileController> {
                                         primary: Colors.brown),
                                     onPressed: () => profileController
                                         .changeRoleToMember(userId),
-                                    child: Text("Go Back As User")),
+                                    child: Text("Go Back As User"))
                               ],
                             );
                           } else {
@@ -138,7 +139,19 @@ class ProfileView extends GetView<ProfileController> {
                       }),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Colors.brown),
-                      onPressed: () => authController.logout(),
+                      onPressed: () {
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.INFO,
+                          animType: AnimType.BOTTOMSLIDE,
+                          title: 'Alert',
+                          desc: 'Are you sure want to logout?',
+                          btnCancelOnPress: () {},
+                          btnOkOnPress: () {
+                            authController.logout();
+                          },
+                        )..show();
+                      },
                       child: Text("Log Out")),
                 ],
               ),
