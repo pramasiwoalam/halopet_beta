@@ -9,6 +9,7 @@ import 'package:halopet_beta/app/modules/admin_home/views/admin_home_view.dart';
 import 'package:halopet_beta/app/modules/homepage/views/homepage_view.dart';
 import 'package:halopet_beta/app/modules/login/views/login_view.dart';
 import 'package:halopet_beta/app/modules/seller_home/views/seller_home_view.dart';
+import 'package:halopet_beta/app/modules/welcome_page/views/welcome_page_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 void main() async {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
             return GetMaterialApp(
               home: snapshot.data != null && userId != null
                   ?
-                  // AdminHomeView()
+                  // WelcomePageView()
                   StreamBuilder<Object>(
                       stream: authC.streamRole(),
                       builder: (context, snapshot) {
@@ -55,7 +56,9 @@ class MyApp extends StatelessWidget {
                           return Center(child: CircularProgressIndicator());
                         }
                       })
-                  : LoginView(),
+                  :
+                  // WelcomePageView(),
+                  LoginView(),
               getPages: AppPages.routes,
             );
           } else {

@@ -34,29 +34,40 @@ class HomepageView extends GetView<HomepageController> {
         () => BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
           currentIndex: homeController.index.value,
-          iconSize: 30,
+          iconSize: 35,
           unselectedFontSize: 10,
+          selectedFontSize: 16,
+          selectedItemColor: Color(0xffF9813A),
           showSelectedLabels: true,
           items: [
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
-                  color: Colors.white,
+                  color: Color(0xffF9813A),
                 ),
                 title: Text("Home"),
-                backgroundColor: const Color(0xff8e10c4)),
+                backgroundColor: const Color(0xfff2f2f2)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.book),
+                icon: Icon(
+                  Icons.book,
+                  color: Color(0xffF9813A),
+                ),
                 title: Text("Order"),
-                backgroundColor: const Color(0xff8e10c4)),
+                backgroundColor: const Color(0xfff2f2f2)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.history_edu),
+                icon: Icon(
+                  Icons.history_edu,
+                  color: Color(0xffF9813A),
+                ),
                 title: Text("History"),
-                backgroundColor: const Color(0xff8e10c4)),
+                backgroundColor: const Color(0xfff2f2f2)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: Icon(
+                  Icons.person,
+                  color: Color(0xffF9813A),
+                ),
                 title: Text("Profile"),
-                backgroundColor: const Color(0xff8e10c4)),
+                backgroundColor: const Color(0xfff2f2f2)),
           ],
           onTap: (index) {
             indexAction(index);
@@ -70,11 +81,20 @@ class HomepageView extends GetView<HomepageController> {
 class Home extends StatelessWidget {
   final authController = Get.find<AuthController>();
   final homeController = Get.put(HomepageController());
+  final localStorage = GetStorage();
 
   var cards = [
-    {'name': 'Grooming Service', 'image': 'assets/images/grooming-card.jpg'},
-    {'name': 'Pet Hotel', 'image': 'assets/images/hotel-card.jpg'},
-    {'name': 'Vet Available', 'image': 'assets/images/vet-card.jpg'}
+    {
+      'name': 'Grooming Service',
+      'image': 'assets/images/grooming-card.jpg',
+      'value': 1
+    },
+    {
+      'name': 'Vet Available',
+      'image': 'assets/images/vet-card.jpg',
+      'value': 2
+    },
+    {'name': 'Pet Hotel', 'image': 'assets/images/hotel-card.jpg', 'value': 3},
   ];
 
   @override
@@ -82,12 +102,14 @@ class Home extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
+    var userId = localStorage.read('userId');
     return Scaffold(
-      body: StreamBuilder<QuerySnapshot<Object?>>(
-          stream: homeController.streamData(),
+      resizeToAvoidBottomInset: false,
+      body: FutureBuilder<DocumentSnapshot<Object?>>(
+          future: homeController.getUserById('3MGhVANE5wME46JW0Lvm6lbBxIL2'),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.active) {
-              var data = snapshot.data!.docs;
+            if (snapshot.connectionState == ConnectionState.done) {
+              var data = snapshot.data!.data() as Map<String, dynamic>;
               return Container(
                 margin: const EdgeInsets.only(top: 8),
                 child: SafeArea(
@@ -95,7 +117,7 @@ class Home extends StatelessWidget {
                     physics: const ClampingScrollPhysics(),
                     children: <Widget>[
                       Container(
-                        height: height / 8,
+                        height: height / 7,
                         width: width / 2,
                         // color: Colors.lightBlue,
                         margin:
@@ -104,16 +126,50 @@ class Home extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
+                                // color: Colors.red,
                                 margin: EdgeInsets.only(
-                                    left: width * 0.05, top: height * 0.04),
-                                height: height / 7,
+                                    left: width * 0.05, top: height * 0.03),
+                                height: height / 5,
                                 width: width / 2,
                                 // color: Colors.black,
-                                child: Text(
-                                  'Hello, \nPenjahat Kelamin!',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Hello,',
+                                      style: GoogleFonts.inter(
+                                          color: Color(0xffF9813A),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    Text(
+                                      '${data["name"]}',
+                                      style: GoogleFonts.inter(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.location_pin,
+                                            size: 19,
+                                          ),
+                                          SizedBox(
+                                            width: 3,
+                                          ),
+                                          Text(
+                                            'Jakarta, Indonesia',
+                                            style: GoogleFonts.inter(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 )),
                             Container(
                               margin: EdgeInsets.only(
@@ -134,7 +190,7 @@ class Home extends StatelessWidget {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: height * 0.03,
+                            top: height * 0.01,
                             right: width * 0.07,
                             left: width * 0.07),
                         height: height * 0.05,
@@ -156,7 +212,8 @@ class Home extends StatelessWidget {
                             itemCount: cards.length,
                             itemBuilder: (context, index) {
                               return InkWell(
-                                onTap: () => Get.toNamed(Routes.HISTORY),
+                                onTap: () => Get.toNamed(Routes.CATEGORY_PAGE,
+                                    arguments: cards[index]['value']),
                                 child: Container(
                                   height: height * 0.2,
                                   width: width * 0.4,
@@ -187,7 +244,7 @@ class Home extends StatelessWidget {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: height * 0.015,
+                            top: height * 0.01,
                             right: width * 0.07,
                             left: width * 0.07),
                         height: height * 0.05,
@@ -223,82 +280,260 @@ class Home extends StatelessWidget {
                             if (snapshot.connectionState ==
                                 ConnectionState.active) {
                               var data = snapshot.data!.docs;
-                              return ListView.builder(
-                                  physics: ClampingScrollPhysics(),
-                                  // scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: data.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(12),
-                                      child: Card(
-                                        clipBehavior: Clip.antiAlias,
-                                        elevation: 15,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
+                              return Container(
+                                height: height * 0.28,
+                                child: ListView.builder(
+                                    // physics: ClampingScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: data.length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 7, top: 1, right: 10),
                                         child: InkWell(
                                           onTap: () => Get.toNamed(
                                               Routes.PETSHOP_DETAIL,
                                               arguments: data[index].id),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Ink.image(
-                                                height: 200,
-                                                image: AssetImage(
-                                                    'assets/images/petshop-1.jpg'),
-                                                fit: BoxFit.fitWidth,
-                                              ),
-                                              ButtonBar(
-                                                alignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 15, top: 5),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          '${(data[index].data() as Map<String, dynamic>)["petshopName"]}',
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                                  fontSize: 18,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 5,
-                                                        ),
-                                                        Text(
-                                                          '${(data[index].data() as Map<String, dynamic>)["petshopAddress"]}',
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 15,
-                                                        )
-                                                      ],
+                                          child: Container(
+                                            width: width * 0.40,
+                                            height: height * 0.1,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFf2f2f2),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color:
+                                                      const Color(0xFFdedede)),
+                                            ),
+                                            child: Stack(
+                                              alignment: Alignment.topCenter,
+                                              children: [
+                                                Positioned(
+                                                  bottom: 14,
+                                                  child: Container(
+                                                    // color: Colors.red,
+                                                    height: height * 0.1,
+                                                    width: width * 0.34,
+                                                    decoration: BoxDecoration(
+                                                        // color: Colors.blue,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20)),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        top: 13,
+                                                      ),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            '${(data[index].data() as Map<String, dynamic>)["petshopName"]}',
+                                                            style: GoogleFonts
+                                                                .inter(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontSize:
+                                                                        15),
+                                                          ),
+                                                          Text(
+                                                            '${(data[index].data() as Map<String, dynamic>)["petshopAddress"]}',
+                                                            style: GoogleFonts
+                                                                .inter(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w300,
+                                                                    fontSize:
+                                                                        12),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ],
-                                              )
-                                            ],
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20)),
+                                                  child: Stack(
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20),
+                                                        child: Image(
+                                                          height: height * 0.17,
+                                                          width: width * 0.38,
+                                                          image: AssetImage(
+                                                              'assets/images/petshop-1.jpg'),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  });
+                                      );
+                                    }),
+                              );
+                            } else {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          }),
+                      Container(
+                        margin: EdgeInsets.only(
+                            top: height * 0.01,
+                            right: width * 0.07,
+                            left: width * 0.07),
+                        height: height * 0.05,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Petshop Near You',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500),
+                                )),
+                            InkWell(
+                              onTap: () => Get.toNamed(Routes.HISTORY),
+                              child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    'See All',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 15,
+                                        color: Colors.lightBlue,
+                                        fontWeight: FontWeight.w500),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                      StreamBuilder<QuerySnapshot<Object?>>(
+                          stream: homeController.streamData(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.active) {
+                              var data = snapshot.data!.docs;
+                              return Container(
+                                height: height * 0.28,
+                                child: ListView.builder(
+                                    // physics: ClampingScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: data.length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 7, top: 1, right: 10),
+                                        child: InkWell(
+                                          onTap: () => Get.toNamed(
+                                              Routes.PETSHOP_DETAIL,
+                                              arguments: data[index].id),
+                                          child: Container(
+                                            width: width * 0.40,
+                                            height: height * 0.1,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFf2f2f2),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color:
+                                                      const Color(0xFFdedede)),
+                                            ),
+                                            child: Stack(
+                                              alignment: Alignment.topCenter,
+                                              children: [
+                                                Positioned(
+                                                  bottom: 14,
+                                                  child: Container(
+                                                    // color: Colors.red,
+                                                    height: height * 0.1,
+                                                    width: width * 0.34,
+                                                    decoration: BoxDecoration(
+                                                        // color: Colors.blue,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20)),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        top: 13,
+                                                      ),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            '${(data[index].data() as Map<String, dynamic>)["petshopName"]}',
+                                                            style: GoogleFonts
+                                                                .inter(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontSize:
+                                                                        15),
+                                                          ),
+                                                          Text(
+                                                            '${(data[index].data() as Map<String, dynamic>)["petshopAddress"]}',
+                                                            style: GoogleFonts
+                                                                .inter(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w300,
+                                                                    fontSize:
+                                                                        12),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20)),
+                                                  child: Stack(
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20),
+                                                        child: Image(
+                                                          height: height * 0.17,
+                                                          width: width * 0.38,
+                                                          image: AssetImage(
+                                                              'assets/images/petshop-2.jpg'),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              );
                             } else {
                               return Center(child: CircularProgressIndicator());
                             }
@@ -308,7 +543,7 @@ class Home extends StatelessWidget {
                 ),
               );
             } else {
-              return SizedBox();
+              return Center(child: CircularProgressIndicator());
             }
           }),
     );
