@@ -9,6 +9,7 @@ import 'package:halopet_beta/app/modules/admin_home/views/admin_home_view.dart';
 import 'package:halopet_beta/app/modules/homepage/views/homepage_view.dart';
 import 'package:halopet_beta/app/modules/login/views/login_view.dart';
 import 'package:halopet_beta/app/modules/seller_home/views/seller_home_view.dart';
+import 'package:halopet_beta/app/modules/welcome_page/views/welcome_page_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 void main() async {
@@ -21,6 +22,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final authC = Get.put(AuthController(), permanent: true);
   final localStorage = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -31,31 +33,31 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             return GetMaterialApp(
               home: snapshot.data != null && userId != null
-                  ?
+                  ? WelcomePageView()
                   // AdminHomeView()
-                  StreamBuilder<Object>(
-                      stream: authC.streamRole(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData && snapshot.data != null) {
-                          final user = snapshot.data as DocumentSnapshot;
-                          if (user['petshopOwner'] == true) {
-                            localStorage.write(
-                                'initialPetshopId', user['petshopId']);
-                          }
-                          if (user['role'] == 'Admin') {
-                            return AdminHomeView();
-                          } else if (user['role'] == 'Member') {
-                            return HomepageView();
-                          } else if (user['role'] == 'Seller') {
-                            return SellerHomeView();
-                          } else {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                        } else {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                      })
-                  : LoginView(),
+                  // StreamBuilder<Object>(
+                  //     stream: authC.streamRole(),
+                  //     builder: (context, snapshot) {
+                  //       if (snapshot.hasData && snapshot.data != null) {
+                  //         final user = snapshot.data as DocumentSnapshot;
+                  //         if (user['petshopOwner'] == true) {
+                  //           localStorage.write(
+                  //               'initialPetshopId', user['petshopId']);
+                  //         }
+                  //         if (user['role'] == 'Admin') {
+                  //           return AdminHomeView();
+                  //         } else if (user['role'] == 'Member') {
+                  //           return HomepageView();
+                  //         } else if (user['role'] == 'Seller') {
+                  //           return SellerHomeView();
+                  //         } else {
+                  //           return Center(child: CircularProgressIndicator());
+                  //         }
+                  //       } else {
+                  //         return Center(child: CircularProgressIndicator());
+                  //       }
+                  //     })
+                  : WelcomePageView(),
               getPages: AppPages.routes,
             );
           } else {
