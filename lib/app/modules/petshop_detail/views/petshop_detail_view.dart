@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -344,18 +345,8 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                   width: 2, color: const Color(0xFFf2f2f2)),
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(40)),
-                          child: Obx(
-                            () => controller.isFav.value == true
-                                ? const Icon(
-                                    Icons.favorite,
-                                    size: 35,
-                                    color: Colors.red,
-                                  )
-                                : const Icon(
-                                    Icons.favorite_border,
-                                    size: 35,
-                                  ),
-                          )),
+                          child: Obx(() =>
+                              FavoriteButton(valueChanged: controller.isFav))),
                     ),
                   ),
                   controller.orderList.isNotEmpty
