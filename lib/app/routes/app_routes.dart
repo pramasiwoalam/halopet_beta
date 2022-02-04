@@ -3,7 +3,7 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
-  static const LOGIN = _Paths.LOGIN;
+  // static const LOGIN = _Paths.LOGIN;
   static const HOMEPAGE = _Paths.HOMEPAGE;
   static const SIGNUP = _Paths.SIGNUP;
   static const ADD_PETSHOP = _Paths.ADD_PETSHOP;
@@ -26,11 +26,12 @@ abstract class Routes {
   static const ADMIN_PETSHOP_APPROVAL = _Paths.ADMIN_PETSHOP_APPROVAL;
   static const WELCOME_PAGE = _Paths.WELCOME_PAGE;
   static const CATEGORY_PAGE = _Paths.CATEGORY_PAGE;
+  static const CART_PAGE = _Paths.CART_PAGE;
 }
 
 abstract class _Paths {
   _Paths._();
-  static const LOGIN = '/login';
+  // static const LOGIN = '/login';
   static const HOMEPAGE = '/homepage';
   static const SIGNUP = '/signup';
   static const ADD_PETSHOP = '/add-petshop';
@@ -53,4 +54,5 @@ abstract class _Paths {
   static const ADMIN_PETSHOP_APPROVAL = '/admin-petshop-approval';
   static const WELCOME_PAGE = '/welcome-page';
   static const CATEGORY_PAGE = '/category-page';
+  static const CART_PAGE = '/cart-page';
 }

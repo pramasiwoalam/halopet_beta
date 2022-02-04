@@ -10,6 +10,8 @@ import '../modules/admin_list_users/bindings/admin_list_users_binding.dart';
 import '../modules/admin_list_users/views/admin_list_users_view.dart';
 import '../modules/admin_petshop_approval/bindings/admin_petshop_approval_binding.dart';
 import '../modules/admin_petshop_approval/views/admin_petshop_approval_view.dart';
+import '../modules/cart_page/bindings/cart_page_binding.dart';
+import '../modules/cart_page/views/cart_page_view.dart';
 import '../modules/category_page/bindings/category_page_binding.dart';
 import '../modules/category_page/views/category_page_view.dart';
 import '../modules/doctor_registration/bindings/doctor_registration_binding.dart';
@@ -62,11 +64,11 @@ class AppPages {
       page: () => HomepageView(),
       binding: HomepageBinding(),
     ),
-    GetPage(
-      name: _Paths.LOGIN,
-      page: () => LoginView(),
-      binding: LoginBinding(),
-    ),
+    // GetPage(
+    //   name: _Paths.LOGIN,
+    //   page: () => LoginView(),
+    //   binding: LoginBinding(),
+    // ),
     GetPage(
       name: _Paths.SIGNUP,
       page: () => SignupView(),
@@ -171,6 +173,11 @@ class AppPages {
       name: _Paths.CATEGORY_PAGE,
       page: () => CategoryPageView(),
       binding: CategoryPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.CART_PAGE,
+      page: () => CartPageView(),
+      binding: CartPageBinding(),
     ),
   ];
 }

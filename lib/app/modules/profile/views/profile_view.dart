@@ -150,9 +150,9 @@ class ProfileView extends GetView<ProfileController> {
                           btnOkOnPress: () {
                             authController.logout();
                           },
-                        )..show();
+                        ).show();
                       },
-                      child: Text("Log Out")),
+                      child: const Text("Log Out")),
                 ],
               ),
             );

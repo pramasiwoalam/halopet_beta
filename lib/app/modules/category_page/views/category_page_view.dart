@@ -117,9 +117,9 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                       children: [
                                         Container(
                                             height: height * 0.18,
-                                            width: width * 0.85,
+                                            width: width * 0.90,
                                             // color: Colors.blue,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(10),
                                                 topRight: Radius.circular(10),
@@ -132,9 +132,9 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                             )),
                                         Container(
                                           height: height * 0.12,
-                                          width: width * 0.85,
+                                          width: width * 0.90,
                                           // color: Colors.yellow,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             color: Color(0xfff0f0f0),
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(20),
@@ -154,7 +154,7 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      'Dita Gendayyy Petshop',
+                                                      '${(data[index].data() as Map<String, dynamic>)["petshopName"]}',
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w600,
@@ -183,10 +183,10 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                                                           .w600,
                                                                   color: Colors
                                                                       .white)),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 5,
                                                           ),
-                                                          Icon(
+                                                          const Icon(
                                                             Icons.star,
                                                             color: Colors.white,
                                                             size: 15,
@@ -203,11 +203,11 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                                           FontWeight.w300,
                                                       fontSize: 14),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 7,
                                                 ),
                                                 Row(
-                                                  children: [
+                                                  children: const [
                                                     Icon(
                                                       Icons.verified_rounded,
                                                       color: Color(0xff3CBA54),
@@ -246,7 +246,7 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                                     ),
                                                   ],
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 3,
                                                 )
                                               ],

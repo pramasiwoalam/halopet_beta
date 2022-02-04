@@ -34,40 +34,40 @@ class HomepageView extends GetView<HomepageController> {
         () => BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
           currentIndex: homeController.index.value,
-          iconSize: 35,
+          iconSize: 33,
           unselectedFontSize: 10,
-          selectedFontSize: 16,
+          selectedFontSize: 15,
           selectedItemColor: Color(0xffF9813A),
           showSelectedLabels: true,
-          items: [
+          items: const [
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
                   color: Color(0xffF9813A),
                 ),
                 title: Text("Home"),
-                backgroundColor: const Color(0xfff2f2f2)),
+                backgroundColor: Color(0xfff2f2f2)),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.book,
                   color: Color(0xffF9813A),
                 ),
                 title: Text("Order"),
-                backgroundColor: const Color(0xfff2f2f2)),
+                backgroundColor: Color(0xfff2f2f2)),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.history_edu,
                   color: Color(0xffF9813A),
                 ),
                 title: Text("History"),
-                backgroundColor: const Color(0xfff2f2f2)),
+                backgroundColor: Color(0xfff2f2f2)),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
                   color: Color(0xffF9813A),
                 ),
                 title: Text("Profile"),
-                backgroundColor: const Color(0xfff2f2f2)),
+                backgroundColor: Color(0xfff2f2f2)),
           ],
           onTap: (index) {
             indexAction(index);
@@ -153,11 +153,11 @@ class Home extends StatelessWidget {
                                       padding: const EdgeInsets.only(top: 5),
                                       child: Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.location_pin,
                                             size: 19,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 3,
                                           ),
                                           Text(
@@ -178,7 +178,7 @@ class Home extends StatelessWidget {
                                   bottom: height * 0.005),
                               height: height / 4,
                               width: width / 4,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     image:
@@ -226,9 +226,9 @@ class Home extends StatelessWidget {
                                       border: Border.all(
                                           width: 1.8,
                                           color: const Color(0xfff0f0f0)),
-                                      boxShadow: [
+                                      boxShadow: const [
                                         BoxShadow(
-                                          color: const Color(0xfff0f0f0),
+                                          color: Color(0xfff0f0f0),
                                           spreadRadius: 0.1,
                                           blurRadius: 0.8,
                                         )
@@ -292,9 +292,13 @@ class Home extends StatelessWidget {
                                         padding: const EdgeInsets.only(
                                             left: 7, top: 1, right: 10),
                                         child: InkWell(
-                                          onTap: () => Get.toNamed(
+                                          onTap: () => {
+                                            Get.toNamed(
                                               Routes.PETSHOP_DETAIL,
-                                              arguments: data[index].id),
+                                            ),
+                                            localStorage.write(
+                                                'petshopId', data[index].id)
+                                          },
                                           child: Container(
                                             width: width * 0.40,
                                             height: height * 0.1,
@@ -371,7 +375,7 @@ class Home extends StatelessWidget {
                                                         child: Image(
                                                           height: height * 0.17,
                                                           width: width * 0.38,
-                                                          image: AssetImage(
+                                                          image: const AssetImage(
                                                               'assets/images/petshop-1.jpg'),
                                                           fit: BoxFit.cover,
                                                         ),
@@ -519,7 +523,7 @@ class Home extends StatelessWidget {
                                                         child: Image(
                                                           height: height * 0.17,
                                                           width: width * 0.38,
-                                                          image: AssetImage(
+                                                          image: const AssetImage(
                                                               'assets/images/petshop-2.jpg'),
                                                           fit: BoxFit.cover,
                                                         ),
