@@ -21,9 +21,7 @@ class GroomingOrderController extends GetxController {
         "status": "Waiting for approval",
         "message": ""
       });
-
-      Get.back();
-      Get.back();
+      Get.toNamed(Routes.ORDER);
     } catch (e) {
       print(e);
     }

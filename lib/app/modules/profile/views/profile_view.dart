@@ -111,6 +111,12 @@ class ProfileView extends GetView<ProfileController> {
                                     onPressed: () => profileController
                                         .changeRoleToSeller(userId),
                                     child: Text("Go to seller page")),
+                                ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.brown),
+                                    onPressed: () =>
+                                        Get.toNamed(Routes.FAVORITE),
+                                    child: Text("Favorite")),
                               ],
                             );
                           } else if (data['role'] == 'Seller') {
@@ -150,9 +156,9 @@ class ProfileView extends GetView<ProfileController> {
                           btnOkOnPress: () {
                             authController.logout();
                           },
-                        )..show();
+                        ).show();
                       },
-                      child: Text("Log Out")),
+                      child: const Text("Log Out")),
                 ],
               ),
             );

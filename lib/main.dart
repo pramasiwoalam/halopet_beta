@@ -8,9 +8,11 @@ import 'package:halopet_beta/app/controllers/auth_controller.dart';
 import 'package:halopet_beta/app/modules/admin_home/views/admin_home_view.dart';
 import 'package:halopet_beta/app/modules/homepage/views/homepage_view.dart';
 import 'package:halopet_beta/app/modules/login/views/login_view.dart';
+// import 'package:halopet_beta/app/modules/login/views/login_view.dart';
 import 'package:halopet_beta/app/modules/seller_home/views/seller_home_view.dart';
 import 'package:halopet_beta/app/modules/welcome_page/views/welcome_page_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
+import 'package:halopet_beta/app/routes/auth_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,10 +31,10 @@ class MyApp extends StatelessWidget {
         stream: authC.streamUser,
         builder: (context, snapshot) {
           localStorage.write('currentUserId', snapshot.data?.uid);
-          var userId = localStorage.read('currentUserId');
+          // var userId = localStorage.read('currentUserId');
           if (snapshot.connectionState == ConnectionState.active) {
             return GetMaterialApp(
-              home: snapshot.data != null && userId != null
+              home: snapshot.data != null
                   ? LoginView()
                   // AdminHomeView()
                   // StreamBuilder<Object>(

@@ -6,7 +6,6 @@ import 'package:halopet_beta/app/modules/profile/views/profile_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 class HomepageController extends GetxController {
-
   var index = 0.obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final localStorage = GetStorage();
@@ -16,4 +15,8 @@ class HomepageController extends GetxController {
     return petshop.snapshots();
   }
 
+  Future<DocumentSnapshot<Object?>> getUserById(String userId) async {
+    DocumentReference doc = firestore.collection("users").doc(userId);
+    return doc.get();
+  }
 }

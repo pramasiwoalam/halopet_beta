@@ -20,10 +20,10 @@ dependencies:
   flutter_svg: ^1.0.3
   google_fonts: ^2.2.0
   flutter_icons: ^1.1.0
+  favorite_button: ^0.0.4
   
 
 dev_dependencies: 
-  flutter_lints: ^1.0.0
   flutter_test: 
     sdk: flutter
 
@@ -36,7 +36,11 @@ flutter:
     - assets/images/grooming-card.jpg
     - assets/images/hotel-card.jpg
     - assets/images/petshop-1.jpg
+    - assets/images/petshop-2.jpg
     - assets/images/1.png
     - assets/images/3.png
     - assets/images/textHalopet.png
     - assets/images/google1.png
+    - assets/images/tag-hotel.jpg
+    - assets/images/tag-grooming.jpg
+    - assets/images/tag-vet.jpg

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:halopet_beta/app/routes/auth_pages.dart';
 
 import '../controllers/welcome_page_controller.dart';
 
@@ -83,18 +84,23 @@ class _BodyState extends State<Body> {
                 child: FlatButton(
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 98),
                     color: Colors.orange.shade400,
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.LOGIN);
+                    },
                     child: Text(
                       "Login",
                       style: TextStyle(color: Colors.white),
                     )),
               ),
+              SizedBox(height: 5),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: FlatButton(
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 35),
                     color: Colors.blue.shade100,
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.SIGNUP);
+                    },
                     child: Text(
                       "I already have an account",
                       style: TextStyle(color: Colors.orange.shade400),

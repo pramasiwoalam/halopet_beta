@@ -10,8 +10,14 @@ import '../modules/admin_list_users/bindings/admin_list_users_binding.dart';
 import '../modules/admin_list_users/views/admin_list_users_view.dart';
 import '../modules/admin_petshop_approval/bindings/admin_petshop_approval_binding.dart';
 import '../modules/admin_petshop_approval/views/admin_petshop_approval_view.dart';
+import '../modules/cart_page/bindings/cart_page_binding.dart';
+import '../modules/cart_page/views/cart_page_view.dart';
+import '../modules/category_page/bindings/category_page_binding.dart';
+import '../modules/category_page/views/category_page_view.dart';
 import '../modules/doctor_registration/bindings/doctor_registration_binding.dart';
 import '../modules/doctor_registration/views/doctor_registration_view.dart';
+import '../modules/favorite/bindings/favorite_binding.dart';
+import '../modules/favorite/views/favorite_view.dart';
 import '../modules/grooming_order/bindings/grooming_order_binding.dart';
 import '../modules/grooming_order/views/grooming_order_view.dart';
 import '../modules/history/bindings/history_binding.dart';
@@ -60,11 +66,11 @@ class AppPages {
       page: () => HomepageView(),
       binding: HomepageBinding(),
     ),
-    GetPage(
-      name: _Paths.LOGIN,
-      page: () => LoginView(),
-      binding: LoginBinding(),
-    ),
+    // GetPage(
+    //   name: _Paths.LOGIN,
+    //   page: () => LoginView(),
+    //   binding: LoginBinding(),
+    // ),
     GetPage(
       name: _Paths.SIGNUP,
       page: () => SignupView(),
@@ -164,6 +170,21 @@ class AppPages {
       name: _Paths.WELCOME_PAGE,
       page: () => WelcomePageView(),
       binding: WelcomePageBinding(),
+    ),
+    GetPage(
+      name: _Paths.CATEGORY_PAGE,
+      page: () => CategoryPageView(),
+      binding: CategoryPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.CART_PAGE,
+      page: () => CartPageView(),
+      binding: CartPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAVORITE,
+      page: () => FavoriteView(),
+      binding: FavoriteBinding(),
     ),
   ];
 }
