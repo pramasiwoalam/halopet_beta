@@ -48,7 +48,7 @@ class _BodyState extends State<Body> {
                     Container(
                       height: height,
                       width: width * 0.5,
-                      // color: Colors.orange.shade300,
+                      color: Colors.orange.shade300,
                     ),
                   ],
                 ),

@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             return GetMaterialApp(
               home: snapshot.data != null && userId != null
-                  ? WelcomePageView()
+                  ? LoginView()
                   // AdminHomeView()
                   // StreamBuilder<Object>(
                   //     stream: authC.streamRole(),
@@ -56,8 +56,8 @@ class MyApp extends StatelessWidget {
                   //       } else {
                   //         return Center(child: CircularProgressIndicator());
                   //       }
-                  //     })
-                  : WelcomePageView(),
+                  //     }),
+                  : LoginView(),
               getPages: AppPages.routes,
             );
           } else {
