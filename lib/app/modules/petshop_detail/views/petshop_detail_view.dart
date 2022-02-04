@@ -19,7 +19,8 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
     var height = size.height;
     var width = size.width;
     var petshopId = localStorage.read('petshopId');
-    print(controller.orderList);
+    var isFav = controller.isFav;
+    print('val :${controller.isFav}');
     var orderList = controller.orderList;
     if (orderList.length > 0) {
       print('data: ${orderList[0]['serviceName']}');
@@ -147,7 +148,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                               ),
                             ],
                           ),
-                          Divider(
+                          const Divider(
                             thickness: 1.5,
                             height: 30,
                           ),
@@ -158,7 +159,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           Row(
@@ -238,7 +239,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                               )
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           Container(
@@ -282,8 +283,9 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                                         fontSize: 16),
                                                   ),
                                                   Container(
-                                                    margin: EdgeInsets.only(
-                                                        right: 1),
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            right: 1),
                                                     height: 24,
                                                     width: 45,
                                                     color: Colors.green,
@@ -313,10 +315,10 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                                   )
                                                 ],
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 5,
                                               ),
-                                              Text(
+                                              const Text(
                                                   'Asik banget servicenya, bikin Geter!')
                                             ],
                                           ),
@@ -332,21 +334,26 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                     top: height / 3.6,
                     right: 40,
                     child: GestureDetector(
-                      onTap: () {
-                        controller.isFav.value = true;
-                        print(controller.isFav);
-                      },
+                      onTap: () {},
                       child: Container(
-                          height: height * 0.08,
-                          width: height * 0.08,
-                          // color: Colors.red,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2, color: const Color(0xFFf2f2f2)),
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(40)),
-                          child: Obx(() =>
-                              FavoriteButton(valueChanged: controller.isFav))),
+                        height: height * 0.08,
+                        width: height * 0.08,
+                        // color: Colors.red,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 2, color: const Color(0xFFf2f2f2)),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(40)),
+                        child: InkWell(
+                          child: FavoriteButton(
+                            // isFavorite: true,
+                            valueChanged: (isFavorite) {
+                              controller.createFavorite(isFavorite);
+                            },
+                            iconSize: 50,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   controller.orderList.isNotEmpty

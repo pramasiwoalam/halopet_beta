@@ -16,6 +16,8 @@ import '../modules/category_page/bindings/category_page_binding.dart';
 import '../modules/category_page/views/category_page_view.dart';
 import '../modules/doctor_registration/bindings/doctor_registration_binding.dart';
 import '../modules/doctor_registration/views/doctor_registration_view.dart';
+import '../modules/favorite/bindings/favorite_binding.dart';
+import '../modules/favorite/views/favorite_view.dart';
 import '../modules/grooming_order/bindings/grooming_order_binding.dart';
 import '../modules/grooming_order/views/grooming_order_view.dart';
 import '../modules/history/bindings/history_binding.dart';
@@ -178,6 +180,11 @@ class AppPages {
       name: _Paths.CART_PAGE,
       page: () => CartPageView(),
       binding: CartPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAVORITE,
+      page: () => FavoriteView(),
+      binding: FavoriteBinding(),
     ),
   ];
 }

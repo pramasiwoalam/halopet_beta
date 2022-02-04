@@ -27,6 +27,7 @@ abstract class Routes {
   static const WELCOME_PAGE = _Paths.WELCOME_PAGE;
   static const CATEGORY_PAGE = _Paths.CATEGORY_PAGE;
   static const CART_PAGE = _Paths.CART_PAGE;
+  static const FAVORITE = _Paths.FAVORITE;
 }
 
 abstract class _Paths {
@@ -55,4 +56,5 @@ abstract class _Paths {
   static const WELCOME_PAGE = '/welcome-page';
   static const CATEGORY_PAGE = '/category-page';
   static const CART_PAGE = '/cart-page';
+  static const FAVORITE = '/favorite';
 }

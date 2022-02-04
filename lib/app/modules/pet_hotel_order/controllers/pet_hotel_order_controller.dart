@@ -23,7 +23,8 @@ class PetHotelOrderController extends GetxController {
       //   "status": "Waiting for approval"
       // });
 
-      detailC.orderList.add({'serviceName': 'Pet Hotel', 'price': 20000.obs});
+      detailC.orderList.add({'serviceName': 'Pet Hotel', 'price': 20000});
+
       // localStorage.write('orderList', detailC.orderList);
 
       Get.toNamed(Routes.CART_PAGE);

@@ -19,18 +19,11 @@ class CartPageView extends GetView<CartPageController> {
     var height = size.height;
     var width = size.width;
     var orderList = detailC.orderList;
-    var totalPrice = controller.totalPrice;
-    var totalC = 0.obs;
-
-    void total(RxInt price) {
-      totalC = totalC + price.toInt();
-      controller.totalPrice = totalC;
-      // print(controller.totalPrice);
-    }
+    var totalPrice = 0;
 
     void delete(int i) {
-      RxInt indexPrice = detailC.orderList[i]['price'];
-      totalPrice = totalPrice - indexPrice.toInt();
+      int indexPrice = detailC.orderList[i]['price'];
+      totalPrice = totalPrice - indexPrice;
       detailC.orderList.removeAt(i);
       print(controller.totalPrice);
     }
@@ -44,81 +37,81 @@ class CartPageView extends GetView<CartPageController> {
             title: Text('CartPageView'),
             centerTitle: true,
           ),
-          body: Container(
-            height: height,
-            width: width,
-            child: Column(
-              children: [
-                ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: orderList.length,
-                    itemBuilder: (context, index) {
-                      // int indexTotal = orderList[index]['price'];
-                      // totalPrice = totalPrice + indexTotal.toInt();
-                      total(orderList[index]['price']);
-                      // print(controller.totalPrice);
-                      // totalPrice = totalPrice + indexTotal;
-                      return Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Container(
-                          width: width,
-                          height: height * 0.15,
-                          // color: Colors.black,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Column(
-                              children: [
-                                Text(
-                                  '${orderList[index]['serviceName']}',
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                Text(
-                                  '${orderList[index]['price']}',
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                InkWell(
-                                    onTap: () {
-                                      AwesomeDialog(
-                                        context: context,
-                                        dialogType: DialogType.INFO,
-                                        animType: AnimType.BOTTOMSLIDE,
-                                        title: 'Order Cancellation',
-                                        desc:
-                                            'Are you sure want to cancel this order?',
-                                        btnCancelOnPress: () {},
-                                        btnOkOnPress: () {
-                                          delete(index);
-                                          Get.toNamed(Routes.PETSHOP_DETAIL,
-                                              arguments: localStorage
-                                                  .read('petshopId'));
-                                        },
-                                      ).show();
-                                    },
-                                    child: Icon(Icons.delete))
-                              ],
+          body: Obx(
+            () => Container(
+              height: height,
+              width: width,
+              child: Column(
+                children: [
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: orderList.length,
+                      itemBuilder: (context, index) {
+                        totalPrice += (orderList[index]!['price'] as int);
+                        controller.totalPrice = totalPrice.obs;
+                        return Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Container(
+                            width: width,
+                            height: height * 0.15,
+                            // color: Colors.black,
+                            child: Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    '${orderList[index]['serviceName']}',
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Text(
+                                    '${orderList[index]['price']}',
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.INFO,
+                                          animType: AnimType.BOTTOMSLIDE,
+                                          title: 'Order Cancellation',
+                                          desc:
+                                              'Are you sure want to cancel this order?',
+                                          btnCancelOnPress: () {},
+                                          btnOkOnPress: () {
+                                            delete(index);
+                                            Get.toNamed(Routes.PETSHOP_DETAIL,
+                                                arguments: localStorage
+                                                    .read('petshopId'));
+                                          },
+                                        ).show();
+                                      },
+                                      child: Icon(Icons.delete))
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }),
-                Text('${controller.totalPrice}'),
-                ElevatedButton(
-                    onPressed: () {
-                      Get.toNamed(Routes.PETSHOP_DETAIL,
-                          arguments: localStorage.read('petshopId'));
-                    },
-                    child: Text('make another')),
-                ElevatedButton(
-                    onPressed: () {
-                      Get.toNamed(Routes.HOMEPAGE,
-                          arguments: localStorage.read('petshopId'));
-                    },
-                    child: Text('Cancel & back to main page'))
-              ],
+                        );
+                      }),
+                  Text('${controller.totalPrice.value}'),
+                  ElevatedButton(
+                      onPressed: () {
+                        Get.toNamed(Routes.PETSHOP_DETAIL,
+                            arguments: localStorage.read('petshopId'));
+                      },
+                      child: Text('make another')),
+                  ElevatedButton(
+                      onPressed: () {
+                        Get.toNamed(Routes.HOMEPAGE,
+                            arguments: localStorage.read('petshopId'));
+                      },
+                      child: Text('Cancel & back to main page')),
+                  ElevatedButton(onPressed: () {}, child: Text('Order'))
+                ],
+              ),
             ),
           )),
     );
