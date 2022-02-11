@@ -355,8 +355,6 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                 if (favData.isNotEmpty) {
                                   favStatus = favData[0]['isFav'];
                                 }
-
-                                print('statusss: $favStatus');
                                 return InkWell(
                                   child: FavoriteButton(
                                     isFavorite: favStatus ? true : false,
