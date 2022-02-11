@@ -89,12 +89,22 @@ class ProfileView extends GetView<ProfileController> {
                               snapshot.data!.data() as Map<String, dynamic>;
                           if (data['role'] == 'Member' &&
                               data['petshopOwner'] == false) {
-                            return ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.brown),
-                                onPressed: () =>
-                                    Get.toNamed(Routes.ADD_PETSHOP),
-                                child: Text("Create your own petshop"));
+                            return Column(
+                              children: [
+                                ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.brown),
+                                    onPressed: () =>
+                                        Get.toNamed(Routes.ADD_PETSHOP),
+                                    child: Text("Create your own petshop")),
+                                ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.brown),
+                                    onPressed: () =>
+                                        Get.toNamed(Routes.FAVORITE),
+                                    child: Text("Favorite")),
+                              ],
+                            );
                           } else if (data['role'] == 'Member' &&
                               data['petshopOwner'] == true) {
                             return Column(

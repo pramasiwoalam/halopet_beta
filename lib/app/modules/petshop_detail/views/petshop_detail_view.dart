@@ -19,12 +19,12 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
     var height = size.height;
     var width = size.width;
     var petshopId = localStorage.read('petshopId');
-    var isFav = controller.isFav;
-    print('val :${controller.isFav}');
-    var orderList = controller.orderList;
-    if (orderList.length > 0) {
-      print('data: ${orderList[0]['serviceName']}');
-    }
+    var userId = localStorage.read('currentUserId');
+    // print('val :${controller.isFav}');
+    // var orderList = controller.orderList;
+    // if (orderList.length > 0) {
+    //   print('data: ${orderList[0]['serviceName']}');
+    // }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -344,61 +344,37 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                 width: 2, color: const Color(0xFFf2f2f2)),
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(40)),
-                        child: InkWell(
-                          child: FavoriteButton(
-                            // isFavorite: true,
-                            valueChanged: (isFavorite) {
-                              controller.createFavorite(isFavorite);
-                            },
-                            iconSize: 50,
-                          ),
-                        ),
+                        child: StreamBuilder<QuerySnapshot<Object?>>(
+                            stream:
+                                controller.getFavByPetshopId(petshopId, userId),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.active) {
+                                var favData = snapshot.data!.docs;
+                                bool favStatus = false;
+                                if (favData.isNotEmpty) {
+                                  favStatus = favData[0]['isFav'];
+                                }
+
+                                print('statusss: $favStatus');
+                                return InkWell(
+                                  child: FavoriteButton(
+                                    isFavorite: favStatus ? true : false,
+                                    valueChanged: (isFavorite) {
+                                      controller.createFavorite(isFavorite);
+                                    },
+                                    iconSize: 50,
+                                  ),
+                                );
+                              } else {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            }),
                       ),
                     ),
                   ),
-                  controller.orderList.isNotEmpty
-                      ? Positioned.fill(
-                          bottom: 24.0,
-                          child: GestureDetector(
-                            onTap: () => Get.toNamed(Routes.CART_PAGE),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height: height * 0.06,
-                                width: width * 0.9,
-                                // color: Colors.black,
-                                decoration: BoxDecoration(
-                                  color: Color(0xff32CD32),
-                                  borderRadius: BorderRadius.circular(10),
-                                  // border: Border.all(
-                                  //     width: 2,
-                                  //     color: const Color(0xFFf2f2f2))
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 15, bottom: 15, left: 25, right: 25),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Order Basket',
-                                          style: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 15,
-                                              color: Colors.white)),
-                                      Text(
-                                          '${controller.orderList.length} orders',
-                                          style: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 15,
-                                              color: Colors.white))
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ))
-                      : const SizedBox()
                 ],
               );
             } else {

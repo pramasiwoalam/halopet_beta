@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:halopet_beta/app/controllers/auth_controller.dart';
 import 'package:halopet_beta/app/modules/profile/views/profile_view.dart';
-import 'package:halopet_beta/app/modules/seller_history/controllers/seller_history_controller.dart';
 import 'package:halopet_beta/app/modules/seller_history/views/seller_history_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
@@ -31,18 +30,18 @@ class SellerHomeView extends GetView<SellerHomeController> {
         () => BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
           currentIndex: homeController.index.value,
-          items: [
+          items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.done_all_outlined),
-                title: Text("Request"),
+                label: "Request",
                 backgroundColor: Colors.blue),
             BottomNavigationBarItem(
                 icon: Icon(Icons.history),
-                title: Text("History"),
+                label: "History",
                 backgroundColor: Colors.green),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                title: Text("Profile"),
+                label: "Profile",
                 backgroundColor: Colors.brown),
           ],
           onTap: (index) {
@@ -104,7 +103,7 @@ class Home extends StatelessWidget {
             }
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed(Routes.ADD_PETSHOP),
+        onPressed: () => authController.logout(),
         child: Icon(Icons.add),
       ),
     );

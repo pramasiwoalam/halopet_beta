@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:halopet_beta/app/controllers/auth_controller.dart';
 import 'package:halopet_beta/app/modules/admin_list_users/views/admin_list_users_view.dart';
-import 'package:halopet_beta/app/modules/history/views/history_view.dart';
-import 'package:halopet_beta/app/modules/homepage/views/homepage_view.dart';
-import 'package:halopet_beta/app/modules/order/views/order_view.dart';
 import 'package:halopet_beta/app/modules/profile/views/profile_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
@@ -32,18 +29,18 @@ class AdminHomeView extends GetView<AdminHomeController> {
         () => BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
           currentIndex: homeController.index.value,
-          items: [
+          items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.done_all_outlined),
-                title: Text("Request"),
+                label: "Request",
                 backgroundColor: Colors.blue),
             BottomNavigationBarItem(
                 icon: Icon(Icons.admin_panel_settings_rounded),
-                title: Text("Users"),
+                label: "Users",
                 backgroundColor: Colors.green),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                title: Text("Profile"),
+                label: "Profile",
                 backgroundColor: Colors.brown),
           ],
           onTap: (index) {

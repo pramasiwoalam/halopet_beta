@@ -21,7 +21,7 @@ class LoginView extends GetView<LoginController> {
         child: Column(
           children: [
             Container(
-              height: height * 0.52,
+              height: height * 0.49,
               width: width,
               // color: Colors.red,
               child: Column(
@@ -36,7 +36,7 @@ class LoginView extends GetView<LoginController> {
                     height: height * 0.06,
                     width: width * 0.3,
                     // color: Colors.amber,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage("assets/images/textHalopet.png"),
                             fit: BoxFit.cover)),
@@ -45,7 +45,7 @@ class LoginView extends GetView<LoginController> {
                     height: height * 0.30,
                     width: width,
                     // color: Colors.yellowAccent,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/images/3.png"),
                           fit: BoxFit.contain),
@@ -55,7 +55,7 @@ class LoginView extends GetView<LoginController> {
                     height: height * 0.03,
                     width: width,
                     // color: Colors.yellow,
-                    child: Text(
+                    child: const Text(
                       "Login in with",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16, color: Colors.black),
@@ -89,7 +89,7 @@ class LoginView extends GetView<LoginController> {
                                 Container(
                                   height: height,
                                   width: width * 0.2,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(
                                             "assets/images/google1.png"),
@@ -113,9 +113,9 @@ class LoginView extends GetView<LoginController> {
                             fontSize: 14, fontWeight: FontWeight.w500)),
                   ),
                   Container(
-                    height: height * 0.2,
+                    height: height * 0.18,
                     width: width,
-                    // color: Colors.white,
+                    // color: Colors.blue,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     child: Column(
                       children: <Widget>[
@@ -126,10 +126,10 @@ class LoginView extends GetView<LoginController> {
                           margin: EdgeInsets.symmetric(vertical: 6),
                           child: TextField(
                             controller: emailController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.orange, width: 2.0),
+                                        color: Colors.orange, width: 1),
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(30.0))),
                                 hintText: "abc@gmail.com",
@@ -144,10 +144,10 @@ class LoginView extends GetView<LoginController> {
                           padding: EdgeInsets.symmetric(horizontal: 3),
                           child: TextField(
                             controller: passwordController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.orange, width: 2.0),
+                                        color: Colors.orange, width: 1),
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(30.0))),
                                 hintText: "8 characters",
@@ -170,7 +170,7 @@ class LoginView extends GetView<LoginController> {
                           color: Colors.transparent,
                           child: MaterialButton(
                             onPressed: () {},
-                            elevation: 10,
+                            elevation: 5,
                             child: Text("Forgot your password?",
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.roboto(
@@ -188,7 +188,7 @@ class LoginView extends GetView<LoginController> {
                         onPressed: () => authController.login(
                             emailController.text, passwordController.text),
                         style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 10.0, vertical: 5.0),
                           primary: Colors.orange,
                           shape: StadiumBorder(),
@@ -219,7 +219,7 @@ class LoginView extends GetView<LoginController> {
                           margin: EdgeInsets.symmetric(vertical: 3),
                           // color: Colors.brown,
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () => Get.toNamed(Routes.SIGNUP),
                             elevation: 10,
                             child: Text(
                               "Register",
