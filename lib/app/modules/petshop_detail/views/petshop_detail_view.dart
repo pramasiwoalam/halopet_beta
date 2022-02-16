@@ -84,7 +84,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                               )
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 7,
                           ),
                           Text(
@@ -92,16 +92,16 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                             style:
                                 GoogleFonts.inter(fontWeight: FontWeight.w300),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.calendar_today,
                                 size: 25,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Column(
@@ -120,14 +120,14 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                           fontSize: 12))
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.timer,
                                 size: 25,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Column(
@@ -365,7 +365,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                   ),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator(),
                                 );
                               }
