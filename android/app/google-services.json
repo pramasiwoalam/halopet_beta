@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:128062410584:android:7cab0e9e8f8f8dc21d1f2d",
         "android_client_info": {
-          "package_name": "com.example.halopet_beta"
+          "package_name": "com.staging.halopet_beta"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "128062410584-7l543daca44k6pu4o96rjruo7v5o4vhn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.halopet_beta",
+            "package_name": "com.staging.halopet_beta",
             "certificate_hash": "aa29be51d014f36ba98354e77a4f2b51860fcd86"
           }
         },

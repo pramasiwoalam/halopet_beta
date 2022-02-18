@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class LoginView extends GetView<LoginController> {
     var width = size.width;
     var height = size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -190,8 +192,37 @@ class LoginView extends GetView<LoginController> {
                     width: size.width * 0.5,
                     color: Colors.transparent,
                     child: ElevatedButton(
-                        onPressed: () => authController.login(
-                            emailController.text, passwordController.text),
+                        onPressed: () async {
+                          try {
+                            var res = await authController.login(
+                                emailController.text, passwordController.text);
+                            if (res != 'Success') {
+                              var message = '';
+                              if (res == 'invalid-email') {
+                                message =
+                                    'Invalid Email Form. Please check again your email.';
+                              } else if (res == 'user-not-found') {
+                                message =
+                                    'User not found. Please check again your input.';
+                              } else if (res == 'wrong-password') {
+                                message =
+                                    'Wrong password. Please check your input';
+                              } else {
+                                message = 'Email / Password must not be null.';
+                              }
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.ERROR,
+                                animType: AnimType.BOTTOMSLIDE,
+                                title: 'Login Failed',
+                                desc: message,
+                                btnOkOnPress: () {},
+                              ).show();
+                            }
+                          } catch (e) {
+                            print("ERROR $e");
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10.0, vertical: 5.0),
