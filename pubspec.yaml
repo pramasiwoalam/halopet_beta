@@ -18,10 +18,10 @@ dependencies:
   intl: ^0.17.0
   awesome_dialog: ^2.1.2
   flutter_svg: ^1.0.3
-  google_fonts: ^2.2.0
   flutter_icons: ^1.1.0
   favorite_button: ^0.0.4
   rename: ^2.0.1
+  google_fonts: ^2.3.1
   
 
 dev_dependencies: 
@@ -51,3 +51,4 @@ flutter:
     - assets/images/tag-hotel.jpg
     - assets/images/tag-grooming.jpg
     - assets/images/tag-vet.jpg
+    - assets/images/Person-Icon.svg
