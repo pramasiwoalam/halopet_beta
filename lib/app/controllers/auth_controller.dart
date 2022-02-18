@@ -23,17 +23,20 @@ class AuthController extends GetxController {
     return doc.snapshots();
   }
 
-  void login(String email, String password) async {
+  Future<Object?> login(String email, String password) async {
     try {
       var res = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       localStorage.write('currentUserId', res.user!.uid);
+
+      return 'Success';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
       }
+      return e.code;
     }
   }
 

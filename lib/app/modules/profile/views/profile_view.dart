@@ -39,7 +39,7 @@ class ProfileView extends GetView<ProfileController> {
                   SizedBox(
                     height: height * 0.3,
                     width: width * 0.3,
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       backgroundImage:
                           AssetImage("assets/images/profile_icon.png"),
                     ),

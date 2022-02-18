@@ -157,14 +157,14 @@ class Home extends StatelessWidget {
                                               'Hello,',
                                               style: GoogleFonts.inter(
                                                   color: Color(0xffF9813A),
-                                                  fontSize: 20,
+                                                  fontSize: 18,
                                                   fontWeight: FontWeight.bold),
                                               textAlign: TextAlign.start,
                                             ),
                                             Text(
                                               '${data["name"]}',
                                               style: GoogleFonts.inter(
-                                                  fontSize: 20,
+                                                  fontSize: 18,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             Padding(
@@ -174,7 +174,7 @@ class Home extends StatelessWidget {
                                                 children: [
                                                   const Icon(
                                                     Icons.location_pin,
-                                                    size: 19,
+                                                    size: 17,
                                                   ),
                                                   const SizedBox(
                                                     width: 3,
@@ -182,7 +182,7 @@ class Home extends StatelessWidget {
                                                   Text(
                                                     'Jakarta, Indonesia',
                                                     style: GoogleFonts.inter(
-                                                        fontSize: 16,
+                                                        fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.w400),
                                                   ),
@@ -219,7 +219,7 @@ class Home extends StatelessWidget {
                                     child: Text(
                                       'Find Petshop by Services',
                                       style: GoogleFonts.inter(
-                                          fontSize: 17,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w500),
                                     )),
                               ),
@@ -282,7 +282,7 @@ class Home extends StatelessWidget {
                                         child: Text(
                                           'Explore More',
                                           style: GoogleFonts.inter(
-                                              fontSize: 17,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w500),
                                         )),
                                     InkWell(
@@ -292,7 +292,7 @@ class Home extends StatelessWidget {
                                           child: Text(
                                             'See All',
                                             style: GoogleFonts.inter(
-                                                fontSize: 15,
+                                                fontSize: 14,
                                                 color: Colors.lightBlue,
                                                 fontWeight: FontWeight.w500),
                                           )),
@@ -448,7 +448,7 @@ class Home extends StatelessWidget {
                                         child: Text(
                                           'Petshop Near You',
                                           style: GoogleFonts.inter(
-                                              fontSize: 17,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w500),
                                         )),
                                     InkWell(
@@ -458,7 +458,7 @@ class Home extends StatelessWidget {
                                           child: Text(
                                             'See All',
                                             style: GoogleFonts.inter(
-                                                fontSize: 15,
+                                                fontSize: 14,
                                                 color: Colors.lightBlue,
                                                 fontWeight: FontWeight.w500),
                                           )),

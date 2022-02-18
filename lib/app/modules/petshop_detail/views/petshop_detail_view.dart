@@ -64,7 +64,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                           Text(
                             '${data["petshopName"]}',
                             style: GoogleFonts.inter(
-                                fontSize: 22,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w700,
                                 color: Color(0xffF9813A)),
                           ),
@@ -80,7 +80,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                               Text(
                                 '${data["petshopAddress"]}',
                                 style: GoogleFonts.inter(
-                                    fontSize: 16, fontWeight: FontWeight.w300),
+                                    fontSize: 15, fontWeight: FontWeight.w300),
                               )
                             ],
                           ),
@@ -89,8 +89,8 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                           ),
                           Text(
                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            style:
-                                GoogleFonts.inter(fontWeight: FontWeight.w300),
+                            style: GoogleFonts.inter(
+                                fontWeight: FontWeight.w300, fontSize: 14),
                           ),
                           const SizedBox(
                             height: 8,
@@ -99,7 +99,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                             children: [
                               const Icon(
                                 Icons.calendar_today,
-                                size: 25,
+                                size: 24,
                               ),
                               const SizedBox(
                                 width: 10,
@@ -111,13 +111,13 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                     'Day Open',
                                     style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Color(0xff2596BE)),
                                   ),
                                   Text('Mon-Sat',
                                       style: GoogleFonts.inter(
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 12))
+                                          fontSize: 11))
                                 ],
                               ),
                               const SizedBox(
@@ -137,13 +137,13 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                     'Open Hours',
                                     style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Color(0xff2596BE)),
                                   ),
                                   Text('09.00 - 21.00',
                                       style: GoogleFonts.inter(
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 12))
+                                          fontSize: 11))
                                 ],
                               ),
                             ],
@@ -155,7 +155,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                           Text(
                             'Book a service:',
                             style: GoogleFonts.inter(
-                              fontSize: 16,
+                              fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -233,7 +233,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                 padding: const EdgeInsets.only(right: 10),
                                 child: Text('See All',
                                     style: GoogleFonts.inter(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.blue)),
                               )

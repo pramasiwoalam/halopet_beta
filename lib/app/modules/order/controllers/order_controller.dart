@@ -3,14 +3,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class OrderController extends GetxController {
-  
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final localStorage = GetStorage();
 
-  Stream<QuerySnapshot<Object?>> streamOrder() {
+  Stream<QuerySnapshot<Object?>> streamOrderByUserId() {
     var userId = localStorage.read('currentUserId');
     CollectionReference order = firestore.collection("order");
-    return order.snapshots();
+    return order.where('userId', isEqualTo: userId).snapshots();
   }
-
 }

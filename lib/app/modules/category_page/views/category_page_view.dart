@@ -34,12 +34,12 @@ class CategoryPageView extends GetView<CategoryPageController> {
                           children: [
                             Text('Petshop that serves Grooming',
                                 style: GoogleFonts.roboto(
-                                    fontWeight: FontWeight.w600, fontSize: 20)),
+                                    fontWeight: FontWeight.w600, fontSize: 17)),
                             Text(
                               'Loved & highly-reviewed petshop, by and for pets.',
                               style: GoogleFonts.roboto(
                                 fontWeight: FontWeight.w300,
-                                fontSize: 15,
+                                fontSize: 13,
                               ),
                             )
                           ],
@@ -57,12 +57,12 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                 Text('Happy Pet, Happy Us!',
                                     style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 20)),
+                                        fontSize: 17)),
                                 Text(
                                   'Loved & highly-reviewed petshop, by and for pets.',
                                   style: GoogleFonts.roboto(
                                     fontWeight: FontWeight.w300,
-                                    fontSize: 15,
+                                    fontSize: 13,
                                   ),
                                 )
                               ],
@@ -79,12 +79,12 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                 Text('Petshop that gives comfort for your pet',
                                     style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 20)),
+                                        fontSize: 17)),
                                 Text(
                                   'Loved & highly-reviewed petshop, by and for pets.',
                                   style: GoogleFonts.roboto(
                                     fontWeight: FontWeight.w300,
-                                    fontSize: 15,
+                                    fontSize: 13,
                                   ),
                                 )
                               ],
