@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -17,105 +18,68 @@ class LoginView extends GetView<LoginController> {
     var width = size.width;
     var height = size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              height: height * 0.49,
+              height: height * 0.5,
               width: width,
               // color: Colors.red,
-              child: Column(
-                children: [
-                  SizedBox(height: 55),
-                  Text("Welcome to",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.roboto(
-                          fontSize: 16, fontWeight: FontWeight.w500)),
-                  SizedBox(height: 5),
-                  Container(
-                    height: height * 0.06,
-                    width: width * 0.3,
-                    // color: Colors.amber,
-                    decoration: const BoxDecoration(
+              child: Expanded(
+                child: Column(
+                  children: [
+                    SizedBox(height: 44),
+                    Text("Welcome to",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.roboto(
+                            fontSize: 16, fontWeight: FontWeight.w500)),
+                    SizedBox(height: 5),
+                    Container(
+                      height: height * 0.07,
+                      width: width * 0.35,
+                      // color: Colors.amber,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image:
+                                  AssetImage("assets/images/textHalopet.png"),
+                              fit: BoxFit.cover)),
+                    ),
+                    Container(
+                      height: height * 0.30,
+                      width: width,
+                      // color: Colors.yellowAccent,
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("assets/images/textHalopet.png"),
-                            fit: BoxFit.cover)),
-                  ),
-                  Container(
-                    height: height * 0.30,
-                    width: width,
-                    // color: Colors.yellowAccent,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/images/3.png"),
-                          fit: BoxFit.contain),
+                            image: AssetImage("assets/images/3.png"),
+                            fit: BoxFit.contain),
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: height * 0.03,
-                    width: width,
-                    // color: Colors.yellow,
-                    child: const Text(
-                      "Login in with",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                  )
-                ],
+                    Container(
+                      height: height * 0.03,
+                      width: width,
+                      // color: Colors.yellow,
+                      child: const Text(
+                        "Login in with",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Container(
-              height: height * 0.48,
+              height: height * 0.5,
               width: width,
               // color: Colors.blue,
               child: Column(
                 children: [
+                  // Expanded(child:
                   Container(
-                    height: height * 0.04,
+                    height: height * 0.19,
                     width: width,
-                    // color: Colors.green,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: height * 0.04,
-                          width: width * 0.3,
-                          color: Colors.transparent,
-                          child: MaterialButton(
-                            onPressed: () {},
-                            elevation: 10,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: height,
-                                  width: width * 0.2,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/google1.png"),
-                                        fit: BoxFit.cover),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: height * 0.02,
-                    width: width,
-                    // color: Colors.amber,
-                    child: Text("or",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.roboto(
-                            fontSize: 14, fontWeight: FontWeight.w500)),
-                  ),
-                  Container(
-                    height: height * 0.18,
-                    width: width,
-                    // color: Colors.blue,
+                    // color: Colors.brown,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     child: Column(
                       children: <Widget>[
@@ -158,14 +122,57 @@ class LoginView extends GetView<LoginController> {
                       ],
                     ),
                   ),
+                  //
                   Container(
-                    height: height * 0.05,
+                    height: height * 0.03,
+                    width: width,
+                    // color: Colors.amber,
+                    child: Text("or",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.roboto(
+                            fontSize: 14, fontWeight: FontWeight.w500)),
+                  ),
+                  Container(
+                    height: height * 0.04,
                     width: width,
                     // color: Colors.green,
                     child: Column(
                       children: [
                         Container(
                           height: height * 0.04,
+                          width: width * 0.29,
+                          // color: Colors.yellow,
+                          child: MaterialButton(
+                            onPressed: () {},
+                            elevation: 10,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: height,
+                                  width: width * 0.18,
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/google1.png"),
+                                        fit: BoxFit.cover),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height * 0.042,
+                    width: width * 0.4,
+                    // color: Colors.red,
+                    child: Column(
+                      children: [
+                        Container(
+                          height: height * 0.042,
                           width: width * 0.8,
                           color: Colors.transparent,
                           child: MaterialButton(
@@ -185,8 +192,37 @@ class LoginView extends GetView<LoginController> {
                     width: size.width * 0.5,
                     color: Colors.transparent,
                     child: ElevatedButton(
-                        onPressed: () => authController.login(
-                            emailController.text, passwordController.text),
+                        onPressed: () async {
+                          try {
+                            var res = await authController.login(
+                                emailController.text, passwordController.text);
+                            if (res != 'Success') {
+                              var message = '';
+                              if (res == 'invalid-email') {
+                                message =
+                                    'Invalid Email Form. Please check again your email.';
+                              } else if (res == 'user-not-found') {
+                                message =
+                                    'User not found. Please check again your input.';
+                              } else if (res == 'wrong-password') {
+                                message =
+                                    'Wrong password. Please check your input';
+                              } else {
+                                message = 'Email / Password must not be null.';
+                              }
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.ERROR,
+                                animType: AnimType.BOTTOMSLIDE,
+                                title: 'Login Failed',
+                                desc: message,
+                                btnOkOnPress: () {},
+                              ).show();
+                            }
+                          } catch (e) {
+                            print("ERROR $e");
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10.0, vertical: 5.0),
@@ -197,45 +233,46 @@ class LoginView extends GetView<LoginController> {
                             style: GoogleFonts.roboto(
                                 fontSize: 17, fontWeight: FontWeight.w500))),
                   ),
+                  // Container(
+                  //   height: height * 0.13,
+                  //   width: width,
+                  //   margin: EdgeInsets.symmetric(vertical: 5),
+                  //   color: Colors.green,
+                  //   child: Column(
+                  //     children: [
                   Container(
-                    height: height * 0.03,
+                    height: height * 0.027,
                     width: width,
-                    margin: EdgeInsets.symmetric(vertical: 5),
                     // color: Colors.green,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: height,
-                          width: width * 0.55,
-                          margin: EdgeInsets.symmetric(vertical: 3),
-                          child: Text("Don't have an account?",
-                              textAlign: TextAlign.right,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 12, fontWeight: FontWeight.w500)),
-                        ),
-                        Container(
-                          height: height,
-                          width: width * 0.19,
-                          margin: EdgeInsets.symmetric(vertical: 3),
-                          // color: Colors.brown,
-                          child: MaterialButton(
-                            onPressed: () => Get.toNamed(Routes.SIGNUP),
-                            elevation: 10,
-                            child: Text(
-                              "Register",
-                              textAlign: TextAlign.left,
-                              style: GoogleFonts.roboto(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                    margin: EdgeInsets.symmetric(vertical: 4),
+                    child: Text("Don't have an account?",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.roboto(
+                            fontSize: 12, fontWeight: FontWeight.w500)),
                   ),
+                  Container(
+                    height: height * 0.034,
+                    width: width * 0.25,
+                    // margin: EdgeInsets.symmetric(vertical: 3),
+                    // color: Colors.brown,
+                    child: MaterialButton(
+                      onPressed: () => Get.toNamed(Routes.SIGNUP),
+                      elevation: 10,
+                      child: Text(
+                        "Register",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.roboto(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  )
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),

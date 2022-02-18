@@ -23,28 +23,26 @@ class OrderView extends GetView<OrderController> {
           child: Column(
             children: [
               Container(
-                height: height * 0.1,
+                height: height * 0.08,
+                width: width,
+              ),
+              Container(
+                height: height * 0.05,
                 width: width,
                 child: Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Your Order',
-                      style: GoogleFonts.inter(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey),
-                    ),
-                  ],
+                    child: Text(
+                  'Your Order',
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                      color: Color(0xff2596BE)),
                 )),
               ),
               StreamBuilder<QuerySnapshot<Object?>>(
-                  stream: orderController.streamOrder(),
+                  stream: orderController.streamOrderByUserId(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.active) {
                       var data = snapshot.data!.docs;
-
                       var userId = localStorage.read('currentUserId');
                       return ListView.builder(
                         physics: const ClampingScrollPhysics(),
@@ -55,8 +53,7 @@ class OrderView extends GetView<OrderController> {
                           var dataMap =
                               data[index].data() as Map<String, dynamic>;
                           return Padding(
-                            padding: const EdgeInsets.only(
-                                top: 7, right: 10, left: 10),
+                            padding: const EdgeInsets.only(right: 10, left: 10),
                             child: Container(
                               height: height * 0.22,
                               width: width,
@@ -81,7 +78,7 @@ class OrderView extends GetView<OrderController> {
                                               ),
                                               Text('${dataMap['status']}',
                                                   style: GoogleFonts.inter(
-                                                      fontSize: 16,
+                                                      fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w700,
                                                       color: Colors.orange))
@@ -99,7 +96,7 @@ class OrderView extends GetView<OrderController> {
                                               Text(
                                                 'Order Declined',
                                                 style: GoogleFonts.inter(
-                                                    fontSize: 16,
+                                                    fontSize: 14,
                                                     fontWeight: FontWeight.w700,
                                                     color: Colors.red),
                                               )
@@ -118,7 +115,7 @@ class OrderView extends GetView<OrderController> {
                                           children: [
                                             const Icon(
                                               Icons.date_range,
-                                              color: Colors.red,
+                                              color: Color(0xff2596BE),
                                             ),
                                             const SizedBox(
                                               width: 7,
@@ -126,10 +123,15 @@ class OrderView extends GetView<OrderController> {
                                             Text('Order ID',
                                                 style: GoogleFonts.inter(
                                                     fontWeight: FontWeight.w700,
-                                                    fontSize: 15)),
+                                                    fontSize: 14)),
                                           ],
                                         ),
-                                        Text(data[index].id)
+                                        Text(
+                                          data[index].id,
+                                          style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 13),
+                                        )
                                       ],
                                     ),
                                     Spacer(),
@@ -141,7 +143,7 @@ class OrderView extends GetView<OrderController> {
                                           children: [
                                             const Icon(
                                               Icons.timelapse_sharp,
-                                              color: Colors.red,
+                                              color: Color(0xff2596BE),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -150,31 +152,41 @@ class OrderView extends GetView<OrderController> {
                                               'Order Date',
                                               style: GoogleFonts.inter(
                                                 fontWeight: FontWeight.w700,
-                                                fontSize: 15,
+                                                fontSize: 14,
                                               ),
                                             ),
                                           ],
                                         ),
-                                        Text(data[index]['orderDate'])
+                                        Text(
+                                          data[index]['orderDate'],
+                                          style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 13),
+                                        )
                                       ],
                                     ),
                                     Spacer(),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Container(
-                                          height: height * 0.04,
-                                          width: width * 0.3,
-                                          decoration: BoxDecoration(
-                                              color: Colors.blue,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Center(
-                                              child: Text('See Detail',
-                                                  style: GoogleFonts.inter(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.white))),
+                                        InkWell(
+                                          child: Container(
+                                            height: height * 0.04,
+                                            width: width * 0.3,
+                                            decoration: BoxDecoration(
+                                                color: Color(0xff2596BE),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: Center(
+                                                child: Text('See Detail',
+                                                    style: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: Colors.white))),
+                                          ),
+                                          onTap: () => Get.toNamed(
+                                              Routes.ORDER_DETAIL,
+                                              arguments: data[index].id),
                                         )
                                       ],
                                     )

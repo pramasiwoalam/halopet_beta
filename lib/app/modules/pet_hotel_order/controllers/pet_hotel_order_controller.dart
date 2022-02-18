@@ -10,26 +10,21 @@ class PetHotelOrderController extends GetxController {
   final localStorage = GetStorage();
   final detailC = Get.put(PetshopDetailController());
 
-  void createOrder(String petType, String date) {
+  Future<Object?> createOrder(String petType, String date) async {
     CollectionReference order = firestore.collection("order");
 
     try {
-      // order.add({
-      //   "bookingType": "Pet Hotel",
-      //   "petType": petType,
-      //   "orderDate": date,
-      //   "userId": localStorage.read('currentUserId'),
-      //   "petshopId": localStorage.read('petshopId'),
-      //   "status": "Waiting for approval"
-      // });
-
-      detailC.orderList.add({'serviceName': 'Pet Hotel', 'price': 20000});
-
-      // localStorage.write('orderList', detailC.orderList);
-
-      Get.toNamed(Routes.CART_PAGE);
+      order.add({
+        "bookingType": "Pet Hotel",
+        "petType": petType,
+        "orderDate": date,
+        "userId": localStorage.read('currentUserId'),
+        "petshopId": localStorage.read('petshopId'),
+        "status": "Waiting for approval"
+      });
+      return 'Order Success';
     } catch (e) {
-      print(e);
+      return 'Error';
     }
   }
 }

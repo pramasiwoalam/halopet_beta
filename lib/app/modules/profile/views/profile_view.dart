@@ -179,7 +179,7 @@ class ProfileView extends GetView<ProfileController> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade300,
+                                        color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
                                             Icon(Icons.person),
@@ -188,7 +188,11 @@ class ProfileView extends GetView<ProfileController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  "Create your own petshop"),
+                                                "Create your own petshop",
+                                                style: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
                                             ),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
@@ -205,7 +209,7 @@ class ProfileView extends GetView<ProfileController> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade300,
+                                        color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
                                             Icon(Icons.favorite),
@@ -213,7 +217,12 @@ class ProfileView extends GetView<ProfileController> {
                                               width: 20,
                                             ),
                                             Expanded(
-                                              child: Text("Favorite Petshop"),
+                                              child: Text(
+                                                "Favorite Petshop",
+                                                style: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
                                             ),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
@@ -236,7 +245,7 @@ class ProfileView extends GetView<ProfileController> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade300,
+                                        color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
                                             Icon(Icons.edit_attributes),
@@ -244,7 +253,12 @@ class ProfileView extends GetView<ProfileController> {
                                               width: 20,
                                             ),
                                             Expanded(
-                                              child: Text("Edit your petshop"),
+                                              child: Text(
+                                                "Edit your petshop",
+                                                style: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
                                             ),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
@@ -261,7 +275,7 @@ class ProfileView extends GetView<ProfileController> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade300,
+                                        color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
                                             Icon(Icons.sell_sharp),
@@ -269,7 +283,12 @@ class ProfileView extends GetView<ProfileController> {
                                               width: 20,
                                             ),
                                             Expanded(
-                                              child: Text("Go to seller page"),
+                                              child: Text(
+                                                "Go to seller page",
+                                                style: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
                                             ),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
@@ -286,7 +305,7 @@ class ProfileView extends GetView<ProfileController> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade300,
+                                        color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
                                             Icon(Icons.favorite),
@@ -294,7 +313,12 @@ class ProfileView extends GetView<ProfileController> {
                                               width: 20,
                                             ),
                                             Expanded(
-                                              child: Text("Favorite"),
+                                              child: Text(
+                                                "Favorite",
+                                                style: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
                                             ),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
@@ -316,7 +340,7 @@ class ProfileView extends GetView<ProfileController> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade300,
+                                        color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
                                             Icon(Icons.edit_attributes),
@@ -324,7 +348,12 @@ class ProfileView extends GetView<ProfileController> {
                                               width: 20,
                                             ),
                                             Expanded(
-                                              child: Text("Edit your petshop"),
+                                              child: Text(
+                                                "Edit your petshop",
+                                                style: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
                                             ),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
@@ -341,7 +370,7 @@ class ProfileView extends GetView<ProfileController> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade300,
+                                        color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
                                             Icon(Icons.emoji_people),
@@ -349,7 +378,12 @@ class ProfileView extends GetView<ProfileController> {
                                               width: 20,
                                             ),
                                             Expanded(
-                                              child: Text("Go Back As User"),
+                                              child: Text(
+                                                "Go Back As User",
+                                                style: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
                                             ),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
@@ -374,7 +408,7 @@ class ProfileView extends GetView<ProfileController> {
                           padding: EdgeInsets.all(20),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
-                          color: Colors.grey.shade300,
+                          color: Colors.grey.shade200,
                           child: Row(
                             children: [
                               Icon(Icons.logout),
@@ -382,7 +416,11 @@ class ProfileView extends GetView<ProfileController> {
                                 width: 20,
                               ),
                               Expanded(
-                                child: Text("Log Out"),
+                                child: Text(
+                                  "Log Out",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w400),
+                                ),
                               ),
                               Icon(Icons.arrow_forward_ios),
                             ],
