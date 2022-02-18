@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:halopet_beta/app/routes/app_pages.dart';
 import 'package:intl/intl.dart';
 
 import '../controllers/pet_hotel_order_controller.dart';
@@ -67,7 +68,7 @@ class PetHotelOrderView extends GetView<PetHotelOrderController> {
                         title: 'Order Success',
                         desc: 'Your order has been created.',
                         btnOkOnPress: () {
-                          Get.back();
+                          Get.toNamed(Routes.HOMEPAGE);
                         },
                       ).show();
                     }

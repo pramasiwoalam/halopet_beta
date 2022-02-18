@@ -35,7 +35,7 @@ class OrderView extends GetView<OrderController> {
                   style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
-                      color: Color(0xffF9813A)),
+                      color: Color(0xff2596BE)),
                 )),
               ),
               StreamBuilder<QuerySnapshot<Object?>>(
@@ -115,7 +115,7 @@ class OrderView extends GetView<OrderController> {
                                           children: [
                                             const Icon(
                                               Icons.date_range,
-                                              color: Colors.red,
+                                              color: Color(0xff2596BE),
                                             ),
                                             const SizedBox(
                                               width: 7,
@@ -126,7 +126,12 @@ class OrderView extends GetView<OrderController> {
                                                     fontSize: 14)),
                                           ],
                                         ),
-                                        Text(data[index].id)
+                                        Text(
+                                          data[index].id,
+                                          style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 13),
+                                        )
                                       ],
                                     ),
                                     Spacer(),
@@ -138,7 +143,7 @@ class OrderView extends GetView<OrderController> {
                                           children: [
                                             const Icon(
                                               Icons.timelapse_sharp,
-                                              color: Colors.red,
+                                              color: Color(0xff2596BE),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -152,7 +157,12 @@ class OrderView extends GetView<OrderController> {
                                             ),
                                           ],
                                         ),
-                                        Text(data[index]['orderDate'])
+                                        Text(
+                                          data[index]['orderDate'],
+                                          style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 13),
+                                        )
                                       ],
                                     ),
                                     Spacer(),
@@ -164,7 +174,7 @@ class OrderView extends GetView<OrderController> {
                                             height: height * 0.04,
                                             width: width * 0.3,
                                             decoration: BoxDecoration(
-                                                color: Colors.blue,
+                                                color: Color(0xff2596BE),
                                                 borderRadius:
                                                     BorderRadius.circular(10)),
                                             child: Center(
