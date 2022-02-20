@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/controllers/auth_controller.dart';
+import 'package:halopet_beta/app/modules/favorite/views/favorite_view.dart';
 import 'package:halopet_beta/app/modules/history/views/history_view.dart';
 import 'package:halopet_beta/app/modules/order/views/order_view.dart';
 import 'package:halopet_beta/app/modules/profile/views/profile_view.dart';
@@ -24,7 +25,7 @@ class HomepageView extends GetView<HomepageController> {
     homeController.index.value = index;
   }
 
-  final tabs = [Home(), OrderView(), HistoryView(), ProfileView()];
+  final tabs = [Home(), OrderView(), FavoriteView(), ProfileView()];
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +57,10 @@ class HomepageView extends GetView<HomepageController> {
                 backgroundColor: Color(0xfff2f2f2)),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.history_edu,
+                  Icons.favorite,
                   color: Color(0xffF9813A),
                 ),
-                label: "History",
+                label: "Favorite",
                 backgroundColor: Color(0xfff2f2f2)),
             BottomNavigationBarItem(
                 icon: Icon(
@@ -117,18 +118,12 @@ class Home extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.done) {
                 var data = snapshot.data!.data() as Map<String, dynamic>;
                 localStorage.write('favArr', data['favoriteId']);
-
                 return StreamBuilder<QuerySnapshot<Object?>>(
                     stream: homeController.getFavByUserId(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.active) {
                         var favData = snapshot.data!.docs;
                         var arrData = [];
-                        // favData.forEach((element) => arrData.add([
-                        //       {'favId': element.id.toString()},
-                        //     ]));
-                        // print('arr: ${arrData}');
-                        // localStorage.write('favArr', arrData);
                         return Container(
                           margin: const EdgeInsets.only(top: 8),
                           child: SafeArea(
