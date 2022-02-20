@@ -180,7 +180,10 @@ class OrderView extends GetView<OrderController> {
                                           ),
                                           onTap: () => Get.toNamed(
                                               Routes.ORDER_DETAIL,
-                                              arguments: data[index].id),
+                                              arguments: [
+                                                {'id': data[index].id},
+                                                {'status': (dataMap['status'])}
+                                              ]),
                                         )
                                       ],
                                     )

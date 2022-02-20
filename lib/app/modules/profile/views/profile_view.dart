@@ -262,9 +262,9 @@ class ProfileView extends GetView<ProfileController> {
                                         color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
-                                            Icon(Icons.edit_attributes,
+                                            const Icon(Icons.edit_attributes,
                                                 color: Color(0xffF9813A)),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             ),
                                             Expanded(
