@@ -8,7 +8,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/controllers/auth_controller.dart';
 import 'package:halopet_beta/app/modules/favorite/views/favorite_view.dart';
-import 'package:halopet_beta/app/modules/history/views/history_view.dart';
 import 'package:halopet_beta/app/modules/order/views/order_view.dart';
 import 'package:halopet_beta/app/modules/profile/views/profile_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
