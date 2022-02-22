@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/controllers/auth_controller.dart';
+import 'package:halopet_beta/app/modules/favorite/views/favorite_view.dart';
 import 'package:halopet_beta/app/modules/history/views/history_view.dart';
 import 'package:halopet_beta/app/modules/order/views/order_view.dart';
 import 'package:halopet_beta/app/modules/profile/views/profile_view.dart';
@@ -24,54 +25,75 @@ class HomepageView extends GetView<HomepageController> {
     homeController.index.value = index;
   }
 
-  final tabs = [Home(), OrderView(), HistoryView(), ProfileView()];
+  final tabs = [Home(), OrderView(), FavoriteView(), ProfileView()];
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var height = size.height;
+    var width = size.width;
     return Scaffold(
       body: Obx(() => tabs[homeController.index.value]),
       bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
-          currentIndex: homeController.index.value,
-          iconSize: 33,
-          unselectedFontSize: 10,
-          selectedFontSize: 15,
-          selectedItemColor: Color(0xffF9813A),
-          showSelectedLabels: true,
-          items: const [
-            BottomNavigationBarItem(
-                label: "Home",
-                icon: Icon(
-                  Icons.home,
-                  color: Color(0xffF9813A),
-                ),
-                backgroundColor: Color(0xfff2f2f2)),
-            BottomNavigationBarItem(
-                label: "Order",
-                icon: Icon(
-                  Icons.book,
-                  color: Color(0xffF9813A),
-                ),
-                backgroundColor: Color(0xfff2f2f2)),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.history_edu,
-                  color: Color(0xffF9813A),
-                ),
-                label: "History",
-                backgroundColor: Color(0xfff2f2f2)),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person,
-                  color: Color(0xffF9813A),
-                ),
-                label: "Profile",
-                backgroundColor: Color(0xfff2f2f2)),
-          ],
-          onTap: (index) {
-            indexAction(index);
-          },
+        () => Container(
+          height: height * 0.095,
+          width: width,
+          decoration: const BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                  color: Color.fromARGB(255, 121, 121, 121), width: 0.2),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(255, 224, 224, 224),
+                spreadRadius: 3,
+                blurRadius: 5,
+                offset: Offset(0, 4),
+              )
+            ],
+          ),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.shifting,
+            currentIndex: homeController.index.value,
+            iconSize: 33,
+            unselectedFontSize: 10,
+            selectedFontSize: 15,
+            selectedItemColor: Color(0xffF9813A),
+            showSelectedLabels: true,
+            items: const [
+              BottomNavigationBarItem(
+                  label: "Home",
+                  icon: Icon(
+                    Icons.home,
+                    color: Color(0xffF9813A),
+                  ),
+                  backgroundColor: Color.fromARGB(255, 255, 255, 255)),
+              BottomNavigationBarItem(
+                  label: "Order",
+                  icon: Icon(
+                    Icons.book,
+                    color: Color(0xffF9813A),
+                  ),
+                  backgroundColor: Color.fromARGB(255, 255, 255, 255)),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.favorite,
+                    color: Color(0xffF9813A),
+                  ),
+                  label: "Favorite",
+                  backgroundColor: Color.fromARGB(255, 255, 255, 255)),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.person,
+                    color: Color(0xffF9813A),
+                  ),
+                  label: "Profile",
+                  backgroundColor: Color.fromARGB(255, 255, 255, 255)),
+            ],
+            onTap: (index) {
+              indexAction(index);
+            },
+          ),
         ),
       ),
     );
@@ -117,18 +139,12 @@ class Home extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.done) {
                 var data = snapshot.data!.data() as Map<String, dynamic>;
                 localStorage.write('favArr', data['favoriteId']);
-
                 return StreamBuilder<QuerySnapshot<Object?>>(
                     stream: homeController.getFavByUserId(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.active) {
                         var favData = snapshot.data!.docs;
                         var arrData = [];
-                        // favData.forEach((element) => arrData.add([
-                        //       {'favId': element.id.toString()},
-                        //     ]));
-                        // print('arr: ${arrData}');
-                        // localStorage.write('favArr', arrData);
                         return Container(
                           margin: const EdgeInsets.only(top: 8),
                           child: SafeArea(
@@ -275,9 +291,7 @@ class Home extends StatelessWidget {
                                 ),
                                 Container(
                                   margin: EdgeInsets.only(
-                                      top: height * 0.01,
-                                      right: width * 0.07,
-                                      left: width * 0.07),
+                                      right: width * 0.07, left: width * 0.07),
                                   height: height * 0.05,
                                   child: Row(
                                     mainAxisAlignment:
@@ -313,141 +327,150 @@ class Home extends StatelessWidget {
                                       if (snapshot.connectionState ==
                                           ConnectionState.active) {
                                         var data = snapshot.data!.docs;
-                                        return Container(
-                                          height: height * 0.28,
-                                          child: ListView.builder(
-                                              // physics: ClampingScrollPhysics(),
-                                              scrollDirection: Axis.horizontal,
-                                              shrinkWrap: true,
-                                              itemCount: data.length,
-                                              itemBuilder: (context, index) {
-                                                return Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 7,
-                                                          top: 1,
-                                                          right: 10),
-                                                  child: InkWell(
-                                                    onTap: () => {
-                                                      Get.toNamed(
-                                                        Routes.PETSHOP_DETAIL,
-                                                      ),
-                                                      localStorage.write(
-                                                          'petshopId',
-                                                          data[index].id)
-                                                    },
-                                                    child: Container(
-                                                      width: width * 0.40,
-                                                      height: height * 0.1,
-                                                      decoration: BoxDecoration(
-                                                        color: const Color(
-                                                            0xFFf2f2f2),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                        border: Border.all(
-                                                            width: 1,
-                                                            color: const Color(
-                                                                0xFFdedede)),
-                                                      ),
-                                                      child: Stack(
-                                                        alignment:
-                                                            Alignment.topCenter,
-                                                        children: [
-                                                          Positioned(
-                                                            bottom: 14,
-                                                            child: Container(
-                                                              // color: Colors.red,
-                                                              height:
-                                                                  height * 0.1,
-                                                              width:
-                                                                  width * 0.34,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      // color: Colors.blue,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              20)),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                  top: 13,
-                                                                ),
-                                                                child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      '${(data[index].data() as Map<String, dynamic>)["petshopName"]}',
-                                                                      style: GoogleFonts.inter(
-                                                                          fontWeight: FontWeight
-                                                                              .w600,
-                                                                          fontSize:
-                                                                              15),
-                                                                    ),
-                                                                    Text(
-                                                                      '${(data[index].data() as Map<String, dynamic>)["petshopAddress"]}',
-                                                                      style: GoogleFonts.inter(
-                                                                          fontWeight: FontWeight
-                                                                              .w300,
-                                                                          fontSize:
-                                                                              12),
-                                                                    )
-                                                                  ],
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 15),
+                                          child: Container(
+                                            height: height * 0.28,
+                                            child: ListView.builder(
+                                                // physics: ClampingScrollPhysics(),
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                shrinkWrap: true,
+                                                itemCount: data.length,
+                                                itemBuilder: (context, index) {
+                                                  return Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 1, right: 15),
+                                                    child: InkWell(
+                                                      onTap: () => {
+                                                        Get.toNamed(
+                                                          Routes.PETSHOP_DETAIL,
+                                                        ),
+                                                        localStorage.write(
+                                                            'petshopId',
+                                                            data[index].id)
+                                                      },
+                                                      child: Container(
+                                                        width: width * 0.42,
+                                                        height: height * 0.1,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: const Color
+                                                                  .fromARGB(255,
+                                                              245, 245, 245),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          border: Border.all(
+                                                              width: 1,
+                                                              color: const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  230,
+                                                                  230,
+                                                                  230)),
+                                                        ),
+                                                        child: Stack(
+                                                          alignment: Alignment
+                                                              .topCenter,
+                                                          children: [
+                                                            Positioned(
+                                                              bottom: 7,
+                                                              child: Container(
+                                                                // color: Colors.red,
+                                                                height: height *
+                                                                    0.1,
+                                                                width: width *
+                                                                    0.37,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                        // color: Colors.blue,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5)),
+                                                                child: Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                    top: 13,
+                                                                  ),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        '${(data[index].data() as Map<String, dynamic>)["petshopName"]}',
+                                                                        style: GoogleFonts.roboto(
+                                                                            fontWeight:
+                                                                                FontWeight.w600,
+                                                                            fontSize: 14),
+                                                                      ),
+                                                                      Text(
+                                                                        '${(data[index].data() as Map<String, dynamic>)["petshopAddress"]}',
+                                                                        style: GoogleFonts.roboto(
+                                                                            fontWeight:
+                                                                                FontWeight.w300,
+                                                                            fontSize: 12),
+                                                                      )
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
-                                                          Container(
-                                                            decoration: BoxDecoration(
-                                                                color: Colors
-                                                                    .white,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            20)),
-                                                            child: Stack(
-                                                              children: [
-                                                                ClipRRect(
+                                                            Container(
+                                                              decoration: BoxDecoration(
+                                                                  color: Colors
+                                                                      .white,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              20),
-                                                                  child: Image(
-                                                                    height:
-                                                                        height *
+                                                                              3)),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        top:
+                                                                            7.0),
+                                                                child: Stack(
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              3),
+                                                                      child:
+                                                                          Image(
+                                                                        height: height *
                                                                             0.17,
-                                                                    width:
-                                                                        width *
+                                                                        width: width *
                                                                             0.38,
-                                                                    image: const AssetImage(
-                                                                        'assets/images/petshop-1.jpg'),
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
+                                                                        image: const AssetImage(
+                                                                            'assets/images/petshop-1.jpg'),
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                );
-                                              }),
+                                                  );
+                                                }),
+                                          ),
                                         );
                                       } else {
-                                        return Center(
+                                        return const Center(
                                             child: CircularProgressIndicator());
                                       }
                                     }),
                                 Container(
                                   margin: EdgeInsets.only(
-                                      top: height * 0.01,
-                                      right: width * 0.07,
-                                      left: width * 0.07),
+                                      right: width * 0.07, left: width * 0.07),
                                   height: height * 0.05,
                                   child: Row(
                                     mainAxisAlignment:
@@ -605,7 +628,7 @@ class Home extends StatelessWidget {
                                               }),
                                         );
                                       } else {
-                                        return Center(
+                                        return const Center(
                                             child: CircularProgressIndicator());
                                       }
                                     }),

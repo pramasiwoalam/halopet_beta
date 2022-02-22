@@ -31,7 +31,6 @@ class PetshopDetailController extends GetxController {
     CollectionReference favorite = firestore.collection("favorite");
     CollectionReference users = firestore.collection("users");
     CollectionReference petshop = firestore.collection("petshop");
-    print('isfav: $isFav');
     try {
       if (isFav == true) {
         favorite.add(
@@ -56,7 +55,6 @@ class PetshopDetailController extends GetxController {
           },
         );
       } else if (isFav == false) {
-        print('asd');
         firestore
             .collection('favorite')
             .where('petshopId', isEqualTo: petshopId)

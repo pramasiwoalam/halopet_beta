@@ -16,7 +16,14 @@ class AddPetshopView extends GetView<AddPetshopController> {
   final hotelType = TextEditingController();
   final petshopController = Get.put(AddPetshopController());
 
-  Map<String, dynamic> formData = {'name': null, 'address': null, 'desc': null};
+  Map<String, dynamic> formData = {
+    'name': null,
+    'address': null,
+    'desc': null,
+    'value1': false,
+    'value2': false,
+    'value3': false
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +43,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
           child: Padding(
             padding: const EdgeInsets.all(25),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
                   inputFormatters: [
@@ -48,7 +56,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                       hintText: 'Name',
                       contentPadding: EdgeInsets.all(18),
                       floatingLabelBehavior: FloatingLabelBehavior.always),
-                  // textInputAction: TextInputAction.done,
+                  textInputAction: TextInputAction.done,
                   controller: pName,
                   validator: (String? value) {
                     if (pName.text.contains('@')) {
@@ -58,10 +66,10 @@ class AddPetshopView extends GetView<AddPetshopController> {
                     }
                   },
                   onChanged: (String value) {
-                    formData['name'] = pName;
+                    formData['name'] = pName.text;
                   },
                   onSaved: (String? value) {
-                    formData['name'] = pName;
+                    formData['name'] = pName.text;
                   },
                 ),
                 Padding(
@@ -84,10 +92,10 @@ class AddPetshopView extends GetView<AddPetshopController> {
                       }
                     },
                     onChanged: (String value) {
-                      formData['address'] = value;
+                      formData['address'] = pAddress.text;
                     },
                     onSaved: (String? value) {
-                      formData['address'] = value;
+                      formData['address'] = pAddress.text;
                     },
                   ),
                 ),
@@ -114,10 +122,10 @@ class AddPetshopView extends GetView<AddPetshopController> {
                       }
                     },
                     onChanged: (String value) {
-                      formData['desc'] = value;
+                      formData['desc'] = pDesc.text;
                     },
                     onSaved: (String? value) {
-                      formData['desc'] = value;
+                      formData['desc'] = pDesc.text;
                     },
                   ),
                 ),
@@ -129,15 +137,40 @@ class AddPetshopView extends GetView<AddPetshopController> {
                       onChanged: (value) {
                         petshopController.checkValue1.value =
                             !petshopController.checkValue1.value;
+                        formData['value1'] =
+                            !petshopController.checkValue1.value;
                       }),
                 ),
                 Obx(() => petshopController.checkValue1.value == true
                     ? Column(
                         children: [
-                          TextField(
-                            controller: groomingPrice,
-                            decoration: InputDecoration(
-                                labelText: "Grooming price range"),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  labelText: "Grooming Price Range *",
+                                  hintText: 'Price Range',
+                                  contentPadding: EdgeInsets.all(18),
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always),
+                              controller: groomingPrice,
+                              validator: (String? value) {
+                                if (value!.contains('@')) {
+                                  return 'Error 2';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              onChanged: (String value) {
+                                formData['grType'] = groomingPrice.text;
+                              },
+                              onSaved: (String? value) {
+                                formData['grType'] = groomingPrice.text;
+                              },
+                            ),
                           ),
                           TextField(
                             controller: groomingType,
@@ -146,7 +179,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                           ),
                         ],
                       )
-                    : SizedBox(
+                    : const SizedBox(
                         height: 1,
                       )),
                 Obx(
@@ -156,6 +189,8 @@ class AddPetshopView extends GetView<AddPetshopController> {
                       onChanged: (value) {
                         petshopController.checkValue2.value =
                             !petshopController.checkValue2.value;
+                        formData['value2'] =
+                            !petshopController.checkValue2.value;
                       }),
                 ),
                 Obx(() => petshopController.checkValue2.value == true
@@ -163,7 +198,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         children: [
                           TextField(
                             controller: hotelPrice,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 labelText: "Pet hotel price / room"),
                           ),
                           TextField(
@@ -172,7 +207,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                           ),
                         ],
                       )
-                    : SizedBox(
+                    : const SizedBox(
                         height: 1,
                       )),
                 Obx(
@@ -182,29 +217,32 @@ class AddPetshopView extends GetView<AddPetshopController> {
                       onChanged: (value) {
                         petshopController.checkValue3.value =
                             !petshopController.checkValue3.value;
+                        formData['value3'] =
+                            !petshopController.checkValue3.value;
                       }),
                 ),
                 Obx(() => petshopController.checkValue3.value == true
                     ? Column(
                         children: [
-                          Text(
+                          const Text(
                               "You don't have any doctors registered, please register"),
                           ElevatedButton(
                               onPressed: () =>
                                   Get.toNamed(Routes.DOCTOR_REGISTRATION),
-                              child: Text("Register the doctor"))
+                              child: const Text("Register the doctor"))
                         ],
                       )
-                    : SizedBox(
+                    : const SizedBox(
                         height: 1,
                       )),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
                     onPressed: () async {
                       if (form.currentState!.validate()) {
                         form.currentState!.save();
+                        petshopController.createPetshop(formData);
                       }
                     },
                     // petshopController.createPetshop(
@@ -217,7 +255,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                     //     petshopController.checkValue1.value,
                     //     petshopController.checkValue2.value,
                     //     petshopController.checkValue3.value),
-                    child: Text("Create Petshop"))
+                    child: const Text("Create Petshop"))
               ],
             ),
           ),

@@ -106,7 +106,9 @@ class CategoryPageView extends GetView<CategoryPageController> {
                               return Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: InkWell(
-                                  onTap: () => Get.toNamed(Routes.ADD_PETSHOP),
+                                  onTap: () => Get.toNamed(
+                                      Routes.PETSHOP_DETAIL,
+                                      arguments: data[index].id),
                                   child: Container(
                                     // color: Colors.red,
                                     height: height * 0.3,
@@ -121,8 +123,8 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                             // color: Colors.blue,
                                             decoration: const BoxDecoration(
                                               borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(10),
-                                                topRight: Radius.circular(10),
+                                                topLeft: Radius.circular(5),
+                                                topRight: Radius.circular(5),
                                               ),
                                               image: DecorationImage(
                                                 fit: BoxFit.cover,
@@ -137,8 +139,8 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                           decoration: const BoxDecoration(
                                             color: Color(0xfff0f0f0),
                                             borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.circular(20),
-                                              bottomRight: Radius.circular(20),
+                                              bottomLeft: Radius.circular(5),
+                                              bottomRight: Radius.circular(5),
                                             ),
                                           ),
                                           child: Padding(
@@ -158,7 +160,7 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w600,
-                                                          fontSize: 18),
+                                                          fontSize: 16),
                                                     ),
                                                     Container(
                                                       margin: EdgeInsets.only(
@@ -201,7 +203,7 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                                   style: GoogleFonts.roboto(
                                                       fontWeight:
                                                           FontWeight.w300,
-                                                      fontSize: 14),
+                                                      fontSize: 13),
                                                 ),
                                                 const SizedBox(
                                                   height: 7,

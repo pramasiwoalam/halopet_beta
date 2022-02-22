@@ -25,7 +25,15 @@ class ProfileView extends GetView<ProfileController> {
     var height = size.height;
     var width = size.width;
     return Scaffold(
-      appBar: buildAppbar(),
+      appBar: AppBar(
+        title: Center(
+            child: Text(
+          'Profile',
+          style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 19),
+        )),
+        backgroundColor: Color(0xffF9813A),
+        elevation: 0,
+      ),
       body: StreamBuilder<User?>(
           stream: authController.streamUser,
           builder: (context, userSnapshot) {
@@ -45,8 +53,8 @@ class ProfileView extends GetView<ProfileController> {
                             ClipPath(
                               clipper: CustomShape(),
                               child: Container(
-                                height: height * 0.25,
-                                color: Colors.orange,
+                                height: height * 0.15,
+                                color: Color(0xffF9813A),
                               ),
                             ),
                             Column(
@@ -182,7 +190,10 @@ class ProfileView extends GetView<ProfileController> {
                                         color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
-                                            Icon(Icons.person),
+                                            Icon(
+                                              Icons.person,
+                                              color: Color(0xffF9813A),
+                                            ),
                                             SizedBox(
                                               width: 20,
                                             ),
@@ -212,7 +223,10 @@ class ProfileView extends GetView<ProfileController> {
                                         color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
-                                            Icon(Icons.favorite),
+                                            Icon(
+                                              Icons.favorite,
+                                              color: Color(0xffF9813A),
+                                            ),
                                             SizedBox(
                                               width: 20,
                                             ),
@@ -248,8 +262,9 @@ class ProfileView extends GetView<ProfileController> {
                                         color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
-                                            Icon(Icons.edit_attributes),
-                                            SizedBox(
+                                            const Icon(Icons.edit_attributes,
+                                                color: Color(0xffF9813A)),
+                                            const SizedBox(
                                               width: 20,
                                             ),
                                             Expanded(
@@ -411,7 +426,7 @@ class ProfileView extends GetView<ProfileController> {
                           color: Colors.grey.shade200,
                           child: Row(
                             children: [
-                              Icon(Icons.logout),
+                              Icon(Icons.logout, color: Color(0xffF9813A)),
                               SizedBox(
                                 width: 20,
                               ),

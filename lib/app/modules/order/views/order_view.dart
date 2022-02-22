@@ -19,25 +19,19 @@ class OrderView extends GetView<OrderController> {
     var width = size.width;
     return Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: Center(
+              child: Text(
+            'Your Order',
+            style:
+                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 19),
+          )),
+          backgroundColor: Color(0xffF9813A),
+          elevation: 0,
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: height * 0.08,
-                width: width,
-              ),
-              Container(
-                height: height * 0.05,
-                width: width,
-                child: Center(
-                    child: Text(
-                  'Your Order',
-                  style: GoogleFonts.inter(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: Color(0xff2596BE)),
-                )),
-              ),
               StreamBuilder<QuerySnapshot<Object?>>(
                   stream: orderController.streamOrderByUserId(),
                   builder: (context, snapshot) {
@@ -72,16 +66,16 @@ class OrderView extends GetView<OrderController> {
                                         ? Row(
                                             children: [
                                               const Icon(Icons.timer,
-                                                  color: Colors.orange),
+                                                  color: Colors.brown),
                                               const SizedBox(
                                                 width: 7,
                                               ),
                                               Text('${dataMap['status']}',
-                                                  style: GoogleFonts.inter(
-                                                      fontSize: 14,
+                                                  style: GoogleFonts.roboto(
+                                                      fontSize: 15,
                                                       fontWeight:
                                                           FontWeight.w700,
-                                                      color: Colors.orange))
+                                                      color: Colors.brown))
                                             ],
                                           )
                                         : Row(
@@ -95,8 +89,8 @@ class OrderView extends GetView<OrderController> {
                                               ),
                                               Text(
                                                 'Order Declined',
-                                                style: GoogleFonts.inter(
-                                                    fontSize: 14,
+                                                style: GoogleFonts.roboto(
+                                                    fontSize: 15,
                                                     fontWeight: FontWeight.w700,
                                                     color: Colors.red),
                                               )
@@ -104,7 +98,7 @@ class OrderView extends GetView<OrderController> {
                                           ),
                                     const Divider(
                                       thickness: 0.5,
-                                      height: 30,
+                                      height: 25,
                                       color: Color.fromARGB(255, 209, 209, 209),
                                     ),
                                     Row(
@@ -115,7 +109,7 @@ class OrderView extends GetView<OrderController> {
                                           children: [
                                             const Icon(
                                               Icons.date_range,
-                                              color: Color(0xff2596BE),
+                                              color: Color(0xffF9813A),
                                             ),
                                             const SizedBox(
                                               width: 7,
@@ -143,7 +137,7 @@ class OrderView extends GetView<OrderController> {
                                           children: [
                                             const Icon(
                                               Icons.timelapse_sharp,
-                                              color: Color(0xff2596BE),
+                                              color: Color(0xffF9813A),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -186,7 +180,10 @@ class OrderView extends GetView<OrderController> {
                                           ),
                                           onTap: () => Get.toNamed(
                                               Routes.ORDER_DETAIL,
-                                              arguments: data[index].id),
+                                              arguments: [
+                                                {'id': data[index].id},
+                                                {'status': (dataMap['status'])}
+                                              ]),
                                         )
                                       ],
                                     )
