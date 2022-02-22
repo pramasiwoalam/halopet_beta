@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 import '../controllers/add_petshop_controller.dart';
@@ -34,8 +35,23 @@ class AddPetshopView extends GetView<AddPetshopController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('AddPetshopView'),
-        centerTitle: true,
+        title: Center(
+            child: Text(
+          'Create Petshop',
+          style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+        )),
+        actions: const [
+          Icon(
+            Icons.abc_outlined,
+            color: Color(0xffF9813A),
+          ),
+          Icon(
+            Icons.abc_outlined,
+            color: Color(0xffF9813A),
+          ),
+        ],
+        backgroundColor: Color(0xffF9813A),
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Form(

@@ -88,138 +88,189 @@ class _approvalContainerState extends State<approvalContainer> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.active) {
                   var data = snapshot.data!.docs;
-                  return ListView.builder(
-                    physics: const ClampingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      var dataMap = data[index].data() as Map<String, dynamic>;
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 10, left: 10),
-                        child: Container(
-                          height: height * 0.22,
-                          width: width,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  width: 2, color: const Color(0xfff0f0f0))),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(Icons.timer,
-                                        color: Colors.brown),
-                                    const SizedBox(
-                                      width: 7,
-                                    ),
-                                    Text('${dataMap['status']}',
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.brown))
-                                  ],
-                                ),
-                                const Divider(
-                                  thickness: 0.5,
-                                  height: 25,
-                                  color: Color.fromARGB(255, 209, 209, 209),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                  if (data.length > 0) {
+                    return Container(
+                      child: ListView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          var dataMap =
+                              data[index].data() as Map<String, dynamic>;
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 10, left: 10),
+                            child: Container(
+                              height: height * 0.22,
+                              width: width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                      width: 2,
+                                      color: const Color(0xfff0f0f0))),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
                                       children: [
-                                        const Icon(
-                                          Icons.date_range,
-                                          color: Color(0xffF9813A),
-                                        ),
+                                        const Icon(Icons.timer,
+                                            color: Colors.brown),
                                         const SizedBox(
                                           width: 7,
                                         ),
-                                        Text('Order ID',
-                                            style: GoogleFonts.inter(
+                                        Text('${dataMap['status']}',
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 15,
                                                 fontWeight: FontWeight.w700,
-                                                fontSize: 14)),
+                                                color: Colors.brown))
                                       ],
                                     ),
-                                    Text(
-                                      data[index].id,
-                                      style: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 13),
-                                    )
-                                  ],
-                                ),
-                                Spacer(),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
+                                    const Divider(
+                                      thickness: 0.5,
+                                      height: 25,
+                                      color: Color.fromARGB(255, 209, 209, 209),
+                                    ),
                                     Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Icon(
-                                          Icons.timelapse_sharp,
-                                          color: Color(0xffF9813A),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.date_range,
+                                              color: Color(0xffF9813A),
+                                            ),
+                                            const SizedBox(
+                                              width: 7,
+                                            ),
+                                            Text('Order ID',
+                                                style: GoogleFonts.inter(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 14)),
+                                          ],
                                         ),
                                         Text(
-                                          'Order Date',
+                                          data[index].id,
                                           style: GoogleFonts.inter(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 14,
-                                          ),
-                                        ),
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 13),
+                                        )
                                       ],
                                     ),
-                                    Text(
-                                      data[index]['orderDate'],
-                                      style: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 13),
+                                    Spacer(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.timelapse_sharp,
+                                              color: Color(0xffF9813A),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              'Order Date',
+                                              style: GoogleFonts.inter(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          data[index]['orderDate'],
+                                          style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 13),
+                                        )
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        InkWell(
+                                          child: Container(
+                                            height: height * 0.04,
+                                            width: width * 0.3,
+                                            decoration: BoxDecoration(
+                                                color: Color(0xff2596BE),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: Center(
+                                                child: Text('See Detail',
+                                                    style: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: Colors.white))),
+                                          ),
+                                          onTap: () => Get.toNamed(
+                                              Routes.ORDER_DETAIL,
+                                              arguments: [
+                                                {'id': data[index].id},
+                                                {'status': (dataMap['status'])}
+                                              ]),
+                                        )
+                                      ],
                                     )
                                   ],
                                 ),
-                                Spacer(),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    InkWell(
-                                      child: Container(
-                                        height: height * 0.04,
-                                        width: width * 0.3,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xff2596BE),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Center(
-                                            child: Text('See Detail',
-                                                style: GoogleFonts.inter(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.white))),
-                                      ),
-                                      onTap: () => Get.toNamed(
-                                          Routes.ORDER_DETAIL,
-                                          arguments: [
-                                            {'id': data[index].id},
-                                            {'status': (dataMap['status'])}
-                                          ]),
-                                    )
-                                  ],
-                                )
-                              ],
+                              ),
                             ),
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 80),
+                          height: height * 0.2,
+                          width: width / 2.6,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage('assets/images/thumb.png')),
                           ),
                         ),
-                      );
-                    },
-                  );
+                        Container(
+                          height: height * 0.1,
+                          width: width,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'There are no payments due.',
+                                style: GoogleFonts.inter(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey.shade500),
+                              ),
+                              const SizedBox(
+                                height: 7,
+                              ),
+                              InkWell(
+                                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
+                                child: Text(
+                                  'Book your appointment here',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blue),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    );
+                  }
                 } else {
                   return Center(child: CircularProgressIndicator());
                 }
@@ -251,138 +302,186 @@ class _paymentState extends State<payment> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.active) {
                   var data = snapshot.data!.docs;
-                  return ListView.builder(
-                    physics: const ClampingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      var dataMap = data[index].data() as Map<String, dynamic>;
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 10, left: 10),
-                        child: Container(
-                          height: height * 0.22,
-                          width: width,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  width: 2, color: const Color(0xfff0f0f0))),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(Icons.timer,
-                                        color: Colors.brown),
-                                    const SizedBox(
-                                      width: 7,
-                                    ),
-                                    Text('${dataMap['status']}',
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.brown))
-                                  ],
-                                ),
-                                const Divider(
-                                  thickness: 0.5,
-                                  height: 25,
-                                  color: Color.fromARGB(255, 209, 209, 209),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.date_range,
-                                          color: Color(0xffF9813A),
-                                        ),
-                                        const SizedBox(
-                                          width: 7,
-                                        ),
-                                        Text('Order ID',
-                                            style: GoogleFonts.inter(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 14)),
-                                      ],
-                                    ),
-                                    Text(
-                                      data[index].id,
-                                      style: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 13),
-                                    )
-                                  ],
-                                ),
-                                Spacer(),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.timelapse_sharp,
-                                          color: Color(0xffF9813A),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          'Order Date',
-                                          style: GoogleFonts.inter(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      data[index]['orderDate'],
-                                      style: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 13),
-                                    )
-                                  ],
-                                ),
-                                Spacer(),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    InkWell(
-                                      child: Container(
-                                        height: height * 0.04,
-                                        width: width * 0.3,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xff2596BE),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Center(
-                                            child: Text('See Detail',
-                                                style: GoogleFonts.inter(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.white))),
+                  if (data.length > 1) {
+                    return ListView.builder(
+                      physics: const ClampingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        var dataMap =
+                            data[index].data() as Map<String, dynamic>;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 10, left: 10),
+                          child: Container(
+                            height: height * 0.22,
+                            width: width,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 2, color: const Color(0xfff0f0f0))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.timer,
+                                          color: Colors.brown),
+                                      const SizedBox(
+                                        width: 7,
                                       ),
-                                      onTap: () => Get.toNamed(
-                                          Routes.ORDER_DETAIL,
-                                          arguments: [
-                                            {'id': data[index].id},
-                                            {'status': (dataMap['status'])}
-                                          ]),
-                                    )
-                                  ],
-                                )
-                              ],
+                                      Text('${dataMap['status']}',
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.brown))
+                                    ],
+                                  ),
+                                  const Divider(
+                                    thickness: 0.5,
+                                    height: 25,
+                                    color: Color.fromARGB(255, 209, 209, 209),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.date_range,
+                                            color: Color(0xffF9813A),
+                                          ),
+                                          const SizedBox(
+                                            width: 7,
+                                          ),
+                                          Text('Order ID',
+                                              style: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 14)),
+                                        ],
+                                      ),
+                                      Text(
+                                        data[index].id,
+                                        style: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 13),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.timelapse_sharp,
+                                            color: Color(0xffF9813A),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            'Order Date',
+                                            style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        data[index]['orderDate'],
+                                        style: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 13),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      InkWell(
+                                        child: Container(
+                                          height: height * 0.04,
+                                          width: width * 0.3,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff2596BE),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Center(
+                                              child: Text('See Detail',
+                                                  style: GoogleFonts.inter(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white))),
+                                        ),
+                                        onTap: () => Get.toNamed(
+                                            Routes.ORDER_DETAIL,
+                                            arguments: [
+                                              {'id': data[index].id},
+                                              {'status': (dataMap['status'])}
+                                            ]),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
+                        );
+                      },
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 80),
+                          height: height * 0.2,
+                          width: width / 2.6,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage('assets/images/thumb.png')),
+                          ),
                         ),
-                      );
-                    },
-                  );
+                        Container(
+                          height: height * 0.1,
+                          width: width,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'There are no payments due.',
+                                style: GoogleFonts.inter(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey.shade500),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              InkWell(
+                                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
+                                child: Text(
+                                  'Book your appointment here',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blue),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    );
+                  }
                 } else {
                   return Center(child: CircularProgressIndicator());
                 }
@@ -401,8 +500,205 @@ class onGoing extends StatefulWidget {
 class _onGoingState extends State<onGoing> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.green,
+    final orderController = Get.put(OrderController());
+    final localStorage = GetStorage();
+    var size = MediaQuery.of(context).size;
+    var height = size.height;
+    var width = size.width;
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          StreamBuilder<QuerySnapshot<Object?>>(
+              stream: orderController.getByPaymentStatus(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.active) {
+                  var data = snapshot.data!.docs;
+                  if (data.length > 1) {
+                    return ListView.builder(
+                      physics: const ClampingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        var dataMap =
+                            data[index].data() as Map<String, dynamic>;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 10, left: 10),
+                          child: Container(
+                            height: height * 0.22,
+                            width: width,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 2, color: const Color(0xfff0f0f0))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.timer,
+                                          color: Colors.brown),
+                                      const SizedBox(
+                                        width: 7,
+                                      ),
+                                      Text('${dataMap['status']}',
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.brown))
+                                    ],
+                                  ),
+                                  const Divider(
+                                    thickness: 0.5,
+                                    height: 25,
+                                    color: Color.fromARGB(255, 209, 209, 209),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.date_range,
+                                            color: Color(0xffF9813A),
+                                          ),
+                                          const SizedBox(
+                                            width: 7,
+                                          ),
+                                          Text('Order ID',
+                                              style: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 14)),
+                                        ],
+                                      ),
+                                      Text(
+                                        data[index].id,
+                                        style: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 13),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.timelapse_sharp,
+                                            color: Color(0xffF9813A),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            'Order Date',
+                                            style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        data[index]['orderDate'],
+                                        style: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 13),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      InkWell(
+                                        child: Container(
+                                          height: height * 0.04,
+                                          width: width * 0.3,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff2596BE),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Center(
+                                              child: Text('See Detail',
+                                                  style: GoogleFonts.inter(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white))),
+                                        ),
+                                        onTap: () => Get.toNamed(
+                                            Routes.ORDER_DETAIL,
+                                            arguments: [
+                                              {'id': data[index].id},
+                                              {'status': (dataMap['status'])}
+                                            ]),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 80),
+                          height: height * 0.2,
+                          width: width / 2.6,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage('assets/images/thumb.png')),
+                          ),
+                        ),
+                        Container(
+                          height: height * 0.1,
+                          width: width,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'There are no payments due.',
+                                style: GoogleFonts.inter(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey.shade500),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              InkWell(
+                                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
+                                child: Text(
+                                  'Book your appointment here',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blue),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    );
+                  }
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              }),
+        ],
+      ),
     );
   }
 }
@@ -415,8 +711,205 @@ class completed extends StatefulWidget {
 class _completedState extends State<completed> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.pink,
+    final orderController = Get.put(OrderController());
+    final localStorage = GetStorage();
+    var size = MediaQuery.of(context).size;
+    var height = size.height;
+    var width = size.width;
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          StreamBuilder<QuerySnapshot<Object?>>(
+              stream: orderController.getByPaymentStatus(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.active) {
+                  var data = snapshot.data!.docs;
+                  if (data.length > 1) {
+                    return ListView.builder(
+                      physics: const ClampingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        var dataMap =
+                            data[index].data() as Map<String, dynamic>;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 10, left: 10),
+                          child: Container(
+                            height: height * 0.22,
+                            width: width,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 2, color: const Color(0xfff0f0f0))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.timer,
+                                          color: Colors.brown),
+                                      const SizedBox(
+                                        width: 7,
+                                      ),
+                                      Text('${dataMap['status']}',
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.brown))
+                                    ],
+                                  ),
+                                  const Divider(
+                                    thickness: 0.5,
+                                    height: 25,
+                                    color: Color.fromARGB(255, 209, 209, 209),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.date_range,
+                                            color: Color(0xffF9813A),
+                                          ),
+                                          const SizedBox(
+                                            width: 7,
+                                          ),
+                                          Text('Order ID',
+                                              style: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 14)),
+                                        ],
+                                      ),
+                                      Text(
+                                        data[index].id,
+                                        style: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 13),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.timelapse_sharp,
+                                            color: Color(0xffF9813A),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            'Order Date',
+                                            style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        data[index]['orderDate'],
+                                        style: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 13),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      InkWell(
+                                        child: Container(
+                                          height: height * 0.04,
+                                          width: width * 0.3,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff2596BE),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Center(
+                                              child: Text('See Detail',
+                                                  style: GoogleFonts.inter(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white))),
+                                        ),
+                                        onTap: () => Get.toNamed(
+                                            Routes.ORDER_DETAIL,
+                                            arguments: [
+                                              {'id': data[index].id},
+                                              {'status': (dataMap['status'])}
+                                            ]),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 80),
+                          height: height * 0.2,
+                          width: width / 2.6,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage('assets/images/thumb.png')),
+                          ),
+                        ),
+                        Container(
+                          height: height * 0.1,
+                          width: width,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'There are no payments due.',
+                                style: GoogleFonts.inter(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey.shade500),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              InkWell(
+                                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
+                                child: Text(
+                                  'Book your appointment here',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blue),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    );
+                  }
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              }),
+        ],
+      ),
     );
   }
 }
@@ -429,8 +922,205 @@ class cancellation extends StatefulWidget {
 class _cancellationState extends State<cancellation> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
+    final orderController = Get.put(OrderController());
+    final localStorage = GetStorage();
+    var size = MediaQuery.of(context).size;
+    var height = size.height;
+    var width = size.width;
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          StreamBuilder<QuerySnapshot<Object?>>(
+              stream: orderController.getByPaymentStatus(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.active) {
+                  var data = snapshot.data!.docs;
+                  if (data.length > 1) {
+                    return ListView.builder(
+                      physics: const ClampingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        var dataMap =
+                            data[index].data() as Map<String, dynamic>;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 10, left: 10),
+                          child: Container(
+                            height: height * 0.22,
+                            width: width,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 2, color: const Color(0xfff0f0f0))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.timer,
+                                          color: Colors.brown),
+                                      const SizedBox(
+                                        width: 7,
+                                      ),
+                                      Text('${dataMap['status']}',
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.brown))
+                                    ],
+                                  ),
+                                  const Divider(
+                                    thickness: 0.5,
+                                    height: 25,
+                                    color: Color.fromARGB(255, 209, 209, 209),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.date_range,
+                                            color: Color(0xffF9813A),
+                                          ),
+                                          const SizedBox(
+                                            width: 7,
+                                          ),
+                                          Text('Order ID',
+                                              style: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 14)),
+                                        ],
+                                      ),
+                                      Text(
+                                        data[index].id,
+                                        style: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 13),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.timelapse_sharp,
+                                            color: Color(0xffF9813A),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            'Order Date',
+                                            style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        data[index]['orderDate'],
+                                        style: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 13),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      InkWell(
+                                        child: Container(
+                                          height: height * 0.04,
+                                          width: width * 0.3,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff2596BE),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Center(
+                                              child: Text('See Detail',
+                                                  style: GoogleFonts.inter(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.white))),
+                                        ),
+                                        onTap: () => Get.toNamed(
+                                            Routes.ORDER_DETAIL,
+                                            arguments: [
+                                              {'id': data[index].id},
+                                              {'status': (dataMap['status'])}
+                                            ]),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 80),
+                          height: height * 0.2,
+                          width: width / 2.6,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage('assets/images/thumb.png')),
+                          ),
+                        ),
+                        Container(
+                          height: height * 0.1,
+                          width: width,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'There are no payments due.',
+                                style: GoogleFonts.inter(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey.shade500),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              InkWell(
+                                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
+                                child: Text(
+                                  'Book your appointment here',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blue),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    );
+                  }
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              }),
+        ],
+      ),
     );
   }
 }

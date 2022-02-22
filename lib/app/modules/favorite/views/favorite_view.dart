@@ -34,173 +34,144 @@ class FavoriteView extends GetView<FavoriteController> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active) {
                     var data = snapshot.data!.docs;
+
                     return ListView.builder(
                         physics: const ClampingScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemCount: data.length,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: InkWell(
-                              onTap: () => Get.toNamed(Routes.PETSHOP_DETAIL,
-                                  arguments: data[index].id),
-                              child: Container(
-                                // color: Colors.red,
-                                height: height * 0.3,
+                          var dataMap =
+                              data[index].data() as Map<String, dynamic>;
+                          return InkWell(
+                            onTap: () => Get.toNamed(Routes.PETSHOP_DETAIL,
+                                arguments: data[index].id),
+                            child: Container(
+                                height: height * 0.2,
                                 width: width,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 1, color: Colors.grey.shade300),
+                                ),
+                                child: Row(
                                   children: [
-                                    Container(
-                                        height: height * 0.18,
-                                        width: width * 0.90,
-                                        // color: Colors.blue,
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(10),
-                                            topRight: Radius.circular(10),
-                                          ),
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                'assets/images/petshop-1.jpg'),
-                                          ),
-                                        )),
-                                    Container(
-                                      height: height * 0.12,
-                                      width: width * 0.90,
-                                      // color: Colors.yellow,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xfff0f0f0),
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(20),
-                                          bottomRight: Radius.circular(20),
-                                        ),
-                                      ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 10.0, bottom: 10, left: 6),
                                       child: Padding(
                                         padding: const EdgeInsets.only(
-                                            top: 5, left: 15),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  '${(data[index].data() as Map<String, dynamic>)["petshopName"]}',
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 18),
-                                                ),
-                                                Container(
-                                                  margin:
-                                                      EdgeInsets.only(right: 5),
-                                                  width: 55,
-                                                  height: 30,
-                                                  // color: Colors.green,
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.green,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5)),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text('5.0',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  color: Colors
-                                                                      .white)),
-                                                      const SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      const Icon(
-                                                        Icons.star,
-                                                        color: Colors.white,
-                                                        size: 15,
-                                                      )
-                                                    ],
+                                            top: 8.0, bottom: 8, left: 10),
+                                        child: Container(
+                                          height: height * 0.18,
+                                          width: width * 0.3,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            image: const DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: AssetImage(
+                                                    'assets/images/petshop-1.jpg')),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 9.0, bottom: 10, left: 10),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 9, bottom: 10),
+                                        child: Container(
+                                          height: height * 0.2,
+                                          width: width * 0.55,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                ' ${dataMap['petshopName']}',
+                                                style: GoogleFonts.roboto(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16),
+                                              ),
+                                              const SizedBox(
+                                                height: 1,
+                                              ),
+                                              Text(
+                                                ' Jakarta, Indonesia',
+                                                style: GoogleFonts.roboto(
+                                                    fontSize: 13),
+                                              ),
+                                              const SizedBox(
+                                                height: 4,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.star,
+                                                    color: Colors.yellow,
+                                                    size: 19,
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                            Text(
-                                              'Jakarta, Indonesia',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w300,
-                                                  fontSize: 14),
-                                            ),
-                                            const SizedBox(
-                                              height: 7,
-                                            ),
-                                            Row(
-                                              children: const [
-                                                Icon(
-                                                  Icons.verified_rounded,
-                                                  color: Color(0xff3CBA54),
-                                                  size: 20,
+                                                  const SizedBox(
+                                                    width: 4,
+                                                  ),
+                                                  Text('5.0 (238)',
+                                                      style: GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.w400)),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+                                              Row(
+                                                children: const [
+                                                  Icon(
+                                                    Icons.verified_rounded,
+                                                    color: Color(0xff3CBA54),
+                                                    size: 18,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                      'Grooming, Pet Hotel, Vet'),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 6,
+                                              ),
+                                              Container(
+                                                height: height * 0.034,
+                                                width: width * 0.23,
+                                                color: Colors.blue.shade300,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: Center(
+                                                    child: Text(
+                                                      'Most Favorites',
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 12,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ),
                                                 ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text('Grooming'),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Icon(
-                                                  Icons.verified_rounded,
-                                                  color: Color(0xff3CBA54),
-                                                  size: 20,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text('Pet Hotel'),
-                                                SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Icon(
-                                                  Icons.verified_rounded,
-                                                  color: Color(0xff3CBA54),
-                                                  size: 20,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text('Vet'),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 3,
-                                            )
-                                          ],
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     )
                                   ],
-                                ),
-                              ),
-                            ),
+                                )),
                           );
                         });
                   } else {
                     return Center(child: CircularProgressIndicator());
                   }
                 })
-            : Center(
+            : const Center(
                 child: Text('Empty'),
               ));
   }
