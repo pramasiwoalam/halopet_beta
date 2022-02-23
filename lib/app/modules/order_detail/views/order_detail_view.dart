@@ -17,7 +17,8 @@ class OrderDetailView extends GetView<OrderDetailController> {
     var width = size.width;
     dynamic arguments = Get.arguments;
     var status = arguments[1]['status'];
-    print(status);
+    var petshopId = GetStorage().read('petshopId');
+    print(petshopId);
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -42,15 +43,9 @@ class OrderDetailView extends GetView<OrderDetailController> {
         child: Column(
           children: [
             Container(
-              height: height * 0.1,
+              margin: EdgeInsets.only(left: 40, right: 40),
+              height: height * 0.2,
               width: width,
-              color: Colors.blue,
-              child: Center(child: Text('BOX STATUS')),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 5),
-              height: height * 0.47,
-              color: Colors.red,
               child: FutureBuilder<DocumentSnapshot<Object?>>(
                   future: controller.getOrder(arguments[0]['id']),
                   builder: (context, snapshot) {
@@ -58,29 +53,162 @@ class OrderDetailView extends GetView<OrderDetailController> {
                       var data = snapshot.data!.data() as Map<String, dynamic>;
                       var currentUserId = localStorage.read('currentUserId');
                       var orderId = arguments[0]['id'];
-                      localStorage.write('petshopId', arguments[0]['id']);
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Center(
-                            child: Text(
-                              'Box Order Detail',
-                              style: TextStyle(fontSize: 25),
+                      return Padding(
+                        padding: const EdgeInsets.all(25),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.circle,
+                                  color: Colors.orange,
+                                  size: 15,
+                                ),
+                                const SizedBox(
+                                  width: 7,
+                                ),
+                                Text(
+                                  'Order Details',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
                             ),
-                          ),
-                          Center(
-                            child: Text(
-                              'Welcome ${currentUserId}',
-                              style: TextStyle(fontSize: 15),
+                            const SizedBox(
+                              height: 10,
                             ),
-                          ),
-                          Center(
-                            child: Text(
-                              'Your Order ID: $orderId',
-                              style: TextStyle(fontSize: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Order ID'),
+                                Text(orderId),
+                              ],
                             ),
-                          ),
-                        ],
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Booking Type'),
+                                Text(data['bookingType']),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text('Status'),
+                                Text('Waiting for approval'),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text('Order Created'),
+                                Text('29-09-2022'),
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
+            ),
+            Container(
+              width: width * 0.9,
+              child: Divider(
+                color: Colors.grey.shade300,
+                thickness: 2,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 5),
+              height: height * 0.3,
+              child: FutureBuilder<DocumentSnapshot<Object?>>(
+                  future: controller.getPetshopByOrder(petshopId),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      var data = snapshot.data!.data() as Map<String, dynamic>;
+                      var currentUserId = localStorage.read('currentUserId');
+                      var orderId = arguments[0]['id'];
+                      var dataMap = data as Map<String, dynamic>;
+                      return Padding(
+                        padding: const EdgeInsets.all(40),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.circle,
+                                  color: Colors.orange,
+                                  size: 15,
+                                ),
+                                const SizedBox(
+                                  width: 7,
+                                ),
+                                Text(
+                                  'Petshop Detail',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Petshop Name'),
+                                Text(dataMap['petshopName']),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Petshop Address'),
+                                Text(dataMap['petshopAddress']),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text('Status'),
+                                Text('Waiting for approval'),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text('Order Created'),
+                                Text('29-09-2022'),
+                              ],
+                            )
+                          ],
+                        ),
                       );
                     } else {
                       return Center(child: CircularProgressIndicator());
