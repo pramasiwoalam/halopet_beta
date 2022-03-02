@@ -29,8 +29,9 @@ class ProfileView extends GetView<ProfileController> {
         title: Center(
             child: Text(
           'Profile',
-          style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 19),
+          style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
         )),
+        centerTitle: true,
         backgroundColor: Color(0xffF9813A),
         elevation: 0,
       ),
@@ -81,7 +82,7 @@ class ProfileView extends GetView<ProfileController> {
                                           border: Border.all(
                                               color: Colors.black,
                                               width: width * 0.4),
-                                          image: DecorationImage(
+                                          image: const DecorationImage(
                                               fit: BoxFit.cover,
                                               image: AssetImage(
                                                   'assets/images/user.png')),
@@ -150,7 +151,7 @@ class ProfileView extends GetView<ProfileController> {
                                           ],
                                         );
                                       } else {
-                                        return Center(
+                                        return const Center(
                                             child: CircularProgressIndicator());
                                       }
                                     });
@@ -190,11 +191,11 @@ class ProfileView extends GetView<ProfileController> {
                                         color: Colors.grey.shade200,
                                         child: Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.person,
                                               color: Color(0xffF9813A),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             ),
                                             Expanded(

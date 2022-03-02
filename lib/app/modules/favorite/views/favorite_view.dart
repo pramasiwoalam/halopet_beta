@@ -92,7 +92,7 @@ class FavoriteView extends GetView<FavoriteController> {
                                                 ' ${dataMap['petshopName']}',
                                                 style: GoogleFonts.roboto(
                                                     fontWeight: FontWeight.w600,
-                                                    fontSize: 16),
+                                                    fontSize: 15),
                                               ),
                                               const SizedBox(
                                                 height: 1,
@@ -125,17 +125,20 @@ class FavoriteView extends GetView<FavoriteController> {
                                                 height: 5,
                                               ),
                                               Row(
-                                                children: const [
-                                                  Icon(
+                                                children: [
+                                                  const Icon(
                                                     Icons.verified_rounded,
                                                     color: Color(0xff3CBA54),
                                                     size: 18,
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 5,
                                                   ),
                                                   Text(
-                                                      'Grooming, Pet Hotel, Vet'),
+                                                    'Grooming, Pet Hotel, Vet',
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 13),
+                                                  ),
                                                 ],
                                               ),
                                               const SizedBox(

@@ -44,7 +44,7 @@ class OrderDetailView extends GetView<OrderDetailController> {
           children: [
             Container(
               margin: EdgeInsets.only(left: 40, right: 40),
-              height: height * 0.2,
+              height: height * 0.22,
               width: width,
               child: FutureBuilder<DocumentSnapshot<Object?>>(
                   future: controller.getOrder(arguments[0]['id']),
@@ -218,7 +218,7 @@ class OrderDetailView extends GetView<OrderDetailController> {
             status == 'Waiting for approval'
                 ? Container(
                     margin: EdgeInsets.only(top: 5),
-                    height: height * 0.3,
+                    height: height * 0.25,
                     color: Colors.red,
                     child: Center(child: Text('Box Action')),
                   )

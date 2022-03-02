@@ -35,7 +35,7 @@ class HomepageView extends GetView<HomepageController> {
       body: Obx(() => tabs[homeController.index.value]),
       bottomNavigationBar: Obx(
         () => Container(
-          height: height * 0.095,
+          height: height * 0.09,
           width: width,
           decoration: const BoxDecoration(
             border: Border(
@@ -54,9 +54,9 @@ class HomepageView extends GetView<HomepageController> {
           child: BottomNavigationBar(
             type: BottomNavigationBarType.shifting,
             currentIndex: homeController.index.value,
-            iconSize: 33,
+            iconSize: 28,
             unselectedFontSize: 10,
-            selectedFontSize: 15,
+            selectedFontSize: 13,
             selectedItemColor: Color(0xffF9813A),
             showSelectedLabels: true,
             items: const [
@@ -155,7 +155,7 @@ class Home extends StatelessWidget {
                                   width: width / 2,
                                   // color: Colors.lightBlue,
                                   margin: const EdgeInsets.only(
-                                      left: 16, right: 16, top: 16),
+                                      left: 16, right: 16, top: 10),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -176,7 +176,7 @@ class Home extends StatelessWidget {
                                                 'Hello,',
                                                 style: GoogleFonts.inter(
                                                     color: Color(0xffF9813A),
-                                                    fontSize: 18,
+                                                    fontSize: 17,
                                                     fontWeight:
                                                         FontWeight.bold),
                                                 textAlign: TextAlign.start,
@@ -184,7 +184,7 @@ class Home extends StatelessWidget {
                                               Text(
                                                 '${data["name"]}',
                                                 style: GoogleFonts.inter(
-                                                    fontSize: 18,
+                                                    fontSize: 16,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -404,14 +404,14 @@ class Home extends StatelessWidget {
                                                                         style: GoogleFonts.roboto(
                                                                             fontWeight:
                                                                                 FontWeight.w600,
-                                                                            fontSize: 14),
+                                                                            fontSize: 13),
                                                                       ),
                                                                       Text(
                                                                         '${(data[index].data() as Map<String, dynamic>)["petshopAddress"]}',
                                                                         style: GoogleFonts.roboto(
                                                                             fontWeight:
                                                                                 FontWeight.w300,
-                                                                            fontSize: 12),
+                                                                            fontSize: 11),
                                                                       )
                                                                     ],
                                                                   ),

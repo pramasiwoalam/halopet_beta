@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/controllers/auth_controller.dart';
 import 'package:halopet_beta/app/modules/profile/views/profile_view.dart';
 import 'package:halopet_beta/app/modules/seller_history/views/seller_history_view.dart';
@@ -20,33 +21,62 @@ class SellerHomeView extends GetView<SellerHomeController> {
     homeController.index.value = index;
   }
 
+  List<Widget> containerList = [
+    ApprovalContainer(),
+    PaymentContainer(),
+    OnGoingContainer(),
+    CompletedContainer(),
+    CancelledContainer()
+  ];
+
   final tabs = [Home(), SellerHistoryView(), ProfileView()];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Obx(() => tabs[homeController.index.value]),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
-          currentIndex: homeController.index.value,
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.done_all_outlined),
-                label: "Request",
-                backgroundColor: Colors.blue),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.history),
-                label: "History",
-                backgroundColor: Colors.green),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: "Profile",
-                backgroundColor: Colors.brown),
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: Center(
+              child: Text(
+            'Booking Order',
+            style:
+                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+          )),
+          backgroundColor: Color(0xff2596BE),
+          elevation: 0,
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.person),
+              onPressed: () => Get.toNamed(Routes.PROFILE),
+            ),
           ],
-          onTap: (index) {
-            indexAction(index);
-          },
+          bottom: const TabBar(
+              isScrollable: true,
+              indicatorColor: Colors.white,
+              labelColor: Colors.white,
+              tabs: <Widget>[
+                Tab(
+                  text: "Waiting for Approval",
+                ),
+                Tab(
+                  text: "Waiting for Payment",
+                ),
+                Tab(
+                  text: "On Going",
+                ),
+                Tab(
+                  text: "Completed",
+                ),
+                Tab(
+                  text: "Cancelled",
+                )
+              ]),
+        ),
+        body: TabBarView(
+          children: containerList,
         ),
       ),
     );
@@ -61,18 +91,12 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Order Inbox'),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
       body: StreamBuilder<QuerySnapshot<Object?>>(
           stream: homeController.streamData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               var data = snapshot.data!.docs;
               var petshopId = localStorage.read('initialPetshopId');
-              print('petshop id pada home: $petshopId');
               return ListView.builder(
                   itemCount: data.length,
                   itemBuilder: (context, index) {
@@ -97,15 +121,81 @@ class Home extends StatelessWidget {
                     }
                   });
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
           }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => authController.logout(),
-        child: Icon(Icons.add),
-      ),
     );
+  }
+}
+
+class ApprovalContainer extends StatefulWidget {
+  const ApprovalContainer({Key? key}) : super(key: key);
+
+  @override
+  _ApprovalContainerState createState() => _ApprovalContainerState();
+}
+
+class _ApprovalContainerState extends State<ApprovalContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class PaymentContainer extends StatefulWidget {
+  const PaymentContainer({Key? key}) : super(key: key);
+
+  @override
+  _PaymentContainerState createState() => _PaymentContainerState();
+}
+
+class _PaymentContainerState extends State<PaymentContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class OnGoingContainer extends StatefulWidget {
+  const OnGoingContainer({Key? key}) : super(key: key);
+
+  @override
+  _OnGoingContainerState createState() => _OnGoingContainerState();
+}
+
+class _OnGoingContainerState extends State<OnGoingContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class CompletedContainer extends StatefulWidget {
+  const CompletedContainer({Key? key}) : super(key: key);
+
+  @override
+  _CompletedContainerState createState() => _CompletedContainerState();
+}
+
+class _CompletedContainerState extends State<CompletedContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class CancelledContainer extends StatefulWidget {
+  const CancelledContainer({Key? key}) : super(key: key);
+
+  @override
+  _CancelledContainerState createState() => _CancelledContainerState();
+}
+
+class _CancelledContainerState extends State<CancelledContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

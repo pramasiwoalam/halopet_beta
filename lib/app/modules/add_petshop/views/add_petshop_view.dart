@@ -6,34 +6,46 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 import '../controllers/add_petshop_controller.dart';
+import 'package:multiselect_formfield/multiselect_formfield.dart';
+
+class Days {
+  final int id;
+  final String name;
+
+  Days({
+    required this.id,
+    required this.name,
+  });
+}
 
 class AddPetshopView extends GetView<AddPetshopController> {
-  final pName = TextEditingController();
-  final pAddress = TextEditingController();
-  final pDesc = TextEditingController();
-  final groomingPrice = TextEditingController();
-  final groomingType = TextEditingController();
-  final hotelPrice = TextEditingController();
-  final hotelType = TextEditingController();
   final petshopController = Get.put(AddPetshopController());
 
   Map<String, dynamic> formData = {
     'name': null,
     'address': null,
     'desc': null,
+    'district': null,
+    'city': null,
+    'phone': null,
     'value1': false,
     'value2': false,
-    'value3': false
+    'value3': false,
+    'dayOpen': null,
+    'openHoursStart': null,
+    'openHoursEnd': null
   };
+
+  GlobalKey<FormState> form = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final form = GlobalKey<FormState>();
     var size = MediaQuery.of(context).size;
+    FocusNode inputNode = FocusNode();
     var height = size.height;
     var width = size.width;
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Center(
             child: Text(
@@ -54,10 +66,11 @@ class AddPetshopView extends GetView<AddPetshopController> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: Form(
-          key: form,
-          child: Padding(
-            padding: const EdgeInsets.all(25),
+        physics: const ClampingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.all(25),
+          child: Form(
+            key: form,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -67,25 +80,19 @@ class AddPetshopView extends GetView<AddPetshopController> {
                   ],
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
                       labelText: "Petshop Name *",
                       hintText: 'Name',
                       contentPadding: EdgeInsets.all(18),
                       floatingLabelBehavior: FloatingLabelBehavior.always),
-                  textInputAction: TextInputAction.done,
-                  controller: pName,
-                  validator: (String? value) {
-                    if (pName.text.contains('@')) {
-                      return 'Error';
-                    } else {
-                      return null;
+                  validator: (value) {
+                    if (value!.contains('Wira')) {
+                      return 'Wira Dilarang daftar';
                     }
                   },
-                  onChanged: (String value) {
-                    formData['name'] = pName.text;
-                  },
-                  onSaved: (String? value) {
-                    formData['name'] = pName.text;
+                  onSaved: (value) {
+                    formData['name'] = value;
                   },
                 ),
                 Padding(
@@ -99,19 +106,94 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         hintText: 'Address',
                         contentPadding: EdgeInsets.all(18),
                         floatingLabelBehavior: FloatingLabelBehavior.always),
-                    controller: pAddress,
-                    validator: (String? value) {
+                    validator: (value) {
                       if (value!.contains('@')) {
                         return 'Error 2';
                       } else {
                         return null;
                       }
                     },
-                    onChanged: (String value) {
-                      formData['address'] = pAddress.text;
+                    onSaved: (value) {
+                      formData['address'] = value;
                     },
-                    onSaved: (String? value) {
-                      formData['address'] = pAddress.text;
+                  ),
+                ),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              labelText: "District *",
+                              hintText: 'District',
+                              contentPadding: EdgeInsets.all(18),
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always),
+                          validator: (value) {
+                            if (value!.contains('@')) {
+                              return 'Error 2';
+                            } else {
+                              return null;
+                            }
+                          },
+                          onSaved: (value) {
+                            formData['district'] = value;
+                          },
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 15, left: 15),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              labelText: "City *",
+                              hintText: 'City',
+                              contentPadding: EdgeInsets.all(18),
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always),
+                          validator: (value) {
+                            if (value!.contains('@')) {
+                              return 'Error 2';
+                            } else {
+                              return null;
+                            }
+                          },
+                          onSaved: (value) {
+                            formData['city'] = value;
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                        labelText: "Petshop Phone Number *",
+                        hintText: 'Phone',
+                        contentPadding: EdgeInsets.all(18),
+                        floatingLabelBehavior: FloatingLabelBehavior.always),
+                    validator: (value) {
+                      if (value!.contains('@')) {
+                        return 'Error 2';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onSaved: (value) {
+                      formData['phone'] = value;
                     },
                   ),
                 ),
@@ -119,7 +201,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                   padding: const EdgeInsets.only(top: 15),
                   child: TextFormField(
                     maxLines: null,
-                    minLines: 4,
+                    minLines: 3,
                     keyboardType: TextInputType.multiline,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(
@@ -129,149 +211,277 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         hintText: 'Description',
                         contentPadding: EdgeInsets.all(18),
                         floatingLabelBehavior: FloatingLabelBehavior.always),
-                    controller: pDesc,
-                    validator: (String? value) {
+                    validator: (value) {
                       if (value!.contains('@')) {
                         return 'Error 2';
                       } else {
                         return null;
                       }
                     },
-                    onChanged: (String value) {
-                      formData['desc'] = pDesc.text;
-                    },
-                    onSaved: (String? value) {
-                      formData['desc'] = pDesc.text;
+                    onSaved: (value) {
+                      formData['desc'] = value;
                     },
                   ),
                 ),
-                Text("List of Services: "),
-                Obx(
-                  () => CheckboxListTile(
-                      title: Text("Pet Grooming Service"),
-                      value: petshopController.checkValue1.value,
-                      onChanged: (value) {
-                        petshopController.checkValue1.value =
-                            !petshopController.checkValue1.value;
-                        formData['value1'] =
-                            !petshopController.checkValue1.value;
-                      }),
-                ),
-                Obx(() => petshopController.checkValue1.value == true
-                    ? Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: TextFormField(
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                  labelText: "Grooming Price Range *",
-                                  hintText: 'Price Range',
-                                  contentPadding: EdgeInsets.all(18),
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always),
-                              controller: groomingPrice,
-                              validator: (String? value) {
-                                if (value!.contains('@')) {
-                                  return 'Error 2';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              onChanged: (String value) {
-                                formData['grType'] = groomingPrice.text;
-                              },
-                              onSaved: (String? value) {
-                                formData['grType'] = groomingPrice.text;
-                              },
-                            ),
-                          ),
-                          TextField(
-                            controller: groomingType,
-                            decoration:
-                                InputDecoration(labelText: "Grooming pet type"),
-                          ),
-                        ],
-                      )
-                    : const SizedBox(
-                        height: 1,
-                      )),
-                Obx(
-                  () => CheckboxListTile(
-                      title: Text("Pet Hotel Service"),
-                      value: petshopController.checkValue2.value,
-                      onChanged: (value) {
-                        petshopController.checkValue2.value =
-                            !petshopController.checkValue2.value;
-                        formData['value2'] =
-                            !petshopController.checkValue2.value;
-                      }),
-                ),
-                Obx(() => petshopController.checkValue2.value == true
-                    ? Column(
-                        children: [
-                          TextField(
-                            controller: hotelPrice,
-                            decoration: const InputDecoration(
-                                labelText: "Pet hotel price / room"),
-                          ),
-                          TextField(
-                            controller: hotelType,
-                            decoration: InputDecoration(labelText: "Pet type"),
-                          ),
-                        ],
-                      )
-                    : const SizedBox(
-                        height: 1,
-                      )),
-                Obx(
-                  () => CheckboxListTile(
-                      title: Text("Vet Available"),
-                      value: petshopController.checkValue3.value,
-                      onChanged: (value) {
-                        petshopController.checkValue3.value =
-                            !petshopController.checkValue3.value;
-                        formData['value3'] =
-                            !petshopController.checkValue3.value;
-                      }),
-                ),
-                Obx(() => petshopController.checkValue3.value == true
-                    ? Column(
-                        children: [
-                          const Text(
-                              "You don't have any doctors registered, please register"),
-                          ElevatedButton(
-                              onPressed: () =>
-                                  Get.toNamed(Routes.DOCTOR_REGISTRATION),
-                              child: const Text("Register the doctor"))
-                        ],
-                      )
-                    : const SizedBox(
-                        height: 1,
-                      )),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                    onPressed: () async {
-                      if (form.currentState!.validate()) {
-                        form.currentState!.save();
-                        petshopController.createPetshop(formData);
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: MultiSelectFormField(
+                    chipBackGroundColor: Color(0xffF9813A),
+                    chipLabelStyle: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w300,
+                        color: Colors.white,
+                        fontSize: 13),
+                    dialogTextStyle: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w300, fontSize: 15),
+                    checkBoxActiveColor: Color(0xffF9813A),
+                    dialogShapeBorder: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    border: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    title: Text(
+                      "Choose Open Day(s) *",
+                      style: GoogleFonts.roboto(
+                          fontSize: 13, fontWeight: FontWeight.w400),
+                    ),
+                    trailing: Icon(Icons.delete),
+                    dataSource: const [
+                      {
+                        "display": "Monday",
+                        "value": "Monday",
+                      },
+                      {
+                        "display": "Tuesday",
+                        "value": "Tuesday",
+                      },
+                      {
+                        "display": "Wednesday",
+                        "value": "Wednesday",
+                      },
+                      {
+                        "display": "Thursday",
+                        "value": "Thursday",
+                      },
+                      {
+                        "display": "Friday",
+                        "value": "Friday",
+                      },
+                      {
+                        "display": "Saturday",
+                        "value": "Saturday",
+                      },
+                      {
+                        "display": "Sunday",
+                        "value": "Sunday",
+                      },
+                    ],
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select one or more options';
                       }
+                      return null;
                     },
-                    // petshopController.createPetshop(
-                    //     pName.text,
-                    //     pAddress.text,
-                    //     groomingPrice.text,
-                    //     groomingType.text,
-                    //     int.parse(hotelPrice.text),
-                    //     hotelType.text,
-                    //     petshopController.checkValue1.value,
-                    //     petshopController.checkValue2.value,
-                    //     petshopController.checkValue3.value),
-                    child: const Text("Create Petshop"))
+                    textField: 'display',
+                    valueField: 'value',
+                    okButtonLabel: 'Choose',
+                    cancelButtonLabel: 'Cancel',
+                    initialValue: formData['dayOpen'],
+                    onSaved: (value) {
+                      if (value == null) return;
+                      formData['dayOpen'] = value;
+                    },
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              labelText: "Open Hours *",
+                              hintText: '07.00 am',
+                              contentPadding: EdgeInsets.all(18),
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always),
+                          validator: (value) {
+                            if (value!.contains('@')) {
+                              return 'Error 2';
+                            } else {
+                              return null;
+                            }
+                          },
+                          onSaved: (value) {
+                            formData['openHoursStart'] = value;
+                          },
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                        child: Container(
+                            width: width * 0.1,
+                            margin: EdgeInsets.only(top: 10),
+                            child: Center(
+                                child: Text(
+                              'until',
+                              style: GoogleFonts.roboto(
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.grey.shade700),
+                            )))),
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              labelText: "Open Hours *",
+                              hintText: '21.00 pm',
+                              contentPadding: EdgeInsets.all(18),
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always),
+                          validator: (value) {
+                            if (value!.contains('@')) {
+                              return 'Error 2';
+                            } else {
+                              return null;
+                            }
+                          },
+                          onSaved: (value) {
+                            formData['openHoursEnd'] = value;
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                // Text("List of Services: "),
+                // Obx(
+                //   () => CheckboxListTile(
+                //       title: Text("Pet Grooming Service"),
+                //       value: petshopController.checkValue1.value,
+                //       onChanged: (value) {
+                //         petshopController.checkValue1.value =
+                //             !petshopController.checkValue1.value;
+                //         formData['value1'] =
+                //             !petshopController.checkValue1.value;
+                //       }),
+                // ),
+                // Obx(() => petshopController.checkValue1.value == true
+                //     ? Column(
+                //         children: [
+                //           Padding(
+                //             padding: const EdgeInsets.only(top: 15),
+                //             child: TextFormField(
+                //               decoration: const InputDecoration(
+                //                   border: OutlineInputBorder(
+                //                       borderRadius: BorderRadius.all(
+                //                           Radius.circular(20))),
+                //                   labelText: "Grooming Price Range *",
+                //                   hintText: 'Price Range',
+                //                   contentPadding: EdgeInsets.all(18),
+                //                   floatingLabelBehavior:
+                //                       FloatingLabelBehavior.always),
+                //               validator: (value) {
+                //                 if (value!.contains('@')) {
+                //                   return 'Error 2';
+                //                 } else {
+                //                   return null;
+                //                 }
+                //               },
+                //               onSaved: (value) {
+                //                 formData['grType'] = value;
+                //               },
+                //             ),
+                //           ),
+                //           const TextField(
+                //             decoration:
+                //                 InputDecoration(labelText: "Grooming pet type"),
+                //           ),
+                //         ],
+                //       )
+                //     : const SizedBox(
+                //         height: 1,
+                //       )),
+                // Obx(
+                //   () => CheckboxListTile(
+                //       title: Text("Pet Hotel Service"),
+                //       value: petshopController.checkValue2.value,
+                //       onChanged: (value) {
+                //         petshopController.checkValue2.value =
+                //             !petshopController.checkValue2.value;
+                //         formData['value2'] =
+                //             !petshopController.checkValue2.value;
+                //       }),
+                // ),
+                // Obx(() => petshopController.checkValue2.value == true
+                //     ? Column(
+                //         children: const [
+                //           TextField(
+                //             decoration: InputDecoration(
+                //                 labelText: "Pet hotel price / room"),
+                //           ),
+                //           TextField(
+                //             decoration: InputDecoration(labelText: "Pet type"),
+                //           ),
+                //         ],
+                //       )
+                //     : const SizedBox(
+                //         height: 1,
+                //       )),
+                // Obx(
+                //   () => CheckboxListTile(
+                //       title: Text("Vet Available"),
+                //       value: petshopController.checkValue3.value,
+                //       onChanged: (value) {
+                //         petshopController.checkValue3.value =
+                //             !petshopController.checkValue3.value;
+                //         formData['value3'] =
+                //             !petshopController.checkValue3.value;
+                //       }),
+                // ),
+                // Obx(() => petshopController.checkValue3.value == true
+                //     ? Column(
+                //         children: [
+                //           const Text(
+                //               "You don't have any doctors registered, please register"),
+                //           ElevatedButton(
+                //               onPressed: () =>
+                //                   Get.toNamed(Routes.DOCTOR_REGISTRATION),
+                //               child: const Text("Register the doctor"))
+                //         ],
+                //       )
+                //     : const SizedBox(
+                //         height: 1,
+                //       )),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                Center(
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        if (form.currentState!.validate()) {
+                          form.currentState!.save();
+                          petshopController.createPetshop(formData);
+                        }
+                      },
+                      // petshopController.createPetshop(
+                      //     pName.text,
+                      //     pAddress.text,
+                      //     groomingPrice.text,
+                      //     groomingType.text,
+                      //     int.parse(hotelPrice.text),
+                      //     hotelType.text,
+                      //     petshopController.checkValue1.value,
+                      //     petshopController.checkValue2.value,
+                      //     petshopController.checkValue3.value),
+                      child: const Text("Create service")),
+                )
               ],
             ),
           ),
