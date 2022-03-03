@@ -19,7 +19,7 @@ class OrderController extends GetxController {
         .snapshots();
   }
 
-  Stream<QuerySnapshot<Object?>> getByPaymentStatus() {
+  Stream<QuerySnapshot<Object?>> getByPaymentStatus(String userId) {
     CollectionReference order = firestore.collection("order");
     return order
         .where('userId', isEqualTo: userId)

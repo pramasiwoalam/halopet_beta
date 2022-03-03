@@ -15,7 +15,7 @@ class SellerOrderDetailController extends GetxController {
   void accepted(String orderId) {
     DocumentReference docRef = firestore.collection('order').doc(orderId);
 
-    docRef.update({'status': 'Booking Created'});
+    docRef.update({'status': 'Waiting for payment'});
     Get.back();
   }
 

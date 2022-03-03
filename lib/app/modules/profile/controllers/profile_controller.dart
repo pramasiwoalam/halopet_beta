@@ -21,6 +21,7 @@ class ProfileController extends GetxController {
     Future<void> users =
         firestore.collection('users').doc(userId).update({"role": "Member"});
     auth.currentUser!.reload();
+    Get.back();
   }
 
   void changeRoleToSeller(String userId) {

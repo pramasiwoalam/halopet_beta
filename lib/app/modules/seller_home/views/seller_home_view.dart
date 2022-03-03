@@ -29,8 +29,6 @@ class SellerHomeView extends GetView<SellerHomeController> {
     CancelledContainer()
   ];
 
-  final tabs = [Home(), SellerHistoryView(), ProfileView()];
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -83,78 +81,97 @@ class SellerHomeView extends GetView<SellerHomeController> {
   }
 }
 
-class Home extends StatelessWidget {
+class ApprovalContainer extends StatelessWidget {
   final authController = Get.find<AuthController>();
   final homeController = Get.put(SellerHomeController());
   final localStorage = GetStorage();
 
   @override
   Widget build(BuildContext context) {
+    var userId = localStorage.read('currentUserId');
     return Scaffold(
-      body: StreamBuilder<QuerySnapshot<Object?>>(
-          stream: homeController.streamData(),
+      body: FutureBuilder<DocumentSnapshot<Object?>>(
+          future: homeController.getUser(userId),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.active) {
-              var data = snapshot.data!.docs;
-              var petshopId = localStorage.read('initialPetshopId');
-              return ListView.builder(
-                  itemCount: data.length,
-                  itemBuilder: (context, index) {
-                    if ((data[index].data()
-                                as Map<String, dynamic>)['petshopId'] ==
-                            petshopId &&
-                        (data[index].data()
-                                as Map<String, dynamic>)['status'] !=
-                            'Declined' &&
-                        (data[index].data()
-                                as Map<String, dynamic>)['status'] !=
-                            'Done') {
-                      return ListTile(
-                          onTap: () => Get.toNamed(Routes.SELLER_ORDER_DETAIL,
-                              arguments: data[index].id),
-                          title: Text(
-                              "Booking Type: ${(data[index].data() as Map<String, dynamic>)["bookingType"]}"),
-                          subtitle: Text(
-                              "Status: ${(data[index].data() as Map<String, dynamic>)["status"]}"));
+            if (snapshot.connectionState == ConnectionState.done) {
+              var data = snapshot.data!.data() as Map<String, dynamic>;
+              var petshopId = data['petshopId'];
+              return StreamBuilder<QuerySnapshot<Object?>>(
+                  stream: homeController.getByApprovalStatus(petshopId),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.active) {
+                      var data = snapshot.data!.docs;
+                      return ListView.builder(
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            var dataMap =
+                                data[index].data() as Map<String, dynamic>;
+                            return ListTile(
+                                onTap: () => Get.toNamed(
+                                    Routes.SELLER_ORDER_DETAIL,
+                                    arguments: data[index].id),
+                                title: Text(
+                                    "Booking Type: ${dataMap['bookingType']}"),
+                                subtitle: Text('Status: ${dataMap['status']}'));
+                          });
                     } else {
-                      return SizedBox();
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
                     }
                   });
             } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
             }
           }),
     );
   }
 }
 
-class ApprovalContainer extends StatefulWidget {
-  const ApprovalContainer({Key? key}) : super(key: key);
+class PaymentContainer extends StatelessWidget {
+  final authController = Get.find<AuthController>();
+  final homeController = Get.put(SellerHomeController());
+  final localStorage = GetStorage();
 
-  @override
-  _ApprovalContainerState createState() => _ApprovalContainerState();
-}
-
-class _ApprovalContainerState extends State<ApprovalContainer> {
   @override
   Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class PaymentContainer extends StatefulWidget {
-  const PaymentContainer({Key? key}) : super(key: key);
-
-  @override
-  _PaymentContainerState createState() => _PaymentContainerState();
-}
-
-class _PaymentContainerState extends State<PaymentContainer> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
+    var userId = localStorage.read('currentUserId');
+    return Scaffold(
+      body: FutureBuilder<DocumentSnapshot<Object?>>(
+          future: homeController.getUser(userId),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              var data = snapshot.data!.data() as Map<String, dynamic>;
+              var petshopId = data['petshopId'];
+              return StreamBuilder<QuerySnapshot<Object?>>(
+                  stream: homeController.getByPaymentStatus(petshopId),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.active) {
+                      var data = snapshot.data!.docs;
+                      return ListView.builder(
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            var dataMap =
+                                data[index].data() as Map<String, dynamic>;
+                            return ListTile(
+                                onTap: () => Get.toNamed(
+                                    Routes.SELLER_ORDER_DETAIL,
+                                    arguments: data[index].id),
+                                title: Text(
+                                    "Booking Type: ${dataMap['bookingType']}"),
+                                subtitle: Text('Status: ${dataMap['status']}'));
+                          });
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  });
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          }),
+    );
   }
 }
 

@@ -256,32 +256,30 @@ class ProfileView extends GetView<ProfileController> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20, vertical: 10),
                                       child: FlatButton(
-                                        padding: EdgeInsets.all(20),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        color: Colors.grey.shade200,
-                                        child: Row(
-                                          children: [
-                                            const Icon(Icons.edit_attributes,
-                                                color: Color(0xffF9813A)),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                "Edit your petshop",
-                                                style: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FontWeight.w400),
+                                          padding: EdgeInsets.all(20),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          color: Colors.grey.shade200,
+                                          child: Row(
+                                            children: [
+                                              const Icon(Icons.edit_attributes,
+                                                  color: Color(0xffF9813A)),
+                                              const SizedBox(
+                                                width: 20,
                                               ),
-                                            ),
-                                            Icon(Icons.arrow_forward_ios),
-                                          ],
-                                        ),
-                                        onPressed: () => profileController
-                                            .changeRoleToSeller(userId),
-                                      ),
+                                              Expanded(
+                                                child: Text(
+                                                  "Edit your petshop",
+                                                  style: GoogleFonts.inter(
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                              ),
+                                              Icon(Icons.arrow_forward_ios),
+                                            ],
+                                          ),
+                                          onPressed: () => {}),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
