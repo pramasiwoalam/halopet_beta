@@ -155,14 +155,27 @@ class ProfileView extends GetView<ProfileController> {
                                       }
                                     });
                               } else {
-                                return Center(
-                                    child: Text(
-                                  'Hallo ${data['name']}',
-                                  style: GoogleFonts.inter(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ));
+                                return Column(
+                                  children: [
+                                    Center(
+                                        child: Text(
+                                      'Hallo ${data['name']}',
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    Center(
+                                      child: Text(
+                                        '(+62) ${data['phone']}',
+                                        style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                );
                               }
                             } else {
                               return Center(child: CircularProgressIndicator());
@@ -179,19 +192,48 @@ class ProfileView extends GetView<ProfileController> {
                                   data['petshopOwner'] == false) {
                                 return Column(
                                   children: [
+                                    Container(
+                                      height: height * 0.042,
+                                      width: width * 0.8,
+                                      color: Colors.transparent,
+                                      child: Center(
+                                        child: MaterialButton(
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Expanded(
+                                                child: Center(
+                                                  child: Text(
+                                                    "Create your own petshop",
+                                                    style: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Colors.blue),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          onPressed: () =>
+                                              Get.toNamed(Routes.ADD_PETSHOP),
+                                        ),
+                                      ),
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
+                                          horizontal: 30, vertical: 10),
                                       child: FlatButton(
-                                        padding: EdgeInsets.all(20),
+                                        padding: EdgeInsets.all(15),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade200,
+                                        color: Colors.white54,
                                         child: Row(
                                           children: [
                                             Icon(
-                                              Icons.person,
+                                              Icons.people,
                                               color: Color(0xffF9813A),
                                             ),
                                             SizedBox(
@@ -199,7 +241,7 @@ class ProfileView extends GetView<ProfileController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                "Create your own petshop",
+                                                "Personal Detail",
                                                 style: GoogleFonts.inter(
                                                     fontWeight:
                                                         FontWeight.w400),
@@ -209,18 +251,18 @@ class ProfileView extends GetView<ProfileController> {
                                           ],
                                         ),
                                         onPressed: () =>
-                                            Get.toNamed(Routes.ADD_PETSHOP),
+                                            Get.toNamed(Routes.FAVORITE),
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
+                                          horizontal: 30, vertical: 10),
                                       child: FlatButton(
-                                        padding: EdgeInsets.all(20),
+                                        padding: EdgeInsets.all(15),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade200,
+                                        color: Colors.white54,
                                         child: Row(
                                           children: [
                                             Icon(
@@ -253,13 +295,13 @@ class ProfileView extends GetView<ProfileController> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
+                                          horizontal: 30, vertical: 10),
                                       child: FlatButton(
-                                        padding: EdgeInsets.all(20),
+                                        padding: EdgeInsets.all(15),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade200,
+                                        color: Colors.white60,
                                         child: Row(
                                           children: [
                                             const Icon(Icons.edit_attributes,
@@ -284,13 +326,13 @@ class ProfileView extends GetView<ProfileController> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
+                                          horizontal: 30, vertical: 10),
                                       child: FlatButton(
-                                        padding: EdgeInsets.all(20),
+                                        padding: EdgeInsets.all(15),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade200,
+                                        color: Colors.white60,
                                         child: Row(
                                           children: [
                                             Icon(Icons.sell_sharp),
@@ -314,13 +356,13 @@ class ProfileView extends GetView<ProfileController> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
+                                          horizontal: 30, vertical: 10),
                                       child: FlatButton(
-                                        padding: EdgeInsets.all(20),
+                                        padding: EdgeInsets.all(15),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade200,
+                                        color: Colors.white60,
                                         child: Row(
                                           children: [
                                             Icon(Icons.favorite),
@@ -349,13 +391,13 @@ class ProfileView extends GetView<ProfileController> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
+                                          horizontal: 30, vertical: 10),
                                       child: FlatButton(
-                                        padding: EdgeInsets.all(20),
+                                        padding: EdgeInsets.all(15),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade200,
+                                        color: Colors.white60,
                                         child: Row(
                                           children: [
                                             Icon(Icons.edit_attributes),
@@ -379,13 +421,13 @@ class ProfileView extends GetView<ProfileController> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
+                                          horizontal: 30, vertical: 10),
                                       child: FlatButton(
-                                        padding: EdgeInsets.all(20),
+                                        padding: EdgeInsets.all(15),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.grey.shade200,
+                                        color: Colors.white60,
                                         child: Row(
                                           children: [
                                             Icon(Icons.emoji_people),
@@ -416,43 +458,46 @@ class ProfileView extends GetView<ProfileController> {
                               return Center(child: CircularProgressIndicator());
                             }
                           }),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: FlatButton(
-                          padding: EdgeInsets.all(20),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                          color: Colors.grey.shade200,
-                          child: Row(
-                            children: [
-                              Icon(Icons.logout, color: Color(0xffF9813A)),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  "Log Out",
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w400),
+                      Container(
+                        height: height * 0.07,
+                        width: width * 0.4,
+                        color: Colors.transparent,
+                        child: Center(
+                          child: MaterialButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Row(
+                              children: [
+                                Icon(Icons.logout, color: Color(0xffF9813A)),
+                                SizedBox(
+                                  width: 20,
                                 ),
-                              ),
-                              Icon(Icons.arrow_forward_ios),
-                            ],
+                                Expanded(
+                                  child: Center(
+                                    child: Text(
+                                      "Log Out",
+                                      style: GoogleFonts.inter(
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.red),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onPressed: () {
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.INFO,
+                                animType: AnimType.BOTTOMSLIDE,
+                                title: 'Alert',
+                                desc: 'Are you sure want to logout?',
+                                btnCancelOnPress: () {},
+                                btnOkOnPress: () {
+                                  authController.logout();
+                                },
+                              ).show();
+                            },
                           ),
-                          onPressed: () {
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.INFO,
-                              animType: AnimType.BOTTOMSLIDE,
-                              title: 'Alert',
-                              desc: 'Are you sure want to logout?',
-                              btnCancelOnPress: () {},
-                              btnOkOnPress: () {
-                                authController.logout();
-                              },
-                            ).show();
-                          },
                         ),
                       ),
                     ],
