@@ -163,8 +163,9 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                                           fontSize: 16),
                                                     ),
                                                     Container(
-                                                      margin: EdgeInsets.only(
-                                                          right: 5),
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              right: 5),
                                                       width: 55,
                                                       height: 30,
                                                       // color: Colors.green,

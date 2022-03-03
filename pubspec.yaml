@@ -22,6 +22,10 @@ dependencies:
   flutter_icons: ^1.1.0
   favorite_button: ^0.0.4
   rename: ^2.0.1
+  form_validator: ^1.0.2
+  multi_select_flutter: ^4.0.0
+  multiselect_formfield: ^0.1.7
+  get_cli: ^1.7.1
   
 
 dev_dependencies: 
@@ -52,3 +56,4 @@ flutter:
     - assets/images/tag-grooming.jpg
     - assets/images/tag-vet.jpg
     - assets/images/Person-Icon.svg
+    - assets/images/thumb.png
