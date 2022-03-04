@@ -93,6 +93,9 @@ class LoginView extends GetView<LoginController> {
                             child: TextField(
                               controller: emailController,
                               decoration: const InputDecoration(
+                                  filled: true,
+                                  fillColor: Color.fromARGB(255, 255, 183, 74),
+                                  isDense: true,
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.orange, width: 1),
@@ -111,6 +114,9 @@ class LoginView extends GetView<LoginController> {
                             child: TextField(
                               controller: passwordController,
                               decoration: const InputDecoration(
+                                  filled: true,
+                                  fillColor: Color.fromARGB(255, 255, 183, 74),
+                                  isDense: true,
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.orange, width: 1),
