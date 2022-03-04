@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -32,8 +33,6 @@ class SellerOrderDetailView extends GetView<SellerOrderDetailController> {
                 var data = snapshot.data!.data() as Map<String, dynamic>;
                 if (data['status'] == 'Waiting for approval') {
                   return WaitingApproval();
-                } else if (data['status'] == 'Booking Created') {
-                  return BookCreated();
                 } else if (data['status'] == 'Declined') {
                   return Declined();
                 } else if (data['status'] == 'Completed') {
@@ -49,47 +48,6 @@ class SellerOrderDetailView extends GetView<SellerOrderDetailController> {
 }
 
 class WaitingApproval extends GetView<SellerOrderDetailController> {
-  final localStorage = GetStorage();
-  final messageC = TextEditingController();
-  RxBool isDeclined = false.obs;
-
-  @override
-  Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    var height = size.height;
-    var width = size.width;
-    return Scaffold(
-      body: FutureBuilder<DocumentSnapshot<Object?>>(
-          future: controller.getOrder(Get.arguments),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              var data = snapshot.data!.data() as Map<String, dynamic>;
-              var currentUserId = localStorage.read('currentUserId');
-              var orderId = Get.arguments;
-              localStorage.write('petshopId', Get.arguments);
-              return Stack(
-                children: [
-                  Container(
-                    height: height / 2,
-                    width: width,
-                    color: Colors.orange,
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(top: height / 3),
-                      height: height,
-                      width: width,
-                      color: Colors.red)
-                ],
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          }),
-    );
-  }
-}
-
-class BookCreated extends GetView<SellerOrderDetailController> {
   final localStorage = GetStorage();
   final messageC = TextEditingController();
   RxBool isDeclined = false.obs;
@@ -288,7 +246,20 @@ class BookCreated extends GetView<SellerOrderDetailController> {
                           ),
                           Center(
                             child: GestureDetector(
-                              onTap: () => Get.toNamed(Routes.SELLER_PROFILE),
+                              onTap: () => {
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.INFO,
+                                  animType: AnimType.BOTTOMSLIDE,
+                                  title: 'Confirmation',
+                                  desc:
+                                      'Are you sure want to accept this order?',
+                                  btnCancelOnPress: () {},
+                                  btnOkOnPress: () {
+                                    controller.accepted(orderId);
+                                  },
+                                ).show()
+                              },
                               child: Container(
                                 margin: EdgeInsets.only(top: height * 0.025),
                                 width: width * 0.82,
