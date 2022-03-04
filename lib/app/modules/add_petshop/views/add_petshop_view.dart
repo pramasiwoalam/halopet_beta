@@ -201,7 +201,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                   padding: const EdgeInsets.only(top: 15),
                   child: TextFormField(
                     maxLines: null,
-                    minLines: 3,
+                    minLines: 2,
                     keyboardType: TextInputType.multiline,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(
