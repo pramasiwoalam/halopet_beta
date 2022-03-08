@@ -12,6 +12,8 @@ class LoginView extends GetView<LoginController> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final authController = Get.find<AuthController>();
+
+  bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -25,16 +27,16 @@ class LoginView extends GetView<LoginController> {
             Container(
               height: height * 0.45,
               width: width,
-              // color: Colors.red,
+              color: Colors.red,
               child: Expanded(
                 child: Column(
                   children: [
-                    SizedBox(height: 70),
+                    SizedBox(height: 100),
                     Text("Welcome to",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.roboto(
                             fontSize: 16, fontWeight: FontWeight.w500)),
-                    SizedBox(height: 30),
+                    // SizedBox(height: 10),
                     // Container(
                     //   height: height * 0.07,
                     //   width: width * 0.35,
@@ -93,17 +95,18 @@ class LoginView extends GetView<LoginController> {
                             child: TextField(
                               controller: emailController,
                               decoration: const InputDecoration(
-                                  filled: true,
-                                  fillColor: Color.fromARGB(255, 255, 183, 74),
-                                  isDense: true,
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.orange, width: 1),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(30.0))),
-                                  hintText: "abc@gmail.com",
-                                  prefixIcon: Icon(Icons.people),
-                                  border: InputBorder.none),
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 255, 183, 74),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.orange, width: 1),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.0))),
+                                hintText: "abc@gmail.com",
+                                prefixIcon: Icon(Icons.people),
+                                border: InputBorder.none,
+                              ),
                             ),
                           ),
                           Container(
@@ -112,19 +115,24 @@ class LoginView extends GetView<LoginController> {
                             margin: EdgeInsets.symmetric(vertical: 5),
                             padding: EdgeInsets.symmetric(horizontal: 3),
                             child: TextField(
+                              obscureText: true,
                               controller: passwordController,
                               decoration: const InputDecoration(
-                                  filled: true,
-                                  fillColor: Color.fromARGB(255, 255, 183, 74),
-                                  isDense: true,
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.orange, width: 1),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(30.0))),
-                                  hintText: "8 characters",
-                                  prefixIcon: Icon(Icons.lock),
-                                  border: InputBorder.none),
+                                // filled: true,
+                                // fillColor: Color.fromARGB(255, 236, 236, 236),
+                                // isDense: true,
+
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        width: 1),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.0))),
+                                hintText: "8 characters",
+                                prefixIcon: Icon(Icons.lock),
+                                border: InputBorder.none,
+                              ),
                             ),
                           ),
                         ],
@@ -251,44 +259,49 @@ class LoginView extends GetView<LoginController> {
                     ),
                   ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: height * 0.027,
-                        width: width * 0.4,
-                        // color: Colors.green,
-                        margin: EdgeInsets.symmetric(vertical: 4),
-                        child: Text("Don't have an account?",
-                            textAlign: TextAlign.right,
-                            style: GoogleFonts.roboto(
-                                fontSize: 12, fontWeight: FontWeight.w500)),
-                      ),
-                      Container(
-                        height: height * 0.037,
-                        width: width * 0.19,
-                        // margin: EdgeInsets.symmetric(vertical: 3),
-                        // color: Colors.brown,
-                        child: Align(
-                          // alignment: Alignment.topLeft,
-                          child: MaterialButton(
-                            onPressed: () => Get.toNamed(Routes.SIGNUP),
-                            elevation: 10,
-                            child: Text(
-                              "Register",
-                              textAlign: TextAlign.left,
+                  Container(
+                    height: height * 0.04,
+                    width: width,
+                    // color: Colors.green,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: height * 0.027,
+                          width: width * 0.55,
+                          // color: Colors.green,
+                          margin: EdgeInsets.symmetric(vertical: 6),
+                          child: Text("Don't have an account?",
+                              textAlign: TextAlign.right,
                               style: GoogleFonts.roboto(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                                decoration: TextDecoration.underline,
+                                  fontSize: 12, fontWeight: FontWeight.w500)),
+                        ),
+                        Container(
+                          height: height * 0.037,
+                          width: width * 0.4,
+                          // margin: EdgeInsets.symmetric(vertical: 3),
+                          // color: Colors.brown,
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: MaterialButton(
+                              onPressed: () => Get.toNamed(Routes.SIGNUP),
+                              elevation: 10,
+                              child: Text(
+                                "Register",
+                                // textAlign: TextAlign.left,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        //
-                      )
-                    ],
+                          //
+                        )
+                      ],
+                    ),
                   ),
                   // Container(
                   //   height: height * 0.034,
