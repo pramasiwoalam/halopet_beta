@@ -26,4 +26,12 @@ class OrderController extends GetxController {
         .where('status', isEqualTo: 'Waiting for payment')
         .snapshots();
   }
+
+  Stream<QuerySnapshot<Object?>> getByOnGoing(String userId) {
+    CollectionReference order = firestore.collection("order");
+    return order
+        .where('userId', isEqualTo: userId)
+        .where('status', isEqualTo: 'On Going')
+        .snapshots();
+  }
 }

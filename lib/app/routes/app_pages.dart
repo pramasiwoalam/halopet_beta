@@ -38,8 +38,8 @@ import '../modules/petshop_detail/bindings/petshop_detail_binding.dart';
 import '../modules/petshop_detail/views/petshop_detail_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
-import '../modules/region/bindings/region_binding.dart';
-import '../modules/region/views/region_view.dart';
+import '../modules/payment/bindings/payment_binding.dart';
+import '../modules/payment/views/payment_view.dart';
 import '../modules/seller_history/bindings/seller_history_binding.dart';
 import '../modules/seller_history/views/seller_history_view.dart';
 import '../modules/seller_home/bindings/seller_home_binding.dart';
@@ -82,9 +82,9 @@ class AppPages {
       binding: AddPetshopBinding(),
     ),
     GetPage(
-      name: _Paths.REGION,
-      page: () => RegionView(),
-      binding: RegionBinding(),
+      name: _Paths.PAYMENT,
+      page: () => PaymentView(),
+      binding: PaymentBinding(),
     ),
     GetPage(
       name: _Paths.PETSHOP_DETAIL,
