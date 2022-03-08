@@ -7,7 +7,7 @@ abstract class Routes {
   static const HOMEPAGE = _Paths.HOMEPAGE;
   static const SIGNUP = _Paths.SIGNUP;
   static const ADD_PETSHOP = _Paths.ADD_PETSHOP;
-  static const REGION = _Paths.REGION;
+  static const PAYMENT = _Paths.PAYMENT;
   static const PETSHOP_DETAIL = _Paths.PETSHOP_DETAIL;
   static const CREATE_ORDER = _Paths.CREATE_ORDER;
   static const DOCTOR_REGISTRATION = _Paths.DOCTOR_REGISTRATION;
@@ -36,7 +36,7 @@ abstract class _Paths {
   static const HOMEPAGE = '/homepage';
   static const SIGNUP = '/signup';
   static const ADD_PETSHOP = '/add-petshop';
-  static const REGION = '/region';
+  static const PAYMENT = '/payment';
   static const PETSHOP_DETAIL = '/petshop-detail';
   static const CREATE_ORDER = '/create-order';
   static const DOCTOR_REGISTRATION = '/doctor-registration';

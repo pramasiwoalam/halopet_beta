@@ -15,7 +15,7 @@ class OrderView extends GetView<OrderController> {
   List<Widget> containerList = [
     ApprovalContainer(),
     PaymentContainer(),
-    onGoing(),
+    OnGoing(),
     completed(),
     cancellation()
   ];
@@ -207,49 +207,7 @@ class ApprovalContainer extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 80),
-                          height: height * 0.2,
-                          width: width / 2.6,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage('assets/images/thumb.png')),
-                          ),
-                        ),
-                        Container(
-                          height: height * 0.1,
-                          width: width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'There are no payments due.',
-                                style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.grey.shade500),
-                              ),
-                              const SizedBox(
-                                height: 7,
-                              ),
-                              InkWell(
-                                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
-                                child: Text(
-                                  'Book your appointment here',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.blue),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    );
+                    return EmptyContainer();
                   }
                 } else {
                   return Center(child: CircularProgressIndicator());
@@ -392,49 +350,7 @@ class PaymentContainer extends StatelessWidget {
                       },
                     );
                   } else {
-                    return Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 80),
-                          height: height * 0.2,
-                          width: width / 2.6,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage('assets/images/thumb.png')),
-                          ),
-                        ),
-                        Container(
-                          height: height * 0.1,
-                          width: width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'There are no payments due.',
-                                style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.grey.shade500),
-                              ),
-                              const SizedBox(
-                                height: 7,
-                              ),
-                              InkWell(
-                                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
-                                child: Text(
-                                  'Book your appointment here',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.blue),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    );
+                    return EmptyContainer();
                   }
                 } else {
                   return Center(child: CircularProgressIndicator());
@@ -446,12 +362,7 @@ class PaymentContainer extends StatelessWidget {
   }
 }
 
-class onGoing extends StatefulWidget {
-  @override
-  _onGoingState createState() => _onGoingState();
-}
-
-class _onGoingState extends State<onGoing> {
+class OnGoing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final orderController = Get.put(OrderController());
@@ -459,15 +370,16 @@ class _onGoingState extends State<onGoing> {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
+    var userId = localStorage.read('currentUserId');
     return SingleChildScrollView(
       child: Column(
         children: [
           StreamBuilder<QuerySnapshot<Object?>>(
-              stream: orderController.getByApprovalStatus(),
+              stream: orderController.getByOnGoing(userId),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.active) {
                   var data = snapshot.data!.docs;
-                  if (data.length > 1) {
+                  if (data.isNotEmpty) {
                     return ListView.builder(
                       physics: const ClampingScrollPhysics(),
                       scrollDirection: Axis.vertical,
@@ -488,11 +400,8 @@ class _onGoingState extends State<onGoing> {
                                     width: 2, color: const Color(0xfff0f0f0))),
                             child: InkWell(
                               onTap: () => {
-                                localStorage.write(
-                                    'petshopId', dataMap[index]['petshopId']),
-                                print(localStorage.read('petshopId')),
                                 Get.toNamed(Routes.ORDER_DETAIL,
-                                    arguments: {'id': data[index].id})
+                                    arguments: data[index].id)
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
@@ -586,49 +495,7 @@ class _onGoingState extends State<onGoing> {
                       },
                     );
                   } else {
-                    return Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 80),
-                          height: height * 0.2,
-                          width: width / 2.6,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage('assets/images/thumb.png')),
-                          ),
-                        ),
-                        Container(
-                          height: height * 0.1,
-                          width: width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'There are no payments due.',
-                                style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.grey.shade500),
-                              ),
-                              SizedBox(
-                                height: 7,
-                              ),
-                              InkWell(
-                                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
-                                child: Text(
-                                  'Book your appointment here',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.blue),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    );
+                    return EmptyContainer();
                   }
                 } else {
                   return Center(child: CircularProgressIndicator());
@@ -797,49 +664,7 @@ class _completedState extends State<completed> {
                       },
                     );
                   } else {
-                    return Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 80),
-                          height: height * 0.2,
-                          width: width / 2.6,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage('assets/images/thumb.png')),
-                          ),
-                        ),
-                        Container(
-                          height: height * 0.1,
-                          width: width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'There are no payments due.',
-                                style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.grey.shade500),
-                              ),
-                              SizedBox(
-                                height: 7,
-                              ),
-                              InkWell(
-                                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
-                                child: Text(
-                                  'Book your appointment here',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.blue),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    );
+                    return EmptyContainer();
                   }
                 } else {
                   return Center(child: CircularProgressIndicator());
@@ -1008,49 +833,7 @@ class _cancellationState extends State<cancellation> {
                       },
                     );
                   } else {
-                    return Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 80),
-                          height: height * 0.2,
-                          width: width / 2.6,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage('assets/images/thumb.png')),
-                          ),
-                        ),
-                        Container(
-                          height: height * 0.1,
-                          width: width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'There are no payments due.',
-                                style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.grey.shade500),
-                              ),
-                              SizedBox(
-                                height: 7,
-                              ),
-                              InkWell(
-                                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
-                                child: Text(
-                                  'Book your appointment here',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.blue),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    );
+                    return EmptyContainer();
                   }
                 } else {
                   return Center(child: CircularProgressIndicator());
@@ -1058,6 +841,59 @@ class _cancellationState extends State<cancellation> {
               }),
         ],
       ),
+    );
+  }
+}
+
+class EmptyContainer extends StatelessWidget {
+  const EmptyContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var height = size.height;
+    var width = size.width;
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 80),
+          height: height * 0.2,
+          width: width / 2.6,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.fill, image: AssetImage('assets/images/thumb.png')),
+          ),
+        ),
+        Container(
+          height: height * 0.1,
+          width: width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'There are no payments due.',
+                style: GoogleFonts.inter(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey.shade500),
+              ),
+              const SizedBox(
+                height: 7,
+              ),
+              InkWell(
+                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
+                child: Text(
+                  'Book your appointment here',
+                  style: GoogleFonts.inter(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.blue),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
