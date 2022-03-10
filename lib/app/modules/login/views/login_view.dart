@@ -105,6 +105,12 @@ class LoginView extends GetView<LoginController> {
                                         width: 1),
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(30.0))),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 19, 7, 7),
+                                        width: 1),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.0))),
                                 hintText: "abc@gmail.com",
                                 prefixIcon: Icon(Icons.people),
                                 border: InputBorder.none,
@@ -125,6 +131,12 @@ class LoginView extends GetView<LoginController> {
                                 // isDense: true,
 
                                 enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 19, 7, 7),
+                                        width: 1),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(30.0))),
+                                focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color.fromARGB(255, 19, 7, 7),
                                         width: 1),
