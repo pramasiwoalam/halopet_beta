@@ -270,40 +270,30 @@ class LoginView extends GetView<LoginController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          height: height * 0.027,
-                          width: width * 0.55,
-                          // color: Colors.green,
-                          margin: EdgeInsets.symmetric(vertical: 6),
-                          child: Text("Don't have an account?",
-                              textAlign: TextAlign.right,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 12, fontWeight: FontWeight.w500)),
-                        ),
-                        Container(
-                          height: height * 0.037,
-                          width: width * 0.4,
-                          // margin: EdgeInsets.symmetric(vertical: 3),
-                          // color: Colors.brown,
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: MaterialButton(
-                              onPressed: () => Get.toNamed(Routes.SIGNUP),
-                              elevation: 10,
-                              child: Text(
-                                "Register",
-                                // textAlign: TextAlign.left,
-                                style: GoogleFonts.roboto(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
+                        Text("Don't have an account?",
+                            textAlign: TextAlign.right,
+                            style: GoogleFonts.roboto(
+                                fontSize: 12, fontWeight: FontWeight.w500)),
+                        // Align(
+                        //   alignment: Alignment.topLeft,
+                        //   child:
+                        SizedBox(width: 5),
+                        InkWell(
+                          onTap: () => Get.toNamed(Routes.SIGNUP),
+                          // elevation: 10,
+                          child: Text(
+                            "Register",
+                            // textAlign: TextAlign.left,
+                            style: GoogleFonts.roboto(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                              decoration: TextDecoration.underline,
                             ),
                           ),
-                          //
-                        )
+                        ),
+
+                        //
                       ],
                     ),
                   ),
