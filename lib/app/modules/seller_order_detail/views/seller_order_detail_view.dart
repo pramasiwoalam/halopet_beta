@@ -9,6 +9,8 @@ import 'package:halopet_beta/app/routes/app_pages.dart';
 
 import '../controllers/seller_order_detail_controller.dart';
 
+final reasons = TextEditingController();
+
 class SellerOrderDetailView extends GetView<SellerOrderDetailController> {
   final localStorage = GetStorage();
   final messageC = TextEditingController();
@@ -157,7 +159,7 @@ class WaitingApproval extends GetView<SellerOrderDetailController> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 18,
                           ),
                           Text(
@@ -167,7 +169,7 @@ class WaitingApproval extends GetView<SellerOrderDetailController> {
                                 fontSize: 17,
                                 color: Color(0xff2596BE)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Center(
@@ -299,6 +301,80 @@ class WaitingApproval extends GetView<SellerOrderDetailController> {
                           ),
                           Center(
                             child: GestureDetector(
+                              onTap: () => {
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.WARNING,
+                                  animType: AnimType.BOTTOMSLIDE,
+                                  title: 'Warning',
+                                  desc:
+                                      'Are you sure want to cancel this booking?',
+                                  btnCancelOnPress: () {},
+                                  btnOkOnPress: () {
+                                    late AwesomeDialog dialog;
+                                    dialog = AwesomeDialog(
+                                      context: context,
+                                      animType: AnimType.BOTTOMSLIDE,
+                                      dialogType: DialogType.INFO,
+                                      keyboardAware: true,
+                                      body: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Text(
+                                              'Cancellation Reason',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline6,
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Material(
+                                              elevation: 0,
+                                              color: Colors.grey.shade100,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  controller: reasons,
+                                                  autofocus: true,
+                                                  minLines: 1,
+                                                  maxLines: null,
+                                                  keyboardType:
+                                                      TextInputType.multiline,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    border: InputBorder.none,
+                                                    labelText: 'Reason',
+                                                    prefixIcon: Icon(
+                                                      Icons.message,
+                                                      size: 20,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            AnimatedButton(
+                                                isFixedHeight: false,
+                                                text: 'Submit',
+                                                pressEvent: () {
+                                                  controller
+                                                      .bookingCancellation(
+                                                          orderId,
+                                                          reasons.text);
+                                                  dialog.dismiss();
+                                                })
+                                          ],
+                                        ),
+                                      ),
+                                    )..show();
+                                  },
+                                ).show()
+                              },
                               child: Container(
                                 margin: EdgeInsets.only(top: height * 0.025),
                                 width: width * 0.82,

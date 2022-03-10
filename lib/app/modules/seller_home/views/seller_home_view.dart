@@ -50,6 +50,10 @@ class SellerHomeView extends GetView<SellerHomeController> {
               icon: Icon(Icons.person),
               onPressed: () => Get.toNamed(Routes.PROFILE),
             ),
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () => authController.logout(),
+            ),
           ],
           bottom: const TabBar(
               isScrollable: true,

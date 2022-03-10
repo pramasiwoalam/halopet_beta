@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:halopet_beta/app/modules/rating/bindings/rating_binding.dart';
+import 'package:halopet_beta/app/modules/rating/views/rating_view.dart';
 
 import '../modules/add_petshop/bindings/add_petshop_binding.dart';
 import '../modules/add_petshop/bindings/add_petshop_binding.dart';
@@ -185,6 +187,11 @@ class AppPages {
       name: _Paths.FAVORITE,
       page: () => FavoriteView(),
       binding: FavoriteBinding(),
+    ),
+    GetPage(
+      name: _Paths.RATING,
+      page: () => RatingView(),
+      binding: RatingBinding(),
     ),
   ];
 }

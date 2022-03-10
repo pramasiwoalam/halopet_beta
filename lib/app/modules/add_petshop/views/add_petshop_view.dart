@@ -44,7 +44,6 @@ class AddPetshopView extends GetView<AddPetshopController> {
     FocusNode inputNode = FocusNode();
     var height = size.height;
     var width = size.width;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -80,4 +80,10 @@ class PetshopDetailController extends GetxController {
       print(e);
     }
   }
+
+  Stream<QuerySnapshot<Object?>> streamReview(String petshopId) {
+    CollectionReference review = firestore.collection("review");
+
+    return review.where('petshopId', isEqualTo: petshopId).snapshots();
+  }
 }

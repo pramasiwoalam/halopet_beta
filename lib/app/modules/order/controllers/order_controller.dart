@@ -11,7 +11,7 @@ class OrderController extends GetxController {
     return order.where('userId', isEqualTo: userId).snapshots();
   }
 
-  Stream<QuerySnapshot<Object?>> getByApprovalStatus() {
+  Stream<QuerySnapshot<Object?>> getByApprovalStatus(String userId) {
     CollectionReference order = firestore.collection("order");
     return order
         .where('userId', isEqualTo: userId)
@@ -32,6 +32,22 @@ class OrderController extends GetxController {
     return order
         .where('userId', isEqualTo: userId)
         .where('status', isEqualTo: 'On Going')
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot<Object?>> getByCancellation(String userId) {
+    CollectionReference order = firestore.collection("order");
+    return order
+        .where('userId', isEqualTo: userId)
+        .where('status', isEqualTo: 'Cancelled')
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot<Object?>> getByCompleted(String userId) {
+    CollectionReference order = firestore.collection("order");
+    return order
+        .where('userId', isEqualTo: userId)
+        .where('status', isEqualTo: 'Completed')
         .snapshots();
   }
 }

@@ -14,4 +14,11 @@ class OrderDetailController extends GetxController {
     DocumentReference doc = firestore.collection("petshop").doc(petshopId);
     return doc.get();
   }
+
+  void bookingCancellation(String orderId, String message) {
+    DocumentReference docRef = firestore.collection('order').doc(orderId);
+
+    docRef.update({'status': 'Cancelled', 'cancellationReason': message});
+    Get.back();
+  }
 }
