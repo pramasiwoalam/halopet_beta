@@ -1,20 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class SignupController extends GetxController {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   //TODO: Implement SignupController
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  void signupUser(Map<String, dynamic> formData) {
+    CollectionReference petshop = firestore.collection("petshop");
+    CollectionReference users = firestore.collection("users");
+    var userId = GetStorage().read('currentUserId');
+    var petshopId = '';
+    print('data: $formData');
+    final count = 0.obs;
+    @override
+    void onInit() {
+      super.onInit();
+    }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+    @override
+    void onReady() {
+      super.onReady();
+    }
 
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+    @override
+    void onClose() {}
+    void increment() => count.value++;
+  }
 }

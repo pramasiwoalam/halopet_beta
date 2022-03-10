@@ -74,8 +74,8 @@ class ProfileView extends GetView<ProfileController> {
                                             left: width * 0.01,
                                             top: height * 0.01,
                                             bottom: height * 0.005),
-                                        height: height / 4,
-                                        width: width / 3.5,
+                                        height: height / 3.5,
+                                        width: width / 3,
                                         // color: Colors.blue,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
@@ -166,6 +166,7 @@ class ProfileView extends GetView<ProfileController> {
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     )),
+                                    SizedBox(height: 5),
                                     Center(
                                       child: Text(
                                         '(+62) ${data['phone']}',
