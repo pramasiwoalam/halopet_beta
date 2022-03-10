@@ -27,7 +27,7 @@ class LoginView extends GetView<LoginController> {
             Container(
               height: height * 0.45,
               width: width,
-              color: Colors.red,
+              // color: Colors.red,
               child: Expanded(
                 child: Column(
                   children: [
@@ -47,6 +47,7 @@ class LoginView extends GetView<LoginController> {
                     //               AssetImage("assets/images/textHalopet.png"),
                     //           fit: BoxFit.cover)),
                     // ),
+                    SizedBox(height: 17),
                     Container(
                       height: height * 0.16,
                       width: width * 0.65,
@@ -57,7 +58,7 @@ class LoginView extends GetView<LoginController> {
                             fit: BoxFit.contain),
                       ),
                     ),
-                    SizedBox(height: 57),
+                    SizedBox(height: 37),
                     Container(
                       height: height * 0.03,
                       width: width,
@@ -80,7 +81,7 @@ class LoginView extends GetView<LoginController> {
                 children: [
                   // Expanded(child:
                   Container(
-                    height: height * 0.19,
+                    height: height * 0.21,
                     width: width,
                     // color: Colors.brown,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 3),
@@ -88,19 +89,20 @@ class LoginView extends GetView<LoginController> {
                       child: Column(
                         children: <Widget>[
                           Container(
-                            height: size.height * 0.07,
-                            width: size.width * 0.8,
+                            height: size.height * 0.08,
+                            width: size.width * 0.7,
                             padding: EdgeInsets.symmetric(horizontal: 3),
-                            margin: EdgeInsets.symmetric(vertical: 6),
+                            margin: EdgeInsets.symmetric(vertical: 9),
                             child: TextField(
                               controller: emailController,
                               decoration: const InputDecoration(
-                                filled: true,
+                                // filled: true,
                                 fillColor: Color.fromARGB(255, 255, 183, 74),
                                 isDense: true,
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.orange, width: 1),
+                                        color: Color.fromARGB(255, 19, 7, 7),
+                                        width: 1),
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(30.0))),
                                 hintText: "abc@gmail.com",
@@ -110,9 +112,9 @@ class LoginView extends GetView<LoginController> {
                             ),
                           ),
                           Container(
-                            height: size.height * 0.07,
-                            width: size.width * 0.8,
-                            margin: EdgeInsets.symmetric(vertical: 5),
+                            height: size.height * 0.073,
+                            width: size.width * 0.7,
+                            margin: EdgeInsets.symmetric(vertical: 2),
                             padding: EdgeInsets.symmetric(horizontal: 3),
                             child: TextField(
                               obscureText: true,
@@ -124,13 +126,15 @@ class LoginView extends GetView<LoginController> {
 
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
+                                        color: Color.fromARGB(255, 19, 7, 7),
                                         width: 1),
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(30.0))),
                                 hintText: "8 characters",
-                                prefixIcon: Icon(Icons.lock),
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  size: 20,
+                                ),
                                 border: InputBorder.none,
                               ),
                             ),
