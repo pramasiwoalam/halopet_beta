@@ -137,7 +137,11 @@ class Home extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 var data = snapshot.data!.data() as Map<String, dynamic>;
-                localStorage.write('favArr', data['favoriteId']);
+                if (data['favoriteId'] != null) {
+                  localStorage.write('favArr', data['favoriteId']);
+                } else {
+                  localStorage.write('favArr', []);
+                }
                 return StreamBuilder<QuerySnapshot<Object?>>(
                     stream: homeController.getFavByUserId(),
                     builder: (context, snapshot) {

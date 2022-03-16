@@ -10,9 +10,15 @@ class RatingController extends GetxController {
   double rating = 0;
   var petshopId = '';
   var service = '';
+  var userName = '';
 
   Future<DocumentSnapshot<Object?>> getOrder(String orderId) async {
     DocumentReference doc = firestore.collection("order").doc(orderId);
+    return doc.get();
+  }
+
+  Future<DocumentSnapshot<Object?>> getUser(String userId) async {
+    DocumentReference doc = firestore.collection("users").doc(userId);
     return doc.get();
   }
 
@@ -26,7 +32,9 @@ class RatingController extends GetxController {
         "petshopId": petshopId,
         'rating': rating,
         'message': message,
-        'service': service
+        'service': service,
+        'userName': userName,
+        'reviewCreated': DateTime.now()
       });
       Get.back();
     } catch (e) {

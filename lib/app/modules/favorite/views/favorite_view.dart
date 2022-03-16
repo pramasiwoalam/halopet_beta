@@ -34,7 +34,6 @@ class FavoriteView extends GetView<FavoriteController> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active) {
                     var data = snapshot.data!.docs;
-
                     return ListView.builder(
                         physics: const ClampingScrollPhysics(),
                         scrollDirection: Axis.vertical,

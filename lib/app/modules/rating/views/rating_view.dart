@@ -61,73 +61,95 @@ class RatingView extends GetView<RatingController> {
                                 snapshot.data!.data() as Map<String, dynamic>;
                             controller.petshopId = data['petshopId'];
                             controller.service = data['bookingType'];
-                            return Container(
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'Thank you for your order.',
-                                    style: GoogleFonts.roboto(
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.grey.shade700,
-                                        fontSize: 18),
-                                  ),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 24.0, top: 8, right: 24),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Order from:',
-                                          style: GoogleFonts.roboto(
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.grey.shade700,
-                                              fontSize: 15),
-                                        ),
-                                        Text(
-                                          'Dita Genday Petshop',
-                                          style: GoogleFonts.roboto(
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.grey.shade700,
-                                              fontSize: 15),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 24.0, top: 8, right: 24),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Service:',
-                                          style: GoogleFonts.roboto(
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.grey.shade700,
-                                              fontSize: 15),
-                                        ),
-                                        Text(
-                                          'Grooming',
-                                          style: GoogleFonts.roboto(
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.grey.shade700,
-                                              fontSize: 15),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                ],
-                              ),
-                            );
+                            return FutureBuilder<DocumentSnapshot<Object?>>(
+                                future: controller.getUser(data['userId']),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    var data = snapshot.data!.data()
+                                        as Map<String, dynamic>;
+                                    controller.userName = data['name'];
+                                    return Container(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Thank you for your order.',
+                                            style: GoogleFonts.roboto(
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.grey.shade700,
+                                                fontSize: 18),
+                                          ),
+                                          const SizedBox(
+                                            height: 16,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 24.0, top: 8, right: 24),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Order from:',
+                                                  style: GoogleFonts.roboto(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color:
+                                                          Colors.grey.shade700,
+                                                      fontSize: 15),
+                                                ),
+                                                Text(
+                                                  'Dita Genday Petshop',
+                                                  style: GoogleFonts.roboto(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color:
+                                                          Colors.grey.shade700,
+                                                      fontSize: 15),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 24.0, top: 8, right: 24),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Service:',
+                                                  style: GoogleFonts.roboto(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color:
+                                                          Colors.grey.shade700,
+                                                      fontSize: 15),
+                                                ),
+                                                Text(
+                                                  'Grooming',
+                                                  style: GoogleFonts.roboto(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color:
+                                                          Colors.grey.shade700,
+                                                      fontSize: 15),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 15,
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  } else {
+                                    return CircularProgressIndicator();
+                                  }
+                                });
                           } else {
                             return Center(
                               child: CircularProgressIndicator(),

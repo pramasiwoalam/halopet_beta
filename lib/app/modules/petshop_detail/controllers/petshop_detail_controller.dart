@@ -15,6 +15,11 @@ class PetshopDetailController extends GetxController {
     return doc.get();
   }
 
+  Future<DocumentSnapshot<Object?>> getUser(String userId) async {
+    DocumentReference doc = firestore.collection("users").doc(userId);
+    return doc.get();
+  }
+
   Stream<QuerySnapshot<Object?>> getFavByPetshopId(
       String petshopId, String userId) {
     CollectionReference favorite = firestore.collection("favorite");
