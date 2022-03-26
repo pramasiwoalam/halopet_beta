@@ -21,12 +21,12 @@ abstract class Routes {
   static const ADMIN_LIST_USERS = _Paths.ADMIN_LIST_USERS;
   static const SELLER_HOME = _Paths.SELLER_HOME;
   static const SELLER_HISTORY = _Paths.SELLER_HISTORY;
-  static const SELLER_PROFILE = _Paths.SELLER_PROFILE;
+  static const SERVICE_FORM = _Paths.SERVICE_FORM;
   static const SELLER_ORDER_DETAIL = _Paths.SELLER_ORDER_DETAIL;
   static const ADMIN_PETSHOP_APPROVAL = _Paths.ADMIN_PETSHOP_APPROVAL;
   static const WELCOME_PAGE = _Paths.WELCOME_PAGE;
   static const CATEGORY_PAGE = _Paths.CATEGORY_PAGE;
-  static const CART_PAGE = _Paths.CART_PAGE;
+  static const SERVICE_LIST = _Paths.SERVICE_LIST;
   static const FAVORITE = _Paths.FAVORITE;
   static const RATING = _Paths.RATING;
 }
@@ -51,12 +51,12 @@ abstract class _Paths {
   static const ADMIN_LIST_USERS = '/admin-list-users';
   static const SELLER_HOME = '/seller-home';
   static const SELLER_HISTORY = '/seller-history';
-  static const SELLER_PROFILE = '/seller-profile';
+  static const SERVICE_FORM = '/service-form';
   static const SELLER_ORDER_DETAIL = '/seller-order-detail';
   static const ADMIN_PETSHOP_APPROVAL = '/admin-petshop-approval';
   static const WELCOME_PAGE = '/welcome-page';
   static const CATEGORY_PAGE = '/category-page';
-  static const CART_PAGE = '/cart-page';
+  static const SERVICE_LIST = '/service-list';
   static const FAVORITE = '/favorite';
   static const RATING = '/rating';
 }

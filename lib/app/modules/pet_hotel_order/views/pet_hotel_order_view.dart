@@ -27,7 +27,7 @@ class PetHotelOrderView extends GetView<PetHotelOrderController> {
         padding: const EdgeInsets.all(25),
         child: Column(
           children: [
-            Center(
+            const Center(
               child: Text(
                 'Book your order',
                 style: TextStyle(fontSize: 20),

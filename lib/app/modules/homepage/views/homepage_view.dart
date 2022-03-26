@@ -146,8 +146,6 @@ class Home extends StatelessWidget {
                     stream: homeController.getFavByUserId(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.active) {
-                        var favData = snapshot.data!.docs;
-                        var arrData = [];
                         return Container(
                           margin: const EdgeInsets.only(top: 8),
                           child: SafeArea(

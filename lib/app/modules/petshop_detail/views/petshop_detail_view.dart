@@ -95,40 +95,6 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                             width: width,
                             child: Column(
                               children: [
-                                // Padding(
-                                //   padding: const EdgeInsets.only(
-                                //       top: 25, bottom: 12, left: 25, right: 25),
-                                //   child: Column(
-                                //     crossAxisAlignment: CrossAxisAlignment.start,
-                                //     children: [
-                                //       Text(
-                                //         '${data["petshopName"]}',
-                                //         style: GoogleFonts.inter(
-                                //             fontSize: 20,
-                                //             fontWeight: FontWeight.w700,
-                                //             color: Color(0xffF9813A)),
-                                //       ),
-                                //       SizedBox(
-                                //         height: 2,
-                                //       ),
-                                //       Row(
-                                //         children: [
-                                //           Icon(Icons.location_pin, size: 18),
-                                //           const SizedBox(
-                                //             width: 5,
-                                //           ),
-                                //           Text(
-                                //             '${data["petshopAddress"]}',
-                                //             style: GoogleFonts.inter(
-                                //                 fontSize: 15,
-                                //                 fontWeight: FontWeight.w300),
-                                //           ),
-                                //         ],
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
-
                                 SizedBox(
                                   height: 50,
                                   child: AppBar(
@@ -153,29 +119,9 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                                     ),
                                   ),
                                 ),
-
-                                Expanded(
+                                const Expanded(
                                   child: TabBarView(
-                                    children: [
-                                      // first tab bar view widget
-                                      Container(
-                                        color: Colors.white,
-                                        child: Center(
-                                          child: InkWell(
-                                            onTap: () => Get.toNamed(
-                                                Routes.PET_HOTEL_ORDER,
-                                                arguments: snapshot.data!.id),
-                                            child: Text(
-                                              'ShopInfo',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-
-                                      // second tab bar viiew widget
-                                      Service(),
-                                      Review()
-                                    ],
+                                    children: [ShopInfo(), Service(), Review()],
                                   ),
                                 ),
                               ],
@@ -252,8 +198,6 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                         child: Container(
                             height: height * 0.15,
                             width: width * 0.70,
-                            // color: Colors.red,
-
                             child: Column(
                               children: [
                                 Padding(
@@ -295,7 +239,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                     ],
                   );
                 } else {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -308,9 +252,148 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
 
 class ShopInfo extends StatelessWidget {
   const ShopInfo({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final controller = Get.put(PetshopDetailController());
+    var size = MediaQuery.of(context).size;
+    var height = size.height;
+    var width = size.width;
+    return Container(
+      height: height,
+      width: width,
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Information',
+                style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey.shade800),
+              ),
+              Container(
+                width: width / 4,
+                child: Divider(
+                  thickness: 2,
+                  color: Colors.grey.shade800,
+                ),
+              ),
+              Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                  style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black)),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'Services',
+                style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey.shade800),
+              ),
+              Container(
+                width: width / 4,
+                child: Divider(
+                  thickness: 2,
+                  color: Colors.grey.shade800,
+                ),
+              ),
+              Text('Grooming Services',
+                  style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black)),
+              const SizedBox(
+                height: 2,
+              ),
+              Text('Pet Hotel Services',
+                  style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black)),
+              const SizedBox(
+                height: 2,
+              ),
+              Text('Vet Available',
+                  style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black)),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'Location',
+                style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey.shade800),
+              ),
+              Container(
+                width: width / 4,
+                child: Divider(
+                  thickness: 2,
+                  color: Colors.grey.shade800,
+                ),
+              ),
+              Text('Jl. Gang Pori No.99',
+                  style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black)),
+              const SizedBox(
+                height: 3,
+              ),
+              Text('Pisangan, Jakarta Timur',
+                  style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black)),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'Open Days',
+                style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey.shade800),
+              ),
+              Container(
+                width: width / 4,
+                child: Divider(
+                  thickness: 2,
+                  color: Colors.grey.shade800,
+                ),
+              ),
+              Text('Monday - Saturday',
+                  style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black)),
+              const SizedBox(
+                height: 3,
+              ),
+              Text('09.00 - 21.00',
+                  style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black)),
+              const SizedBox(
+                height: 5,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -326,106 +409,277 @@ class Service extends StatelessWidget {
     var petshopId = localStorage.read('petshopId');
     var userId = localStorage.read('currentUserId');
 
-    return ListView.builder(
-        physics: ClampingScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return Container(
-            height: height * 0.2,
-            width: width,
-            decoration: BoxDecoration(
-                border: Border.all(
-                  width: 1,
-                  color: Colors.grey.shade200,
-                ),
-                color: Colors.white),
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Test',
-                            style: GoogleFonts.inter(
-                                fontWeight: FontWeight.w700, fontSize: 15),
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+          border: Border.all(
+            width: 1,
+            color: Colors.grey.shade200,
+          ),
+          color: Colors.white),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              height: height * 0.18,
+              width: width * 0.9,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.shade300,
+                        spreadRadius: 3,
+                        blurRadius: 5,
+                        offset: Offset(0, 3))
+                  ]),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20, left: 24, bottom: 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        InkWell(
+                          onTap: () => Get.toNamed(Routes.CREATE_ORDER),
+                          child: Container(
+                            width: width * 0.62,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Grooming for Pets',
+                                        style: GoogleFonts.inter(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
+                                      ),
+                                      Text('')
+                                    ],
+                                  ),
+                                  Container(
+                                    width: width * 0.5,
+                                    child: const Divider(
+                                      thickness: 1,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.timer,
+                                        size: 20,
+                                      ),
+                                      const SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        '1h 0m (approx)',
+                                        style: GoogleFonts.inter(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.black),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(
+                                    'Bath + Blow Dry + Hair Trim + Nail Trimming + Ear Cleaning',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w300,
+                                        color: Colors.black),
+                                  ),
+                                ]),
                           ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          Text(
-                            'Service: Pet Hotel',
-                            style: GoogleFonts.roboto(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 13,
-                                color: Colors.grey.shade700),
-                          )
-                        ],
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(right: 1),
-                        height: 30,
-                        width: 50,
-                        color: Colors.green,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('test',
-                                style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12,
-                                    color: Colors.white)),
-                            const SizedBox(
-                              width: 2,
-                            ),
-                            const Icon(
-                              Icons.star,
-                              size: 13,
-                              color: Colors.white,
-                            )
-                          ],
                         ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  Divider(
-                    thickness: 1,
-                  ),
-                  const SizedBox(
-                    height: 3,
-                  ),
-                  Text(
-                    'test',
-                    style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.w400, fontSize: 14),
-                  ),
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(),
-                      Text('asd',
-                          style: GoogleFonts.roboto(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: Colors.grey.shade700,
-                          ))
-                    ],
-                  )
-                ],
+                      ],
+                    ),
+                    Container(
+                      height: height * 0.19,
+                      width: width * 0.2,
+                      child: Center(child: Icon(Icons.arrow_forward_ios)),
+                    )
+                  ],
+                ),
               ),
             ),
-          );
-        });
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: height * 0.18,
+              width: width * 0.9,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.shade300,
+                        spreadRadius: 3,
+                        blurRadius: 5,
+                        offset: Offset(0, 3))
+                  ]),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20, left: 24, bottom: 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          width: width * 0.62,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Hotel for Pets',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+                                Container(
+                                  width: width * 0.5,
+                                  child: const Divider(
+                                    thickness: 1,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.timer,
+                                      size: 20,
+                                    ),
+                                    const SizedBox(
+                                      width: 3,
+                                    ),
+                                    Text(
+                                      '1h 0m (approx)',
+                                      style: GoogleFonts.inter(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  'Bath + Blow Dry + Hair Trim + Nail Trimming + Ear Cleaning',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.black),
+                                ),
+                              ]),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: height * 0.19,
+                      width: width * 0.2,
+                      child: Center(child: Icon(Icons.arrow_forward_ios)),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: height * 0.18,
+              width: width * 0.9,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.shade300,
+                        spreadRadius: 3,
+                        blurRadius: 5,
+                        offset: Offset(0, 3))
+                  ]),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 24, left: 24, bottom: 24),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          width: width * 0.62,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Vet',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                                ),
+                                Container(
+                                  width: width * 0.5,
+                                  child: Divider(
+                                    thickness: 1,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.timer,
+                                      size: 20,
+                                    ),
+                                    SizedBox(
+                                      width: 3,
+                                    ),
+                                    Text(
+                                      '1h 0m (approx)',
+                                      style: GoogleFonts.inter(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  'Bath + Blow Dry + Hair Trim + Nail Trimming + Ear Cleaning',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.black),
+                                ),
+                              ]),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: height * 0.19,
+                      width: width * 0.2,
+                      child: Center(child: Icon(Icons.arrow_forward_ios)),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -456,7 +710,6 @@ class Review extends StatelessWidget {
                       itemBuilder: (context, index) {
                         var dataMap =
                             data[index].data() as Map<String, dynamic>;
-
                         return Container(
                           height: height * 0.2,
                           width: width,

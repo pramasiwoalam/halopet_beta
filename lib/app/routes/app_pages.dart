@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:halopet_beta/app/modules/rating/bindings/rating_binding.dart';
 import 'package:halopet_beta/app/modules/rating/views/rating_view.dart';
+import 'package:halopet_beta/app/modules/service_form/views/service_form_view.dart';
+import 'package:halopet_beta/app/modules/service_list/bindings/service_list_binding.dart';
+import 'package:halopet_beta/app/modules/service_list/views/service_list_view.dart';
 
 import '../modules/add_petshop/bindings/add_petshop_binding.dart';
 import '../modules/add_petshop/bindings/add_petshop_binding.dart';
@@ -12,8 +15,6 @@ import '../modules/admin_list_users/bindings/admin_list_users_binding.dart';
 import '../modules/admin_list_users/views/admin_list_users_view.dart';
 import '../modules/admin_petshop_approval/bindings/admin_petshop_approval_binding.dart';
 import '../modules/admin_petshop_approval/views/admin_petshop_approval_view.dart';
-import '../modules/cart_page/bindings/cart_page_binding.dart';
-import '../modules/cart_page/views/cart_page_view.dart';
 import '../modules/category_page/bindings/category_page_binding.dart';
 import '../modules/category_page/views/category_page_view.dart';
 import '../modules/doctor_registration/bindings/doctor_registration_binding.dart';
@@ -48,8 +49,6 @@ import '../modules/seller_home/bindings/seller_home_binding.dart';
 import '../modules/seller_home/views/seller_home_view.dart';
 import '../modules/seller_order_detail/bindings/seller_order_detail_binding.dart';
 import '../modules/seller_order_detail/views/seller_order_detail_view.dart';
-import '../modules/seller_profile/bindings/seller_profile_binding.dart';
-import '../modules/seller_profile/views/seller_profile_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/welcome_page/bindings/welcome_page_binding.dart';
@@ -154,9 +153,9 @@ class AppPages {
       binding: SellerHistoryBinding(),
     ),
     GetPage(
-      name: _Paths.SELLER_PROFILE,
-      page: () => SellerProfileView(),
-      binding: SellerProfileBinding(),
+      name: _Paths.SERVICE_FORM,
+      page: () => ServiceFormView(),
+      binding: ServiceListBinding(),
     ),
     GetPage(
       name: _Paths.SELLER_ORDER_DETAIL,
@@ -179,9 +178,9 @@ class AppPages {
       binding: CategoryPageBinding(),
     ),
     GetPage(
-      name: _Paths.CART_PAGE,
-      page: () => CartPageView(),
-      binding: CartPageBinding(),
+      name: _Paths.SERVICE_LIST,
+      page: () => ServiceListView(),
+      binding: ServiceListBinding(),
     ),
     GetPage(
       name: _Paths.FAVORITE,

@@ -19,14 +19,14 @@ class FavoriteView extends GetView<FavoriteController> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Center(
-              child: Text(
+          title: Text(
             'Favorites',
             style:
                 GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 19),
-          )),
+          ),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,
+          centerTitle: true,
         ),
         body: favoriteArr.isNotEmpty
             ? StreamBuilder<QuerySnapshot<Object?>>(

@@ -95,112 +95,109 @@ class ApprovalContainer extends StatelessWidget {
                         itemBuilder: (context, index) {
                           var dataMap =
                               data[index].data() as Map<String, dynamic>;
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 10, left: 10),
-                            child: InkWell(
-                              onTap: () => {
-                                localStorage.write(
-                                    'petshopId', data[index]['petshopId']),
-                                Get.toNamed(Routes.ORDER_DETAIL,
-                                    arguments: data[index].id)
-                              },
-                              child: Container(
-                                height: height * 0.22,
-                                width: width,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                        width: 2,
-                                        color: const Color(0xfff0f0f0))),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          const Icon(Icons.timer,
-                                              color: Colors.brown),
-                                          const SizedBox(
-                                            width: 7,
+                          return InkWell(
+                            onTap: () => {
+                              localStorage.write(
+                                  'petshopId', data[index]['petshopId']),
+                              Get.toNamed(Routes.ORDER_DETAIL,
+                                  arguments: data[index].id)
+                            },
+                            child: Container(
+                              height: height * 0.22,
+                              width: width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                      width: 2,
+                                      color: const Color(0xfff0f0f0))),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text('Grooming Service',
+                                                style: GoogleFonts.roboto(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w700,
+                                                    color:
+                                                        Colors.grey.shade900)),
+                                            SizedBox(
+                                              height: 2,
+                                            ),
+                                            Text('Penjahat Bird Shop',
+                                                style: GoogleFonts.roboto(
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w400,
+                                                    color:
+                                                        Colors.grey.shade700)),
+                                          ],
+                                        ),
+                                        Container(
+                                          width: width * 0.33,
+                                          height: 25,
+                                          color: Colors.green,
+                                          child: Center(
+                                            child: Text('${dataMap['status']}',
+                                                style: GoogleFonts.roboto(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.white)),
                                           ),
-                                          Text('${dataMap['status']}',
-                                              style: GoogleFonts.roboto(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.brown))
-                                        ],
-                                      ),
-                                      const Divider(
-                                        thickness: 0.5,
-                                        height: 25,
-                                        color:
-                                            Color.fromARGB(255, 209, 209, 209),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              const Icon(
-                                                Icons.date_range,
-                                                color: Color(0xffF9813A),
-                                              ),
-                                              const SizedBox(
-                                                width: 7,
-                                              ),
-                                              Text('Order ID',
-                                                  style: GoogleFonts.inter(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 14)),
-                                            ],
-                                          ),
-                                          Text(
-                                            data[index].id,
+                                        )
+                                      ],
+                                    ),
+                                    const Divider(
+                                      thickness: 0.5,
+                                      height: 18,
+                                      color: Color.fromARGB(255, 209, 209, 209),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Order ID',
                                             style: GoogleFonts.inter(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 13),
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 7,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              const Icon(
-                                                Icons.timelapse_sharp,
-                                                color: Color(0xffF9813A),
-                                              ),
-                                              const SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                'Order Date',
-                                                style: GoogleFonts.inter(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ],
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 13)),
+                                        Text(
+                                          data[index].id,
+                                          style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 7,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Order Date',
+                                          style: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 13,
                                           ),
-                                          Text(
-                                            data[index]['orderDate'],
-                                            style: GoogleFonts.inter(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 13),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                        ),
+                                        Text(
+                                          data[index]['orderDate'],
+                                          style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12),
+                                        )
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
@@ -41,9 +42,9 @@ class AddPetshopView extends GetView<AddPetshopController> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    FocusNode inputNode = FocusNode();
     var height = size.height;
     var width = size.width;
+    var localStorage = GetStorage();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -290,12 +291,12 @@ class AddPetshopView extends GetView<AddPetshopController> {
                               "value": "Sunday",
                             },
                           ],
-                          validator: (value) {
-                            if (value == null) {
-                              return 'Please select one or more options';
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null) {
+                          //     return 'Please select one or more options';
+                          //   }
+                          //   return null;
+                          // },
                           textField: 'display',
                           valueField: 'value',
                           okButtonLabel: 'Choose',
@@ -479,22 +480,17 @@ class AddPetshopView extends GetView<AddPetshopController> {
                       // ),
                       Center(
                         child: ElevatedButton(
-                            onPressed: () async {
-                              if (form.currentState!.validate()) {
-                                form.currentState!.save();
-                                petshopController.createPetshop(formData);
-                              }
-                            },
-                            // petshopController.createPetshop(
-                            //     pName.text,
-                            //     pAddress.text,
-                            //     groomingPrice.text,
-                            //     groomingType.text,
-                            //     int.parse(hotelPrice.text),
-                            //     hotelType.text,
-                            //     petshopController.checkValue1.value,
-                            //     petshopController.checkValue2.value,
-                            //     petshopController.checkValue3.value),
+                            onPressed: () => {
+                                  // if (form.currentState!.validate()) {
+                                  //   form.currentState!.save();
+                                  //   petshopController.createPetshop(formData);
+                                  //
+                                  // }
+                                  localStorage.write('grooming', false),
+                                  localStorage.write('hotel', false),
+                                  localStorage.write('vet', false),
+                                  Get.toNamed(Routes.SERVICE_LIST)
+                                },
                             child: const Text("Create service")),
                       )
                     ],
