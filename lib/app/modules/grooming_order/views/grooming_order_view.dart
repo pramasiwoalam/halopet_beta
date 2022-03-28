@@ -57,7 +57,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                               BorderRadius.all(Radius.circular(20.0))),
                       hintText: "Pet's name",
                       hintStyle: GoogleFonts.roboto(
-                          color: Colors.grey.shade600, fontSize: 12),
+                          color: Colors.grey.shade600, fontSize: 13),
                       border: InputBorder.none,
                     ),
                   ),
@@ -85,7 +85,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                               BorderRadius.all(Radius.circular(20.0))),
                       hintText: "Pet's parent name",
                       hintStyle: GoogleFonts.roboto(
-                          color: Colors.grey.shade600, fontSize: 12),
+                          color: Colors.grey.shade600, fontSize: 13),
                       border: InputBorder.none,
                     ),
                   ),
@@ -111,7 +111,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   hintText: "Pet's breeds (ex: Dog: Husky)",
                   hintStyle: GoogleFonts.roboto(
-                      color: Colors.grey.shade600, fontSize: 12),
+                      color: Colors.grey.shade600, fontSize: 13),
                   border: InputBorder.none,
                 ),
               ),
@@ -140,7 +140,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                               BorderRadius.all(Radius.circular(20.0))),
                       hintText: "Age",
                       hintStyle: GoogleFonts.roboto(
-                          color: Colors.grey.shade600, fontSize: 12),
+                          color: Colors.grey.shade600, fontSize: 13),
                       border: InputBorder.none,
                     ),
                   ),
@@ -165,7 +165,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                               BorderRadius.all(Radius.circular(20.0))),
                       hintText: "Weight",
                       hintStyle: GoogleFonts.roboto(
-                          color: Colors.grey.shade600, fontSize: 12),
+                          color: Colors.grey.shade600, fontSize: 13),
                       border: InputBorder.none,
                     ),
                   ),
@@ -190,7 +190,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                               BorderRadius.all(Radius.circular(20.0))),
                       hintText: "Gender",
                       hintStyle: GoogleFonts.roboto(
-                          color: Colors.grey.shade600, fontSize: 12),
+                          color: Colors.grey.shade600, fontSize: 13),
                       border: InputBorder.none,
                     ),
                   ),
@@ -215,14 +215,14 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                   },
                   child: orderController.date == "null"
                       ? Text(
-                          "Choose Date",
+                          "Choose Booking Date",
                           style: GoogleFonts.roboto(
-                              color: Colors.grey.shade600, fontSize: 12),
+                              color: Colors.grey.shade700, fontSize: 13),
                         )
                       : Text(
                           '${controller.date}',
                           style: GoogleFonts.roboto(
-                              color: Colors.grey.shade600, fontSize: 13),
+                              color: Colors.grey.shade800, fontSize: 14),
                         ),
                   textColor: Colors.grey.shade600,
                   shape: RoundedRectangleBorder(

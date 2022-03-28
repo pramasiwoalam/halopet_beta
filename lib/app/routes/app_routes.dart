@@ -29,6 +29,8 @@ abstract class Routes {
   static const SERVICE_LIST = _Paths.SERVICE_LIST;
   static const FAVORITE = _Paths.FAVORITE;
   static const RATING = _Paths.RATING;
+  static const PET_LIST = _Paths.PET_LIST;
+  static const PET_FORM = _Paths.PET_FORM;
 }
 
 abstract class _Paths {
@@ -59,4 +61,6 @@ abstract class _Paths {
   static const SERVICE_LIST = '/service-list';
   static const FAVORITE = '/favorite';
   static const RATING = '/rating';
+  static const PET_LIST = '/pet-list';
+  static const PET_FORM = '/pet-form';
 }

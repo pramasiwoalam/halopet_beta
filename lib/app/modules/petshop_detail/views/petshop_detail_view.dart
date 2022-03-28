@@ -28,11 +28,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
     var width = size.width;
     var petshopId = localStorage.read('petshopId');
     var userId = localStorage.read('currentUserId');
-    // print('val :${controller.isFav}');
-    // var orderList = controller.orderList;
-    // if (orderList.length > 0) {
-    //   print('data: ${orderList[0]['serviceName']}');
-    // }
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(

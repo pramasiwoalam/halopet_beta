@@ -87,13 +87,15 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
                         ],
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
                             labelText: "Petshop Name *",
                             hintText: 'Name',
+                            hintStyle: GoogleFonts.roboto(
+                                fontSize: 14, color: Colors.grey.shade600),
                             contentPadding: EdgeInsets.all(18),
                             floatingLabelBehavior:
                                 FloatingLabelBehavior.always),
@@ -107,14 +109,16 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         },
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15),
+                        padding: EdgeInsets.only(top: 15),
                         child: TextFormField(
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
                               labelText: "Petshop Address *",
                               hintText: 'Address',
+                              hintStyle: GoogleFonts.roboto(
+                                  fontSize: 14, color: Colors.grey.shade600),
                               contentPadding: EdgeInsets.all(18),
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always),
@@ -136,12 +140,15 @@ class AddPetshopView extends GetView<AddPetshopController> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 15),
                               child: TextFormField(
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20))),
                                     labelText: "District *",
                                     hintText: 'District',
+                                    hintStyle: GoogleFonts.roboto(
+                                        fontSize: 14,
+                                        color: Colors.grey.shade600),
                                     contentPadding: EdgeInsets.all(18),
                                     floatingLabelBehavior:
                                         FloatingLabelBehavior.always),
@@ -162,12 +169,15 @@ class AddPetshopView extends GetView<AddPetshopController> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 15, left: 15),
                               child: TextFormField(
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20))),
                                     labelText: "City *",
                                     hintText: 'City',
+                                    hintStyle: GoogleFonts.roboto(
+                                        fontSize: 14,
+                                        color: Colors.grey.shade600),
                                     contentPadding: EdgeInsets.all(18),
                                     floatingLabelBehavior:
                                         FloatingLabelBehavior.always),
@@ -189,12 +199,14 @@ class AddPetshopView extends GetView<AddPetshopController> {
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: TextFormField(
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
                               labelText: "Petshop Phone Number *",
                               hintText: 'Phone',
+                              hintStyle: GoogleFonts.roboto(
+                                  fontSize: 14, color: Colors.grey.shade600),
                               contentPadding: EdgeInsets.all(18),
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always),
@@ -216,12 +228,14 @@ class AddPetshopView extends GetView<AddPetshopController> {
                           maxLines: null,
                           minLines: 2,
                           keyboardType: TextInputType.multiline,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
                               labelText: "Petshop Description *",
                               hintText: 'Description',
+                              hintStyle: GoogleFonts.roboto(
+                                  fontSize: 14, color: Colors.grey.shade600),
                               contentPadding: EdgeInsets.all(18),
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always),
@@ -242,9 +256,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         child: MultiSelectFormField(
                           chipBackGroundColor: Color(0xffF9813A),
                           chipLabelStyle: GoogleFonts.roboto(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 13),
+                              fontSize: 14, color: Colors.white),
                           dialogTextStyle: GoogleFonts.roboto(
                               fontWeight: FontWeight.w300, fontSize: 15),
                           checkBoxActiveColor: Color(0xffF9813A),
@@ -258,7 +270,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                           title: Text(
                             "Choose Open Day(s) *",
                             style: GoogleFonts.roboto(
-                                fontSize: 13, fontWeight: FontWeight.w400),
+                                fontSize: 14, color: Colors.grey.shade600),
                           ),
                           trailing: Icon(Icons.delete),
                           dataSource: const [
@@ -315,12 +327,15 @@ class AddPetshopView extends GetView<AddPetshopController> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 15),
                               child: TextFormField(
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20))),
                                     labelText: "Open Hours *",
                                     hintText: '07.00 am',
+                                    hintStyle: GoogleFonts.roboto(
+                                        fontSize: 14,
+                                        color: Colors.grey.shade600),
                                     contentPadding: EdgeInsets.all(18),
                                     floatingLabelBehavior:
                                         FloatingLabelBehavior.always),
@@ -345,19 +360,22 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                       child: Text(
                                     'until',
                                     style: GoogleFonts.roboto(
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.grey.shade700),
+                                        fontSize: 14,
+                                        color: Colors.grey.shade600),
                                   )))),
                           Flexible(
                             child: Padding(
                               padding: const EdgeInsets.only(top: 15),
                               child: TextFormField(
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
+                                            const Radius.circular(20))),
                                     labelText: "Open Hours *",
                                     hintText: '21.00 pm',
+                                    hintStyle: GoogleFonts.roboto(
+                                        fontSize: 14,
+                                        color: Colors.grey.shade600),
                                     contentPadding: EdgeInsets.all(18),
                                     floatingLabelBehavior:
                                         FloatingLabelBehavior.always),
@@ -478,21 +496,53 @@ class AddPetshopView extends GetView<AddPetshopController> {
                       // const SizedBox(
                       //   height: 20,
                       // ),
-                      Center(
-                        child: ElevatedButton(
-                            onPressed: () => {
-                                  // if (form.currentState!.validate()) {
-                                  //   form.currentState!.save();
-                                  //   petshopController.createPetshop(formData);
-                                  //
-                                  // }
-                                  localStorage.write('grooming', false),
-                                  localStorage.write('hotel', false),
-                                  localStorage.write('vet', false),
-                                  Get.toNamed(Routes.SERVICE_LIST)
-                                },
-                            child: const Text("Create service")),
-                      )
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: FlatButton(
+                          padding: EdgeInsets.all(15),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          color: Colors.grey.shade200,
+                          height: height * 0.08,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  "Create Service",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.grey.shade800,
+                                      fontSize: 15),
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 21,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                            ],
+                          ),
+                          onPressed: () => {
+                            // if (form.currentState!.validate()) {
+                            //   form.currentState!.save();
+                            //   petshopController.createPetshop(formData);
+                            //
+                            // }
+                            localStorage.write('grooming', false),
+                            localStorage.write('hotel', false),
+                            localStorage.write('vet', false),
+                            Get.toNamed(Routes.SERVICE_LIST)
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),

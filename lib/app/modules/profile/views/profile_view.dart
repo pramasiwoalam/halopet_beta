@@ -225,21 +225,56 @@ class ProfileView extends GetView<ProfileController> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 30, vertical: 10),
+                                          horizontal: 30, vertical: 5),
                                       child: FlatButton(
                                         padding: EdgeInsets.all(15),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.white54,
+                                        color: Colors.grey.shade100,
+                                        height: height * 0.08,
                                         child: Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
+                                              Icons.pets,
+                                              color: Color(0xffF9813A),
+                                            ),
+                                            const SizedBox(
+                                              width: 30,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                "My Pets",
+                                                style: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                            ),
+                                            Icon(Icons.arrow_forward_ios),
+                                          ],
+                                        ),
+                                        onPressed: () =>
+                                            Get.toNamed(Routes.PET_LIST),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 30, vertical: 5),
+                                      child: FlatButton(
+                                        padding: EdgeInsets.all(15),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        color: Colors.grey.shade100,
+                                        height: height * 0.08,
+                                        child: Row(
+                                          children: [
+                                            const Icon(
                                               Icons.people,
                                               color: Color(0xffF9813A),
                                             ),
                                             const SizedBox(
-                                              width: 20,
+                                              width: 30,
                                             ),
                                             Expanded(
                                               child: Text(
@@ -258,13 +293,14 @@ class ProfileView extends GetView<ProfileController> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 30, vertical: 10),
+                                          horizontal: 30, vertical: 5),
                                       child: FlatButton(
                                         padding: EdgeInsets.all(15),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.white54,
+                                        color: Colors.grey.shade100,
+                                        height: height * 0.08,
                                         child: Row(
                                           children: [
                                             Icon(
@@ -272,7 +308,7 @@ class ProfileView extends GetView<ProfileController> {
                                               color: Color(0xffF9813A),
                                             ),
                                             SizedBox(
-                                              width: 20,
+                                              width: 30,
                                             ),
                                             Expanded(
                                               child: Text(
@@ -309,7 +345,7 @@ class ProfileView extends GetView<ProfileController> {
                                               const Icon(Icons.edit_attributes,
                                                   color: Color(0xffF9813A)),
                                               const SizedBox(
-                                                width: 20,
+                                                width: 30,
                                               ),
                                               Expanded(
                                                 child: Text(

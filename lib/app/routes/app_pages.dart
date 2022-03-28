@@ -4,10 +4,7 @@ import 'package:halopet_beta/app/modules/rating/views/rating_view.dart';
 import 'package:halopet_beta/app/modules/service_form/views/service_form_view.dart';
 import 'package:halopet_beta/app/modules/service_list/bindings/service_list_binding.dart';
 import 'package:halopet_beta/app/modules/service_list/views/service_list_view.dart';
-
 import '../modules/add_petshop/bindings/add_petshop_binding.dart';
-import '../modules/add_petshop/bindings/add_petshop_binding.dart';
-import '../modules/add_petshop/views/add_petshop_view.dart';
 import '../modules/add_petshop/views/add_petshop_view.dart';
 import '../modules/admin_home/bindings/admin_home_binding.dart';
 import '../modules/admin_home/views/admin_home_view.dart';
@@ -29,14 +26,16 @@ import '../modules/history_detail/bindings/history_detail_binding.dart';
 import '../modules/history_detail/views/history_detail_view.dart';
 import '../modules/homepage/bindings/homepage_binding.dart';
 import '../modules/homepage/views/homepage_view.dart';
-import '../modules/login/bindings/login_binding.dart';
-import '../modules/login/views/login_view.dart';
 import '../modules/order/bindings/order_binding.dart';
 import '../modules/order/views/order_view.dart';
 import '../modules/order_detail/bindings/order_detail_binding.dart';
 import '../modules/order_detail/views/order_detail_view.dart';
+import '../modules/pet_form/bindings/pet_form_binding.dart';
+import '../modules/pet_form/views/pet_form_view.dart';
 import '../modules/pet_hotel_order/bindings/pet_hotel_order_binding.dart';
 import '../modules/pet_hotel_order/views/pet_hotel_order_view.dart';
+import '../modules/pet_list/bindings/pet_list_binding.dart';
+import '../modules/pet_list/views/pet_list_view.dart';
 import '../modules/petshop_detail/bindings/petshop_detail_binding.dart';
 import '../modules/petshop_detail/views/petshop_detail_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -191,6 +190,16 @@ class AppPages {
       name: _Paths.RATING,
       page: () => RatingView(),
       binding: RatingBinding(),
+    ),
+    GetPage(
+      name: _Paths.PET_LIST,
+      page: () => PetListView(),
+      binding: PetListBinding(),
+    ),
+    GetPage(
+      name: _Paths.PET_FORM,
+      page: () => PetFormView(),
+      binding: PetFormBinding(),
     ),
   ];
 }
