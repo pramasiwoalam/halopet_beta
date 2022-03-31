@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                 if (snapshot.connectionState == ConnectionState.done) {
                   var data = snapshot.data!.data() as Map<String, dynamic>;
                   var currentUserId = localStorage.read('currentUserId');
+                  print(data['favoriteId']);
                   return Stack(
                     children: <Widget>[
                       Positioned(
@@ -442,7 +444,41 @@ class Service extends StatelessWidget {
                     Column(
                       children: [
                         InkWell(
-                          onTap: () => Get.toNamed(Routes.CREATE_ORDER),
+                          onTap: () => {
+                            AwesomeDialog(
+                              context: context,
+                              padding: EdgeInsets.all(20),
+                              dialogType: DialogType.NO_HEADER,
+                              animType: AnimType.BOTTOMSLIDE,
+                              title: 'Confirmation',
+                              desc: 'Are you sure want to create this order?.',
+                              btnCancelOnPress: () => {},
+                              btnCancelColor: Colors.grey.shade200,
+                              btnOkColor: Colors.green.shade200,
+                              btnOkText: 'Yes',
+                              buttonsTextStyle: GoogleFonts.roboto(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.grey.shade800),
+                              btnOkOnPress: () {
+                                Get.toNamed(Routes.CHOOSE_PET);
+                                AwesomeDialog(
+                                  padding: EdgeInsets.all(20),
+                                  context: context,
+                                  dialogType: DialogType.INFO_REVERSED,
+                                  animType: AnimType.BOTTOMSLIDE,
+                                  title: 'Choose your pet.',
+                                  desc:
+                                      'Choose who will be in service. Make sure you already registered your pet.',
+                                  btnOkText: 'Ok',
+                                  btnOkColor: Colors.grey.shade300,
+                                  buttonsTextStyle: GoogleFonts.roboto(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.grey.shade800),
+                                  btnOkOnPress: () {},
+                                ).show();
+                              },
+                            ).show()
+                          },
                           child: Container(
                             width: width * 0.62,
                             child: Column(

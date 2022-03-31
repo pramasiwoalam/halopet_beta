@@ -40,4 +40,33 @@ class ServiceListController extends GetxController {
     //   print(e);
     // }
   }
+
+  void createService() {
+    CollectionReference petshop = firestore.collection("petshop");
+    CollectionReference service = firestore.collection("service");
+    CollectionReference users = firestore.collection("users");
+    var userId = GetStorage().read('currentUserId');
+    var petshopId = '';
+    petshop.add({
+      'groomingService': true,
+    }).then((value) => {
+          localStorage.write('savedPetshopId', value.id),
+          service.add({'petshopId': value.id}).then((value) => {
+                localStorage.write('savedServiceId', value.id),
+                petshop
+                    .doc(localStorage.read('savedPetshopId'))
+                    .update({'serviceId': value.id})
+              })
+        });
+  }
+
+  void cancellation(String petshopId, String serviceId) {
+    CollectionReference petshop = firestore.collection("petshop");
+    CollectionReference service = firestore.collection("service");
+
+    petshop
+        .doc(petshopId)
+        .delete()
+        .then((value) => service.doc(serviceId).delete());
+  }
 }

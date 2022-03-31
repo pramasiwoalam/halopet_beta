@@ -14,6 +14,8 @@ import '../modules/admin_petshop_approval/bindings/admin_petshop_approval_bindin
 import '../modules/admin_petshop_approval/views/admin_petshop_approval_view.dart';
 import '../modules/category_page/bindings/category_page_binding.dart';
 import '../modules/category_page/views/category_page_view.dart';
+import '../modules/choose_pet/bindings/choose_pet_binding.dart';
+import '../modules/choose_pet/views/choose_pet_view.dart';
 import '../modules/doctor_registration/bindings/doctor_registration_binding.dart';
 import '../modules/doctor_registration/views/doctor_registration_view.dart';
 import '../modules/favorite/bindings/favorite_binding.dart';
@@ -200,6 +202,11 @@ class AppPages {
       name: _Paths.PET_FORM,
       page: () => PetFormView(),
       binding: PetFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHOOSE_PET,
+      page: () => ChoosePetView(),
+      binding: ChoosePetBinding(),
     ),
   ];
 }

@@ -65,8 +65,11 @@ class ServiceListView extends GetView<ServiceListController> {
                       ),
                       groomingStatus == false
                           ? InkWell(
-                              onTap: () => Get.toNamed(Routes.SERVICE_FORM,
-                                  arguments: 'Grooming'),
+                              onTap: () => {
+                                Get.toNamed(Routes.SERVICE_FORM,
+                                    arguments: 'Grooming'),
+                                controller.createService()
+                              },
                               child: Container(
                                 height: height * 0.12,
                                 width: width,

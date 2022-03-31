@@ -31,6 +31,7 @@ abstract class Routes {
   static const RATING = _Paths.RATING;
   static const PET_LIST = _Paths.PET_LIST;
   static const PET_FORM = _Paths.PET_FORM;
+  static const CHOOSE_PET = _Paths.CHOOSE_PET;
 }
 
 abstract class _Paths {
@@ -63,4 +64,5 @@ abstract class _Paths {
   static const RATING = '/rating';
   static const PET_LIST = '/pet-list';
   static const PET_FORM = '/pet-form';
+  static const CHOOSE_PET = '/choose-pet';
 }

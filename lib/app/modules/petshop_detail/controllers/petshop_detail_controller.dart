@@ -44,7 +44,7 @@ class PetshopDetailController extends GetxController {
             users.doc(userId).set(
               {
                 'favoriteId': FieldValue.arrayUnion([
-                  {'favId': value.id}
+                  {'favId': value.id, 'asd': 'asd'}
                 ])
               },
               SetOptions(merge: true),
