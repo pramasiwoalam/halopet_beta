@@ -43,25 +43,25 @@ class ProfileView extends GetView<ProfileController> {
                 Column(
                   children: <Widget>[
                     Container(
-                      height: height * 0.25,
+                      height: height * 0.35,
                       width: width,
                       // color: Colors.blue,
                       child: SizedBox(
-                        height: height * 0.2,
+                        height: height * 0.3,
                         width: width,
                         child: Stack(
                           children: [
                             ClipPath(
                               clipper: CustomShape(),
                               child: Container(
-                                height: height * 0.15,
+                                height: height * 0.4,
                                 color: Color(0xffF9813A),
                               ),
                             ),
                             Column(
                               children: <Widget>[
                                 Container(
-                                  height: height / 5.5,
+                                  height: height / 6,
                                   width: width * 0.35,
                                   // color: Colors.pink,
                                   margin: EdgeInsets.only(
@@ -74,7 +74,7 @@ class ProfileView extends GetView<ProfileController> {
                                             left: width * 0.01,
                                             top: height * 0.01,
                                             bottom: height * 0.005),
-                                        height: height / 3.5,
+                                        height: height / 3,
                                         width: width / 3,
                                         // color: Colors.blue,
                                         decoration: BoxDecoration(
@@ -102,7 +102,7 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(0.5),
+                  padding: const EdgeInsets.all(0.3),
                   child: Column(
                     // mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -195,7 +195,7 @@ class ProfileView extends GetView<ProfileController> {
                                 return Column(
                                   children: [
                                     Container(
-                                      height: height * 0.042,
+                                      height: height * 0.03,
                                       width: width * 0.8,
                                       color: Colors.transparent,
                                       child: Center(
