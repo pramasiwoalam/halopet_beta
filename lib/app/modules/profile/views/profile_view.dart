@@ -303,11 +303,11 @@ class ProfileView extends GetView<ProfileController> {
                                         height: height * 0.08,
                                         child: Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.favorite,
                                               color: Color(0xffF9813A),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 30,
                                             ),
                                             Expanded(

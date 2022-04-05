@@ -68,7 +68,7 @@ class ServiceListView extends GetView<ServiceListController> {
                               onTap: () => {
                                 Get.toNamed(Routes.SERVICE_FORM,
                                     arguments: 'Grooming'),
-                                controller.createService()
+                                // controller.createService()
                               },
                               child: Container(
                                 height: height * 0.12,

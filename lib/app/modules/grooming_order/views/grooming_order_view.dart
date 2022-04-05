@@ -169,6 +169,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                     FloatingLabelBehavior.always),
                           ),
                         ),
+                        SizedBox(height: 15),
                         Container(
                           height: size.height * 0.065,
                           width: width * 0.28,
