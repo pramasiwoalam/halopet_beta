@@ -30,6 +30,7 @@ dependencies:
   flutter_rating_bar: ^4.0.0
 
   timeago: ^3.2.2
+  carousel_slider: ^4.0.0
   
 
 dev_dependencies: 

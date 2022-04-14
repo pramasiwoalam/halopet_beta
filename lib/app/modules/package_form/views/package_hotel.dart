@@ -4,12 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:halopet_beta/app/modules/service_list/controllers/service_list_controller.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
-import '../controllers/service_form_controller.dart';
+import '../../service_form/controllers/service_form_controller.dart';
 
-class DetailGroomingService extends StatelessWidget {
+class PackageHotel extends StatelessWidget {
   GlobalKey<FormState> form = GlobalKey<FormState>();
   final controller = Get.put(ServiceFormController());
   Map<String, dynamic> formData = {
@@ -55,8 +54,8 @@ class DetailGroomingService extends StatelessWidget {
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
-                        labelText: "Package Name *",
-                        hintText: 'Package Grooming A',
+                        labelText: "Room Name *",
+                        hintText: 'Room A',
                         hintStyle: GoogleFonts.roboto(
                             fontSize: 14, color: Colors.grey.shade600),
                         contentPadding: EdgeInsets.all(18),
@@ -78,10 +77,10 @@ class DetailGroomingService extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
-                        labelText: "Package Description *",
+                        labelText: "Room Description *",
                         hintStyle: GoogleFonts.roboto(
                             fontSize: 14, color: Colors.grey.shade600),
-                        hintText: 'Blow + Hair Detailing',
+                        hintText: 'Air Conditioner',
                         contentPadding: EdgeInsets.all(18),
                         floatingLabelBehavior: FloatingLabelBehavior.always),
                     validator: (value) {
@@ -99,8 +98,8 @@ class DetailGroomingService extends StatelessWidget {
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
-                        labelText: "Package Price *",
-                        hintText: 'Rp. 100.000',
+                        labelText: "Room Price * (1 night)",
+                        hintText: 'Rp. 100.000 / night',
                         hintStyle: GoogleFonts.roboto(
                             fontSize: 14, color: Colors.grey.shade600),
                         contentPadding: EdgeInsets.all(18),
@@ -122,8 +121,9 @@ class DetailGroomingService extends StatelessWidget {
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
-                        labelText: "Package Time Estimation *",
-                        hintText: '1 hour',
+                        labelText:
+                            "Room Dimension * (length x width x height) in cm)",
+                        hintText: '100 cm x 200 x 300 cm',
                         hintStyle: GoogleFonts.roboto(
                             fontSize: 14, color: Colors.grey.shade600),
                         contentPadding: EdgeInsets.all(18),
@@ -134,7 +134,7 @@ class DetailGroomingService extends StatelessWidget {
                       }
                     },
                     onSaved: (value) {
-                      formData['time'] = value;
+                      formData['dimension'] = value;
                     },
                   ),
                   const SizedBox(
@@ -145,10 +145,11 @@ class DetailGroomingService extends StatelessWidget {
                         if (form.currentState!.validate()) {
                           form.currentState!.save();
                           controller.createServiceDetail(formData);
-                          controller.packageList.add(formData);
+                          controller.packageHotelList.add(formData);
+                          localStorage.write('serviceFlag', 1);
                           localStorage.write('packageFlag', 1);
-                          Get.toNamed(Routes.SERVICE_FORM,
-                              arguments: 'Grooming');
+
+                          Get.toNamed(Routes.SERVICE_FORM, arguments: 'Hotel');
                         }
                       },
                       child: Text('Register')),

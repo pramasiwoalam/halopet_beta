@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
+import '../../service_list/controllers/service_list_controller.dart';
 import '../controllers/add_petshop_controller.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 
@@ -21,6 +22,7 @@ class Days {
 
 class AddPetshopView extends GetView<AddPetshopController> {
   final petshopController = Get.put(AddPetshopController());
+  final serviceListController = Get.put(ServiceListController());
 
   Map<String, dynamic> formData = {
     'name': null,
@@ -84,9 +86,6 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         height: 10,
                       ),
                       TextFormField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
-                        ],
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius:
@@ -531,15 +530,16 @@ class AddPetshopView extends GetView<AddPetshopController> {
                             ],
                           ),
                           onPressed: () => {
-                            // if (form.currentState!.validate()) {
-                            //   form.currentState!.save();
-                            //   petshopController.createPetshop(formData);
-                            //
-                            // }
-                            localStorage.write('grooming', false),
-                            localStorage.write('hotel', false),
-                            localStorage.write('vet', false),
-                            Get.toNamed(Routes.SERVICE_LIST)
+                            if (form.currentState!.validate())
+                              {
+                                form.currentState!.save(),
+                                localStorage.write('generalData', formData),
+                                petshopController.createPetshop(formData),
+                                localStorage.write('grooming', false),
+                                localStorage.write('hotel', false),
+                                localStorage.write('vet', false),
+                                Get.toNamed(Routes.SERVICE_LIST)
+                              },
                           },
                         ),
                       ),

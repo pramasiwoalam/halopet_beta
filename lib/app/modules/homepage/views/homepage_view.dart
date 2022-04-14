@@ -105,17 +105,10 @@ class Home extends StatelessWidget {
   final localStorage = GetStorage();
 
   var cards = [
-    {
-      'name': 'Grooming Service',
-      'image': 'assets/images/grooming-card.jpg',
-      'value': 1
-    },
-    {
-      'name': 'Vet Available',
-      'image': 'assets/images/vet-card.jpg',
-      'value': 2
-    },
-    {'name': 'Pet Hotel', 'image': 'assets/images/hotel-card.jpg', 'value': 3},
+    {'name': 'Grooming', 'value': 1},
+    {'name': 'Vet Available', 'value': 2},
+    {'name': 'Pet Hotel', 'value': 3},
+    {'name': 'Information', 'value': 4}
   ];
 
   @override
@@ -231,24 +224,12 @@ class Home extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      top: height * 0.01,
-                                      right: width * 0.07,
-                                      left: width * 0.07),
-                                  height: height * 0.05,
-                                  child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        'Find Petshop by Services',
-                                        style: GoogleFonts.inter(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500),
-                                      )),
+                                SizedBox(
+                                  height: 12,
                                 ),
                                 Container(
-                                  height: height * 0.2,
-                                  width: width * 0.1,
+                                  height: height * 0.11,
+                                  width: width * 0.05,
                                   // color: Colors.black,
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -261,26 +242,32 @@ class Home extends StatelessWidget {
                                               Routes.CATEGORY_PAGE,
                                               arguments: cards[index]['value']),
                                           child: Container(
-                                            height: height * 0.2,
-                                            width: width * 0.4,
-                                            margin: EdgeInsets.only(right: 10),
+                                            height: height * 0.11,
+                                            width: width * 0.22,
+
                                             decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                        '${cards[index]['image']}')),
-                                                border: Border.all(
-                                                    width: 1.8,
-                                                    color: const Color(
-                                                        0xfff0f0f0)),
-                                                boxShadow: const [
-                                                  BoxShadow(
-                                                    color: Color(0xfff0f0f0),
-                                                    spreadRadius: 0.1,
-                                                    blurRadius: 0.8,
-                                                  )
-                                                ]),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              color: Color(0xffF9813A),
+                                            ),
+                                            margin: EdgeInsets.only(right: 15),
+                                            child: Center(
+                                                child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.pets,
+                                                  color: Colors.white,
+                                                ),
+                                                Text(
+                                                  '${cards[index]['name']}',
+                                                  style: GoogleFonts.roboto(
+                                                      color: Colors.white,
+                                                      fontSize: 12),
+                                                ),
+                                              ],
+                                            )),
 
                                             // child: Align(
                                             //   alignment: Alignment.center,
@@ -289,6 +276,12 @@ class Home extends StatelessWidget {
                                           ),
                                         );
                                       }),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  height: height * 0.22,
+                                  width: width,
+                                  color: Colors.red,
                                 ),
                                 Container(
                                   margin: EdgeInsets.only(

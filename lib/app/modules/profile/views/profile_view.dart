@@ -26,6 +26,7 @@ class ProfileView extends GetView<ProfileController> {
     var width = size.width;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Center(
             child: Text(
           'Profile',

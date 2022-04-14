@@ -32,6 +32,8 @@ import '../modules/order/bindings/order_binding.dart';
 import '../modules/order/views/order_view.dart';
 import '../modules/order_detail/bindings/order_detail_binding.dart';
 import '../modules/order_detail/views/order_detail_view.dart';
+import '../modules/package_form/bindings/package_form_binding.dart';
+import '../modules/package_form/views/package_form_view.dart';
 import '../modules/pet_form/bindings/pet_form_binding.dart';
 import '../modules/pet_form/views/pet_form_view.dart';
 import '../modules/pet_hotel_order/bindings/pet_hotel_order_binding.dart';
@@ -207,6 +209,11 @@ class AppPages {
       name: _Paths.CHOOSE_PET,
       page: () => ChoosePetView(),
       binding: ChoosePetBinding(),
+    ),
+    GetPage(
+      name: _Paths.PACKAGE_FORM,
+      page: () => PackageFormView(),
+      binding: PackageFormBinding(),
     ),
   ];
 }

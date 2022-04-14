@@ -6,7 +6,8 @@ final localStorage = GetStorage();
 
 class ServiceFormController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  var packageList = [];
+  var packageGroomingList = [];
+  var packageHotelList = [];
 
   Future<DocumentSnapshot<Object?>> getUser(String userId) async {
     DocumentReference doc = firestore.collection("users").doc(userId);
@@ -30,12 +31,37 @@ class ServiceFormController extends GetxController {
       'desc': formData['desc'],
       'price': formData['price'],
       'time': formData['time'],
-      'serviceId': localStorage.read('savedServiceId')
+      'serviceId': localStorage.read('tempServiceId')
     }).then((value) => {
-          localStorage.write('savedPackageId', value.id),
-          service
-              .doc(localStorage.read('savedServiceId'))
-              .update({'packageId': value.id})
+          service.doc(localStorage.read('tempServiceId')).set(
+            {
+              'packageId': FieldValue.arrayUnion([
+                {'id': value.id}
+              ])
+            },
+            SetOptions(merge: true),
+          ),
         });
+  }
+
+  void createDefaultService() {
+    CollectionReference service = firestore.collection("service");
+    service.add({'packageId': null}).then((value) => {
+          localStorage.write('tempServiceId', value.id),
+          localStorage.write('serviceFlag', 1)
+        });
+  }
+
+  void createService() {
+    CollectionReference petshop = firestore.collection("petshop");
+
+    petshop.doc(localStorage.read('tempPetshopId')).set(
+      {
+        'serviceId': FieldValue.arrayUnion([
+          {'id': localStorage.read('tempPetshopId')}
+        ])
+      },
+      SetOptions(merge: true),
+    );
   }
 }

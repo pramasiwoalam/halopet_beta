@@ -261,7 +261,6 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                       fontSize: 14,
                                       fontWeight: FontWeight.w700),
                                 ),
-                          textColor: Colors.grey.shade600,
                           shape: RoundedRectangleBorder(
                               side: BorderSide(
                                   color: orderController.date == 'null'

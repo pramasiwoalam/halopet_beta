@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:halopet_beta/app/modules/service_form/views/detail_service_form_grooming.dart';
+import 'package:halopet_beta/app/modules/package_form/views/package_grooming.dart';
 import 'package:halopet_beta/app/modules/service_form/views/service_form_grooming.dart';
 import 'package:halopet_beta/app/modules/service_form/views/service_form_hotel.dart';
 import 'package:halopet_beta/app/modules/service_form/views/service_form_vet.dart';
@@ -28,8 +28,6 @@ class ServiceFormView extends GetView<ServiceFormController> {
             ? GroomingService()
             : argument == 'Hotel'
                 ? HotelService()
-                : argument == 'detailGrooming'
-                    ? DetailGroomingService()
-                    : VetService());
+                : VetService());
   }
 }

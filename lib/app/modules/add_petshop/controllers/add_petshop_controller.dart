@@ -18,27 +18,16 @@ class AddPetshopController extends GetxController {
     CollectionReference users = firestore.collection("users");
     var userId = GetStorage().read('currentUserId');
     var petshopId = '';
-    print('data: $formData');
 
-    // try {
-    //   var res = petshop.add({
-    //     "petshopName": formData['name'],
-    //     "petshopAddress": formData['address'],
-    //     // "groomingService": value1,
-    //     // "groomingPriceRange": grPrice,
-    //     // "groomingTypeList": grType,
-    //     // "petHotelService": value2,
-    //     // "petHotelPrice": htPrice,
-    //     // "petHotelType": htType,
-    //     // "vetServices": value3,
-    //     'petshopOwner': userId,
-    //     'status': 'Waiting for Approval'
-    //   }).then((value) => {
-    //         users.doc(userId).update({'petshopId': value.id})
-    //       });
-    //   Get.back();
-    // } catch (e) {
-    //   print(e);
-    // }
+    try {
+      var res =
+          petshop.add({'status': 'Waiting for Approval'}).then((value) => {
+                localStorage.write('tempPetshopId', value.id),
+                users.doc(userId).update({'petshopId': value.id})
+              });
+      Get.back();
+    } catch (e) {
+      print(e);
+    }
   }
 }

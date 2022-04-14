@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:halopet_beta/app/modules/service_form/views/detail_service_form_grooming.dart';
+import 'package:halopet_beta/app/modules/package_form/views/package_grooming.dart';
 import 'package:halopet_beta/app/modules/service_list/controllers/service_list_controller.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
@@ -102,15 +102,11 @@ class GroomingService extends StatelessWidget {
                       style: GoogleFonts.roboto(
                           fontSize: 14, color: Colors.grey.shade700),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    serviceController.packageList.isEmpty
+                    serviceController.packageGroomingList.isEmpty
                         ? InkWell(
                             onTap: () => {
-                              Get.toNamed(Routes.SERVICE_LIST),
-                              Get.toNamed(Routes.SERVICE_FORM,
-                                  arguments: 'detailGrooming')
+                              Get.toNamed(Routes.PACKAGE_FORM,
+                                  arguments: 'Grooming')
                             },
                             child: Container(
                               margin: EdgeInsets.only(left: 15, right: 15),
@@ -148,12 +144,69 @@ class GroomingService extends StatelessWidget {
                               )),
                             ),
                           )
-                        : ListView.builder(
-                            itemCount: serviceController.packageList.length,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                onTap: () =>
-                                    print(serviceController.packageList),
+                        : Column(
+                            children: [
+                              ListView.builder(
+                                  itemCount: serviceController
+                                      .packageGroomingList.length,
+                                  physics: const ClampingScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () => {},
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 12),
+                                        child: Container(
+                                          margin: EdgeInsets.only(
+                                              left: 15, right: 15),
+                                          height: height * 0.06,
+                                          width: width * 0.8,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: Colors.grey.shade300,
+                                                    spreadRadius: 2,
+                                                    blurRadius: 3,
+                                                    offset: Offset(0, 3))
+                                              ]),
+                                          child: Center(
+                                              child: Text(
+                                            serviceController
+                                                    .packageGroomingList[index]
+                                                ['name'],
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 14,
+                                                color: Colors.grey.shade700),
+                                          )),
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              InkWell(
+                                onTap: () => {
+                                  if (localStorage.read('serviceFlag') == 0)
+                                    {
+                                      serviceController.createDefaultService(),
+                                      Get.toNamed(
+                                        Routes.PACKAGE_FORM,
+                                        arguments: 'Grooming',
+                                      ),
+                                    }
+                                  else
+                                    {
+                                      Get.toNamed(
+                                        Routes.PACKAGE_FORM,
+                                        arguments: 'Grooming',
+                                      ),
+                                    },
+                                },
                                 child: Container(
                                   margin: EdgeInsets.only(left: 15, right: 15),
                                   height: height * 0.06,
@@ -181,8 +234,7 @@ class GroomingService extends StatelessWidget {
                                         width: 5,
                                       ),
                                       Text(
-                                        serviceController.packageList[index]
-                                            ['name'],
+                                        'Add Package',
                                         style: GoogleFonts.roboto(
                                             fontSize: 14,
                                             color: Colors.grey.shade700),
@@ -190,16 +242,20 @@ class GroomingService extends StatelessWidget {
                                     ],
                                   )),
                                 ),
-                              );
-                            }),
+                              )
+                            ],
+                          ),
                     ElevatedButton(
                         onPressed: () async {
                           if (form.currentState!.validate() &&
-                              serviceController.packageList.isNotEmpty) {
+                              serviceController
+                                  .packageGroomingList.isNotEmpty) {
                             form.currentState!.save();
 
-                            controller.createPetshop(formData);
+                            controller.setService(formData);
                             localStorage.write('grooming', true);
+                            localStorage.write('serviceFlag', 0);
+
                             Get.toNamed(Routes.SERVICE_LIST);
                           } else {
                             AwesomeDialog(
@@ -223,7 +279,8 @@ class GroomingService extends StatelessWidget {
                               Get.toNamed(Routes.SERVICE_LIST),
                               controller.cancellation(
                                   localStorage.read('savedPetshopId'),
-                                  localStorage.read('savedServiceId'))
+                                  localStorage.read('savedServiceId')),
+                              localStorage.write('serviceFlag', 0)
                             },
                         child: Text('Back To Service List'))
                   ],
