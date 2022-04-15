@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,12 @@ import 'package:halopet_beta/app/modules/profile/views/profile_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 import '../controllers/homepage_controller.dart';
+
+final List<String> items = [
+  'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+  'https://images.unsplash.com/photo-1542992015-4a0b729b1385?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1489&q=80',
+  'https://images.unsplash.com/photo-1572584642822-6f8de0243c93?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+];
 
 class HomepageView extends GetView<HomepageController> {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -212,8 +219,8 @@ class Home extends StatelessWidget {
                                             right: width * 0.04,
                                             top: height * 0.01,
                                             bottom: height * 0.005),
-                                        height: height / 4,
-                                        width: width / 4,
+                                        height: height / 5,
+                                        width: width / 5,
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
@@ -228,13 +235,38 @@ class Home extends StatelessWidget {
                                   height: 12,
                                 ),
                                 Container(
+                                    margin: EdgeInsets.only(
+                                      bottom: 15,
+                                    ),
+                                    height: height * 0.25,
+                                    width: width,
+                                    child: CarouselSlider.builder(
+                                      itemCount: items.length,
+                                      options: CarouselOptions(
+                                        disableCenter: false,
+                                        autoPlay: true,
+                                        autoPlayInterval: Duration(seconds: 2),
+                                        // autoPlayCurve: Curves.fastOutSlowIn,
+
+                                        aspectRatio: 16 / 9,
+                                      ),
+                                      itemBuilder: (context, index, realIdx) {
+                                        return Container(
+                                          child: Center(
+                                              child: Image.network(items[index],
+                                                  fit: BoxFit.cover,
+                                                  width: 1000)),
+                                        );
+                                      },
+                                    )),
+                                Container(
                                   height: height * 0.11,
                                   width: width * 0.05,
                                   // color: Colors.black,
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       padding:
-                                          EdgeInsets.only(left: 15, right: 5),
+                                          EdgeInsets.only(left: 20, right: 5),
                                       itemCount: cards.length,
                                       itemBuilder: (context, index) {
                                         return InkWell(
@@ -260,6 +292,7 @@ class Home extends StatelessWidget {
                                                   Icons.pets,
                                                   color: Colors.white,
                                                 ),
+                                                SizedBox(height: 5),
                                                 Text(
                                                   '${cards[index]['name']}',
                                                   style: GoogleFonts.roboto(
@@ -278,14 +311,10 @@ class Home extends StatelessWidget {
                                       }),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  height: height * 0.22,
-                                  width: width,
-                                  color: Colors.red,
-                                ),
-                                Container(
                                   margin: EdgeInsets.only(
-                                      right: width * 0.07, left: width * 0.07),
+                                      right: width * 0.07,
+                                      left: width * 0.07,
+                                      top: 5),
                                   height: height * 0.05,
                                   child: Row(
                                     mainAxisAlignment:
@@ -295,9 +324,9 @@ class Home extends StatelessWidget {
                                           alignment: Alignment.centerLeft,
                                           child: Text(
                                             'Explore More',
-                                            style: GoogleFonts.inter(
+                                            style: GoogleFonts.roboto(
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w500),
+                                                fontWeight: FontWeight.w400),
                                           )),
                                       InkWell(
                                         onTap: () =>
@@ -307,7 +336,7 @@ class Home extends StatelessWidget {
                                             child: Text(
                                               'See All',
                                               style: GoogleFonts.inter(
-                                                  fontSize: 14,
+                                                  fontSize: 13,
                                                   color: Colors.lightBlue,
                                                   fontWeight: FontWeight.w500),
                                             )),
@@ -642,3 +671,18 @@ class Home extends StatelessWidget {
     );
   }
 }
+
+final List<Widget> imageSliders = items
+    .map((item) => Container(
+          child: Container(
+            margin: EdgeInsets.all(5.0),
+            child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                child: Stack(
+                  children: <Widget>[
+                    Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                  ],
+                )),
+          ),
+        ))
+    .toList();
