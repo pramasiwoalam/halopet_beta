@@ -145,7 +145,7 @@ class FavoriteView extends GetView<FavoriteController> {
                                               ),
                                               Container(
                                                 height: height * 0.034,
-                                                width: width * 0.23,
+                                                width: width * 0.25,
                                                 color: Colors.blue.shade300,
                                                 child: Padding(
                                                   padding:
@@ -154,7 +154,7 @@ class FavoriteView extends GetView<FavoriteController> {
                                                     child: Text(
                                                       'Most Favorites',
                                                       style: GoogleFonts.roboto(
-                                                          fontSize: 12,
+                                                          fontSize: 10,
                                                           color: Colors.white),
                                                     ),
                                                   ),

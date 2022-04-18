@@ -42,6 +42,8 @@ import '../modules/pet_list/bindings/pet_list_binding.dart';
 import '../modules/pet_list/views/pet_list_view.dart';
 import '../modules/petshop_detail/bindings/petshop_detail_binding.dart';
 import '../modules/petshop_detail/views/petshop_detail_view.dart';
+import '../modules/petshop_list/bindings/petshop_list_binding.dart';
+import '../modules/petshop_list/views/petshop_list_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/payment/bindings/payment_binding.dart';
@@ -214,6 +216,11 @@ class AppPages {
       name: _Paths.PACKAGE_FORM,
       page: () => PackageFormView(),
       binding: PackageFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.PETSHOP_LIST,
+      page: () => PetshopListView(),
+      binding: PetshopListBinding(),
     ),
   ];
 }

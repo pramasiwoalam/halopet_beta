@@ -113,9 +113,10 @@ class Home extends StatelessWidget {
 
   var cards = [
     {'name': 'Grooming', 'value': 1},
-    {'name': 'Vet Available', 'value': 2},
+    {'name': 'Vet', 'value': 2},
     {'name': 'Pet Hotel', 'value': 3},
-    {'name': 'Information', 'value': 4}
+    {'name': 'Information', 'value': 4},
+    {'name': 'Vaccine', 'value': 5}
   ];
 
   @override
@@ -238,7 +239,7 @@ class Home extends StatelessWidget {
                                     margin: EdgeInsets.only(
                                       bottom: 15,
                                     ),
-                                    height: height * 0.25,
+                                    height: height * 0.22,
                                     width: width,
                                     child: CarouselSlider.builder(
                                       itemCount: items.length,
@@ -260,8 +261,8 @@ class Home extends StatelessWidget {
                                       },
                                     )),
                                 Container(
-                                  height: height * 0.11,
-                                  width: width * 0.05,
+                                  height: height * 0.08,
+                                  width: width * 0.02,
                                   // color: Colors.black,
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -274,8 +275,8 @@ class Home extends StatelessWidget {
                                               Routes.CATEGORY_PAGE,
                                               arguments: cards[index]['value']),
                                           child: Container(
-                                            height: height * 0.11,
-                                            width: width * 0.22,
+                                            height: height * 0.08,
+                                            width: width * 0.16,
 
                                             decoration: BoxDecoration(
                                               borderRadius:
@@ -297,7 +298,7 @@ class Home extends StatelessWidget {
                                                   '${cards[index]['name']}',
                                                   style: GoogleFonts.roboto(
                                                       color: Colors.white,
-                                                      fontSize: 12),
+                                                      fontSize: 10),
                                                 ),
                                               ],
                                             )),
@@ -330,7 +331,7 @@ class Home extends StatelessWidget {
                                           )),
                                       InkWell(
                                         onTap: () =>
-                                            Get.toNamed(Routes.HISTORY),
+                                            Get.toNamed(Routes.PETSHOP_LIST),
                                         child: Align(
                                             alignment: Alignment.centerRight,
                                             child: Text(
