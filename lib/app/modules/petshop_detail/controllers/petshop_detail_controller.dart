@@ -30,6 +30,12 @@ class PetshopDetailController extends GetxController {
         .snapshots();
   }
 
+  Stream<QuerySnapshot<Object?>> getServiceByPetshop(String petshopId) {
+    CollectionReference service = firestore.collection('service');
+
+    return service.where('petshopId', isEqualTo: petshopId).snapshots();
+  }
+
   void createFavorite(bool isFav) {
     var userId = GetStorage().read('currentUserId');
     var petshopId = GetStorage().read('petshopId');

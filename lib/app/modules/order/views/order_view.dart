@@ -35,15 +35,17 @@ class OrderView extends GetView<OrderController> {
                 child: Text(
               'Your Order',
               style:
-                  GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 19),
+                  GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 17),
             )),
             backgroundColor: Color(0xffF9813A),
             elevation: 0,
-            bottom: const TabBar(
+            bottom: TabBar(
+                labelStyle: GoogleFonts.roboto(
+                    fontSize: 13, fontWeight: FontWeight.w600),
                 isScrollable: true,
                 indicatorColor: Colors.white,
                 labelColor: Colors.white,
-                tabs: <Widget>[
+                tabs: const <Widget>[
                   Tab(
                     text: "Waiting for Approval",
                   ),

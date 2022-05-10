@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halopet_beta/app/modules/information/views/information_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 import '../controllers/category_page_controller.dart';
@@ -69,28 +70,31 @@ class CategoryPageView extends GetView<CategoryPageController> {
                             ),
                           ),
                         )
-                      : Container(
-                          margin: EdgeInsets.only(top: 20),
-                          height: height * 0.055,
-                          width: width,
-                          child: Center(
-                            child: Column(
-                              children: [
-                                Text('Petshop that gives comfort for your pet',
-                                    style: GoogleFonts.roboto(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 17)),
-                                Text(
-                                  'Loved & highly-reviewed petshop, by and for pets.',
-                                  style: GoogleFonts.roboto(
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 13,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                      : value == 3
+                          ? Container(
+                              margin: EdgeInsets.only(top: 20),
+                              height: height * 0.055,
+                              width: width,
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                        'Petshop that gives comfort for your pet',
+                                        style: GoogleFonts.roboto(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 17)),
+                                    Text(
+                                      'Loved & highly-reviewed petshop, by and for pets.',
+                                      style: GoogleFonts.roboto(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 13,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Container(),
               Container(
                 child: StreamBuilder<QuerySnapshot<Object?>>(
                     stream: controller.streamData(Get.arguments),

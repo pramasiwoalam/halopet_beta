@@ -115,8 +115,7 @@ class Home extends StatelessWidget {
     {'name': 'Grooming', 'value': 1},
     {'name': 'Vet', 'value': 2},
     {'name': 'Pet Hotel', 'value': 3},
-    {'name': 'Information', 'value': 4},
-    {'name': 'Vaccine', 'value': 5}
+    {'name': 'Pet Info', 'value': 4},
   ];
 
   @override
@@ -235,6 +234,104 @@ class Home extends StatelessWidget {
                                 SizedBox(
                                   height: 12,
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 16, right: 16, bottom: 20),
+                                  child: Container(
+                                    height: height * 0.1,
+                                    width: width * 0.8,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            width: 0.8,
+                                            color: Colors.grey.shade300),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey.shade200,
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              offset: Offset(1, 2))
+                                        ]),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.monetization_on,
+                                                  color: Colors.orange,
+                                                  size: 20,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Rp. 0',
+                                                      style: GoogleFonts.roboto(
+                                                          color: Colors
+                                                              .grey.shade800,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 16),
+                                                    ),
+                                                    Text(
+                                                      'PawPay Coins',
+                                                      style: GoogleFonts.roboto(
+                                                          color: Colors
+                                                              .grey.shade800,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          fontSize: 12),
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            VerticalDivider(
+                                              color: Colors.grey.shade300,
+                                              thickness: 1,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.add,
+                                                  color: Colors.orange,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  'Top up PawPay',
+                                                  style: GoogleFonts.roboto(
+                                                      color:
+                                                          Colors.grey.shade800,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 Container(
                                     margin: EdgeInsets.only(
                                       bottom: 15,
@@ -262,7 +359,7 @@ class Home extends StatelessWidget {
                                     )),
                                 Container(
                                   height: height * 0.08,
-                                  width: width * 0.02,
+                                  width: width * 0.05,
                                   // color: Colors.black,
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -271,19 +368,27 @@ class Home extends StatelessWidget {
                                       itemCount: cards.length,
                                       itemBuilder: (context, index) {
                                         return InkWell(
-                                          onTap: () => Get.toNamed(
-                                              Routes.CATEGORY_PAGE,
-                                              arguments: cards[index]['value']),
+                                          onTap: () => {
+                                            if (cards[index]['value'] == 4)
+                                              {Get.toNamed(Routes.INFORMATION)}
+                                            else
+                                              {
+                                                Get.toNamed(
+                                                    Routes.CATEGORY_PAGE,
+                                                    arguments: cards[index]
+                                                        ['value'])
+                                              }
+                                          },
                                           child: Container(
                                             height: height * 0.08,
-                                            width: width * 0.16,
+                                            width: width * 0.17,
 
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                               color: Color(0xffF9813A),
                                             ),
-                                            margin: EdgeInsets.only(right: 15),
+                                            margin: EdgeInsets.only(right: 20),
                                             child: Center(
                                                 child: Column(
                                               mainAxisAlignment:
@@ -326,7 +431,7 @@ class Home extends StatelessWidget {
                                           child: Text(
                                             'Explore More',
                                             style: GoogleFonts.roboto(
-                                                fontSize: 16,
+                                                fontSize: 15,
                                                 fontWeight: FontWeight.w400),
                                           )),
                                       InkWell(

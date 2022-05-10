@@ -275,19 +275,41 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                     SizedBox(
                       height: 15,
                     ),
-                    Text('Choose Grooming Package'),
-                    SizedBox(
-                      height: 15,
+                    Obx(
+                      () => Container(
+                        height: height * 0.07,
+                        width: width,
+                        child: FlatButton(
+                          color: orderController.packageFlag == 'null'
+                              ? Colors.white
+                              : Colors.blue,
+                          onPressed: () {},
+                          child: orderController.packageFlag == "null"
+                              ? Text(
+                                  "Choose Grooming Package *",
+                                  style: GoogleFonts.roboto(
+                                      color: Colors.grey.shade700,
+                                      fontSize: 15),
+                                )
+                              : Text(
+                                  'Booking Date: ${controller.packageName}',
+                                  style: GoogleFonts.roboto(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  color: orderController.packageFlag == 'null'
+                                      ? Colors.grey.shade400
+                                      : Colors.grey.shade100,
+                                  width: 1,
+                                  style: BorderStyle.solid),
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                      ),
                     ),
-                    ElevatedButton(
-                        onPressed: () => {},
-                        child: Text('Package A ------- Rp. 500.000')),
-                    ElevatedButton(
-                        onPressed: () => {},
-                        child: Text('Package B ------- Rp. 400.000')),
-                    ElevatedButton(
-                        onPressed: () => {},
-                        child: Text('Package C ------- Rp. 200.000')),
+
                     // Obx(
                     //   () => InkWell(
                     //     onTap: () {

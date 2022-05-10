@@ -44,7 +44,7 @@ class ProfileView extends GetView<ProfileController> {
                 Column(
                   children: <Widget>[
                     Container(
-                      height: height * 0.25,
+                      height: height * 0.2,
                       width: width,
                       // color: Colors.blue,
                       child: SizedBox(
@@ -65,16 +65,15 @@ class ProfileView extends GetView<ProfileController> {
                                   height: height / 5.5,
                                   width: width * 0.35,
                                   // color: Colors.pink,
-                                  margin: EdgeInsets.only(
-                                      left: width * 0.33, top: height * 0.06),
+                                  margin: EdgeInsets.only(left: width * 0.33),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
                                         margin: EdgeInsets.only(
-                                            left: width * 0.01,
-                                            top: height * 0.01,
-                                            bottom: height * 0.005),
+                                          left: width * 0.01,
+                                          top: height * 0.01,
+                                        ),
                                         height: height / 3.5,
                                         width: width / 3,
                                         // color: Colors.blue,
@@ -99,8 +98,95 @@ class ProfileView extends GetView<ProfileController> {
                           ],
                         ),
                       ),
-                    )
+                    ),
+                    Container(
+                      height: height * 0.1,
+                      width: width * 0.8,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                              width: 0.8, color: Colors.grey.shade300),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.shade200,
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(1, 2))
+                          ]),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.monetization_on,
+                                    color: Colors.orange,
+                                    size: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Rp. 0',
+                                        style: GoogleFonts.roboto(
+                                            color: Colors.grey.shade800,
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 16),
+                                      ),
+                                      Text(
+                                        'PawPay Coins',
+                                        style: GoogleFonts.roboto(
+                                            color: Colors.grey.shade800,
+                                            fontWeight: FontWeight.w300,
+                                            fontSize: 12),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              VerticalDivider(
+                                color: Colors.grey.shade300,
+                                thickness: 1,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.add,
+                                    color: Colors.orange,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    'Top up PawPay',
+                                    style: GoogleFonts.roboto(
+                                        color: Colors.grey.shade800,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(0.5),
@@ -157,27 +243,8 @@ class ProfileView extends GetView<ProfileController> {
                                       }
                                     });
                               } else {
-                                return Column(
-                                  children: [
-                                    Center(
-                                        child: Text(
-                                      'Hallo ${data['name']}',
-                                      style: GoogleFonts.inter(
-                                          color: Colors.black,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    SizedBox(height: 5),
-                                    Center(
-                                      child: Text(
-                                        '(+62) ${data['phone']}',
-                                        style: GoogleFonts.inter(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    )
-                                  ],
+                                return SizedBox(
+                                  height: 1,
                                 );
                               }
                             } else {

@@ -5,6 +5,10 @@ import 'package:halopet_beta/app/routes/app_pages.dart';
 
 class GroomingOrderController extends GetxController {
   var date = "null".obs;
+  var packageFlag = 'null'.obs;
+
+  var packageName = 'null'.obs;
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final localStorage = GetStorage();
 

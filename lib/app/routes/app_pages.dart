@@ -28,6 +28,8 @@ import '../modules/history_detail/bindings/history_detail_binding.dart';
 import '../modules/history_detail/views/history_detail_view.dart';
 import '../modules/homepage/bindings/homepage_binding.dart';
 import '../modules/homepage/views/homepage_view.dart';
+import '../modules/information/bindings/information_binding.dart';
+import '../modules/information/views/information_view.dart';
 import '../modules/order/bindings/order_binding.dart';
 import '../modules/order/views/order_view.dart';
 import '../modules/order_detail/bindings/order_detail_binding.dart';
@@ -221,6 +223,11 @@ class AppPages {
       name: _Paths.PETSHOP_LIST,
       page: () => PetshopListView(),
       binding: PetshopListBinding(),
+    ),
+    GetPage(
+      name: _Paths.INFORMATION,
+      page: () => InformationView(),
+      binding: InformationBinding(),
     ),
   ];
 }
