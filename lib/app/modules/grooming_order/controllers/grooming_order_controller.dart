@@ -7,10 +7,10 @@ class GroomingOrderController extends GetxController {
   var date = "null".obs;
   var packageFlag = 'null'.obs;
 
-  var packageName = 'null'.obs;
+  var packageName = 'null';
+  var packageData = GetStorage().read('packageData');
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final localStorage = GetStorage();
 
   Future<DocumentSnapshot<Object?>> getPets(String petId) async {
     DocumentReference doc = firestore.collection("pets").doc(petId);
@@ -18,6 +18,7 @@ class GroomingOrderController extends GetxController {
   }
 
   void createOrder(String petType, String date) {
+    final localStorage = GetStorage();
     CollectionReference order = firestore.collection("order");
 
     try {

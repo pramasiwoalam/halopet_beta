@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:halopet_beta/app/modules/package_list/bindings/package_list_binding.dart';
+import 'package:halopet_beta/app/modules/package_list/views/package_list_view.dart';
 import 'package:halopet_beta/app/modules/rating/bindings/rating_binding.dart';
 import 'package:halopet_beta/app/modules/rating/views/rating_view.dart';
 import 'package:halopet_beta/app/modules/service_form/views/service_form_view.dart';
@@ -228,6 +230,11 @@ class AppPages {
       name: _Paths.INFORMATION,
       page: () => InformationView(),
       binding: InformationBinding(),
+    ),
+    GetPage(
+      name: _Paths.PACKAGE_LIST,
+      page: () => PackageListView(),
+      binding: PackageListBinding(),
     ),
   ];
 }

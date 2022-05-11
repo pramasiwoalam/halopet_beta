@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/modules/petshop_detail/views/petshop_detail_view.dart';
+import 'package:halopet_beta/app/routes/app_pages.dart';
 import 'package:intl/intl.dart';
 
 import '../controllers/grooming_order_controller.dart';
@@ -283,7 +284,9 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                           color: orderController.packageFlag == 'null'
                               ? Colors.white
                               : Colors.blue,
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(Routes.PACKAGE_LIST);
+                          },
                           child: orderController.packageFlag == "null"
                               ? Text(
                                   "Choose Grooming Package *",
@@ -292,7 +295,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                       fontSize: 15),
                                 )
                               : Text(
-                                  'Booking Date: ${controller.packageName}',
+                                  'Package Type: ${controller.packageName}',
                                   style: GoogleFonts.roboto(
                                       color: Colors.white,
                                       fontSize: 14,
