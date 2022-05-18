@@ -12,6 +12,7 @@ import 'package:halopet_beta/app/modules/favorite/views/favorite_view.dart';
 import 'package:halopet_beta/app/modules/order/views/order_view.dart';
 import 'package:halopet_beta/app/modules/profile/views/profile_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
+import 'package:money_formatter/money_formatter.dart';
 
 import '../controllers/homepage_controller.dart';
 
@@ -112,10 +113,10 @@ class Home extends StatelessWidget {
   final localStorage = GetStorage();
 
   var cards = [
-    {'name': 'Grooming', 'value': 1},
-    {'name': 'Vet', 'value': 2},
-    {'name': 'Pet Hotel', 'value': 3},
-    {'name': 'Pet Info', 'value': 4},
+    {'name': 'assets/images/6.png', 'value': 1},
+    {'name': 'assets/images/7.png', 'value': 2},
+    {'name': 'assets/images/8.png', 'value': 3},
+    {'name': 'assets/images/9.png', 'value': 4},
   ];
 
   @override
@@ -137,6 +138,22 @@ class Home extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 var data = snapshot.data!.data() as Map<String, dynamic>;
+                if (data['pets'] == null) {
+                  localStorage.write('userPet', 0);
+                } else {
+                  localStorage.write('userPet', 1);
+                }
+                int balance = data['balance'];
+                MoneyFormatter fmf = MoneyFormatter(
+                    amount: balance.roundToDouble(),
+                    settings: MoneyFormatterSettings(
+                      symbol: 'Rp.',
+                      thousandSeparator: '.',
+                      decimalSeparator: ',',
+                      symbolAndNumberSeparator: ' ',
+                    ));
+                MoneyFormatterOutput fo = fmf.output;
+                localStorage.write('balance', data['balance']);
                 if (data['favoriteId'] != null) {
                   localStorage.write('favArr', data['favoriteId']);
                 } else {
@@ -278,7 +295,7 @@ class Home extends StatelessWidget {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Rp. 0',
+                                                      "${fo.symbolOnLeft}",
                                                       style: GoogleFonts.roboto(
                                                           color: Colors
                                                               .grey.shade800,
@@ -306,25 +323,30 @@ class Home extends StatelessWidget {
                                               color: Colors.grey.shade300,
                                               thickness: 1,
                                             ),
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.add,
-                                                  color: Colors.orange,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  'Top up PawPay',
-                                                  style: GoogleFonts.roboto(
-                                                      color:
-                                                          Colors.grey.shade800,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 14),
-                                                ),
-                                              ],
+                                            InkWell(
+                                              onTap: () => {
+                                                Get.toNamed(Routes.TOPUP),
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.add,
+                                                    color: Colors.orange,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    'Top up PawPay',
+                                                    style: GoogleFonts.roboto(
+                                                        color: Colors
+                                                            .grey.shade800,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
                                             )
                                           ],
                                         ),
@@ -358,8 +380,8 @@ class Home extends StatelessWidget {
                                       },
                                     )),
                                 Container(
-                                  height: height * 0.08,
-                                  width: width * 0.05,
+                                  height: height * 0.13,
+                                  width: width * 0.035,
                                   // color: Colors.black,
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -379,40 +401,26 @@ class Home extends StatelessWidget {
                                                         ['value'])
                                               }
                                           },
-                                          child: Container(
-                                            height: height * 0.08,
-                                            width: width * 0.17,
-
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              color: Color(0xffF9813A),
-                                            ),
-                                            margin: EdgeInsets.only(right: 20),
-                                            child: Center(
-                                                child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.pets,
-                                                  color: Colors.white,
+                                          child: Stack(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(3),
+                                                child: Image(
+                                                  height: height * 0.6,
+                                                  width: width * 0.26,
+                                                  image: AssetImage(
+                                                      "${cards[index]['name']}"),
+                                                  fit: BoxFit.fill,
                                                 ),
-                                                SizedBox(height: 5),
-                                                Text(
-                                                  '${cards[index]['name']}',
-                                                  style: GoogleFonts.roboto(
-                                                      color: Colors.white,
-                                                      fontSize: 10),
-                                                ),
-                                              ],
-                                            )),
-
-                                            // child: Align(
-                                            //   alignment: Alignment.center,
-                                            //   child: Text('${cards[index]['name']}'),
-                                            // ),
+                                              ),
+                                            ],
                                           ),
+
+                                          // child: Align(
+                                          //   alignment: Alignment.center,
+                                          //   child: Text('${cards[index]['name']}'),
+                                          // ),
                                         );
                                       }),
                                 ),

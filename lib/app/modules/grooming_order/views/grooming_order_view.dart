@@ -372,7 +372,8 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                     ElevatedButton(
                         onPressed: () => orderController.createOrder(
                             typeController.text,
-                            orderController.date.toString()),
+                            orderController.date.toString(),
+                            localStorage.read('packageId')),
                         child: Text("Request Booking"))
                   ],
                 ),

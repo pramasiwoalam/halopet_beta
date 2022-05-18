@@ -48,6 +48,7 @@ class PackageListView extends GetView<PackageListController> {
                           Get.toNamed(Routes.CREATE_ORDER,
                               arguments: 'Grooming'),
                           localStorage.write('packageData', dataMap),
+                          localStorage.write('packageId', data[index].id),
                           groomingController.packageFlag = '1'.obs,
                           groomingController.packageName = dataMap['name']
                         },

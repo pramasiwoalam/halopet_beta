@@ -6,6 +6,8 @@ import 'package:halopet_beta/app/modules/rating/views/rating_view.dart';
 import 'package:halopet_beta/app/modules/service_form/views/service_form_view.dart';
 import 'package:halopet_beta/app/modules/service_list/bindings/service_list_binding.dart';
 import 'package:halopet_beta/app/modules/service_list/views/service_list_view.dart';
+import 'package:halopet_beta/app/modules/topup/bindings/topup_binding.dart';
+import 'package:halopet_beta/app/modules/topup/views/topup_view.dart';
 import '../modules/add_petshop/bindings/add_petshop_binding.dart';
 import '../modules/add_petshop/views/add_petshop_view.dart';
 import '../modules/admin_home/bindings/admin_home_binding.dart';
@@ -235,6 +237,11 @@ class AppPages {
       name: _Paths.PACKAGE_LIST,
       page: () => PackageListView(),
       binding: PackageListBinding(),
+    ),
+    GetPage(
+      name: _Paths.TOPUP,
+      page: () => TopUpView(),
+      binding: TopUpBinding(),
     ),
   ];
 }

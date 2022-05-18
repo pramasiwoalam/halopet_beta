@@ -9,6 +9,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/controllers/auth_controller.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
+import 'package:money_formatter/money_formatter.dart';
 
 import '../controllers/profile_controller.dart';
 
@@ -99,90 +100,121 @@ class ProfileView extends GetView<ProfileController> {
                         ),
                       ),
                     ),
-                    Container(
-                      height: height * 0.1,
-                      width: width * 0.8,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              width: 0.8, color: Colors.grey.shade300),
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.shade200,
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: Offset(1, 2))
-                          ]),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.monetization_on,
-                                    color: Colors.orange,
-                                    size: 20,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                    FutureBuilder<DocumentSnapshot<Object?>>(
+                        future: profileController.getUser(userId),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            var data =
+                                snapshot.data!.data() as Map<String, dynamic>;
+                            int balance = data['balance'];
+                            MoneyFormatter fmf = MoneyFormatter(
+                                amount: balance.roundToDouble(),
+                                settings: MoneyFormatterSettings(
+                                  symbol: 'Rp.',
+                                  thousandSeparator: '.',
+                                  decimalSeparator: ',',
+                                  symbolAndNumberSeparator: ' ',
+                                ));
+                            MoneyFormatterOutput fo = fmf.output;
+                            return Container(
+                              height: height * 0.1,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      width: 0.8, color: Colors.grey.shade300),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.shade200,
+                                        spreadRadius: 1,
+                                        blurRadius: 1,
+                                        offset: Offset(1, 2))
+                                  ]),
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        'Rp. 0',
-                                        style: GoogleFonts.roboto(
-                                            color: Colors.grey.shade800,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 16),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.monetization_on,
+                                            color: Colors.orange,
+                                            size: 20,
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "${fo.symbolOnLeft}",
+                                                style: GoogleFonts.roboto(
+                                                    color: Colors.grey.shade800,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 16),
+                                              ),
+                                              Text(
+                                                'PawPay Coins',
+                                                style: GoogleFonts.roboto(
+                                                    color: Colors.grey.shade800,
+                                                    fontWeight: FontWeight.w300,
+                                                    fontSize: 12),
+                                              )
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        'PawPay Coins',
-                                        style: GoogleFonts.roboto(
-                                            color: Colors.grey.shade800,
-                                            fontWeight: FontWeight.w300,
-                                            fontSize: 12),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      VerticalDivider(
+                                        color: Colors.grey.shade300,
+                                        thickness: 1,
+                                      ),
+                                      InkWell(
+                                        onTap: () => {
+                                          Get.toNamed(Routes.TOPUP),
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.add,
+                                              color: Colors.orange,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              'Top up PawPay',
+                                              style: GoogleFonts.roboto(
+                                                  color: Colors.grey.shade800,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14),
+                                            ),
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
-                                ],
+                                ),
                               ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              VerticalDivider(
-                                color: Colors.grey.shade300,
-                                thickness: 1,
-                              ),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.add,
-                                    color: Colors.orange,
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    'Top up PawPay',
-                                    style: GoogleFonts.roboto(
-                                        color: Colors.grey.shade800,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                            );
+                          } else {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        }),
                   ],
                 ),
                 SizedBox(
@@ -201,7 +233,7 @@ class ProfileView extends GetView<ProfileController> {
                               var data =
                                   snapshot.data!.data() as Map<String, dynamic>;
                               var petshopId = data['petshopId'];
-                              print('petshopId: $petshopId');
+
                               if (data['role'] == 'Seller') {
                                 return FutureBuilder<DocumentSnapshot<Object?>>(
                                     future: profileController

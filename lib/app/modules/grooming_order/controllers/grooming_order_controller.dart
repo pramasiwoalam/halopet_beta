@@ -17,7 +17,7 @@ class GroomingOrderController extends GetxController {
     return doc.get();
   }
 
-  void createOrder(String petType, String date) {
+  void createOrder(String petType, String date, String packageId) {
     final localStorage = GetStorage();
     CollectionReference order = firestore.collection("order");
 
@@ -29,9 +29,10 @@ class GroomingOrderController extends GetxController {
         "userId": localStorage.read('currentUserId'),
         "petshopId": localStorage.read('petshopId'),
         "status": "Waiting for approval",
-        "message": ""
+        "message": "",
+        "packageId": packageId
       });
-      Get.toNamed(Routes.ORDER);
+      Get.toNamed(Routes.HOMEPAGE);
     } catch (e) {
       print(e);
     }

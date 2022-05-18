@@ -23,7 +23,10 @@ class ServiceListController extends GetxController {
         "petHotelService": localStorage.read('hotel'),
         "vetServices": localStorage.read('vet'),
         'petshopOwner': userId,
-      });
+      }).then((value) => users.doc(userId).update({
+            'petshopId': localStorage.read('tempPetshopId'),
+            'petshopOwner': true
+          }));
       Get.back();
     } catch (e) {
       print(e);

@@ -257,6 +257,7 @@ class ShopInfo extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
+
     return Container(
       height: height,
       width: width,
@@ -405,6 +406,7 @@ class Service extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     var petshopId = localStorage.read('petshopId');
+    var userPetStatus = localStorage.read('userPet');
 
     return StreamBuilder<QuerySnapshot<Object?>>(
         stream: controller.getServiceByPetshop(petshopId),
@@ -444,45 +446,70 @@ class Service extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () => {
-                                AwesomeDialog(
-                                  context: context,
-                                  padding: EdgeInsets.all(20),
-                                  dialogType: DialogType.NO_HEADER,
-                                  animType: AnimType.BOTTOMSLIDE,
-                                  title: 'Confirmation',
-                                  desc:
-                                      'Are you sure want to create this order?.',
-                                  btnCancelOnPress: () => {},
-                                  btnCancelColor: Colors.grey.shade200,
-                                  btnOkColor: Colors.green.shade200,
-                                  btnOkText: 'Yes',
-                                  buttonsTextStyle: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.grey.shade800),
-                                  btnOkOnPress: () {
-                                    localStorage.write(
-                                        'selectedServiceId', data[index].id);
-                                    print(
-                                        localStorage.read('selectedServiceId'));
-                                    Get.toNamed(Routes.CHOOSE_PET);
-
+                                if (userPetStatus == 0)
+                                  {
                                     AwesomeDialog(
-                                      padding: EdgeInsets.all(20),
                                       context: context,
-                                      dialogType: DialogType.INFO_REVERSED,
+                                      padding: EdgeInsets.all(20),
+                                      dialogType: DialogType.WARNING,
                                       animType: AnimType.BOTTOMSLIDE,
-                                      title: 'Choose your pet.',
+                                      title: 'Warning',
                                       desc:
-                                          'Choose who will be in service. Make sure you already registered your pet.',
+                                          "You don't have any pet registered. Please register your pet.",
+                                      btnCancelOnPress: () => {},
+                                      btnCancelColor: Colors.grey.shade200,
+                                      btnOkColor: Colors.green.shade200,
                                       btnOkText: 'Ok',
-                                      btnOkColor: Colors.grey.shade300,
                                       buttonsTextStyle: GoogleFonts.roboto(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.grey.shade800),
-                                      btnOkOnPress: () {},
-                                    ).show();
-                                  },
-                                ).show()
+                                      btnOkOnPress: () {
+                                        Get.toNamed(Routes.PET_LIST);
+                                      },
+                                    ).show()
+                                  }
+                                else
+                                  {
+                                    AwesomeDialog(
+                                      context: context,
+                                      padding: EdgeInsets.all(20),
+                                      dialogType: DialogType.NO_HEADER,
+                                      animType: AnimType.BOTTOMSLIDE,
+                                      title: 'Confirmation',
+                                      desc:
+                                          'Are you sure want to create this order?.',
+                                      btnCancelOnPress: () => {},
+                                      btnCancelColor: Colors.grey.shade200,
+                                      btnOkColor: Colors.green.shade200,
+                                      btnOkText: 'Yes',
+                                      buttonsTextStyle: GoogleFonts.roboto(
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.grey.shade800),
+                                      btnOkOnPress: () {
+                                        localStorage.write('selectedServiceId',
+                                            data[index].id);
+                                        print(localStorage
+                                            .read('selectedServiceId'));
+                                        Get.toNamed(Routes.CHOOSE_PET);
+
+                                        AwesomeDialog(
+                                          padding: EdgeInsets.all(20),
+                                          context: context,
+                                          dialogType: DialogType.INFO_REVERSED,
+                                          animType: AnimType.BOTTOMSLIDE,
+                                          title: 'Choose your pet.',
+                                          desc:
+                                              'Choose who will be in service. Make sure you already registered your pet.',
+                                          btnOkText: 'Ok',
+                                          btnOkColor: Colors.grey.shade300,
+                                          buttonsTextStyle: GoogleFonts.roboto(
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.grey.shade800),
+                                          btnOkOnPress: () {},
+                                        ).show();
+                                      },
+                                    ).show()
+                                  }
                               },
                               child: Container(
                                 width: width * 0.65,

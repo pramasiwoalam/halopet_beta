@@ -36,6 +36,7 @@ abstract class Routes {
   static const PETSHOP_LIST = _Paths.PETSHOP_LIST;
   static const INFORMATION = _Paths.INFORMATION;
   static const PACKAGE_LIST = _Paths.PACKAGE_LIST;
+  static const TOPUP = _Paths.TOPUP;
 }
 
 abstract class _Paths {
@@ -73,4 +74,5 @@ abstract class _Paths {
   static const PETSHOP_LIST = '/petshop-list';
   static const INFORMATION = '/information';
   static const PACKAGE_LIST = '/package-list';
+  static const TOPUP = '/topup';
 }

@@ -83,7 +83,8 @@ class AuthController extends GetxController {
         "email": email,
         "userId": uid,
         "role": "Member",
-        "petshopOwner": false
+        "petshopOwner": false,
+        "balance": 0
       });
 
       // AwesomeDialog(
