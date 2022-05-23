@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
@@ -17,20 +18,30 @@ class GroomingOrderController extends GetxController {
     return doc.get();
   }
 
-  void createOrder(String petType, String date, String packageId) {
+  Future<DocumentSnapshot<Object?>> getPackage(String packageId) async {
+    DocumentReference doc = firestore.collection("package").doc(packageId);
+    return doc.get();
+  }
+
+  void createOrder(String petId, String date, String packageId,
+      String serviceType, double charge) {
     final localStorage = GetStorage();
     CollectionReference order = firestore.collection("order");
 
     try {
       order.add({
         "bookingType": "Grooming",
-        "petType": petType,
+        "petId": localStorage.read('petId'),
+        "orderCreated":
+            formatDate(DateTime.now(), [MM, ' ', dd, ',', ' ', yyyy]),
         "orderDate": date,
         "userId": localStorage.read('currentUserId'),
         "petshopId": localStorage.read('petshopId'),
         "status": "Waiting for approval",
         "message": "",
-        "packageId": packageId
+        "packageId": packageId,
+        "serviceType": serviceType,
+        "charge": charge
       });
       Get.toNamed(Routes.HOMEPAGE);
     } catch (e) {

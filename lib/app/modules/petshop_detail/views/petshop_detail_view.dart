@@ -285,7 +285,7 @@ class ShopInfo extends StatelessWidget {
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                   style: GoogleFonts.inter(
                       fontSize: 13,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w300,
                       color: Colors.black)),
               const SizedBox(
                 height: 15,
@@ -307,7 +307,7 @@ class ShopInfo extends StatelessWidget {
               Text('Grooming Services',
                   style: GoogleFonts.inter(
                       fontSize: 13,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w300,
                       color: Colors.black)),
               const SizedBox(
                 height: 2,
@@ -315,7 +315,7 @@ class ShopInfo extends StatelessWidget {
               Text('Pet Hotel Services',
                   style: GoogleFonts.inter(
                       fontSize: 13,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w300,
                       color: Colors.black)),
               const SizedBox(
                 height: 2,
@@ -323,7 +323,7 @@ class ShopInfo extends StatelessWidget {
               Text('Vet Available',
                   style: GoogleFonts.inter(
                       fontSize: 13,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w300,
                       color: Colors.black)),
               const SizedBox(
                 height: 15,
@@ -345,7 +345,7 @@ class ShopInfo extends StatelessWidget {
               Text('Jl. Gang Pori No.99',
                   style: GoogleFonts.inter(
                       fontSize: 13,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w300,
                       color: Colors.black)),
               const SizedBox(
                 height: 3,
@@ -353,7 +353,7 @@ class ShopInfo extends StatelessWidget {
               Text('Pisangan, Jakarta Timur',
                   style: GoogleFonts.inter(
                       fontSize: 13,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w300,
                       color: Colors.black)),
               const SizedBox(
                 height: 15,
@@ -375,7 +375,7 @@ class ShopInfo extends StatelessWidget {
               Text('Monday - Saturday',
                   style: GoogleFonts.inter(
                       fontSize: 13,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w300,
                       color: Colors.black)),
               const SizedBox(
                 height: 3,
@@ -383,7 +383,7 @@ class ShopInfo extends StatelessWidget {
               Text('09.00 - 21.00',
                   style: GoogleFonts.inter(
                       fontSize: 13,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w300,
                       color: Colors.black)),
               const SizedBox(
                 height: 5,
@@ -486,6 +486,8 @@ class Service extends StatelessWidget {
                                           fontWeight: FontWeight.w600,
                                           color: Colors.grey.shade800),
                                       btnOkOnPress: () {
+                                        localStorage.write('serviceType',
+                                            dataMap['serviceName']);
                                         localStorage.write('selectedServiceId',
                                             data[index].id);
                                         print(localStorage

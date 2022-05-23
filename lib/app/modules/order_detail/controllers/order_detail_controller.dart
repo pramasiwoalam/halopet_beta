@@ -9,6 +9,11 @@ class OrderDetailController extends GetxController {
     return doc.get();
   }
 
+  Future<DocumentSnapshot<Object?>> getPackage(String packageId) async {
+    DocumentReference doc = firestore.collection("package").doc(packageId);
+    return doc.get();
+  }
+
   Future<DocumentSnapshot<Object?>> getPetshopByOrder(String petshopId) async {
     print(petshopId);
     DocumentReference doc = firestore.collection("petshop").doc(petshopId);

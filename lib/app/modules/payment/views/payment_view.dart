@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:money_formatter/money_formatter.dart';
 
 import '../controllers/payment_controller.dart';
 
@@ -37,6 +38,16 @@ class PaymentView extends GetView<PaymentController> {
                 var currentUserId = localStorage.read('currentUserId');
                 var orderId = Get.arguments;
                 localStorage.write('petshopId', Get.arguments);
+                double charge = data['charge'];
+                MoneyFormatter fmf = MoneyFormatter(
+                    amount: charge,
+                    settings: MoneyFormatterSettings(
+                      symbol: 'Rp.',
+                      thousandSeparator: '.',
+                      decimalSeparator: ',',
+                      symbolAndNumberSeparator: ' ',
+                    ));
+                MoneyFormatterOutput fo = fmf.output;
                 return Stack(
                   children: [
                     Container(
@@ -100,7 +111,7 @@ class PaymentView extends GetView<PaymentController> {
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 15,
                                                   color: Colors.white)),
-                                          Text('TR0018ASDJ2',
+                                          Text(orderId,
                                               style: GoogleFonts.roboto(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 16,
@@ -117,7 +128,7 @@ class PaymentView extends GetView<PaymentController> {
                                                   fontWeight: FontWeight.w300,
                                                   fontSize: 15,
                                                   color: Colors.white)),
-                                          Text('Rp. 100.000',
+                                          Text(fo.symbolOnLeft,
                                               style: GoogleFonts.roboto(
                                                   fontWeight: FontWeight.w800,
                                                   fontSize: 16,
@@ -153,20 +164,19 @@ class PaymentView extends GetView<PaymentController> {
                                       color: Colors.white)),
                               unSelectedColor: Colors.white,
                               buttonLables: const [
+                                "PawPay Coins",
                                 "Transfer Manual",
                                 "Virtual Account",
-                                "Digital Wallet",
                               ],
                               buttonValues: const [
+                                "ewallet",
                                 "transfer",
                                 "virtual",
-                                "ewallet",
                               ],
                               radioButtonValue: (value) {
                                 controller.paymentType.value = value.toString();
-                                print(controller.paymentType);
                               },
-                              defaultSelected: "transfer",
+                              defaultSelected: "ewallet",
                               unSelectedBorderColor: Colors.grey.shade100,
                               selectedBorderColor: Color(0xffF9813A),
                               spacing: 1,
@@ -181,7 +191,112 @@ class PaymentView extends GetView<PaymentController> {
                             ),
                             Obx(
                               () => controller.paymentType.value == 'ewallet'
-                                  ? Text('wallet')
+                                  ? Container(
+                                      margin: EdgeInsets.only(top: 15),
+                                      height: height * 0.15,
+                                      width: width * 0.9,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              width: 0.8,
+                                              color: Colors.grey.shade300),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey.shade200,
+                                                spreadRadius: 1,
+                                                blurRadius: 1,
+                                                offset: Offset(1, 2))
+                                          ]),
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.monetization_on,
+                                                    color: Colors.orange,
+                                                    size: 20,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        fo.symbolOnLeft,
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade800,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                fontSize: 16),
+                                                      ),
+                                                      Text(
+                                                        'PawPay Coins',
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade800,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w300,
+                                                                fontSize: 12),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              VerticalDivider(
+                                                color: Colors.grey.shade300,
+                                                thickness: 1,
+                                              ),
+                                              InkWell(
+                                                onTap: () => {},
+                                                child: Row(
+                                                  children: [
+                                                    Icon(
+                                                      Icons.add,
+                                                      color: Colors.orange,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      'Top up PawPay',
+                                                      style: GoogleFonts.roboto(
+                                                          color: Colors
+                                                              .grey.shade800,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
                                   : controller.paymentType.value == 'virtual'
                                       ? Center(
                                           child: Container(

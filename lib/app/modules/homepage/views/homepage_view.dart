@@ -295,7 +295,7 @@ class Home extends StatelessWidget {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      "${fo.symbolOnLeft}",
+                                                      fo.symbolOnLeft,
                                                       style: GoogleFonts.roboto(
                                                           color: Colors
                                                               .grey.shade800,
