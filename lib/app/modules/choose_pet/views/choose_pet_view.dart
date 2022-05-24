@@ -81,6 +81,8 @@ class ChoosePetView extends GetView<ChoosePetController> {
                                           Get.toNamed(Routes.CREATE_ORDER,
                                               arguments: 'Grooming'),
                                           localStorage.write(
+                                              'deliveryCharge', null),
+                                          localStorage.write(
                                               'petId', data[index].id)
                                         },
                                         child: Container(

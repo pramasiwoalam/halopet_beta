@@ -10,6 +10,7 @@ class GroomingOrderController extends GetxController {
 
   var packageName = 'null';
   var packageData = GetStorage().read('packageData');
+  var status = '0';
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 

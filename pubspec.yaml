@@ -33,6 +33,9 @@ dependencies:
   carousel_slider: ^4.0.0
   money_formatter: ^0.0.3
   date_format: ^2.0.6
+  flutter_switch: ^0.3.2
+  toggle_switch: ^2.0.1
+  flutter_picker: ^2.0.3
   
 
 dev_dependencies: 

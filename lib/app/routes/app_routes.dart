@@ -37,6 +37,7 @@ abstract class Routes {
   static const INFORMATION = _Paths.INFORMATION;
   static const PACKAGE_LIST = _Paths.PACKAGE_LIST;
   static const TOPUP = _Paths.TOPUP;
+  static const DELIVERY_LIST = _Paths.DELIVERY;
 }
 
 abstract class _Paths {
@@ -75,4 +76,5 @@ abstract class _Paths {
   static const INFORMATION = '/information';
   static const PACKAGE_LIST = '/package-list';
   static const TOPUP = '/topup';
+  static const DELIVERY = '/delivery-list';
 }

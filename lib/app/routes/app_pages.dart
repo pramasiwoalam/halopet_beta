@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:halopet_beta/app/modules/delivery_list/bindings/delivery_list_binding.dart';
+import 'package:halopet_beta/app/modules/delivery_list/views/delivery_list_view.dart';
 import 'package:halopet_beta/app/modules/package_list/bindings/package_list_binding.dart';
 import 'package:halopet_beta/app/modules/package_list/views/package_list_view.dart';
 import 'package:halopet_beta/app/modules/rating/bindings/rating_binding.dart';
@@ -242,6 +244,11 @@ class AppPages {
       name: _Paths.TOPUP,
       page: () => TopUpView(),
       binding: TopUpBinding(),
+    ),
+    GetPage(
+      name: _Paths.DELIVERY,
+      page: () => DeliveryListView(),
+      binding: DeliveryListBinding(),
     ),
   ];
 }
