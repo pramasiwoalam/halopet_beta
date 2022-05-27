@@ -33,9 +33,66 @@ class ProfileView extends GetView<ProfileController> {
           'Profile',
           style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
         )),
+        leading: Icon(Icons.abc, color: Color(0xffF9813A)),
         centerTitle: true,
         backgroundColor: Color(0xffF9813A),
         elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 5.0),
+            child: FlatButton(
+              minWidth: 5,
+              onPressed: () => Get.toNamed(Routes.NOTIFICATION_LIST),
+              child: Stack(
+                children: [
+                  const Icon(
+                    Icons.notifications,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                  StreamBuilder<QuerySnapshot<Object?>>(
+                      stream: controller.getUnreadNotification(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.active) {
+                          var data = snapshot.data!.docs;
+                          var unreadNotification = '';
+                          if (data.length == 0) {
+                            unreadNotification = 0.toString();
+                          } else {
+                            unreadNotification = data.length.toString();
+                          }
+                          return Container(
+                              width: 30,
+                              height: 30,
+                              alignment: Alignment.topRight,
+                              margin: EdgeInsets.only(top: 5),
+                              child: Container(
+                                width: 16,
+                                height: 16,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.red,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(0.0),
+                                  child: Center(
+                                      child: Text(
+                                    '$unreadNotification',
+                                    style: TextStyle(
+                                        fontSize: 9.5, color: Colors.white),
+                                  )),
+                                ),
+                              ));
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+                      })
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       body: StreamBuilder<User?>(
           stream: authController.streamUser,
@@ -391,40 +448,40 @@ class ProfileView extends GetView<ProfileController> {
                                             Get.toNamed(Routes.FAVORITE),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 30, vertical: 5),
-                                      child: FlatButton(
-                                        padding: EdgeInsets.all(15),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        color: Colors.grey.shade100,
-                                        height: height * 0.08,
-                                        child: Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.favorite,
-                                              color: Color(0xffF9813A),
-                                            ),
-                                            const SizedBox(
-                                              width: 30,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                "Favorite Petshop",
-                                                style: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                            ),
-                                            Icon(Icons.arrow_forward_ios),
-                                          ],
-                                        ),
-                                        onPressed: () =>
-                                            Get.toNamed(Routes.FAVORITE),
-                                      ),
-                                    ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.symmetric(
+                                    //       horizontal: 30, vertical: 5),
+                                    //   child: FlatButton(
+                                    //     padding: EdgeInsets.all(15),
+                                    //     shape: RoundedRectangleBorder(
+                                    //         borderRadius:
+                                    //             BorderRadius.circular(15)),
+                                    //     color: Colors.grey.shade100,
+                                    //     height: height * 0.08,
+                                    //     child: Row(
+                                    //       children: [
+                                    //         const Icon(
+                                    //           Icons.notifications,
+                                    //           color: Color(0xffF9813A),
+                                    //         ),
+                                    //         const SizedBox(
+                                    //           width: 30,
+                                    //         ),
+                                    //         Expanded(
+                                    //           child: Text(
+                                    //             "Notification Center",
+                                    //             style: GoogleFonts.inter(
+                                    //                 fontWeight:
+                                    //                     FontWeight.w400),
+                                    //           ),
+                                    //         ),
+                                    //         Icon(Icons.arrow_forward_ios),
+                                    //       ],
+                                    //     ),
+                                    //     onPressed: () =>
+                                    //         Get.toNamed(Routes.FAVORITE),
+                                    //   ),
+                                    // ),
                                   ],
                                 );
                               } else if (data['role'] == 'Member' &&

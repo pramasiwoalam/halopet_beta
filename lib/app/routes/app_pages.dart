@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:halopet_beta/app/modules/delivery_list/bindings/delivery_list_binding.dart';
 import 'package:halopet_beta/app/modules/delivery_list/views/delivery_list_view.dart';
+import 'package:halopet_beta/app/modules/notification_list/bindings/notification_list_binding.dart';
 import 'package:halopet_beta/app/modules/package_list/bindings/package_list_binding.dart';
 import 'package:halopet_beta/app/modules/package_list/views/package_list_view.dart';
 import 'package:halopet_beta/app/modules/rating/bindings/rating_binding.dart';
@@ -36,6 +37,9 @@ import '../modules/homepage/bindings/homepage_binding.dart';
 import '../modules/homepage/views/homepage_view.dart';
 import '../modules/information/bindings/information_binding.dart';
 import '../modules/information/views/information_view.dart';
+import '../modules/notification_detail/bindings/notification_detail_binding.dart';
+import '../modules/notification_detail/views/notification_detail_view.dart';
+import '../modules/notification_list/views/notification_list_view.dart';
 import '../modules/order/bindings/order_binding.dart';
 import '../modules/order/views/order_view.dart';
 import '../modules/order_detail/bindings/order_detail_binding.dart';
@@ -249,6 +253,16 @@ class AppPages {
       name: _Paths.DELIVERY,
       page: () => DeliveryListView(),
       binding: DeliveryListBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATION_LIST,
+      page: () => NotificationListView(),
+      binding: NotificationListBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATION_DETAIL,
+      page: () => NotificationDetailView(),
+      binding: NotificationDetailBinding(),
     ),
   ];
 }

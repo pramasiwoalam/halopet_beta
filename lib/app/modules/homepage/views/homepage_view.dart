@@ -191,9 +191,10 @@ class Home extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
+                                              const Text(
                                                 'Hello,',
-                                                style: GoogleFonts.inter(
+                                                style: TextStyle(
+                                                    fontFamily: 'SanFrancisco',
                                                     color: Color(0xffF9813A),
                                                     fontSize: 17,
                                                     fontWeight:
@@ -202,8 +203,9 @@ class Home extends StatelessWidget {
                                               ),
                                               Text(
                                                 '${data["name"]}',
-                                                style: GoogleFonts.inter(
-                                                    fontSize: 16,
+                                                style: TextStyle(
+                                                    fontFamily: 'SanFrancisco',
+                                                    fontSize: 17,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -211,17 +213,19 @@ class Home extends StatelessWidget {
                                                 padding: const EdgeInsets.only(
                                                     top: 5),
                                                 child: Row(
-                                                  children: [
-                                                    const Icon(
+                                                  children: const [
+                                                    Icon(
                                                       Icons.location_pin,
                                                       size: 17,
                                                     ),
-                                                    const SizedBox(
+                                                    SizedBox(
                                                       width: 3,
                                                     ),
                                                     Text(
                                                       'Jakarta, Indonesia',
-                                                      style: GoogleFonts.inter(
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w400),
@@ -438,9 +442,10 @@ class Home extends StatelessWidget {
                                           alignment: Alignment.centerLeft,
                                           child: Text(
                                             'Explore More',
-                                            style: GoogleFonts.roboto(
+                                            style: TextStyle(
                                                 fontSize: 15,
-                                                fontWeight: FontWeight.w400),
+                                                fontFamily: 'SanFrancisco',
+                                                fontWeight: FontWeight.w600),
                                           )),
                                       InkWell(
                                         onTap: () =>
@@ -448,10 +453,12 @@ class Home extends StatelessWidget {
                                         child: Align(
                                             alignment: Alignment.centerRight,
                                             child: Text(
-                                              'See All',
-                                              style: GoogleFonts.inter(
+                                              'View All',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Reguler',
                                                   fontSize: 13,
-                                                  color: Colors.lightBlue,
+                                                  color: Color(0xffF9813A),
                                                   fontWeight: FontWeight.w500),
                                             )),
                                       ),
@@ -464,11 +471,12 @@ class Home extends StatelessWidget {
                                       if (snapshot.connectionState ==
                                           ConnectionState.active) {
                                         var data = snapshot.data!.docs;
+
                                         return Padding(
                                           padding:
                                               const EdgeInsets.only(left: 15),
                                           child: Container(
-                                            height: height * 0.28,
+                                            height: height * 0.32,
                                             child: ListView.builder(
                                                 // physics: ClampingScrollPhysics(),
                                                 scrollDirection:
@@ -476,6 +484,9 @@ class Home extends StatelessWidget {
                                                 shrinkWrap: true,
                                                 itemCount: data.length,
                                                 itemBuilder: (context, index) {
+                                                  var dataMap = data[index]
+                                                          .data()
+                                                      as Map<String, dynamic>;
                                                   return Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -490,24 +501,28 @@ class Home extends StatelessWidget {
                                                             data[index].id)
                                                       },
                                                       child: Container(
-                                                        width: width * 0.42,
-                                                        height: height * 0.1,
+                                                        width: width * 0.5,
+                                                        height: height * 0.45,
                                                         decoration:
                                                             BoxDecoration(
-                                                          color: const Color
-                                                                  .fromARGB(255,
-                                                              245, 245, 245),
+                                                          color: Colors.white,
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(5),
+                                                                  .circular(15),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade200,
+                                                                spreadRadius: 3,
+                                                                blurRadius: 5,
+                                                                offset: Offset(
+                                                                    0, 4))
+                                                          ],
                                                           border: Border.all(
                                                               width: 1,
-                                                              color: const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  230,
-                                                                  230,
-                                                                  230)),
+                                                              color: Colors.grey
+                                                                  .shade200),
                                                         ),
                                                         child: Stack(
                                                           alignment: Alignment
@@ -518,9 +533,9 @@ class Home extends StatelessWidget {
                                                               child: Container(
                                                                 // color: Colors.red,
                                                                 height: height *
-                                                                    0.1,
+                                                                    0.094,
                                                                 width: width *
-                                                                    0.37,
+                                                                    0.43,
                                                                 decoration:
                                                                     BoxDecoration(
                                                                         // color: Colors.blue,
@@ -537,19 +552,54 @@ class Home extends StatelessWidget {
                                                                         CrossAxisAlignment
                                                                             .start,
                                                                     children: [
-                                                                      Text(
-                                                                        '${(data[index].data() as Map<String, dynamic>)["petshopName"]}',
-                                                                        style: GoogleFonts.roboto(
-                                                                            fontWeight:
-                                                                                FontWeight.w600,
-                                                                            fontSize: 13),
+                                                                      RichText(
+                                                                        overflow:
+                                                                            TextOverflow.ellipsis,
+                                                                        strutStyle:
+                                                                            StrutStyle(fontSize: 12.0),
+                                                                        text: TextSpan(
+                                                                            style: TextStyle(
+                                                                                fontSize: 13.5,
+                                                                                fontFamily: 'SanFrancisco',
+                                                                                color: Colors.black),
+                                                                            text: dataMap['petshopName']),
                                                                       ),
-                                                                      Text(
-                                                                        '${(data[index].data() as Map<String, dynamic>)["petshopAddress"]}',
-                                                                        style: GoogleFonts.roboto(
-                                                                            fontWeight:
-                                                                                FontWeight.w300,
-                                                                            fontSize: 11),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            15,
+                                                                      ),
+                                                                      Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: [
+                                                                          Row(
+                                                                            children: [
+                                                                              Icon(
+                                                                                Icons.place,
+                                                                                size: 16,
+                                                                                color: Colors.orange,
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 3,
+                                                                              ),
+                                                                              Text(dataMap['district'], style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5, fontFamily: 'SanFrancisco.Reguler')),
+                                                                            ],
+                                                                          ),
+                                                                          Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(right: 8.0),
+                                                                            child:
+                                                                                Row(
+                                                                              children: [
+                                                                                Icon(Icons.star, size: 18, color: Colors.orange),
+                                                                                SizedBox(
+                                                                                  width: 6,
+                                                                                ),
+                                                                                Text('4.5', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5, fontFamily: 'SanFrancisco')),
+                                                                              ],
+                                                                            ),
+                                                                          )
+                                                                        ],
                                                                       )
                                                                     ],
                                                                   ),
@@ -575,13 +625,13 @@ class Home extends StatelessWidget {
                                                                     ClipRRect(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              3),
+                                                                              15),
                                                                       child:
                                                                           Image(
                                                                         height: height *
-                                                                            0.17,
+                                                                            0.21,
                                                                         width: width *
-                                                                            0.38,
+                                                                            0.46,
                                                                         image: const AssetImage(
                                                                             'assets/images/petshop-1.jpg'),
                                                                         fit: BoxFit
@@ -591,7 +641,7 @@ class Home extends StatelessWidget {
                                                                   ],
                                                                 ),
                                                               ),
-                                                            )
+                                                            ),
                                                           ],
                                                         ),
                                                       ),
@@ -605,170 +655,9 @@ class Home extends StatelessWidget {
                                             child: CircularProgressIndicator());
                                       }
                                     }),
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      right: width * 0.07, left: width * 0.07),
-                                  height: height * 0.05,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            'Petshop Near You',
-                                            style: GoogleFonts.inter(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500),
-                                          )),
-                                      InkWell(
-                                        onTap: () =>
-                                            Get.toNamed(Routes.HISTORY),
-                                        child: Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Text(
-                                              'See All',
-                                              style: GoogleFonts.inter(
-                                                  fontSize: 14,
-                                                  color: Colors.lightBlue,
-                                                  fontWeight: FontWeight.w500),
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                StreamBuilder<QuerySnapshot<Object?>>(
-                                    stream: homeController.streamData(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.active) {
-                                        var data = snapshot.data!.docs;
-                                        return Container(
-                                          height: height * 0.28,
-                                          child: ListView.builder(
-                                              // physics: ClampingScrollPhysics(),
-                                              scrollDirection: Axis.horizontal,
-                                              shrinkWrap: true,
-                                              itemCount: data.length,
-                                              itemBuilder: (context, index) {
-                                                return Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 7,
-                                                          top: 1,
-                                                          right: 10),
-                                                  child: InkWell(
-                                                    onTap: () => Get.toNamed(
-                                                        Routes.PETSHOP_DETAIL,
-                                                        arguments:
-                                                            data[index].id),
-                                                    child: Container(
-                                                      width: width * 0.40,
-                                                      height: height * 0.1,
-                                                      decoration: BoxDecoration(
-                                                        color: const Color(
-                                                            0xFFf2f2f2),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                        border: Border.all(
-                                                            width: 1,
-                                                            color: const Color(
-                                                                0xFFdedede)),
-                                                      ),
-                                                      child: Stack(
-                                                        alignment:
-                                                            Alignment.topCenter,
-                                                        children: [
-                                                          Positioned(
-                                                            bottom: 14,
-                                                            child: Container(
-                                                              // color: Colors.red,
-                                                              height:
-                                                                  height * 0.1,
-                                                              width:
-                                                                  width * 0.34,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      // color: Colors.blue,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              20)),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                  top: 13,
-                                                                ),
-                                                                child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      '${(data[index].data() as Map<String, dynamic>)["petshopName"]}',
-                                                                      style: GoogleFonts.inter(
-                                                                          fontWeight: FontWeight
-                                                                              .w600,
-                                                                          fontSize:
-                                                                              15),
-                                                                    ),
-                                                                    Text(
-                                                                      '${(data[index].data() as Map<String, dynamic>)["petshopAddress"]}',
-                                                                      style: GoogleFonts.inter(
-                                                                          fontWeight: FontWeight
-                                                                              .w300,
-                                                                          fontSize:
-                                                                              12),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            decoration: BoxDecoration(
-                                                                color: Colors
-                                                                    .white,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            20)),
-                                                            child: Stack(
-                                                              children: [
-                                                                ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              20),
-                                                                  child: Image(
-                                                                    height:
-                                                                        height *
-                                                                            0.17,
-                                                                    width:
-                                                                        width *
-                                                                            0.38,
-                                                                    image: const AssetImage(
-                                                                        'assets/images/petshop-2.jpg'),
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              }),
-                                        );
-                                      } else {
-                                        return const Center(
-                                            child: CircularProgressIndicator());
-                                      }
-                                    }),
+                                SizedBox(
+                                  height: 15,
+                                )
                               ],
                             ),
                           ),

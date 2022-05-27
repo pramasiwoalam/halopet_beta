@@ -29,4 +29,9 @@ class ProfileController extends GetxController {
         firestore.collection('users').doc(userId).update({"role": "Seller"});
     auth.currentUser!.reload();
   }
+
+  Stream<QuerySnapshot<Object?>> getUnreadNotification() {
+    CollectionReference notification = firestore.collection("notification");
+    return notification.where('isOpened', isEqualTo: false).snapshots();
+  }
 }

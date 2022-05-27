@@ -38,6 +38,8 @@ abstract class Routes {
   static const PACKAGE_LIST = _Paths.PACKAGE_LIST;
   static const TOPUP = _Paths.TOPUP;
   static const DELIVERY_LIST = _Paths.DELIVERY;
+  static const NOTIFICATION_LIST = _Paths.NOTIFICATION_LIST;
+  static const NOTIFICATION_DETAIL = _Paths.NOTIFICATION_DETAIL;
 }
 
 abstract class _Paths {
@@ -77,4 +79,6 @@ abstract class _Paths {
   static const PACKAGE_LIST = '/package-list';
   static const TOPUP = '/topup';
   static const DELIVERY = '/delivery-list';
+  static const NOTIFICATION_LIST = '/notification-list';
+  static const NOTIFICATION_DETAIL = '/notification-detail';
 }

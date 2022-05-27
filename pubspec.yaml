@@ -50,6 +50,17 @@ flutter_icons:
 
 flutter: 
   uses-material-design: true
+  fonts:
+    - family: SanFrancisco
+      fonts:
+        - asset: assets/fonts/SFUIDisplay-Bold.ttf
+    - family: SanFrancisco.Reguler
+      fonts:
+        - asset: assets/fonts/SFUIDisplay-Regular.otf
+    - family: SanFrancisco.Light
+      fonts:
+        - asset: assets/fonts/SFUIDisplay-Light.ttf
+        
   assets:
     - assets/images/user.png
     - assets/images/bg1.png

@@ -33,7 +33,7 @@ class OrderView extends GetView<OrderController> {
           appBar: AppBar(
             title: Center(
                 child: Text(
-              'Your Order',
+              'Your Booking',
               style:
                   GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 17),
             )),
@@ -105,100 +105,146 @@ class ApprovalContainer extends StatelessWidget {
                                   arguments: data[index].id)
                             },
                             child: Container(
-                              height: height * 0.22,
+                              height: height * 0.2,
                               width: width,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
                                   border: Border.all(
-                                      width: 2,
-                                      color: const Color(0xfff0f0f0))),
+                                    width: 1,
+                                    color: Colors.grey.shade200,
+                                  ),
+                                  color: Colors.white),
                               child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                padding: const EdgeInsets.all(16.0),
+                                child: Row(
                                   children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
+                                    SizedBox(
+                                      width: width * 0.32,
+                                      child: Center(
+                                        child: Container(
+                                            width: width * 0.32,
+                                            height: height * 0.18,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                            child: Center(
+                                                child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text('Order ID',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontFamily:
+                                                            'SanFrancisco')),
+                                                SizedBox(
+                                                  height: 3,
+                                                ),
+                                                Text(
+                                                    "#${data[index].id.toUpperCase()}",
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        color: Colors.orange,
+                                                        fontSize: 16,
+                                                        fontFamily:
+                                                            'SanFrancisco'))
+                                              ],
+                                            ))),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: height * 0.12,
+                                      child: VerticalDivider(
+                                        thickness: 1.2,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    SizedBox(
+                                        width: width * 0.5,
+                                        child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text('Grooming Service',
-                                                style: GoogleFonts.roboto(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w700,
-                                                    color:
-                                                        Colors.grey.shade900)),
                                             SizedBox(
-                                              height: 2,
+                                              height: 5,
                                             ),
-                                            Text('Penjahat Bird Shop',
-                                                style: GoogleFonts.roboto(
+                                            Container(
+                                              height: height * 0.033,
+                                              width: width * 0.4,
+                                              decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: const Center(
+                                                  child: Text(
+                                                      'Waiting for Approval',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Regular'))),
+                                            ),
+                                            SizedBox(
+                                              height: 7,
+                                            ),
+                                            const Text('Dita Gendut Petshop',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontFamily:
+                                                        'SanFrancisco')),
+                                            Spacer(),
+                                            const Text('Grooming Service',
+                                                style: TextStyle(
                                                     fontSize: 13,
-                                                    fontWeight: FontWeight.w400,
-                                                    color:
-                                                        Colors.grey.shade700)),
+                                                    fontFamily:
+                                                        'SanFrancisco.Regular')),
+                                            Spacer(),
+                                            Divider(
+                                              thickness: 1.2,
+                                            ),
+                                            Spacer(),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const Text('Booking Date',
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontFamily:
+                                                            'SanFrancisco.Regular')),
+                                                Text(dataMap['orderDate'],
+                                                    style: const TextStyle(
+                                                        color: Colors.orange,
+                                                        fontSize: 12.5,
+                                                        fontFamily:
+                                                            'SanFrancisco'))
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: const [
+                                                Text('Booking Time',
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontFamily:
+                                                            'SanFrancisco.Regular')),
+                                                Text('12.00 PM',
+                                                    style: TextStyle(
+                                                        fontSize: 12.5,
+                                                        color: Colors.orange,
+                                                        fontFamily:
+                                                            'SanFrancisco'))
+                                              ],
+                                            ),
                                           ],
-                                        ),
-                                        Container(
-                                          width: width * 0.33,
-                                          height: 25,
-                                          color: Colors.green,
-                                          child: Center(
-                                            child: Text('${dataMap['status']}',
-                                                style: GoogleFonts.roboto(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.white)),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    const Divider(
-                                      thickness: 0.5,
-                                      height: 18,
-                                      color: Color.fromARGB(255, 209, 209, 209),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('Order ID',
-                                            style: GoogleFonts.inter(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 13)),
-                                        Text(
-                                          data[index].id,
-                                          style: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 12),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 7,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Order Date',
-                                          style: GoogleFonts.inter(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 13,
-                                          ),
-                                        ),
-                                        Text(
-                                          data[index]['orderDate'],
-                                          style: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 12),
-                                        )
-                                      ],
-                                    ),
+                                        ))
                                   ],
                                 ),
                               ),

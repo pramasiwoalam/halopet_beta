@@ -19,6 +19,11 @@ class OrderController extends GetxController {
         .snapshots();
   }
 
+  Future<DocumentSnapshot<Object?>> getPetshop(String petshopId) async {
+    DocumentReference doc = firestore.collection("petshop").doc(petshopId);
+    return doc.get();
+  }
+
   Stream<QuerySnapshot<Object?>> getByPaymentStatus(String userId) {
     CollectionReference order = firestore.collection("order");
     return order

@@ -22,6 +22,8 @@ class ServiceListController extends GetxController {
         "groomingService": localStorage.read('grooming'),
         "petHotelService": localStorage.read('hotel'),
         "vetServices": localStorage.read('vet'),
+        "district": data['district'],
+        "city": data['city'],
         'petshopOwner': userId,
       }).then((value) => users.doc(userId).update({
             'petshopId': localStorage.read('tempPetshopId'),
