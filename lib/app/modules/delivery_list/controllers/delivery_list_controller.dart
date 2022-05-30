@@ -7,6 +7,7 @@ class DeliveryListController extends GetxController {
   final localStorage = GetStorage();
   var time = "null".obs;
   var status = '0'.obs;
+  double deliveryFee = 0;
 
   Future<DocumentSnapshot<Object?>> getUser(String userId) {
     DocumentReference doc = firestore.collection("users").doc(userId);

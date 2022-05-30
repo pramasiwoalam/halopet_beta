@@ -22,6 +22,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
+    bool isDelivery = false;
     dynamic arguments = Get.arguments;
     DateFormat format = new DateFormat("MMMM dd, yyyy");
 
@@ -46,9 +47,17 @@ class WaitingApproval extends GetView<OrderDetailController> {
                         double bookingFee = 5000;
                         double tax =
                             double.parse(packageData['price']) * 10 / 100;
-                        double charge = double.parse(packageData['price']) +
-                            bookingFee +
-                            tax;
+                        double charge = 0;
+                        if (data['isDelivery'] == false) {
+                          charge = double.parse(packageData['price']) +
+                              bookingFee +
+                              tax;
+                        } else {
+                          charge = double.parse(packageData['price']) +
+                              bookingFee +
+                              tax +
+                              data['deliveryFee'];
+                        }
 
                         MoneyFormatter fmf = MoneyFormatter(
                             amount: charge,
@@ -86,15 +95,15 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                       '   Order Status',
                                       style: GoogleFonts.roboto(
                                           fontWeight: FontWeight.w700,
-                                          fontSize: 18,
+                                          fontSize: 17,
                                           color: Color(0xffF9813A)),
                                     ),
                                     const SizedBox(
-                                      height: 12,
+                                      height: 10,
                                     ),
                                     Center(
                                       child: Container(
-                                        height: height * 0.12,
+                                        height: height * 0.11,
                                         width: width * 0.9,
                                         decoration: BoxDecoration(
                                             color: Color(0xffF9813A),
@@ -122,13 +131,14 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 14,
                                                           color: Colors.white)),
-                                                  Text(arguments,
+                                                  Text(
+                                                      "#${arguments.toString().toUpperCase()}",
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 16,
+                                                              FontWeight.w700,
+                                                          fontSize: 15,
                                                           color: Colors.white))
                                                 ],
                                               ),
@@ -142,13 +152,13 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w300,
-                                                          fontSize: 15,
+                                                          fontSize: 14,
                                                           color: Colors.white)),
                                                   Text(data['status'],
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w800,
-                                                          fontSize: 16,
+                                                          fontSize: 15,
                                                           color: Colors.white))
                                                 ],
                                               )
@@ -158,13 +168,13 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                       ),
                                     ),
                                     const SizedBox(
-                                      height: 18,
+                                      height: 16,
                                     ),
                                     Text(
                                       '   Order Detail',
                                       style: GoogleFonts.roboto(
                                           fontWeight: FontWeight.w700,
-                                          fontSize: 18,
+                                          fontSize: 17,
                                           color: Color(0xffF9813A)),
                                     ),
                                     const SizedBox(
@@ -172,7 +182,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                     ),
                                     Center(
                                       child: Container(
-                                        height: height * 0.6,
+                                        height: height * 0.62,
                                         width: width * 0.9,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
@@ -212,14 +222,14 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                   Text(data['serviceType'],
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w700,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500))
                                                 ],
@@ -234,14 +244,14 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                   Text('Full Service Grooming',
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w700,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500))
                                                 ],
@@ -256,14 +266,14 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                   Text('Dita Genday Petshop',
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w700,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500))
                                                 ],
@@ -278,14 +288,14 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                   Text(data['orderCreated'],
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w700,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500))
                                                 ],
@@ -300,7 +310,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                   Text(
@@ -309,7 +319,51 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w700,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
+                                                          color: Colors
+                                                              .grey.shade500)),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Booking time',
+                                                      style: GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 13,
+                                                          color: Colors
+                                                              .grey.shade500)),
+                                                  Text("12.00 PM",
+                                                      style: GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 13,
+                                                          color: Colors
+                                                              .grey.shade500)),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Pet Name',
+                                                      style: GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 13,
+                                                          color: Colors
+                                                              .grey.shade500)),
+                                                  Text("Aero",
+                                                      style: GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                 ],
@@ -322,7 +376,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                   style: GoogleFonts.roboto(
                                                       fontWeight:
                                                           FontWeight.w700,
-                                                      fontSize: 16,
+                                                      fontSize: 15,
                                                       color: Colors.black)),
                                               const Divider(
                                                 thickness: 1,
@@ -339,7 +393,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                   Text(
@@ -347,7 +401,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                 ],
@@ -362,7 +416,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                   Text(
@@ -370,12 +424,49 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                 ],
                                               ),
                                               Spacer(),
+                                              data['isDelivery'] == true
+                                                  ? Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Delivery fee',
+                                                                style: GoogleFonts.roboto(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontSize:
+                                                                        13,
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade500)),
+                                                            Text(
+                                                                "Rp. ${data['deliveryFee']}",
+                                                                style: GoogleFonts.roboto(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontSize:
+                                                                        13,
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade500)),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 14,
+                                                        )
+                                                      ],
+                                                    )
+                                                  : SizedBox(),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -385,14 +476,14 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                   Text("Rp. ${tax.toString()}",
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
                                                               .grey.shade500)),
                                                 ],
@@ -407,14 +498,14 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w600,
-                                                          fontSize: 15,
+                                                          fontSize: 13,
                                                           color: Colors
-                                                              .grey.shade600)),
+                                                              .grey.shade900)),
                                                   Text(fo.symbolOnLeft,
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w800,
-                                                          fontSize: 16,
+                                                          fontSize: 14,
                                                           color: Color(
                                                               0xffF9813A))),
                                                 ],

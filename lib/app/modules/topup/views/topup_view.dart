@@ -348,12 +348,12 @@ class TopUpView extends GetView<TopUpController> {
                                           Text('Rekening',
                                               style: GoogleFonts.roboto(
                                                   fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
+                                                  fontSize: 14,
                                                   color: Colors.grey.shade500)),
                                           Text('6860291990',
                                               style: GoogleFonts.roboto(
                                                   fontWeight: FontWeight.w700,
-                                                  fontSize: 16,
+                                                  fontSize: 15,
                                                   color: Colors.grey.shade500))
                                         ],
                                       ),
@@ -365,12 +365,12 @@ class TopUpView extends GetView<TopUpController> {
                                           Text('Bank',
                                               style: GoogleFonts.roboto(
                                                   fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
+                                                  fontSize: 14,
                                                   color: Colors.grey.shade500)),
                                           Text('Bank Central Asia (BCA)',
                                               style: GoogleFonts.roboto(
                                                   fontWeight: FontWeight.w700,
-                                                  fontSize: 15,
+                                                  fontSize: 14,
                                                   color: Colors.grey.shade500))
                                         ],
                                       ),
@@ -382,12 +382,12 @@ class TopUpView extends GetView<TopUpController> {
                                           Text('Nama Rekening',
                                               style: GoogleFonts.roboto(
                                                   fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
+                                                  fontSize: 14,
                                                   color: Colors.grey.shade500)),
                                           Text('PT. Halopet Indonesia',
                                               style: GoogleFonts.roboto(
                                                   fontWeight: FontWeight.w700,
-                                                  fontSize: 15,
+                                                  fontSize: 14,
                                                   color: Colors.grey.shade500))
                                         ],
                                       ),

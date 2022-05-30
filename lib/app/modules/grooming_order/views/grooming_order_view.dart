@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
@@ -11,11 +12,13 @@ import 'package:intl/intl.dart';
 import 'package:money_formatter/money_formatter.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import '../../delivery_list/controllers/delivery_list_controller.dart';
 import '../controllers/grooming_order_controller.dart';
 
 class GroomingOrderView extends GetView<GroomingOrderController> {
   final orderController = Get.put(GroomingOrderController());
   final typeController = TextEditingController();
+  final deliveryController = Get.put(DeliveryListController());
 
   void setValue(DateTime dateTime) {
     var date = DateFormat('MMMM dd, yyyy').format(dateTime);
@@ -30,6 +33,12 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
     var petId = localStorage.read('petId');
     DateFormat format = new DateFormat("MMMM dd, yyyy");
     print(localStorage.read('deliveryCharge'));
+
+    void getTime(TimeOfDay time) {
+      final hours = time.hour.toString().padLeft(2, '0');
+      final minutes = time.minute.toString().padLeft(2, '0');
+      controller.time.value = "Pick Up Time: ${hours}:${minutes}";
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -50,6 +59,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                 return Padding(
                   padding: const EdgeInsets.all(20),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
@@ -291,6 +301,66 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                       SizedBox(
                         height: 15,
                       ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Text(
+                            '  Choose Appointment Time',
+                            style: TextStyle(
+                                fontFamily: 'SanFrancisco.Regular',
+                                fontSize: 14),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      CustomRadioButton(
+                        elevation: 1,
+                        buttonTextStyle: ButtonTextStyle(
+                            selectedColor: Colors.white,
+                            unSelectedColor: Colors.grey.shade700,
+                            textStyle: TextStyle(
+                                fontFamily: 'SanFrancisco.Regular',
+                                fontSize: 12,
+                                color: Colors.white)),
+                        unSelectedColor: Colors.white,
+                        buttonLables: const [
+                          "10.00 AM",
+                          "11.30 AM",
+                          "13.00 PM",
+                          "14.30 AM",
+                          "16.00 AM",
+                          "17.30 PM",
+                          "19.00 PM",
+                        ],
+                        buttonValues: const [
+                          "10.00 AM",
+                          "11.30 AM",
+                          "13.00 PM",
+                          "14.30 AM",
+                          "16.00 AM",
+                          "17.30 PM",
+                          "19.00 PM",
+                        ],
+                        radioButtonValue: (value) {
+                          controller.appointmentTime.value = value.toString();
+                        },
+                        defaultSelected: "10.00 AM",
+                        unSelectedBorderColor: Colors.grey.shade100,
+                        selectedBorderColor: Color(0xffF9813A),
+                        spacing: 1,
+                        horizontal: false,
+                        enableButtonWrap: false,
+                        height: height * 0.04,
+                        width: width * 0.22,
+                        absoluteZeroSpacing: false,
+                        selectedColor: Color(0xffF9813A),
+                        padding: 10,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Obx(
                         () => Container(
                           height: height * 0.07,
@@ -338,7 +408,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                             Text('Order with delivery?',
                                 style: GoogleFonts.roboto(
                                     color: Colors.grey.shade800,
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w500)),
                             SizedBox(
                               width: 15,
@@ -631,12 +701,35 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                       buttonsTextStyle: GoogleFonts.roboto(
                                           fontWeight: FontWeight.w600),
                                       btnOkOnPress: () {
-                                        orderController.createOrder(
-                                            typeController.text,
-                                            orderController.date.toString(),
-                                            localStorage.read('packageId'),
-                                            localStorage.read('serviceType'),
-                                            localStorage.read('totalCharge'));
+                                        deliveryController.deliveryFee == 0
+                                            ? orderController.createOrder(
+                                                typeController.text,
+                                                orderController.date.toString(),
+                                                localStorage.read('packageId'),
+                                                localStorage
+                                                    .read('serviceType'),
+                                                localStorage
+                                                    .read('totalCharge'),
+                                                controller
+                                                    .appointmentTime.value)
+                                            : orderController
+                                                .createOrderWithDelivery(
+                                                    petId,
+                                                    orderController.date
+                                                        .toString(),
+                                                    localStorage
+                                                        .read('packageId'),
+                                                    localStorage
+                                                        .read('serviceType'),
+                                                    localStorage
+                                                        .read('totalCharge'),
+                                                    controller
+                                                        .appointmentTime.value,
+                                                    deliveryController.time
+                                                        .toString(),
+                                                    deliveryController
+                                                        .deliveryFee);
+
                                         AwesomeDialog(
                                           context: context,
                                           dialogType: DialogType.SUCCES,

@@ -28,7 +28,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
     void getTime(TimeOfDay time) {
       final hours = time.hour.toString().padLeft(2, '0');
       final minutes = time.minute.toString().padLeft(2, '0');
-      controller.time.value = "Pick Up Time: ${hours}:${minutes}";
+      controller.time.value = "${hours}:${minutes}";
     }
 
     return Scaffold(
@@ -275,6 +275,8 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                           double pickUpFee = 20000;
 
                                           double charge = pickUpFee;
+                                          controller.deliveryFee = charge;
+
                                           localStorage.write(
                                               'deliveryCharge', charge);
                                           MoneyFormatter fmf = MoneyFormatter(
@@ -287,7 +289,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                               ));
                                           MoneyFormatterOutput fo = fmf.output;
                                           return Container(
-                                            height: height * 0.15,
+                                            height: height * 0.12,
                                             width: width * 0.9,
                                             decoration: BoxDecoration(
                                                 color: Colors.white,
@@ -302,7 +304,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                       offset: Offset(0, 2))
                                                 ]),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(26),
+                                              padding: const EdgeInsets.all(20),
                                               child: Column(
                                                 children: [
                                                   Row(
@@ -316,7 +318,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500)),
@@ -326,7 +328,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500)),
@@ -345,7 +347,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w800,
-                                                                  fontSize: 16,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500)),
@@ -354,7 +356,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w800,
-                                                              fontSize: 16,
+                                                              fontSize: 14,
                                                               color: Color(
                                                                   0xffF9813A))),
                                                     ],
@@ -390,7 +392,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                 style: GoogleFonts.inter(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.w400,
-                                                    fontSize: 16),
+                                                    fontSize: 15),
                                               ),
                                             ),
                                             Icon(Icons.arrow_forward_ios,
@@ -420,7 +422,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                           double deliveryFee = 22000;
                                           double charge =
                                               pickUpFee + deliveryFee;
-
+                                          controller.deliveryFee = charge;
                                           localStorage.write(
                                               'deliveryCharge', charge);
                                           MoneyFormatter fmf = MoneyFormatter(

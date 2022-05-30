@@ -244,7 +244,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w700,
-                                                                fontSize: 16),
+                                                                fontSize: 15),
                                                       ),
                                                       Text(
                                                         'PawPay Coins',
@@ -328,7 +328,7 @@ class PaymentView extends GetView<PaymentController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w700,
-                                                          fontSize: 16,
+                                                          fontSize: 15,
                                                           color: Colors.black)),
                                                   const Divider(
                                                     thickness: 1,
@@ -347,7 +347,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500)),
@@ -357,7 +357,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w700,
-                                                                  fontSize: 16,
+                                                                  fontSize: 15,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500))
@@ -375,7 +375,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500)),
@@ -386,7 +386,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w700,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500))
@@ -404,7 +404,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500)),
@@ -415,7 +415,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w700,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500))
@@ -456,7 +456,7 @@ class PaymentView extends GetView<PaymentController> {
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w700,
-                                                          fontSize: 16,
+                                                          fontSize: 15,
                                                           color: Colors.black)),
                                                   const Divider(
                                                     thickness: 1,
@@ -475,7 +475,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500)),
@@ -485,7 +485,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w700,
-                                                                  fontSize: 16,
+                                                                  fontSize: 15,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500))
@@ -503,7 +503,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500)),
@@ -514,7 +514,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w700,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500))
@@ -532,7 +532,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500)),
@@ -543,7 +543,7 @@ class PaymentView extends GetView<PaymentController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w700,
-                                                                  fontSize: 15,
+                                                                  fontSize: 14,
                                                                   color: Colors
                                                                       .grey
                                                                       .shade500))

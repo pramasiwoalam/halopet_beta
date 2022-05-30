@@ -134,7 +134,7 @@ class ApprovalContainer extends StatelessWidget {
                                               children: [
                                                 Text('Order ID',
                                                     style: TextStyle(
-                                                        fontSize: 15,
+                                                        fontSize: 14,
                                                         fontFamily:
                                                             'SanFrancisco')),
                                                 SizedBox(
@@ -167,11 +167,8 @@ class ApprovalContainer extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            SizedBox(
-                                              height: 5,
-                                            ),
                                             Container(
-                                              height: height * 0.033,
+                                              height: height * 0.026,
                                               width: width * 0.4,
                                               decoration: BoxDecoration(
                                                 color: Colors.green,
@@ -183,22 +180,20 @@ class ApprovalContainer extends StatelessWidget {
                                                       'Waiting for Approval',
                                                       style: TextStyle(
                                                           color: Colors.white,
-                                                          fontSize: 12,
+                                                          fontSize: 11,
                                                           fontFamily:
                                                               'SanFrancisco.Regular'))),
                                             ),
-                                            SizedBox(
-                                              height: 7,
-                                            ),
+                                            Spacer(),
                                             const Text('Dita Gendut Petshop',
                                                 style: TextStyle(
-                                                    fontSize: 14,
+                                                    fontSize: 13,
                                                     fontFamily:
                                                         'SanFrancisco')),
                                             Spacer(),
                                             const Text('Grooming Service',
                                                 style: TextStyle(
-                                                    fontSize: 13,
+                                                    fontSize: 12,
                                                     fontFamily:
                                                         'SanFrancisco.Regular')),
                                             Spacer(),
@@ -219,7 +214,7 @@ class ApprovalContainer extends StatelessWidget {
                                                 Text(dataMap['orderDate'],
                                                     style: const TextStyle(
                                                         color: Colors.orange,
-                                                        fontSize: 12.5,
+                                                        fontSize: 13,
                                                         fontFamily:
                                                             'SanFrancisco'))
                                               ],
@@ -229,15 +224,15 @@ class ApprovalContainer extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
-                                              children: const [
-                                                Text('Booking Time',
+                                              children: [
+                                                const Text('Booking Time',
                                                     style: TextStyle(
                                                         fontSize: 13,
                                                         fontFamily:
                                                             'SanFrancisco.Regular')),
-                                                Text('12.00 PM',
-                                                    style: TextStyle(
-                                                        fontSize: 12.5,
+                                                Text(dataMap['time'],
+                                                    style: const TextStyle(
+                                                        fontSize: 13,
                                                         color: Colors.orange,
                                                         fontFamily:
                                                             'SanFrancisco'))
