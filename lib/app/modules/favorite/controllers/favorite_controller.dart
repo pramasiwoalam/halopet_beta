@@ -25,7 +25,7 @@ class FavoriteController extends GetxController {
 
   Stream<QuerySnapshot<Object?>> getPetshopByFavId() {
     List favoriteArr = GetStorage().read('favArr');
-    print('fav: ${favoriteArr}');
+    print(favoriteArr);
     CollectionReference petshop = firestore.collection("petshop");
     CollectionReference users = firestore.collection("users");
     if (favoriteArr.isNotEmpty) {

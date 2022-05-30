@@ -155,7 +155,8 @@ class Home extends StatelessWidget {
                 MoneyFormatterOutput fo = fmf.output;
                 localStorage.write('balance', data['balance']);
                 if (data['favoriteId'] != null) {
-                  localStorage.write('favArr', data['favoriteId']);
+                  localStorage.write('favArr', []);
+                  print(localStorage.read('favArr'));
                 } else {
                   localStorage.write('favArr', []);
                 }
@@ -438,7 +439,7 @@ class Home extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Align(
+                                      const Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
                                             'Explore More',
@@ -450,7 +451,7 @@ class Home extends StatelessWidget {
                                       InkWell(
                                         onTap: () =>
                                             Get.toNamed(Routes.PETSHOP_LIST),
-                                        child: Align(
+                                        child: const Align(
                                             alignment: Alignment.centerRight,
                                             child: Text(
                                               'View All',
@@ -558,7 +559,7 @@ class Home extends StatelessWidget {
                                                                         strutStyle:
                                                                             StrutStyle(fontSize: 12.0),
                                                                         text: TextSpan(
-                                                                            style: TextStyle(
+                                                                            style: const TextStyle(
                                                                                 fontSize: 13.5,
                                                                                 fontFamily: 'SanFrancisco',
                                                                                 color: Colors.black),
@@ -574,7 +575,7 @@ class Home extends StatelessWidget {
                                                                         children: [
                                                                           Row(
                                                                             children: [
-                                                                              Icon(
+                                                                              const Icon(
                                                                                 Icons.place,
                                                                                 size: 16,
                                                                                 color: Colors.orange,
@@ -590,7 +591,7 @@ class Home extends StatelessWidget {
                                                                                 const EdgeInsets.only(right: 8.0),
                                                                             child:
                                                                                 Row(
-                                                                              children: [
+                                                                              children: const [
                                                                                 Icon(Icons.star, size: 18, color: Colors.orange),
                                                                                 SizedBox(
                                                                                   width: 6,
