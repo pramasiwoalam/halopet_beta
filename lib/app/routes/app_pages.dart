@@ -23,12 +23,14 @@ import '../modules/category_page/bindings/category_page_binding.dart';
 import '../modules/category_page/views/category_page_view.dart';
 import '../modules/choose_pet/bindings/choose_pet_binding.dart';
 import '../modules/choose_pet/views/choose_pet_view.dart';
+import '../modules/choose_session/bindings/choose_session_binding.dart';
+import '../modules/choose_session/views/choose_session_view.dart';
 import '../modules/doctor_registration/bindings/doctor_registration_binding.dart';
 import '../modules/doctor_registration/views/doctor_registration_view.dart';
 import '../modules/favorite/bindings/favorite_binding.dart';
 import '../modules/favorite/views/favorite_view.dart';
 import '../modules/grooming_order/bindings/grooming_order_binding.dart';
-import '../modules/grooming_order/views/grooming_order_view.dart';
+import '../modules/grooming_order/views/create_order_view.dart';
 import '../modules/history/bindings/history_binding.dart';
 import '../modules/history/views/history_view.dart';
 import '../modules/history_detail/bindings/history_detail_binding.dart';
@@ -66,6 +68,10 @@ import '../modules/seller_home/bindings/seller_home_binding.dart';
 import '../modules/seller_home/views/seller_home_view.dart';
 import '../modules/seller_order_detail/bindings/seller_order_detail_binding.dart';
 import '../modules/seller_order_detail/views/seller_order_detail_view.dart';
+import '../modules/session_detail/bindings/session_detail_binding.dart';
+import '../modules/session_detail/views/session_detail_view.dart';
+import '../modules/session_list/bindings/session_list_binding.dart';
+import '../modules/session_list/views/session_list_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/welcome_page/bindings/welcome_page_binding.dart';
@@ -111,7 +117,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CREATE_ORDER,
-      page: () => GroomingOrderView(),
+      page: () => CreateOrderView(),
       binding: GroomingOrderBinding(),
     ),
     GetPage(
@@ -263,6 +269,21 @@ class AppPages {
       name: _Paths.NOTIFICATION_DETAIL,
       page: () => NotificationDetailView(),
       binding: NotificationDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.SESSION_LIST,
+      page: () => SessionListView(),
+      binding: SessionListBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHOOSE_SESSION,
+      page: () => ChooseSessionView(),
+      binding: ChooseSessionBinding(),
+    ),
+    GetPage(
+      name: _Paths.SESSION_DETAIL,
+      page: () => SessionDetailView(),
+      binding: SessionDetailBinding(),
     ),
   ];
 }

@@ -20,6 +20,9 @@ class ChoosePetView extends GetView<ChoosePetController> {
     var width = size.width;
     var height = size.height;
     var userId = GetStorage().read('currentUserId');
+    print(userId);
+    var arguments = localStorage.read('selectedServiceName');
+    print("ARGUMEN2 $arguments");
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -40,6 +43,8 @@ class ChoosePetView extends GetView<ChoosePetController> {
             future: controller.getUser(userId),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
+                print(snapshot);
+
                 var data = snapshot.data!.data() as Map<String, dynamic>;
                 if (data['pets'] == null) {
                   Get.toNamed(Routes.PET_LIST);
@@ -78,8 +83,9 @@ class ChoosePetView extends GetView<ChoosePetController> {
 
                                       return InkWell(
                                         onTap: () => {
+                                          print("ARG $arguments"),
                                           Get.toNamed(Routes.CREATE_ORDER,
-                                              arguments: 'Grooming'),
+                                              arguments: arguments),
                                           localStorage.write(
                                               'deliveryCharge', null),
                                           localStorage.write(
@@ -316,6 +322,7 @@ class ChoosePetView extends GetView<ChoosePetController> {
                   }
                 }
               } else {
+                print("x");
                 return Center(
                   child: CircularProgressIndicator(),
                 );

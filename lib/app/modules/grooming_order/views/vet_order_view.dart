@@ -15,7 +15,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import '../../delivery_list/controllers/delivery_list_controller.dart';
 import '../controllers/grooming_order_controller.dart';
 
-class GroomingOrderView extends GetView<GroomingOrderController> {
+class VetOrderView extends GetView<GroomingOrderController> {
   final orderController = Get.put(GroomingOrderController());
   final typeController = TextEditingController();
   final deliveryController = Get.put(DeliveryListController());
@@ -24,6 +24,10 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
     var date = DateFormat('MMMM dd, yyyy').format(dateTime);
     orderController.date.value = date;
   }
+
+  Map<String, dynamic> formData = {
+    'symptoms': "Abdomen",
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,25 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
       final minutes = time.minute.toString().padLeft(2, '0');
       controller.time.value = "Pick Up Time: ${hours}:${minutes}";
     }
+
+    double bookingFee = 5000;
+    double charge = 0;
+    if (localStorage.read('deliveryCharge') == null) {
+      charge = bookingFee;
+    } else {
+      charge = bookingFee + localStorage.read('deliveryCharge');
+    }
+
+    localStorage.write('totalCharge', charge);
+    MoneyFormatter fmf = MoneyFormatter(
+        amount: charge,
+        settings: MoneyFormatterSettings(
+          symbol: 'Rp.',
+          thousandSeparator: '.',
+          decimalSeparator: ',',
+          symbolAndNumberSeparator: ' ',
+        ));
+    MoneyFormatterOutput fo = fmf.output;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -249,6 +272,39 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                       SizedBox(
                         height: 15,
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: TextFormField(
+                          maxLines: null,
+                          minLines: 4,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              labelText: "Pet Symptoms*",
+                              hintText: 'Abdomen, Swollen',
+                              hintStyle: GoogleFonts.roboto(
+                                  fontSize: 14, color: Colors.grey.shade600),
+                              contentPadding: EdgeInsets.all(18),
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always),
+                          validator: (value) {
+                            if (value!.contains('@')) {
+                              return 'Error 2';
+                            } else {
+                              return null;
+                            }
+                          },
+                          onSaved: (value) {
+                            formData['symptoms'] = value;
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+
                       Obx(
                         () => Container(
                           height: height * 0.07,
@@ -293,86 +349,25 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                       SizedBox(
                         height: 15,
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text(
-                            '  Choose Appointment Time',
-                            style: TextStyle(
-                                fontFamily: 'SanFrancisco.Regular',
-                                fontSize: 14),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      CustomRadioButton(
-                        elevation: 1,
-                        buttonTextStyle: ButtonTextStyle(
-                            selectedColor: Colors.white,
-                            unSelectedColor: Colors.grey.shade700,
-                            textStyle: TextStyle(
-                                fontFamily: 'SanFrancisco.Regular',
-                                fontSize: 11,
-                                color: Colors.white)),
-                        unSelectedColor: Colors.white,
-                        buttonLables: const [
-                          "10.00 AM",
-                          "11.30 AM",
-                          "13.00 PM",
-                          "14.30 AM",
-                          "16.00 AM",
-                          "17.30 PM",
-                          "19.00 PM",
-                        ],
-                        buttonValues: const [
-                          "10.00 AM",
-                          "11.30 AM",
-                          "13.00 PM",
-                          "14.30 AM",
-                          "16.00 AM",
-                          "17.30 PM",
-                          "19.00 PM",
-                        ],
-                        radioButtonValue: (value) {
-                          controller.appointmentTime.value = value.toString();
-                        },
-                        defaultSelected: "10.00 AM",
-                        unSelectedBorderColor: Colors.grey.shade100,
-                        selectedBorderColor: Color(0xffF9813A),
-                        spacing: 1,
-                        horizontal: false,
-                        enableButtonWrap: false,
-                        height: height * 0.04,
-                        width: width * 0.22,
-                        absoluteZeroSpacing: false,
-                        selectedColor: Color(0xffF9813A),
-                        padding: 10,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
                       Obx(
                         () => Container(
                           height: height * 0.07,
                           width: width,
                           child: FlatButton(
-                            color: orderController.packageFlag == 'null'
+                            color: orderController.vetFlag == 'null'
                                 ? Colors.white
                                 : Color(0xffF9813A),
-                            onPressed: () {
-                              Get.toNamed(Routes.PACKAGE_LIST);
-                            },
-                            child: orderController.packageFlag == "null"
+                            onPressed: () =>
+                                {Get.toNamed(Routes.CHOOSE_SESSION)},
+                            child: orderController.vetFlag == "null"
                                 ? Text(
-                                    "Choose Grooming Package *",
+                                    "Choose Vet Session *",
                                     style: GoogleFonts.roboto(
                                         color: Colors.grey.shade700,
                                         fontSize: 15),
                                   )
                                 : Text(
-                                    'Package Type: ${controller.packageName}',
+                                    'Vet Session: ${localStorage.read('vetSession')}',
                                     style: GoogleFonts.roboto(
                                         color: Colors.white,
                                         fontSize: 14,
@@ -380,7 +375,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                   ),
                             shape: RoundedRectangleBorder(
                                 side: BorderSide(
-                                    color: orderController.packageFlag == 'null'
+                                    color: orderController.vetFlag == 'null'
                                         ? Colors.grey.shade400
                                         : Colors.grey.shade100,
                                     width: 1,
@@ -434,71 +429,50 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                       SizedBox(
                         height: 15,
                       ),
-                      Obx(() => orderController.packageFlag == 'null'
+                      Obx(() => orderController.vetFlag == 'null'
                           ? SizedBox()
-                          : FutureBuilder<DocumentSnapshot<Object?>>(
-                              future: controller
-                                  .getPackage(localStorage.read('packageId')),
-                              builder: (context, snapshot) {
-                                // double deliveryCharge =
-                                //     localStorage.read('deliveryCharge');
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  var packageData = snapshot.data!.data()
-                                      as Map<String, dynamic>;
-                                  double tax =
-                                      double.parse(packageData['price']) *
-                                          10 /
-                                          100;
-                                  double bookingFee = 5000;
-                                  double charge = 0;
-                                  if (localStorage.read('deliveryCharge') ==
-                                      null) {
-                                    charge =
-                                        double.parse(packageData['price']) +
-                                            bookingFee +
-                                            tax;
-                                  } else {
-                                    charge =
-                                        double.parse(packageData['price']) +
-                                            bookingFee +
-                                            tax +
-                                            localStorage.read('deliveryCharge');
-                                  }
-
-                                  localStorage.write('totalCharge', charge);
-                                  MoneyFormatter fmf = MoneyFormatter(
-                                      amount: charge,
-                                      settings: MoneyFormatterSettings(
-                                        symbol: 'Rp.',
-                                        thousandSeparator: '.',
-                                        decimalSeparator: ',',
-                                        symbolAndNumberSeparator: ' ',
-                                      ));
-                                  MoneyFormatterOutput fo = fmf.output;
-                                  return Container(
-                                    height: height * 0.23,
-                                    width: width * 0.9,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20)),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey.shade300,
-                                              spreadRadius: 2,
-                                              blurRadius: 2,
-                                              offset: Offset(0, 2))
-                                        ]),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(26),
-                                      child: Column(
-                                        children: [
-                                          Row(
+                          : Container(
+                              height: height * 0.15,
+                              width: width * 0.9,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.shade300,
+                                        spreadRadius: 2,
+                                        blurRadius: 2,
+                                        offset: Offset(0, 2))
+                                  ]),
+                              child: Padding(
+                                padding: const EdgeInsets.all(26),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Booking Fee',
+                                            style: GoogleFonts.roboto(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14,
+                                                color: Colors.grey.shade500)),
+                                        Text("Rp. $bookingFee",
+                                            style: GoogleFonts.roboto(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14,
+                                                color: Colors.grey.shade500)),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    localStorage.read('deliveryCharge') == null
+                                        ? SizedBox()
+                                        : Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text('Service Charge',
+                                              Text('Delivery Charge',
                                                   style: GoogleFonts.roboto(
                                                       fontWeight:
                                                           FontWeight.w400,
@@ -506,7 +480,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                                       color: Colors
                                                           .grey.shade500)),
                                               Text(
-                                                  "Rp. ${packageData['price']}",
+                                                  "Rp. ${localStorage.read('deliveryCharge')}",
                                                   style: GoogleFonts.roboto(
                                                       fontWeight:
                                                           FontWeight.w400,
@@ -515,111 +489,26 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                                           .grey.shade500)),
                                             ],
                                           ),
-                                          Spacer(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text('Booking Fee',
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 15,
-                                                      color: Colors
-                                                          .grey.shade500)),
-                                              Text("Rp. $bookingFee",
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 15,
-                                                      color: Colors
-                                                          .grey.shade500)),
-                                            ],
-                                          ),
-                                          Spacer(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text('Tax',
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 15,
-                                                      color: Colors
-                                                          .grey.shade500)),
-                                              Text("Rp. $tax",
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 15,
-                                                      color: Colors
-                                                          .grey.shade500)),
-                                            ],
-                                          ),
-                                          Spacer(),
-                                          localStorage.read('deliveryCharge') ==
-                                                  null
-                                              ? SizedBox()
-                                              : Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text('Delivery Charge',
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontSize: 15,
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade500)),
-                                                    Text(
-                                                        "Rp. ${localStorage.read('deliveryCharge')}",
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontSize: 15,
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade500)),
-                                                  ],
-                                                ),
-                                          Spacer(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text('Total Charge',
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      fontSize: 16,
-                                                      color: Colors
-                                                          .grey.shade500)),
-                                              Text(fo.symbolOnLeft,
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      fontSize: 16,
-                                                      color:
-                                                          Color(0xffF9813A))),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                    Spacer(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Total Charge',
+                                            style: GoogleFonts.roboto(
+                                                fontWeight: FontWeight.w800,
+                                                fontSize: 15,
+                                                color: Colors.grey.shade500)),
+                                        Text(fo.symbolOnLeft,
+                                            style: GoogleFonts.roboto(
+                                                fontWeight: FontWeight.w800,
+                                                fontSize: 15,
+                                                color: Color(0xffF9813A))),
+                                      ],
                                     ),
-                                  );
-                                } else {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                              })),
+                                  ],
+                                ),
+                              ))),
 
                       // Obx(
                       //   () => InkWell(
@@ -694,25 +583,23 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                           fontWeight: FontWeight.w600),
                                       btnOkOnPress: () {
                                         deliveryController.deliveryFee == 0
-                                            ? orderController.createOrder(
+                                            ? orderController.createVetOrder(
                                                 typeController.text,
                                                 orderController.date.toString(),
-                                                localStorage.read('packageId'),
-                                                localStorage
-                                                    .read('serviceType'),
+                                                "Vet",
+                                                formData['symptoms'],
                                                 localStorage
                                                     .read('totalCharge'),
                                                 controller
                                                     .appointmentTime.value)
                                             : orderController
-                                                .createOrderWithDelivery(
+                                                .createVetOrderWithDelivery(
                                                     petId,
                                                     orderController.date
                                                         .toString(),
                                                     localStorage
-                                                        .read('packageId'),
-                                                    localStorage
                                                         .read('serviceType'),
+                                                    formData['symptoms'],
                                                     localStorage
                                                         .read('totalCharge'),
                                                     controller

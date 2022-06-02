@@ -19,6 +19,7 @@ class ServiceListView extends GetView<ServiceListController> {
     var width = size.width;
     var groomingStatus = localStorage.read('grooming');
     var hotelStatus = localStorage.read('hotel');
+    var vetStatus = localStorage.read('vetStatus');
     final controller = Get.put(ServiceListController());
 
     return WillPopScope(
@@ -264,58 +265,112 @@ class ServiceListView extends GetView<ServiceListController> {
                       SizedBox(
                         height: 15,
                       ),
-                      InkWell(
-                        onTap: () =>
-                            Get.toNamed(Routes.SERVICE_FORM, arguments: 'Vet'),
-                        child: Container(
-                          height: height * 0.12,
-                          width: width,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.shade300,
-                                    spreadRadius: 2,
-                                    blurRadius: 4,
-                                    offset: Offset(0, 3))
-                              ]),
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Vet',
-                                        style: GoogleFonts.inter(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.grey.shade700)),
-                                    Text('Not yet registered.',
-                                        style: GoogleFonts.inter(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.grey.shade700))
-                                  ],
+                      vetStatus == false
+                          ? InkWell(
+                              onTap: () => Get.toNamed(Routes.SESSION_LIST),
+                              child: Container(
+                                height: height * 0.12,
+                                width: width,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          spreadRadius: 2,
+                                          blurRadius: 4,
+                                          offset: Offset(0, 3))
+                                    ]),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Vet Session',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.grey.shade700)),
+                                          Text('Not yet registered.',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.grey.shade700))
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Colors.grey.shade600,
+                                      )
+                                    ],
+                                  ),
                                 ),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.grey.shade600,
-                                )
-                              ],
+                              ),
+                            )
+                          : InkWell(
+                              onTap: () => Get.toNamed(Routes.SESSION_LIST),
+                              child: Container(
+                                height: height * 0.12,
+                                width: width,
+                                decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          spreadRadius: 2,
+                                          blurRadius: 4,
+                                          offset: Offset(0, 3))
+                                    ]),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Vet Session',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.white)),
+                                          Text('Registered.',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.white))
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.done_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
                       SizedBox(
                         height: 30,
                       ),
                       InkWell(
                         onTap: () => {
                           if (localStorage.read('grooming') == true)
+                            {
+                              controller.createPetshop(),
+                              Get.toNamed(Routes.HOMEPAGE)
+                            }
+                          else if (localStorage.read('vetStatus') == true)
                             {
                               controller.createPetshop(),
                               Get.toNamed(Routes.HOMEPAGE)

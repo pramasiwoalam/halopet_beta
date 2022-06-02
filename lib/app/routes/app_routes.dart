@@ -40,6 +40,9 @@ abstract class Routes {
   static const DELIVERY_LIST = _Paths.DELIVERY;
   static const NOTIFICATION_LIST = _Paths.NOTIFICATION_LIST;
   static const NOTIFICATION_DETAIL = _Paths.NOTIFICATION_DETAIL;
+  static const SESSION_LIST = _Paths.SESSION_LIST;
+  static const CHOOSE_SESSION = _Paths.CHOOSE_SESSION;
+  static const SESSION_DETAIL = _Paths.SESSION_DETAIL;
 }
 
 abstract class _Paths {
@@ -81,4 +84,7 @@ abstract class _Paths {
   static const DELIVERY = '/delivery-list';
   static const NOTIFICATION_LIST = '/notification-list';
   static const NOTIFICATION_DETAIL = '/notification-detail';
+  static const SESSION_LIST = '/session-list';
+  static const CHOOSE_SESSION = '/choose-session';
+  static const SESSION_DETAIL = '/session-detail';
 }

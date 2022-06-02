@@ -486,13 +486,17 @@ class Service extends StatelessWidget {
                                           fontWeight: FontWeight.w600,
                                           color: Colors.grey.shade800),
                                       btnOkOnPress: () {
-                                        localStorage.write('serviceType',
+                                        // localStorage.write('serviceType',
+                                        //     dataMap['serviceName']);
+                                        // localStorage.write('selectedServiceId',
+                                        //     data[index].id);
+                                        // print(dataMap['serviceName']);
+                                        localStorage.write(
+                                            'selectedServiceName',
                                             dataMap['serviceName']);
-                                        localStorage.write('selectedServiceId',
-                                            data[index].id);
-                                        print(localStorage
-                                            .read('selectedServiceId'));
-                                        Get.toNamed(Routes.CHOOSE_PET);
+                                        Get.toNamed(
+                                          Routes.CHOOSE_PET,
+                                        );
 
                                         AwesomeDialog(
                                           padding: EdgeInsets.all(20),

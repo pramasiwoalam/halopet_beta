@@ -44,6 +44,20 @@ class ServiceFormController extends GetxController {
         });
   }
 
+  void createSession(Map<String, dynamic> formData) {
+    CollectionReference session = firestore.collection("session");
+    session.add({
+      'number': formData['number'],
+      'day': formData['day'],
+      'name': formData['name'],
+      'openHours':
+          "${formData['openHoursStart']} - ${formData['openHoursEnd']}",
+      'specialist': formData['specialist'],
+      'desc': formData['desc'],
+      'yearsActive': formData['yearsActive']
+    });
+  }
+
   void createDefaultService() {
     CollectionReference service = firestore.collection("service");
     service.add({'packageId': null}).then((value) => {

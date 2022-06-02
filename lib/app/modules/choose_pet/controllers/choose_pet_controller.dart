@@ -18,7 +18,12 @@ class ChoosePetController extends GetxController {
 
   Future<DocumentSnapshot<Object?>> getUser(String userId) async {
     DocumentReference doc = firestore.collection("users").doc(userId);
-    return doc.get();
+    try {
+      return doc.get();
+    } catch (e) {
+      print(e);
+      return doc.get();
+    }
   }
 
   Stream<QuerySnapshot<Object?>> getPets() {

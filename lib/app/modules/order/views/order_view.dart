@@ -145,7 +145,7 @@ class ApprovalContainer extends StatelessWidget {
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                         color: Colors.orange,
-                                                        fontSize: 16,
+                                                        fontSize: 15,
                                                         fontFamily:
                                                             'SanFrancisco'))
                                               ],
@@ -208,13 +208,13 @@ class ApprovalContainer extends StatelessWidget {
                                               children: [
                                                 const Text('Booking Date',
                                                     style: TextStyle(
-                                                        fontSize: 13,
+                                                        fontSize: 12,
                                                         fontFamily:
                                                             'SanFrancisco.Regular')),
                                                 Text(dataMap['orderDate'],
                                                     style: const TextStyle(
                                                         color: Colors.orange,
-                                                        fontSize: 13,
+                                                        fontSize: 12,
                                                         fontFamily:
                                                             'SanFrancisco'))
                                               ],
@@ -227,12 +227,12 @@ class ApprovalContainer extends StatelessWidget {
                                               children: [
                                                 const Text('Booking Time',
                                                     style: TextStyle(
-                                                        fontSize: 13,
+                                                        fontSize: 12,
                                                         fontFamily:
                                                             'SanFrancisco.Regular')),
                                                 Text(dataMap['time'],
                                                     style: const TextStyle(
-                                                        fontSize: 13,
+                                                        fontSize: 12,
                                                         color: Colors.orange,
                                                         fontFamily:
                                                             'SanFrancisco'))
