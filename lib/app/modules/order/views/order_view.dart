@@ -185,7 +185,7 @@ class ApprovalContainer extends StatelessWidget {
                                                               'SanFrancisco.Regular'))),
                                             ),
                                             Spacer(),
-                                            const Text('Dita Gendut Petshop',
+                                            const Text('Pramditghe Petshop',
                                                 style: TextStyle(
                                                     fontSize: 13,
                                                     fontFamily:

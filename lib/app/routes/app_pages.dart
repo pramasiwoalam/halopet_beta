@@ -21,6 +21,8 @@ import '../modules/admin_petshop_approval/bindings/admin_petshop_approval_bindin
 import '../modules/admin_petshop_approval/views/admin_petshop_approval_view.dart';
 import '../modules/category_page/bindings/category_page_binding.dart';
 import '../modules/category_page/views/category_page_view.dart';
+import '../modules/choose_date/bindings/choose_date_binding.dart';
+import '../modules/choose_date/views/choose_date_view.dart';
 import '../modules/choose_pet/bindings/choose_pet_binding.dart';
 import '../modules/choose_pet/views/choose_pet_view.dart';
 import '../modules/choose_session/bindings/choose_session_binding.dart';
@@ -284,6 +286,11 @@ class AppPages {
       name: _Paths.SESSION_DETAIL,
       page: () => SessionDetailView(),
       binding: SessionDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHOOSE_DATE,
+      page: () => ChooseDateView(),
+      binding: ChooseDateBinding(),
     ),
   ];
 }

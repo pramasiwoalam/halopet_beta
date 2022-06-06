@@ -401,7 +401,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                         ),
                                       ),
                                       onPressed: () => {
-                                            groomingController.status = '0',
+                                            groomingController.status = 0,
                                             Get.toNamed(Routes.CREATE_ORDER,
                                                 arguments: 'Grooming'),
                                           }),
@@ -575,7 +575,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                         ),
                                       ),
                                       onPressed: () => {
-                                            groomingController.status = '0',
+                                            groomingController.status = 0,
                                             Get.toNamed(Routes.CREATE_ORDER,
                                                 arguments: 'Grooming'),
                                           }),

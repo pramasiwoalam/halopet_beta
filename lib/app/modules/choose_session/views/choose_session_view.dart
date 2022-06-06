@@ -140,7 +140,7 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       'SanFrancisco.Regular',
-                                                                  fontSize: 12),
+                                                                  fontSize: 11),
                                                             ),
                                                           ],
                                                         ),
@@ -230,7 +230,7 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                                                                   height: 3,
                                                                 ),
                                                                 Row(
-                                                                  children: [
+                                                                  children: const [
                                                                     Text(
                                                                       "Selected.",
                                                                       style: TextStyle(
@@ -346,7 +346,7 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                                                                       fontFamily:
                                                                           'SanFrancisco.Regular',
                                                                       fontSize:
-                                                                          12),
+                                                                          5),
                                                                 ),
                                                               ],
                                                             ),
@@ -368,91 +368,91 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                           SizedBox(
                             height: 20,
                           ),
-                          InkWell(
-                            onTap: () => {
-                              orderController.vetFlag = 'true'.obs,
-                              orderController.vetName = 'true',
-                              Get.toNamed(Routes.CREATE_ORDER, arguments: 'Vet')
-                            },
-                            child: Container(
-                                height: height * 0.07,
-                                width: width * 0.85,
-                                decoration: BoxDecoration(
-                                    color: Color(0xffF9813A),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade300,
-                                          spreadRadius: 2,
-                                          blurRadius: 4,
-                                          offset: Offset(0, 2))
-                                    ]),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 25, right: 25),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Confirm Session',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontFamily: 'SanFrancisco',
-                                              color: Colors.white)),
-                                      Icon(
-                                        Icons.done_rounded,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                )),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InkWell(
-                            onTap: () => {
-                              orderController.vetName =
-                                  localStorage.read('vetSession'),
-                              orderController.vetFlag = 'null'.obs,
-                              Get.toNamed(Routes.CREATE_ORDER,
-                                  arguments: 'Vet'),
-                            },
-                            child: Container(
-                                height: height * 0.07,
-                                width: width * 0.85,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade300,
-                                          spreadRadius: 2,
-                                          blurRadius: 4,
-                                          offset: Offset(0, 2))
-                                    ]),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 25, right: 25),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Back to Order',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontFamily: 'SanFrancisco',
-                                              color: Color(0xffF9813A))),
-                                      const Icon(
-                                        Icons.arrow_forward_rounded,
-                                        color: Color(0xffF9813A),
-                                      )
-                                    ],
-                                  ),
-                                )),
-                          ),
+                          // InkWell(
+                          //   onTap: () => {
+                          //     orderController.vetFlag = 'true'.obs,
+                          //     orderController.vetName = 'true',
+                          //     Get.toNamed(Routes.CREATE_ORDER, arguments: 'Vet')
+                          //   },
+                          //   child: Container(
+                          //       height: height * 0.07,
+                          //       width: width * 0.85,
+                          //       decoration: BoxDecoration(
+                          //           color: Color(0xffF9813A),
+                          //           borderRadius:
+                          //               BorderRadius.all(Radius.circular(20)),
+                          //           boxShadow: [
+                          //             BoxShadow(
+                          //                 color: Colors.grey.shade300,
+                          //                 spreadRadius: 2,
+                          //                 blurRadius: 4,
+                          //                 offset: Offset(0, 2))
+                          //           ]),
+                          //       child: Padding(
+                          //         padding: const EdgeInsets.only(
+                          //             left: 25, right: 25),
+                          //         child: Row(
+                          //           mainAxisAlignment:
+                          //               MainAxisAlignment.spaceBetween,
+                          //           children: const [
+                          //             Text('Confirm Session',
+                          //                 style: TextStyle(
+                          //                     fontSize: 14,
+                          //                     fontFamily: 'SanFrancisco',
+                          //                     color: Colors.white)),
+                          //             Icon(
+                          //               Icons.done_rounded,
+                          //               color: Colors.white,
+                          //             )
+                          //           ],
+                          //         ),
+                          //       )),
+                          // ),
+                          // SizedBox(
+                          //   height: 15,
+                          // ),
+                          // InkWell(
+                          //   onTap: () => {
+                          //     orderController.vetName =
+                          //         localStorage.read('vetSession'),
+                          //     orderController.vetFlag = 'null'.obs,
+                          //     Get.toNamed(Routes.CREATE_ORDER,
+                          //         arguments: 'Vet'),
+                          //   },
+                          //   child: Container(
+                          //       height: height * 0.07,
+                          //       width: width * 0.85,
+                          //       decoration: BoxDecoration(
+                          //           color: Colors.white,
+                          //           borderRadius:
+                          //               BorderRadius.all(Radius.circular(20)),
+                          //           boxShadow: [
+                          //             BoxShadow(
+                          //                 color: Colors.grey.shade300,
+                          //                 spreadRadius: 2,
+                          //                 blurRadius: 4,
+                          //                 offset: Offset(0, 2))
+                          //           ]),
+                          //       child: Padding(
+                          //         padding: const EdgeInsets.only(
+                          //             left: 25, right: 25),
+                          //         child: Row(
+                          //           mainAxisAlignment:
+                          //               MainAxisAlignment.spaceBetween,
+                          //           children: [
+                          //             Text('Back to Order',
+                          //                 style: TextStyle(
+                          //                     fontSize: 14,
+                          //                     fontFamily: 'SanFrancisco',
+                          //                     color: Color(0xffF9813A))),
+                          //             const Icon(
+                          //               Icons.arrow_forward_rounded,
+                          //               color: Color(0xffF9813A),
+                          //             )
+                          //           ],
+                          //         ),
+                          //       )),
+                          // ),
                         ],
                       ));
                     } else {

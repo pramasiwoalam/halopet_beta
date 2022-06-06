@@ -418,12 +418,12 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                 activeFgColor: Colors.white,
                                 inactiveBgColor: Colors.grey.shade300,
                                 inactiveFgColor: Colors.white,
-                                initialLabelIndex: 0,
+                                initialLabelIndex: controller.status,
                                 totalSwitches: 2,
                                 labels: ['No', 'Yes'],
                                 radiusStyle: true,
                                 onToggle: (index) {
-                                  controller.status = index.toString();
+                                  controller.status = index!;
                                   print(controller.status);
                                 },
                               ),

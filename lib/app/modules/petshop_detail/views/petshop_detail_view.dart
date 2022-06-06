@@ -494,9 +494,8 @@ class Service extends StatelessWidget {
                                         localStorage.write(
                                             'selectedServiceName',
                                             dataMap['serviceName']);
-                                        Get.toNamed(
-                                          Routes.CHOOSE_PET,
-                                        );
+                                        Get.toNamed(Routes.CHOOSE_PET,
+                                            arguments: dataMap['serviceName']);
 
                                         AwesomeDialog(
                                           padding: EdgeInsets.all(20),

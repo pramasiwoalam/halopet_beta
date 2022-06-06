@@ -12,7 +12,7 @@ class GroomingOrderController extends GetxController {
 
   var packageName = 'null';
   var packageData = GetStorage().read('packageData');
-  var status = '0';
+  var status = 0;
 
   var vetSession = 'null';
   var vetFlag = 'null'.obs;

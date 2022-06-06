@@ -226,7 +226,7 @@ class SessionDetailView extends GetView<SessionDetailController> {
                         localStorage.write('vetSession', data['number']),
                         sessionController.vetFlag = true,
                         localStorage.write('sessionId', sessionId),
-                        Get.toNamed(Routes.CHOOSE_SESSION, arguments: sessionId)
+                        Get.toNamed(Routes.CREATE_ORDER, arguments: "Vet")
                       },
                       child: Container(
                         margin: EdgeInsets.only(top: height * 0.025),

@@ -43,6 +43,7 @@ abstract class Routes {
   static const SESSION_LIST = _Paths.SESSION_LIST;
   static const CHOOSE_SESSION = _Paths.CHOOSE_SESSION;
   static const SESSION_DETAIL = _Paths.SESSION_DETAIL;
+  static const CHOOSE_DATE = _Paths.CHOOSE_DATE;
 }
 
 abstract class _Paths {
@@ -87,4 +88,5 @@ abstract class _Paths {
   static const SESSION_LIST = '/session-list';
   static const CHOOSE_SESSION = '/choose-session';
   static const SESSION_DETAIL = '/session-detail';
+  static const CHOOSE_DATE = '/choose-date';
 }

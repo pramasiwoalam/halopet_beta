@@ -84,7 +84,7 @@ class ChoosePetView extends GetView<ChoosePetController> {
                                       return InkWell(
                                         onTap: () => {
                                           print("ARG $arguments"),
-                                          Get.toNamed(Routes.CREATE_ORDER,
+                                          Get.toNamed(Routes.CHOOSE_DATE,
                                               arguments: arguments),
                                           localStorage.write(
                                               'deliveryCharge', null),
