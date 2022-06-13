@@ -93,7 +93,8 @@ class ChooseDateView extends GetView<ChooseDateController> {
                                 : Text(
                                     controller.date.value.toString(),
                                     style: TextStyle(
-                                      fontFamily: 'SanFrancisco.Light',
+                                      fontFamily: 'SanFrancisco.Regular',
+                                      color: Colors.grey.shade700,
                                       fontSize: 14,
                                     ),
                                   ),

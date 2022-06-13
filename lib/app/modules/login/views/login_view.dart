@@ -31,11 +31,15 @@ class LoginView extends GetView<LoginController> {
               child: Expanded(
                 child: Column(
                   children: [
-                    SizedBox(height: 100),
-                    Text("Welcome to",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.roboto(
-                            fontSize: 16, fontWeight: FontWeight.w500)),
+                    SizedBox(height: 120),
+                    Text(
+                      "Welcome to",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'SanFrancisco',
+                          fontSize: 15,
+                          color: Colors.black),
+                    ),
                     // SizedBox(height: 10),
                     // Container(
                     //   height: height * 0.07,
@@ -47,7 +51,7 @@ class LoginView extends GetView<LoginController> {
                     //               AssetImage("assets/images/textHalopet.png"),
                     //           fit: BoxFit.cover)),
                     // ),
-                    SizedBox(height: 17),
+                    SizedBox(height: 15),
                     Container(
                       height: height * 0.16,
                       width: width * 0.65,
@@ -58,15 +62,17 @@ class LoginView extends GetView<LoginController> {
                             fit: BoxFit.contain),
                       ),
                     ),
-                    SizedBox(height: 37),
+                    SizedBox(height: 30),
                     Container(
                       height: height * 0.03,
                       width: width,
-                      // color: Colors.yellow,
-                      child: const Text(
+                      child: Text(
                         "Login in with",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        style: TextStyle(
+                            fontFamily: 'SanFrancisco.Light',
+                            fontSize: 15,
+                            color: Colors.black),
                       ),
                     )
                   ],
@@ -74,9 +80,8 @@ class LoginView extends GetView<LoginController> {
               ),
             ),
             Container(
-              height: height * 0.5,
+              height: height * 0.45,
               width: width,
-              // color: Colors.blue,
               child: Column(
                 children: [
                   // Expanded(child:
@@ -84,7 +89,7 @@ class LoginView extends GetView<LoginController> {
                     height: height * 0.21,
                     width: width,
                     // color: Colors.brown,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 3),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                     child: Center(
                       child: Column(
                         children: <Widget>[
@@ -232,6 +237,9 @@ class LoginView extends GetView<LoginController> {
                   //   color: Colors.green,
                   //   child: Column(
                   //     children: [
+                  SizedBox(
+                    height: 3,
+                  ),
                   Container(
                     height: height * 0.03,
                     width: width,

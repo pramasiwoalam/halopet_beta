@@ -110,9 +110,8 @@ class SignupView extends GetView<SignupController> {
                                     FloatingLabelBehavior.always),
                             validator: (value) {
                               if (value!.contains('@')) {
-                                return 'Error 2';
                               } else {
-                                return null;
+                                return 'Email not valid';
                               }
                             },
                             onSaved: (value) {
@@ -130,7 +129,7 @@ class SignupView extends GetView<SignupController> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
                                 labelText: "Password User *",
-                                hintText: 'Paaword',
+                                hintText: 'Password',
                                 contentPadding: EdgeInsets.all(18),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
@@ -151,7 +150,7 @@ class SignupView extends GetView<SignupController> {
                             onPressed: () async {
                               if (form.currentState!.validate()) {
                                 form.currentState!.save();
-                                signUpController.signupUser(formData);
+                                authController.signUp(formData);
                               }
                             },
                             child: Text("Register"),
@@ -161,7 +160,6 @@ class SignupView extends GetView<SignupController> {
                     ),
                   ),
                 ),
-
                 // child: Column(
                 //   children: [
                 //     TextField(

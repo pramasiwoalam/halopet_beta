@@ -44,11 +44,11 @@ class AuthController extends GetxController {
     auth.signInWithEmailAndPassword(email: "asd", password: "asd");
   }
 
-  void signUp(String name, String email, String password) async {
+  void signUp(Map<String, dynamic> formData) async {
     try {
       var res = await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      addUserCollection(name, email, res.user!.uid);
+          email: formData['email'], password: formData['password']);
+      addUserCollection(formData['name'], formData['email'], res.user!.uid);
       Get.back();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
