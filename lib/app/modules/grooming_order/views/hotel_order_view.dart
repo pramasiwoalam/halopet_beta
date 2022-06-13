@@ -15,7 +15,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import '../../delivery_list/controllers/delivery_list_controller.dart';
 import '../controllers/grooming_order_controller.dart';
 
-class VetOrderView extends GetView<GroomingOrderController> {
+class HotelOrderView extends GetView<GroomingOrderController> {
   final orderController = Get.put(GroomingOrderController());
   final typeController = TextEditingController();
   final deliveryController = Get.put(DeliveryListController());
@@ -25,7 +25,7 @@ class VetOrderView extends GetView<GroomingOrderController> {
     orderController.date.value = date;
   }
 
-  var medicalName = localStorage.read('medName');
+  var roomName = localStorage.read('roomName');
 
   Map<String, dynamic> formData = {
     'symptoms': "Abdomen",
@@ -220,7 +220,7 @@ class VetOrderView extends GetView<GroomingOrderController> {
                                   height: 2,
                                 ),
                                 Text(
-                                  dataMap['name'],
+                                  roomName,
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco.Regular',
                                       fontSize: 13),
@@ -254,69 +254,56 @@ class VetOrderView extends GetView<GroomingOrderController> {
                         ),
                         FlatButton(
                             onPressed: () => {
-                                  if (controller.status == '0')
-                                    {
-                                      AwesomeDialog(
-                                        context: context,
-                                        dialogType: DialogType.INFO,
-                                        animType: AnimType.BOTTOMSLIDE,
-                                        title: 'Booking Confirmation',
-                                        desc:
-                                            'Are you sure want to create this booking?.',
-                                        btnCancelOnPress: () => {},
-                                        btnOkText: 'Yes',
-                                        buttonsTextStyle: GoogleFonts.roboto(
-                                            fontWeight: FontWeight.w600),
-                                        btnOkOnPress: () {
-                                          deliveryController.deliveryFee == 0
-                                              ? orderController.createVetOrder(
-                                                  typeController.text,
+                                  AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.INFO,
+                                    animType: AnimType.BOTTOMSLIDE,
+                                    title: 'Booking Confirmation',
+                                    desc:
+                                        'Are you sure want to create this booking?.',
+                                    btnCancelOnPress: () => {},
+                                    btnOkText: 'Yes',
+                                    buttonsTextStyle: GoogleFonts.roboto(
+                                        fontWeight: FontWeight.w600),
+                                    btnOkOnPress: () {
+                                      deliveryController.deliveryFee == 0
+                                          ? orderController.createHotelOrder(
+                                              typeController.text,
+                                              orderController.date.toString(),
+                                              "Pet Hotel",
+                                              localStorage.read('totalCharge'),
+                                              controller.appointmentTime.value)
+                                          : orderController
+                                              .createHotelOrderWithDelivery(
+                                                  petId,
                                                   orderController.date
                                                       .toString(),
-                                                  "Vet",
-                                                  formData['symptoms'],
+                                                  localStorage
+                                                      .read('serviceType'),
                                                   localStorage
                                                       .read('totalCharge'),
                                                   controller
-                                                      .appointmentTime.value)
-                                              : orderController
-                                                  .createVetOrderWithDelivery(
-                                                      petId,
-                                                      orderController.date
-                                                          .toString(),
-                                                      localStorage
-                                                          .read('serviceType'),
-                                                      formData['symptoms'],
-                                                      localStorage
-                                                          .read('totalCharge'),
-                                                      controller.appointmentTime
-                                                          .value,
-                                                      deliveryController.time
-                                                          .toString(),
-                                                      deliveryController
-                                                          .deliveryFee);
+                                                      .appointmentTime.value,
+                                                  deliveryController.time
+                                                      .toString(),
+                                                  deliveryController
+                                                      .deliveryFee);
 
-                                          AwesomeDialog(
-                                            context: context,
-                                            dialogType: DialogType.SUCCES,
-                                            animType: AnimType.BOTTOMSLIDE,
-                                            title: 'Booking Created.',
-                                            desc:
-                                                'You can check your order here.',
-                                            btnOkText: 'Check your order >',
-                                            buttonsTextStyle:
-                                                GoogleFonts.roboto(
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                            btnOkOnPress: () {
-                                              Get.toNamed(Routes.ORDER);
-                                            },
-                                          ).show();
+                                      AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.SUCCES,
+                                        animType: AnimType.BOTTOMSLIDE,
+                                        title: 'Booking Created.',
+                                        desc: 'You can check your order here.',
+                                        btnOkText: 'Check your order >',
+                                        buttonsTextStyle: GoogleFonts.roboto(
+                                            fontWeight: FontWeight.w600),
+                                        btnOkOnPress: () {
+                                          Get.toNamed(Routes.ORDER);
                                         },
-                                      ).show()
-                                    }
-                                  else
-                                    {Get.toNamed(Routes.DELIVERY_LIST)}
+                                      ).show();
+                                    },
+                                  ).show()
                                 },
                             child: Container(
                                 height: height * 0.07,

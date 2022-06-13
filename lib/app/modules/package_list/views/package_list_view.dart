@@ -42,7 +42,7 @@ class PackageListView extends GetView<PackageListController> {
                   itemBuilder: (context, index) {
                     var dataMap = data[index].data() as Map<String, dynamic>;
                     return Padding(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(6),
                       child: InkWell(
                         onTap: () => {
                           Get.toNamed(Routes.CREATE_ORDER,
@@ -53,14 +53,14 @@ class PackageListView extends GetView<PackageListController> {
                           groomingController.packageName = dataMap['name']
                         },
                         child: Container(
-                          height: height * 0.12,
+                          height: height * 0.15,
                           width: width * 0.8,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(
                                   width: 0.8, color: Colors.grey.shade300),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+                                  BorderRadius.all(Radius.circular(5)),
                               boxShadow: [
                                 BoxShadow(
                                     color: Colors.grey.shade200,
@@ -97,17 +97,18 @@ class PackageListView extends GetView<PackageListController> {
                                           children: [
                                             Text(
                                               dataMap['name'],
-                                              style: GoogleFonts.roboto(
+                                              style: TextStyle(
                                                   color: Colors.grey.shade800,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 16),
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 14),
                                             ),
                                             Text(
                                               dataMap['desc'],
                                               overflow: TextOverflow.ellipsis,
-                                              style: GoogleFonts.roboto(
+                                              style: TextStyle(
                                                   color: Colors.grey.shade800,
-                                                  fontWeight: FontWeight.w300,
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
                                                   fontSize: 12),
                                             )
                                           ],
@@ -124,17 +125,17 @@ class PackageListView extends GetView<PackageListController> {
                                       Icon(
                                         Icons.monetization_on,
                                         color: Colors.orange,
-                                        size: 20,
+                                        size: 16,
                                       ),
                                       SizedBox(
                                         width: 5,
                                       ),
                                       Text(
                                         dataMap['price'],
-                                        style: GoogleFonts.roboto(
+                                        style: TextStyle(
                                             color: Colors.grey.shade800,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 15),
+                                            fontFamily: 'SanFrancisco.Light',
+                                            fontSize: 14),
                                       ),
                                     ],
                                   )

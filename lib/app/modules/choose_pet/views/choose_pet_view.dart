@@ -58,7 +58,12 @@ class ChoosePetView extends GetView<ChoosePetController> {
                           Text('You dont have any pet. Register >'),
                           ElevatedButton(
                               onPressed: () => Get.toNamed(Routes.PET_FORM),
-                              child: Text('Register'))
+                              child: Text(
+                                'Register',
+                                style: TextStyle(
+                                    fontFamily: 'SanFrancisco.Regular',
+                                    fontSize: 13),
+                              ))
                         ],
                       ),
                     );

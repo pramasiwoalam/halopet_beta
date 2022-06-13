@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:halopet_beta/app/modules/choose_room/bindings/choose_room_binding.dart';
+import 'package:halopet_beta/app/modules/choose_room/views/choose_room_view.dart';
 import 'package:halopet_beta/app/modules/delivery_list/bindings/delivery_list_binding.dart';
 import 'package:halopet_beta/app/modules/delivery_list/views/delivery_list_view.dart';
 import 'package:halopet_beta/app/modules/notification_list/bindings/notification_list_binding.dart';
@@ -298,6 +300,11 @@ class AppPages {
       name: _Paths.MEDICAL_LIST,
       page: () => MedicalListView(),
       binding: MedicalListBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHOOSE_ROOM,
+      page: () => ChooseRoomView(),
+      binding: ChooseRoomBinding(),
     ),
   ];
 }

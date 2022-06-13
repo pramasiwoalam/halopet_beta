@@ -497,6 +497,7 @@ class Home extends StatelessWidget {
                                                         Get.toNamed(
                                                           Routes.PETSHOP_DETAIL,
                                                         ),
+                                                        print('asd'),
                                                         localStorage.write(
                                                             'petshopId',
                                                             data[index].id)

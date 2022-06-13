@@ -51,8 +51,9 @@ class PetListView extends GetView<PetListController> {
                         ),
                         Text(
                             "You don't have any pet registered. Please register your pet first.",
-                            style: GoogleFonts.roboto(
-                                fontWeight: FontWeight.w300, fontSize: 15)),
+                            style: TextStyle(
+                                fontFamily: 'SanFrancisco.Light',
+                                fontSize: 14)),
                         SizedBox(
                           height: 10,
                         ),
@@ -70,15 +71,15 @@ class PetListView extends GetView<PetListController> {
                                 children: [
                                   Icon(
                                     Icons.add,
-                                    size: 25,
+                                    size: 22,
                                   ),
                                   SizedBox(
                                     height: 5,
                                   ),
                                   Text('Register',
-                                      style: GoogleFonts.roboto(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 14,
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco.Regular',
+                                          fontSize: 12,
                                           color: Colors.grey.shade800))
                                 ],
                               ),

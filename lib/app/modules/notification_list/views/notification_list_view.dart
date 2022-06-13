@@ -79,7 +79,7 @@ class NotificationListView extends GetView<NotificationListController> {
                                         ),
                                       ),
                                       Container(
-                                        width: width * 0.8,
+                                        width: width * 0.78,
                                         height: height * 0.1,
                                         child: Column(
                                           crossAxisAlignment:
@@ -94,14 +94,14 @@ class NotificationListView extends GetView<NotificationListController> {
                                                     style: GoogleFonts.roboto(
                                                         fontWeight:
                                                             FontWeight.w300,
-                                                        fontSize: 13)),
+                                                        fontSize: 12)),
                                                 Text(
                                                     dataMap['dateCreated']
                                                         .toString(),
                                                     style: GoogleFonts.roboto(
                                                         fontWeight:
                                                             FontWeight.w300,
-                                                        fontSize: 13))
+                                                        fontSize: 12))
                                               ],
                                             ),
                                             SizedBox(
@@ -112,12 +112,12 @@ class NotificationListView extends GetView<NotificationListController> {
                                                     style: GoogleFonts.roboto(
                                                         fontWeight:
                                                             FontWeight.w700,
-                                                        fontSize: 16))
+                                                        fontSize: 14))
                                                 : Text(dataMap['title'],
                                                     style: GoogleFonts.roboto(
                                                         fontWeight:
                                                             FontWeight.w300,
-                                                        fontSize: 16)),
+                                                        fontSize: 14)),
                                             SizedBox(
                                               height: 3,
                                             ),
@@ -126,12 +126,12 @@ class NotificationListView extends GetView<NotificationListController> {
                                                     style: GoogleFonts.roboto(
                                                         fontWeight:
                                                             FontWeight.w600,
-                                                        fontSize: 14))
+                                                        fontSize: 12))
                                                 : Text(dataMap['message'],
                                                     style: GoogleFonts.roboto(
                                                         fontWeight:
                                                             FontWeight.w300,
-                                                        fontSize: 14))
+                                                        fontSize: 12))
                                           ],
                                         ),
                                       )

@@ -7,6 +7,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/modules/grooming_order/views/grooming_order_view.dart';
+import 'package:halopet_beta/app/modules/grooming_order/views/hotel_order_view.dart';
 import 'package:halopet_beta/app/modules/grooming_order/views/vet_order_view.dart';
 import 'package:halopet_beta/app/modules/petshop_detail/views/petshop_detail_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
@@ -46,6 +47,6 @@ class CreateOrderView extends GetView<GroomingOrderController> {
             ? GroomingOrderView()
             : arguments == 'Vet'
                 ? VetOrderView()
-                : SizedBox());
+                : HotelOrderView());
   }
 }

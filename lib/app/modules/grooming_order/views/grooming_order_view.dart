@@ -440,8 +440,6 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                               future: controller
                                   .getPackage(localStorage.read('packageId')),
                               builder: (context, snapshot) {
-                                // double deliveryCharge =
-                                //     localStorage.read('deliveryCharge');
                                 if (snapshot.connectionState ==
                                     ConnectionState.done) {
                                   var packageData = snapshot.data!.data()

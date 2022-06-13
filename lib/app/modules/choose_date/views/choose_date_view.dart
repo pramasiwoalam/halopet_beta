@@ -135,8 +135,15 @@ class ChooseDateView extends GetView<ChooseDateController> {
                           }
                         else
                           {
-                            Get.toNamed(Routes.CHOOSE_SESSION,
-                                arguments: arguments)
+                            if (arguments == 'Vet')
+                              {
+                                Get.toNamed(Routes.CHOOSE_SESSION,
+                                    arguments: arguments)
+                              }
+                            else if (arguments == 'Hotel')
+                              {Get.toNamed(Routes.CHOOSE_ROOM)}
+                            else
+                              {Get.toNamed(Routes.PACKAGE_LIST)}
                           }
                       },
                   child: Container(

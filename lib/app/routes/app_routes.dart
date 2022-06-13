@@ -45,6 +45,7 @@ abstract class Routes {
   static const SESSION_DETAIL = _Paths.SESSION_DETAIL;
   static const CHOOSE_DATE = _Paths.CHOOSE_DATE;
   static const MEDICAL_LIST = _Paths.MEDICAL_LIST;
+  static const CHOOSE_ROOM = _Paths.CHOOSE_ROOM;
 }
 
 abstract class _Paths {
@@ -91,4 +92,5 @@ abstract class _Paths {
   static const SESSION_DETAIL = '/session-detail';
   static const CHOOSE_DATE = '/choose-date';
   static const MEDICAL_LIST = '/medical-list';
+  static const CHOOSE_ROOM = '/choose-room';
 }

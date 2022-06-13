@@ -24,6 +24,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
   var tabIndex = 0;
   @override
   Widget build(BuildContext context) {
+    print('asd');
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
@@ -34,18 +35,6 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
       length: 3,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(-62),
-          child: AppBar(
-            title: Text(
-              'Detail',
-              style:
-                  GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 0),
-            ),
-            backgroundColor: Colors.black,
-            elevation: 0,
-          ),
-        ),
         body: SingleChildScrollView(
           child: FutureBuilder<DocumentSnapshot<Object?>>(
               future: controller.getPetshopDetail(petshopId),
@@ -53,13 +42,12 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                 if (snapshot.connectionState == ConnectionState.done) {
                   var data = snapshot.data!.data() as Map<String, dynamic>;
                   var currentUserId = localStorage.read('currentUserId');
-                  print(data['favoriteId']);
                   return Stack(
-                    children: <Widget>[
+                    children: [
                       Positioned(
                         top: height / 10,
                         child: Container(
-                          height: height / 4,
+                          height: height / 3,
                           width: width,
                           // color: Colors.red,
                           decoration: BoxDecoration(
@@ -79,7 +67,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                         children: [
                           Container(
                             margin: EdgeInsets.only(top: height / 3.05),
-                            height: height * 0.022,
+                            height: height * 0.015,
                             width: width,
                             decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.only(
@@ -94,7 +82,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 50,
+                                  height: 80,
                                   child: AppBar(
                                     backgroundColor: Color(0xffF9813A),
                                     elevation: 0,
@@ -424,9 +412,10 @@ class Service extends StatelessWidget {
                 itemBuilder: (context, index) {
                   var dataMap = data[index].data() as Map<String, dynamic>;
                   return Padding(
-                    padding: const EdgeInsets.all(12),
+                    padding:
+                        const EdgeInsets.only(left: 6, right: 6, bottom: 6),
                     child: Container(
-                      height: height * 0.15,
+                      height: height * 0.18,
                       width: width * 0.7,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -440,7 +429,7 @@ class Service extends StatelessWidget {
                           ]),
                       child: Padding(
                         padding: const EdgeInsets.only(
-                            top: 10, left: 24, bottom: 10),
+                            top: 16, left: 24, bottom: 10),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -488,8 +477,8 @@ class Service extends StatelessWidget {
                                       btnOkOnPress: () {
                                         // localStorage.write('serviceType',
                                         //     dataMap['serviceName']);
-                                        // localStorage.write('selectedServiceId',
-                                        //     data[index].id);
+                                        localStorage.write('selectedServiceId',
+                                            data[index].id);
                                         // print(dataMap['serviceName']);
                                         localStorage.write(
                                             'selectedPetshop', petshopId);
@@ -531,9 +520,9 @@ class Service extends StatelessWidget {
                                           children: [
                                             Text(
                                               dataMap['serviceName'],
-                                              style: GoogleFonts.inter(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700,
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontFamily: 'SanFrancisco',
                                                   color: Colors.grey.shade800),
                                             ),
                                           ],
@@ -546,10 +535,10 @@ class Service extends StatelessWidget {
                                         ),
                                         Text(
                                           'Book your service at this petshop.',
-                                          style: GoogleFonts.inter(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.grey.shade700),
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontFamily: 'SanFrancisco.Light',
+                                              color: Colors.grey.shade800),
                                         ),
                                       ]),
                                 ),
