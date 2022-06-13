@@ -35,31 +35,30 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             return GetMaterialApp(
               home: snapshot.data != null
-                  ?
-                  // LoginView()
+                  ? LoginView()
                   // AdminHomeView()
-                  StreamBuilder<Object>(
-                      stream: authC.streamRole(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData && snapshot.data != null) {
-                          final user = snapshot.data as DocumentSnapshot;
-                          if (user['petshopOwner'] == true) {
-                            localStorage.write(
-                                'initialPetshopId', user['petshopId']);
-                          }
-                          if (user['role'] == 'Admin') {
-                            return AdminHomeView();
-                          } else if (user['role'] == 'Member') {
-                            return HomepageView();
-                          } else if (user['role'] == 'Seller') {
-                            return SellerHomeView();
-                          } else {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                        } else {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                      })
+                  // StreamBuilder<Object>(
+                  //     stream: authC.streamRole(),
+                  //     builder: (context, snapshot) {
+                  //       if (snapshot.hasData && snapshot.data != null) {
+                  //         final user = snapshot.data as DocumentSnapshot;
+                  //         if (user['petshopOwner'] == true) {
+                  //           localStorage.write(
+                  //               'initialPetshopId', user['petshopId']);
+                  //         }
+                  //         if (user['role'] == 'Admin') {
+                  //           return AdminHomeView();
+                  //         } else if (user['role'] == 'Member') {
+                  //           return HomepageView();
+                  //         } else if (user['role'] == 'Seller') {
+                  //           return SellerHomeView();
+                  //         } else {
+                  //           return Center(child: CircularProgressIndicator());
+                  //         }
+                  //       } else {
+                  //         return Center(child: CircularProgressIndicator());
+                  //       }
+                  //     })
                   : LoginView(),
               getPages: AppPages.routes,
             );
