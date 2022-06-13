@@ -492,6 +492,8 @@ class Service extends StatelessWidget {
                                         //     data[index].id);
                                         // print(dataMap['serviceName']);
                                         localStorage.write(
+                                            'selectedPetshop', petshopId);
+                                        localStorage.write(
                                             'selectedServiceName',
                                             dataMap['serviceName']);
                                         Get.toNamed(Routes.CHOOSE_PET,

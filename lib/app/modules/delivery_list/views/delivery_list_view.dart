@@ -22,7 +22,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
     var height = size.height;
     var width = size.width;
     var userId = localStorage.read('currentUserId');
-    var finalCharge = 0;
+    var arguments = Get.arguments;
     TimeOfDay time;
 
     void getTime(TimeOfDay time) {
@@ -403,7 +403,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                       onPressed: () => {
                                             groomingController.status = 0,
                                             Get.toNamed(Routes.CREATE_ORDER,
-                                                arguments: 'Grooming'),
+                                                arguments: arguments),
                                           }),
                                 ],
                               )
@@ -577,7 +577,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                       onPressed: () => {
                                             groomingController.status = 0,
                                             Get.toNamed(Routes.CREATE_ORDER,
-                                                arguments: 'Grooming'),
+                                                arguments: arguments),
                                           }),
                                 ],
                               )),

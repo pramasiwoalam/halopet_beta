@@ -35,7 +35,7 @@ class CreateOrderView extends GetView<GroomingOrderController> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Book a service',
+            'Booking Confirmation',
             style:
                 GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
           ),

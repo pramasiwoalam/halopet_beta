@@ -496,17 +496,17 @@ class ProfileView extends GetView<ProfileController> {
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(15)),
-                                          color: Colors.grey.shade200,
+                                          color: Colors.grey.shade100,
                                           child: Row(
                                             children: [
-                                              const Icon(Icons.edit_attributes,
+                                              const Icon(Icons.pets,
                                                   color: Color(0xffF9813A)),
                                               const SizedBox(
                                                 width: 30,
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                  "Edit your petshop",
+                                                  "Pet List",
                                                   style: GoogleFonts.inter(
                                                       fontWeight:
                                                           FontWeight.w400),
@@ -515,20 +515,24 @@ class ProfileView extends GetView<ProfileController> {
                                               Icon(Icons.arrow_forward_ios),
                                             ],
                                           ),
-                                          onPressed: () => {}),
+                                          onPressed: () =>
+                                              {Get.toNamed(Routes.PET_LIST)}),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 30, vertical: 10),
                                       child: FlatButton(
-                                        padding: EdgeInsets.all(15),
+                                        padding: EdgeInsets.all(20),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.white60,
+                                        color: Colors.grey.shade100,
                                         child: Row(
                                           children: [
-                                            Icon(Icons.sell_sharp),
+                                            Icon(
+                                              Icons.shopify,
+                                              color: Color(0xffF9813A),
+                                            ),
                                             SizedBox(
                                               width: 20,
                                             ),
@@ -551,14 +555,17 @@ class ProfileView extends GetView<ProfileController> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 30, vertical: 10),
                                       child: FlatButton(
-                                        padding: EdgeInsets.all(15),
+                                        padding: EdgeInsets.all(20),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        color: Colors.white60,
+                                        color: Colors.grey.shade100,
                                         child: Row(
                                           children: [
-                                            Icon(Icons.favorite),
+                                            Icon(
+                                              Icons.favorite,
+                                              color: Color(0xffF9813A),
+                                            ),
                                             SizedBox(
                                               width: 20,
                                             ),

@@ -14,6 +14,8 @@ class GroomingOrderController extends GetxController {
   var packageData = GetStorage().read('packageData');
   var status = 0;
 
+  var petshopName = null;
+
   var vetSession = 'null';
   var vetFlag = 'null'.obs;
   var vetName = GetStorage().read('vetSession');

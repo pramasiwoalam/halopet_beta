@@ -41,6 +41,8 @@ import '../modules/homepage/bindings/homepage_binding.dart';
 import '../modules/homepage/views/homepage_view.dart';
 import '../modules/information/bindings/information_binding.dart';
 import '../modules/information/views/information_view.dart';
+import '../modules/medical_list/bindings/medical_list_binding.dart';
+import '../modules/medical_list/views/medical_list_view.dart';
 import '../modules/notification_detail/bindings/notification_detail_binding.dart';
 import '../modules/notification_detail/views/notification_detail_view.dart';
 import '../modules/notification_list/views/notification_list_view.dart';
@@ -291,6 +293,11 @@ class AppPages {
       name: _Paths.CHOOSE_DATE,
       page: () => ChooseDateView(),
       binding: ChooseDateBinding(),
+    ),
+    GetPage(
+      name: _Paths.MEDICAL_LIST,
+      page: () => MedicalListView(),
+      binding: MedicalListBinding(),
     ),
   ];
 }

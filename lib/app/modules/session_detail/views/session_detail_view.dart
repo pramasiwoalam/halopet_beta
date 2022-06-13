@@ -222,12 +222,7 @@ class SessionDetailView extends GetView<SessionDetailController> {
                   ),
                   Center(
                     child: GestureDetector(
-                      onTap: () => {
-                        localStorage.write('vetSession', data['number']),
-                        sessionController.vetFlag = true,
-                        localStorage.write('sessionId', sessionId),
-                        Get.toNamed(Routes.CREATE_ORDER, arguments: "Vet")
-                      },
+                      onTap: () => {Get.toNamed(Routes.MEDICAL_LIST)},
                       child: Container(
                         margin: EdgeInsets.only(top: height * 0.025),
                         width: width * 0.82,

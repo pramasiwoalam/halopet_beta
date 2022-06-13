@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halopet_beta/app/modules/grooming_order/controllers/grooming_order_controller.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 import 'package:intl/intl.dart';
 
@@ -14,6 +15,7 @@ import '../controllers/choose_date_controller.dart';
 
 class ChooseDateView extends GetView<ChooseDateController> {
   final messageC = TextEditingController();
+  final createOrderController = Get.put(GroomingOrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class ChooseDateView extends GetView<ChooseDateController> {
     var arguments = Get.arguments;
     void setValue(DateTime dateTime) {
       var date = DateFormat('MMMM dd, yyyy').format(dateTime);
+      createOrderController.date.value = date.toString();
       controller.date.value = date;
     }
 
@@ -115,7 +118,25 @@ class ChooseDateView extends GetView<ChooseDateController> {
               ),
               FlatButton(
                   onPressed: () => {
-                        Get.toNamed(Routes.CHOOSE_SESSION, arguments: arguments)
+                        if (createOrderController.date == "null".obs)
+                          {
+                            AwesomeDialog(
+                              context: context,
+                              padding: EdgeInsets.all(20),
+                              dialogType: DialogType.WARNING,
+                              animType: AnimType.BOTTOMSLIDE,
+                              title: 'Warning',
+                              desc:
+                                  "Please pick your date before you create the order.",
+                              btnOkText: 'Agreed.',
+                              btnOkOnPress: () {},
+                            ).show()
+                          }
+                        else
+                          {
+                            Get.toNamed(Routes.CHOOSE_SESSION,
+                                arguments: arguments)
+                          }
                       },
                   child: Container(
                     height: height * 0.075,
