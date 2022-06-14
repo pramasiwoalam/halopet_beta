@@ -29,7 +29,7 @@ class MedicalListView extends GetView<MedicalListController> {
           title: Text(
             'Medical Service List',
             style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 17),
           ),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,
@@ -64,6 +64,9 @@ class MedicalListView extends GetView<MedicalListController> {
                                                 animType: AnimType.BOTTOMSLIDE,
                                                 btnCancelText: 'No',
                                                 btnOkText: 'Yes',
+                                                buttonsTextStyle: TextStyle(
+                                                    fontFamily:
+                                                        'SanFrancisco.Light'),
                                                 title: 'Choose Delivery',
                                                 desc:
                                                     'Are you want to order with delivery?',
@@ -83,9 +86,9 @@ class MedicalListView extends GetView<MedicalListController> {
                                           },
                                       child: Padding(
                                           padding: const EdgeInsets.only(
-                                              left: 22, right: 22, top: 24),
+                                              left: 6, right: 6, top: 6),
                                           child: Container(
-                                              height: height * 0.12,
+                                              height: height * 0.14,
                                               width: width,
                                               decoration: BoxDecoration(
                                                   color: Colors.white,
@@ -105,7 +108,7 @@ class MedicalListView extends GetView<MedicalListController> {
                                                       BorderRadius.circular(5)),
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                  left: 24,
+                                                  left: 30,
                                                   top: 12,
                                                   bottom: 12,
                                                 ),
@@ -113,8 +116,11 @@ class MedicalListView extends GetView<MedicalListController> {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   children: [
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
                                                     Container(
-                                                      width: width * 0.6,
+                                                      width: width * 0.65,
                                                       child: Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment

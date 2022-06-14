@@ -25,11 +25,10 @@ class PackageListView extends GetView<PackageListController> {
           title: Text(
             'Choose the package',
             style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 19),
+                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 17),
           ),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,
-          centerTitle: true,
         ),
         body: StreamBuilder<QuerySnapshot<Object?>>(
             stream: orderController.getPackageByServiceId(serviceId),
@@ -53,7 +52,7 @@ class PackageListView extends GetView<PackageListController> {
                           groomingController.packageName = dataMap['name']
                         },
                         child: Container(
-                          height: height * 0.15,
+                          height: height * 0.14,
                           width: width * 0.8,
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -70,23 +69,14 @@ class PackageListView extends GetView<PackageListController> {
                               ]),
                           child: Center(
                             child: Padding(
-                              padding: const EdgeInsets.all(16),
+                              padding: const EdgeInsets.only(
+                                  top: 12, bottom: 12, left: 32, right: 32),
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
-                                      Container(
-                                        child: Icon(
-                                          Icons.info,
-                                          color: Colors.orange,
-                                          size: 20,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
                                       Container(
                                         width: width * 0.35,
                                         child: Column(
@@ -102,6 +92,9 @@ class PackageListView extends GetView<PackageListController> {
                                                   fontFamily: 'SanFrancisco',
                                                   fontSize: 14),
                                             ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
                                             Text(
                                               dataMap['desc'],
                                               overflow: TextOverflow.ellipsis,
@@ -109,8 +102,56 @@ class PackageListView extends GetView<PackageListController> {
                                                   color: Colors.grey.shade800,
                                                   fontFamily:
                                                       'SanFrancisco.Light',
-                                                  fontSize: 12),
-                                            )
+                                                  fontSize: 11),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.pets,
+                                                  size: 13,
+                                                  color: Colors.orange,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  'Cat, Dog',
+                                                  style: TextStyle(
+                                                      color:
+                                                          Colors.grey.shade800,
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
+                                                      fontSize: 11),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.timer,
+                                                  size: 13,
+                                                  color: Colors.orange,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  '1 hour',
+                                                  style: TextStyle(
+                                                      color:
+                                                          Colors.grey.shade800,
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
+                                                      fontSize: 11),
+                                                )
+                                              ],
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -135,7 +176,7 @@ class PackageListView extends GetView<PackageListController> {
                                         style: TextStyle(
                                             color: Colors.grey.shade800,
                                             fontFamily: 'SanFrancisco.Light',
-                                            fontSize: 14),
+                                            fontSize: 13),
                                       ),
                                     ],
                                   )

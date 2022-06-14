@@ -246,7 +246,7 @@ class SessionDetailView extends GetView<SessionDetailController> {
                                 Text('Select this Session',
                                     style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 16,
+                                        fontSize: 15,
                                         color: Colors.white)),
                                 const Icon(
                                   Icons.arrow_forward,
@@ -284,7 +284,7 @@ class SessionDetailView extends GetView<SessionDetailController> {
                                 Text('Back to Session List',
                                     style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 16,
+                                        fontSize: 15,
                                         color: Color(0xffF9813A))),
                                 const Icon(
                                   Icons.arrow_forward,

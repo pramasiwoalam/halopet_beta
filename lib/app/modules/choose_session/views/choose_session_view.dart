@@ -69,10 +69,10 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                                         },
                                     child: Padding(
                                         padding: const EdgeInsets.only(
-                                            left: 24.0, right: 24, top: 24),
+                                            left: 6, right: 6, top: 6),
                                         child: controller.vetFlag == false
                                             ? Container(
-                                                height: height * 0.12,
+                                                height: height * 0.14,
                                                 width: width,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
@@ -94,7 +94,7 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                    left: 24,
+                                                    left: 36,
                                                     top: 12,
                                                     bottom: 12,
                                                   ),
@@ -103,18 +103,19 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                                                         MainAxisAlignment.start,
                                                     children: [
                                                       Container(
-                                                        width: width * 0.6,
+                                                        width: width * 0.65,
                                                         child: Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
+                                                            Spacer(),
                                                             Text(
                                                               dataMap['number'],
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       'SanFrancisco.Light',
-                                                                  fontSize: 11),
+                                                                  fontSize: 12),
                                                             ),
                                                             Spacer(),
                                                             Text(
@@ -131,7 +132,7 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       'SanFrancisco.Light',
-                                                                  fontSize: 11),
+                                                                  fontSize: 12),
                                                             ),
                                                             Spacer(),
                                                             Text(
@@ -140,8 +141,9 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       'SanFrancisco.Regular',
-                                                                  fontSize: 11),
+                                                                  fontSize: 12),
                                                             ),
+                                                            Spacer()
                                                           ],
                                                         ),
                                                       ),

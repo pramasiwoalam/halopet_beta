@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/modules/grooming_order/controllers/grooming_order_controller.dart';
+import 'package:halopet_beta/app/modules/petshop_detail/views/petshop_detail_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 import 'package:intl/intl.dart';
 
@@ -24,6 +25,7 @@ class ChooseDateView extends GetView<ChooseDateController> {
     var height = size.height;
     var userId = GetStorage().read('currentUserId');
     var arguments = Get.arguments;
+    var serviceName = localStorage.read('selectedServiceName');
     void setValue(DateTime dateTime) {
       var date = DateFormat('MMMM dd, yyyy').format(dateTime);
       createOrderController.date.value = date.toString();
@@ -114,6 +116,9 @@ class ChooseDateView extends GetView<ChooseDateController> {
                   ),
                 ),
               ),
+              controller.date == "null" && serviceName == 'Grooming'
+                  ? SizedBox()
+                  : Obx(() => Container()),
               SizedBox(
                 height: 25,
               ),

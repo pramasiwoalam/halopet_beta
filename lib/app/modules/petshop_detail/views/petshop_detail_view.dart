@@ -459,52 +459,110 @@ class Service extends StatelessWidget {
                                   }
                                 else
                                   {
-                                    AwesomeDialog(
-                                      context: context,
-                                      padding: EdgeInsets.all(20),
-                                      dialogType: DialogType.NO_HEADER,
-                                      animType: AnimType.BOTTOMSLIDE,
-                                      title: 'Confirmation',
-                                      desc:
-                                          'Are you sure want to create this order?.',
-                                      btnCancelOnPress: () => {},
-                                      btnCancelColor: Colors.grey.shade200,
-                                      btnOkColor: Colors.green.shade200,
-                                      btnOkText: 'Yes',
-                                      buttonsTextStyle: GoogleFonts.roboto(
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.grey.shade800),
-                                      btnOkOnPress: () {
-                                        // localStorage.write('serviceType',
-                                        //     dataMap['serviceName']);
-                                        localStorage.write('selectedServiceId',
-                                            data[index].id);
-                                        // print(dataMap['serviceName']);
-                                        localStorage.write(
-                                            'selectedPetshop', petshopId);
-                                        localStorage.write(
-                                            'selectedServiceName',
-                                            dataMap['serviceName']);
-                                        Get.toNamed(Routes.CHOOSE_PET,
-                                            arguments: dataMap['serviceName']);
+                                    Get.dialog(AlertDialog(
+                                      title: Text(
+                                        'Booking Confirmation',
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco',
+                                            fontSize: 14),
+                                      ),
+                                      titlePadding: EdgeInsets.only(
+                                          left: 26, right: 26, top: 30),
+                                      contentPadding: EdgeInsets.only(
+                                          left: 26,
+                                          right: 26,
+                                          top: 16,
+                                          bottom: 12),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      content: Text(
+                                          'Are you sure want to create this order?',
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco.Light',
+                                              fontSize: 12)),
+                                      actionsPadding: EdgeInsets.only(
+                                          right: 15, top: 6, bottom: 2),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () => {Get.back()},
+                                            child: Text(
+                                              'Cancel',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 13,
+                                                  color: Colors.orange),
+                                            )),
+                                        TextButton(
+                                            onPressed: () => {
+                                                  Get.back(),
+                                                  localStorage.write(
+                                                      'selectedServiceId',
+                                                      data[index].id),
+                                                  localStorage.write(
+                                                      'selectedPetshop',
+                                                      petshopId),
+                                                  localStorage.write(
+                                                      'selectedServiceName',
+                                                      dataMap['serviceName']),
+                                                  Get.toNamed(Routes.CHOOSE_PET,
+                                                      arguments: dataMap[
+                                                          'serviceName']),
+                                                },
+                                            child: Text(
+                                              'Confirm',
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 13,
+                                                  color: Colors.orange),
+                                            )),
+                                      ],
+                                    ))
+                                    // AwesomeDialog(
+                                    //   context: context,
+                                    //   padding: EdgeInsets.all(20),
+                                    //   dialogType: DialogType.NO_HEADER,
+                                    //   animType: AnimType.BOTTOMSLIDE,
+                                    //   title: 'Confirmation',
+                                    //   desc:
+                                    //       'Are you sure want to create this order?.',
+                                    //   btnCancelOnPress: () => {},
+                                    //   btnCancelColor: Colors.grey.shade200,
+                                    //   btnOkColor: Colors.green.shade200,
+                                    //   btnOkText: 'Yes',
+                                    //   buttonsTextStyle: GoogleFonts.roboto(
+                                    //       fontWeight: FontWeight.w600,
+                                    //       color: Colors.grey.shade800),
+                                    //   btnOkOnPress: () {
+                                    //     localStorage.write('selectedServiceId',
+                                    //         data[index].id);
 
-                                        AwesomeDialog(
-                                          padding: EdgeInsets.all(20),
-                                          context: context,
-                                          dialogType: DialogType.INFO_REVERSED,
-                                          animType: AnimType.BOTTOMSLIDE,
-                                          title: 'Choose your pet.',
-                                          desc:
-                                              'Choose who will be in service. Make sure you already registered your pet.',
-                                          btnOkText: 'Ok',
-                                          btnOkColor: Colors.grey.shade300,
-                                          buttonsTextStyle: GoogleFonts.roboto(
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.grey.shade800),
-                                          btnOkOnPress: () {},
-                                        ).show();
-                                      },
-                                    ).show()
+                                    //     localStorage.write(
+                                    //         'selectedPetshop', petshopId);
+                                    //     localStorage.write(
+                                    //         'selectedServiceName',
+                                    //         dataMap['serviceName']);
+                                    //     Get.toNamed(Routes.CHOOSE_PET,
+                                    //         arguments: dataMap['serviceName']);
+
+                                    //     AwesomeDialog(
+                                    //       padding: EdgeInsets.all(20),
+                                    //       context: context,
+                                    //       dialogType: DialogType.INFO_REVERSED,
+                                    //       animType: AnimType.BOTTOMSLIDE,
+                                    //       title: 'Choose your pet.',
+                                    //       desc:
+                                    //           'Choose who will be in service. Make sure you already registered your pet.',
+                                    //       btnOkText: 'Ok',
+                                    //       btnOkColor: Colors.grey.shade300,
+                                    //       buttonsTextStyle: GoogleFonts.roboto(
+                                    //           fontWeight: FontWeight.w600,
+                                    //           color: Colors.grey.shade800),
+                                    //       btnOkOnPress: () {},
+                                    //     ).show();
+                                    //   },
+                                    // ).show()
                                   }
                               },
                               child: Container(

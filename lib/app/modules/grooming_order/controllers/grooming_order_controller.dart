@@ -92,6 +92,33 @@ class GroomingOrderController extends GetxController {
     }
   }
 
+  void createGroomingOrder(String petId, String date, String serviceType,
+      double charge, String time) {
+    final localStorage = GetStorage();
+    CollectionReference order = firestore.collection("order");
+
+    try {
+      order.add({
+        "bookingType": "Grooming Services",
+        "petId": localStorage.read('petId'),
+        "orderCreated":
+            formatDate(DateTime.now(), [MM, ' ', dd, ',', ' ', yyyy]),
+        "orderDate": date,
+        "userId": localStorage.read('currentUserId'),
+        "petshopId": localStorage.read('petshopId'),
+        "status": "Waiting for approval",
+        "message": "",
+        "serviceType": serviceType,
+        "charge": charge,
+        "time": time,
+        "isDelivery": false
+      });
+      Get.toNamed(Routes.HOMEPAGE);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   void createHotelOrder(String petId, String date, String serviceType,
       double charge, String time) {
     final localStorage = GetStorage();
@@ -112,6 +139,41 @@ class GroomingOrderController extends GetxController {
         "charge": charge,
         "time": time,
         "isDelivery": false
+      });
+      Get.toNamed(Routes.HOMEPAGE);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void createGroomingOrderWithDelivery(
+      String petId,
+      String date,
+      String serviceType,
+      double charge,
+      String time,
+      String pickUpTime,
+      double deliveryFee) {
+    final localStorage = GetStorage();
+    CollectionReference order = firestore.collection("order");
+
+    try {
+      order.add({
+        "bookingType": "Grooming Order",
+        "petId": localStorage.read('petId'),
+        "orderCreated":
+            formatDate(DateTime.now(), [MM, ' ', dd, ',', ' ', yyyy]),
+        "orderDate": date,
+        "userId": localStorage.read('currentUserId'),
+        "petshopId": localStorage.read('petshopId'),
+        "status": "Waiting for approval",
+        "message": "",
+        "serviceType": serviceType,
+        "charge": charge,
+        "time": time,
+        "isDelivery": true,
+        "pickUpTime": pickUpTime,
+        "deliveryFee": deliveryFee
       });
       Get.toNamed(Routes.HOMEPAGE);
     } catch (e) {
