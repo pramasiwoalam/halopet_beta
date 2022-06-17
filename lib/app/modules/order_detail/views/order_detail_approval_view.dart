@@ -22,6 +22,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
+
     bool isDelivery = false;
     dynamic arguments = Get.arguments;
     DateFormat format = new DateFormat("MMMM dd, yyyy");
@@ -36,29 +37,35 @@ class WaitingApproval extends GetView<OrderDetailController> {
                 var data = snapshot.data!.data() as Map<String, dynamic>;
                 var currentUserId = localStorage.read('currentUserId');
                 var orderId = Get.arguments;
-
+                var bookingType = data['bookingType'];
                 localStorage.write('petshopId', Get.arguments);
                 return FutureBuilder<DocumentSnapshot<Object?>>(
-                    future: controller.getPackage(data['packageId']),
+                    future: bookingType == 'Grooming Service'
+                        ? controller.getPackage(data['packageId'])
+                        : bookingType == 'Vet'
+                            ? controller.getSession(data['sessionId'])
+                            : controller.getRoom(data['roomId']),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         var packageData =
                             snapshot.data!.data() as Map<String, dynamic>;
                         double bookingFee = 5000;
-                        double tax =
-                            double.parse(packageData['price']) * 10 / 100;
                         double charge = 0;
-                        if (data['isDelivery'] == false) {
-                          charge = double.parse(packageData['price']) +
-                              bookingFee +
-                              tax;
+                        double tax = 0;
+                        if (bookingType == 'Vet') {
+                          charge = bookingFee;
                         } else {
-                          charge = double.parse(packageData['price']) +
-                              bookingFee +
-                              tax +
-                              data['deliveryFee'];
+                          tax = packageData['price'] * 10 / 100;
+                          charge = 0;
+                          if (data['isDelivery'] == false) {
+                            charge = packageData['price'] + bookingFee + tax;
+                          } else {
+                            charge = packageData['price'] +
+                                bookingFee +
+                                tax +
+                                data['deliveryFee'];
+                          }
                         }
-
                         MoneyFormatter fmf = MoneyFormatter(
                             amount: charge,
                             settings: MoneyFormatterSettings(
@@ -68,6 +75,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
                               symbolAndNumberSeparator: ' ',
                             ));
                         MoneyFormatterOutput fo = fmf.output;
+
                         return Stack(
                           children: [
                             Container(
@@ -93,9 +101,9 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                   children: [
                                     Text(
                                       '   Order Status',
-                                      style: GoogleFonts.roboto(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 17,
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'SanFrancisco',
                                           color: Color(0xffF9813A)),
                                     ),
                                     const SizedBox(
@@ -128,18 +136,18 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text('Order ID',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14,
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
                                                           color: Colors.white)),
                                                   Text(
                                                       "#${arguments.toString().toUpperCase()}",
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 15,
-                                                          color: Colors.white))
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          color: Colors.white)),
                                                 ],
                                               ),
                                               Spacer(),
@@ -149,17 +157,17 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text('Status',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          fontSize: 14,
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
                                                           color: Colors.white)),
                                                   Text(data['status'],
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w800,
-                                                          fontSize: 15,
-                                                          color: Colors.white))
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          color: Colors.white)),
                                                 ],
                                               )
                                             ],
@@ -172,9 +180,9 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                     ),
                                     Text(
                                       '   Order Detail',
-                                      style: GoogleFonts.roboto(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 17,
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'SanFrancisco',
                                           color: Color(0xffF9813A)),
                                     ),
                                     const SizedBox(
@@ -202,10 +210,10 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text('Service',
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 16,
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                          'SanFrancisco',
                                                       color: Colors.black)),
                                               const Divider(
                                                 thickness: 1,
@@ -213,69 +221,262 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                               const SizedBox(
                                                 height: 7,
                                               ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text('Service type',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13,
-                                                          color: Colors
-                                                              .grey.shade500)),
-                                                  Text(data['serviceType'],
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 13,
-                                                          color: Colors
-                                                              .grey.shade500))
-                                                ],
-                                              ),
+                                              bookingType == 'Grooming Service'
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text('Service type',
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade700)),
+                                                        Text(
+                                                            data['serviceType'],
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600)),
+                                                      ],
+                                                    )
+                                                  : bookingType == 'Pet Hotel'
+                                                      ? Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Service Type',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade700)),
+                                                            Text('Pet Hotel',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600)),
+                                                          ],
+                                                        )
+                                                      : Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Service Type',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade700)),
+                                                            Text('Vet Service',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600)),
+                                                          ],
+                                                        ),
+                                              Spacer(),
+                                              bookingType == 'Grooming Service'
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text('Service package',
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade700)),
+                                                        Text(
+                                                            'Full Service Grooming',
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600)),
+                                                      ],
+                                                    )
+                                                  : bookingType == 'Vet'
+                                                      ? Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Session',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade700)),
+                                                            Text(
+                                                                packageData[
+                                                                    'number'],
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600)),
+                                                          ],
+                                                        )
+                                                      : Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Room',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade700)),
+                                                            Text(
+                                                                packageData[
+                                                                    'name'],
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600)),
+                                                          ],
+                                                        ),
                                               Spacer(),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Text('Service package',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13,
+                                                  Text('Pet Name',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
                                                           color: Colors
-                                                              .grey.shade500)),
-                                                  Text('Full Service Grooming',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 13,
+                                                              .grey.shade700)),
+                                                  Text("Aero",
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco',
                                                           color: Colors
-                                                              .grey.shade500))
+                                                              .grey.shade600)),
                                                 ],
                                               ),
                                               Spacer(),
+                                              bookingType == 'Vet'
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text('Medical service',
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade700)),
+                                                        FutureBuilder<
+                                                                DocumentSnapshot<
+                                                                    Object?>>(
+                                                            future: controller
+                                                                .getMedicalDetail(
+                                                                    data[
+                                                                        'medicalId']),
+                                                            builder: (context,
+                                                                snapshot) {
+                                                              if (snapshot
+                                                                      .connectionState ==
+                                                                  ConnectionState
+                                                                      .done) {
+                                                                var medicalData = snapshot
+                                                                        .data!
+                                                                        .data()
+                                                                    as Map<
+                                                                        String,
+                                                                        dynamic>;
+                                                                return Text(
+                                                                    medicalData[
+                                                                        'name'],
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontFamily:
+                                                                            'SanFrancisco',
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade600));
+                                                              } else {
+                                                                return Center(
+                                                                  child:
+                                                                      CircularProgressIndicator(),
+                                                                );
+                                                              }
+                                                            }),
+                                                      ],
+                                                    )
+                                                  : Spacer(),
+                                              bookingType == 'Vet'
+                                                  ? Spacer()
+                                                  : SizedBox(),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
                                                   Text('Booking from',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
                                                           color: Colors
-                                                              .grey.shade500)),
+                                                              .grey.shade700)),
                                                   Text('Dita Genday Petshop',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 13,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco',
                                                           color: Colors
-                                                              .grey.shade500))
+                                                              .grey.shade600)),
                                                 ],
                                               ),
                                               Spacer(),
@@ -285,19 +486,19 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text('Booking created',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
                                                           color: Colors
-                                                              .grey.shade500)),
+                                                              .grey.shade700)),
                                                   Text(data['orderCreated'],
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 13,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco',
                                                           color: Colors
-                                                              .grey.shade500))
+                                                              .grey.shade600)),
                                                 ],
                                               ),
                                               Spacer(),
@@ -307,67 +508,55 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text('Booking appointment',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
                                                           color: Colors
-                                                              .grey.shade500)),
+                                                              .grey.shade700)),
                                                   Text(
                                                       data['orderDate']
                                                           .toString(),
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 13,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco',
                                                           color: Colors
-                                                              .grey.shade500)),
+                                                              .grey.shade600)),
                                                 ],
                                               ),
                                               Spacer(),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text('Booking time',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13,
-                                                          color: Colors
-                                                              .grey.shade500)),
-                                                  Text("12.00 PM",
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 13,
-                                                          color: Colors
-                                                              .grey.shade500)),
-                                                ],
-                                              ),
-                                              Spacer(),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text('Pet Name',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13,
-                                                          color: Colors
-                                                              .grey.shade500)),
-                                                  Text("Aero",
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 13,
-                                                          color: Colors
-                                                              .grey.shade500)),
-                                                ],
-                                              ),
+                                              bookingType == 'Grooming Service'
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text('Booking time',
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade700)),
+                                                        Text("12.00 PM",
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600)),
+                                                      ],
+                                                    )
+                                                  : Spacer(),
+                                              bookingType == 'Vet'
+                                                  ? Spacer()
+                                                  : bookingType ==
+                                                          'Grooming Service'
+                                                      ? Spacer()
+                                                      : SizedBox(),
                                               const SizedBox(
                                                 height: 5,
                                               ),
@@ -390,14 +579,14 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text('Service charge',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
                                                           color: Colors
-                                                              .grey.shade500)),
+                                                              .grey.shade700)),
                                                   Text(
-                                                      "Rp. ${double.parse(packageData['price'])}",
+                                                      "Rp. ${packageData['price']}",
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
                                                               FontWeight.w400,
@@ -413,12 +602,12 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text('Booking fee',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
                                                           color: Colors
-                                                              .grey.shade500)),
+                                                              .grey.shade700)),
                                                   Text(
                                                       "Rp. ${bookingFee.toString()}",
                                                       style: GoogleFonts.roboto(
@@ -439,15 +628,14 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                                   .spaceBetween,
                                                           children: [
                                                             Text('Delivery fee',
-                                                                style: GoogleFonts.roboto(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
+                                                                style: TextStyle(
                                                                     fontSize:
-                                                                        13,
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
                                                                     color: Colors
                                                                         .grey
-                                                                        .shade500)),
+                                                                        .shade700)),
                                                             Text(
                                                                 "Rp. ${data['deliveryFee']}",
                                                                 style: GoogleFonts.roboto(
@@ -473,12 +661,12 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text('Tax',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
                                                           color: Colors
-                                                              .grey.shade500)),
+                                                              .grey.shade700)),
                                                   Text("Rp. ${tax.toString()}",
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
@@ -495,12 +683,12 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text('Total charge',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 13,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco',
                                                           color: Colors
-                                                              .grey.shade900)),
+                                                              .grey.shade700)),
                                                   Text(fo.symbolOnLeft,
                                                       style: GoogleFonts.roboto(
                                                           fontWeight:
@@ -625,10 +813,10 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text('Cancel Order Request',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 17,
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              'SanFrancisco',
                                                           color: Colors.white)),
                                                   const Icon(
                                                     Icons.cancel_schedule_send,

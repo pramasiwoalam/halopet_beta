@@ -266,6 +266,8 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                         style: TextStyle(
                                             fontFamily: 'SanFrancisco.Light',
                                             fontSize: 12)),
+                                    actionsPadding: EdgeInsets.only(
+                                        right: 12, top: 6, bottom: 2),
                                     actions: [
                                       TextButton(
                                           onPressed: () => {Get.back()},

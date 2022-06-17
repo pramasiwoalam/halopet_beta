@@ -72,6 +72,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                             inactiveFgColor: Colors.white,
                             initialLabelIndex: 0,
                             totalSwitches: 2,
+                            fontSize: 14,
                             labels: ['Pick Up Only', 'Pick Up & Delivery'],
                             radiusStyle: true,
                             onToggle: (index) {
@@ -235,16 +236,17 @@ class DeliveryListView extends GetView<DeliveryListController> {
                               child: orderController.time == "null"
                                   ? Text(
                                       "Set Pick Up Time *",
-                                      style: GoogleFonts.roboto(
-                                          color: Colors.grey.shade700,
-                                          fontSize: 15),
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco.Light',
+                                          fontSize: 13,
+                                          color: Colors.grey.shade800),
                                     )
                                   : Text(
                                       '${controller.time}',
-                                      style: GoogleFonts.roboto(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700),
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco.Light',
+                                          fontSize: 13,
+                                          color: Colors.white),
                                     ),
                               shape: RoundedRectangleBorder(
                                   side: BorderSide(
@@ -313,25 +315,19 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text('Pick Up Charge',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 13,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                       Text("Rp. $pickUpFee",
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 13,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                     ],
                                                   ),
                                                   Spacer(),
@@ -342,21 +338,17 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                     children: [
                                                       Text(
                                                           'Total Delivery Charge',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w800,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 13,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                       Text(fo.symbolOnLeft,
-                                                          style: GoogleFonts.roboto(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w800,
-                                                              fontSize: 14,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco',
+                                                              fontSize: 13,
                                                               color: Color(
                                                                   0xffF9813A))),
                                                     ],
@@ -374,37 +366,28 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  FlatButton(
-                                      padding: EdgeInsets.all(15),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      color: Color(0xffF9813A),
-                                      height: height * 0.08,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, right: 20),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "Confirm Delivery",
-                                                style: GoogleFonts.inter(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 15),
-                                              ),
-                                            ),
-                                            Icon(Icons.arrow_forward_ios,
-                                                color: Colors.white),
-                                          ],
+                                  Container(
+                                    height: size.height * 0.07,
+                                    width: width * 0.9,
+                                    color: Colors.transparent,
+                                    child: ElevatedButton(
+                                        onPressed: () => {
+                                              groomingController.status = 0,
+                                              Get.toNamed(Routes.CREATE_ORDER,
+                                                  arguments: arguments),
+                                            },
+                                        style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0, vertical: 5.0),
+                                          primary: Color(0xffF9813A),
+                                          shape: StadiumBorder(),
                                         ),
-                                      ),
-                                      onPressed: () => {
-                                            groomingController.status = 0,
-                                            Get.toNamed(Routes.CREATE_ORDER,
-                                                arguments: arguments),
-                                          }),
+                                        child: Text("Confirm Delivery",
+                                            style: TextStyle(
+                                              fontFamily: 'SanFrancisco',
+                                              fontSize: 14,
+                                            ))),
+                                  ),
                                 ],
                               )
                             : Column(
@@ -459,25 +442,19 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text('Pick Up Charge',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 15,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 13,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                       Text("Rp. $pickUpFee",
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 15,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 13,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                     ],
                                                   ),
                                                   Spacer(),
@@ -487,25 +464,19 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text('Delivery Charge',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 15,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 13,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                       Text("Rp. $deliveryFee",
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 15,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 13,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                     ],
                                                   ),
                                                   Spacer(),
@@ -516,23 +487,19 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                                     children: [
                                                       Text(
                                                           'Total Delivery Charge',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w800,
-                                                                  fontSize: 16,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 13,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                       Text(fo.symbolOnLeft,
-                                                          style: GoogleFonts.roboto(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w800,
-                                                              fontSize: 16,
-                                                              color: Color(
-                                                                  0xffF9813A))),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco',
+                                                              fontSize: 13,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                     ],
                                                   ),
                                                 ],
@@ -548,37 +515,55 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  FlatButton(
-                                      padding: EdgeInsets.all(15),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      color: Color(0xffF9813A),
-                                      height: height * 0.08,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, right: 20),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "Confirm Delivery",
-                                                style: GoogleFonts.inter(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 16),
-                                              ),
-                                            ),
-                                            Icon(Icons.arrow_forward_ios,
-                                                color: Colors.white),
-                                          ],
+                                  Container(
+                                    height: size.height * 0.07,
+                                    width: size.width * 0.9,
+                                    color: Colors.transparent,
+                                    child: ElevatedButton(
+                                        onPressed: () => {
+                                              groomingController.status = 0,
+                                              Get.toNamed(Routes.CREATE_ORDER,
+                                                  arguments: arguments),
+                                            },
+                                        style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0, vertical: 5.0),
+                                          primary: Color(0xffF9813A),
+                                          shape: StadiumBorder(),
                                         ),
-                                      ),
-                                      onPressed: () => {
-                                            groomingController.status = 0,
-                                            Get.toNamed(Routes.CREATE_ORDER,
-                                                arguments: arguments),
-                                          }),
+                                        child: Text("Confirm Delivery",
+                                            style: TextStyle(
+                                              fontFamily: 'SanFrancisco',
+                                              fontSize: 14,
+                                            ))),
+                                  ),
+                                  // FlatButton(
+                                  //     padding: EdgeInsets.all(15),
+                                  //     shape: RoundedRectangleBorder(
+                                  //         borderRadius:
+                                  //             BorderRadius.circular(15)),
+                                  //     color: Color(0xffF9813A),
+                                  //     height: height * 0.08,
+                                  //     child: Padding(
+                                  //       padding: const EdgeInsets.only(
+                                  //           left: 20, right: 20),
+                                  //       child: Row(
+                                  //         children: [
+                                  //           Expanded(
+                                  //             child: Text(
+                                  //               "Confirm Delivery",
+                                  //               style: GoogleFonts.inter(
+                                  //                   color: Colors.white,
+                                  //                   fontWeight: FontWeight.w400,
+                                  //                   fontSize: 16),
+                                  //             ),
+                                  //           ),
+                                  //           Icon(Icons.arrow_forward_ios,
+                                  //               color: Colors.white),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //     onPressed: () => {}),
                                 ],
                               )),
                       ],

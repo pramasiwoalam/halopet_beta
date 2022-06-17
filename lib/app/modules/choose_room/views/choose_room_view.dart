@@ -57,24 +57,62 @@ class ChooseRoomView extends GetView<ChooseRoomController> {
                             const EdgeInsets.only(top: 5, left: 5, right: 5),
                         child: InkWell(
                           onTap: () => {
-                            AwesomeDialog(
-                                context: context,
-                                dialogType: DialogType.INFO_REVERSED,
-                                animType: AnimType.BOTTOMSLIDE,
-                                btnCancelText: 'No',
-                                btnOkText: 'Yes',
-                                title: 'Choose Delivery',
-                                desc: 'Are you want to order with delivery?',
-                                btnCancelOnPress: () => {
-                                      localStorage.write(
-                                          'roomId', roomData[index].id),
-                                      Get.toNamed(Routes.CREATE_ORDER,
-                                          arguments: "Hotel")
-                                    },
-                                btnOkOnPress: () => {
-                                      Get.toNamed(Routes.DELIVERY_LIST,
-                                          arguments: "Hotel")
-                                    }).show(),
+                            Get.dialog(AlertDialog(
+                              title: const Text(
+                                'Delivey Option',
+                                style: TextStyle(
+                                    fontFamily: 'SanFrancisco', fontSize: 14),
+                              ),
+                              titlePadding:
+                                  EdgeInsets.only(left: 26, right: 26, top: 30),
+                              contentPadding: const EdgeInsets.only(
+                                  left: 26, right: 26, top: 16, bottom: 12),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              content: const Text(
+                                  'Do you want to order with delivery?',
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco.Light',
+                                      fontSize: 12)),
+                              actionsPadding:
+                                  EdgeInsets.only(top: 6, bottom: 2),
+                              actions: [
+                                TextButton(
+                                    onPressed: () => {
+                                          Get.back(),
+                                          localStorage.write('roomName',
+                                              roomData[index]['name']),
+                                          localStorage.write(
+                                              'roomId', roomData[index].id),
+                                          Get.toNamed(Routes.DELIVERY_LIST,
+                                              arguments: "Hotel")
+                                        },
+                                    child: const Text(
+                                      'Yes, with delivery',
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco.Light',
+                                          fontSize: 13,
+                                          color: Colors.orange),
+                                    )),
+                                TextButton(
+                                    onPressed: () => {
+                                          Get.back(),
+                                          localStorage.write('roomName',
+                                              roomData[index]['name']),
+                                          localStorage.write(
+                                              'roomId', roomData[index].id),
+                                          Get.toNamed(Routes.CREATE_ORDER,
+                                              arguments: "Hotel")
+                                        },
+                                    child: Text(
+                                      'No',
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco',
+                                          fontSize: 13,
+                                          color: Colors.orange),
+                                    )),
+                              ],
+                            ))
                           },
                           child: Container(
                             height: height * 0.18,

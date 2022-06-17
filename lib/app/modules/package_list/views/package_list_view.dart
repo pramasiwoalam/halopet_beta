@@ -44,12 +44,59 @@ class PackageListView extends GetView<PackageListController> {
                       padding: const EdgeInsets.all(6),
                       child: InkWell(
                         onTap: () => {
-                          Get.toNamed(Routes.CREATE_ORDER,
-                              arguments: 'Grooming'),
-                          localStorage.write('packageData', dataMap),
-                          localStorage.write('packageId', data[index].id),
-                          groomingController.packageFlag = '1'.obs,
-                          groomingController.packageName = dataMap['name']
+                          Get.dialog(AlertDialog(
+                            title: const Text(
+                              'Delivey Option',
+                              style: TextStyle(
+                                  fontFamily: 'SanFrancisco', fontSize: 14),
+                            ),
+                            titlePadding:
+                                EdgeInsets.only(left: 26, right: 26, top: 30),
+                            contentPadding: const EdgeInsets.only(
+                                left: 26, right: 26, top: 16, bottom: 12),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            content: const Text(
+                                'Do you want to order with delivery?',
+                                style: TextStyle(
+                                    fontFamily: 'SanFrancisco.Light',
+                                    fontSize: 12)),
+                            actionsPadding: EdgeInsets.only(top: 6, bottom: 2),
+                            actions: [
+                              TextButton(
+                                  onPressed: () => {
+                                        Get.back(),
+                                        Get.toNamed(Routes.DELIVERY_LIST,
+                                            arguments: "Hotel")
+                                      },
+                                  child: const Text(
+                                    'Yes, with delivery',
+                                    style: TextStyle(
+                                        fontFamily: 'SanFrancisco.Light',
+                                        fontSize: 13,
+                                        color: Colors.orange),
+                                  )),
+                              TextButton(
+                                  onPressed: () => {
+                                        Get.back(),
+                                        Get.toNamed(Routes.CREATE_ORDER,
+                                            arguments: 'Grooming'),
+                                        localStorage.write(
+                                            'packageData', dataMap),
+                                        localStorage.write(
+                                            'packageId', data[index].id),
+                                        groomingController.packageName =
+                                            dataMap['name']
+                                      },
+                                  child: Text(
+                                    'No',
+                                    style: TextStyle(
+                                        fontFamily: 'SanFrancisco',
+                                        fontSize: 13,
+                                        color: Colors.orange),
+                                  )),
+                            ],
+                          ))
                         },
                         child: Container(
                           height: height * 0.14,
@@ -172,7 +219,7 @@ class PackageListView extends GetView<PackageListController> {
                                         width: 5,
                                       ),
                                       Text(
-                                        dataMap['price'],
+                                        'Rp. ${dataMap['price']}',
                                         style: TextStyle(
                                             color: Colors.grey.shade800,
                                             fontFamily: 'SanFrancisco.Light',

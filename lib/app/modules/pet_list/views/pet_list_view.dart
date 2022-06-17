@@ -182,15 +182,11 @@ class PetListView extends GetView<PetListController> {
                                                           children: [
                                                             Text(
                                                                 '${dataMap['name']}',
-                                                                style: GoogleFonts.roboto(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        'SanFrancisco',
                                                                     fontSize:
-                                                                        17,
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .shade800)),
+                                                                        14)),
                                                             const SizedBox(
                                                               width: 5,
                                                             ),
@@ -212,14 +208,10 @@ class PetListView extends GetView<PetListController> {
                                                         Spacer(),
                                                         Text(
                                                             'Hello! My Name is ${dataMap['name']}. I was adopted/ born on ${dataMap['birth']}.',
-                                                            style: GoogleFonts.roboto(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade800,
-                                                                fontSize: 13)),
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                fontSize: 11)),
                                                         Spacer(),
                                                         Row(
                                                           children: [
@@ -228,19 +220,18 @@ class PetListView extends GetView<PetListController> {
                                                                   .baby_changing_station,
                                                               color:
                                                                   Colors.orange,
-                                                              size: 19,
+                                                              size: 17,
                                                             ),
                                                             const SizedBox(
                                                               width: 6,
                                                             ),
                                                             Text(
                                                                 "${dataMap['age']} months.",
-                                                                style: GoogleFonts.roboto(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
                                                                     fontSize:
-                                                                        13)),
+                                                                        11)),
                                                           ],
                                                         ),
                                                         Spacer(),
@@ -251,18 +242,18 @@ class PetListView extends GetView<PetListController> {
                                                                   .monitor_weight,
                                                               color: Colors.grey
                                                                   .shade700,
-                                                              size: 19,
+                                                              size: 17,
                                                             ),
                                                             const SizedBox(
                                                               width: 5,
                                                             ),
                                                             Text(
-                                                              '${dataMap['weight']} kg(s).',
-                                                              style: GoogleFonts
-                                                                  .roboto(
-                                                                      fontSize:
-                                                                          13),
-                                                            ),
+                                                                '${dataMap['weight']} kg(s).',
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    fontSize:
+                                                                        11)),
                                                           ],
                                                         ),
                                                         Spacer(),
@@ -279,11 +270,13 @@ class PetListView extends GetView<PetListController> {
                                                               child: Text(
                                                                 dataMap[
                                                                     'species'],
-                                                                style: GoogleFonts.roboto(
-                                                                    fontSize:
-                                                                        12,
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
                                                                     color: Colors
-                                                                        .white),
+                                                                        .white,
+                                                                    fontSize:
+                                                                        11),
                                                               ),
                                                             ),
                                                           ),
@@ -314,22 +307,22 @@ class PetListView extends GetView<PetListController> {
                                       children: [
                                         Icon(
                                           Icons.add,
+                                          size: 19,
                                           color: Colors.grey.shade800,
                                         ),
                                         const SizedBox(
                                           width: 20,
                                         ),
                                         Expanded(
-                                          child: Text(
-                                            "Add More",
-                                            style: GoogleFonts.inter(
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.grey.shade800),
-                                          ),
+                                          child: Text("Add More",
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 12)),
                                         ),
                                         Icon(
                                           Icons.arrow_forward_ios,
-                                          size: 21,
+                                          size: 16,
                                         ),
                                       ],
                                     ),

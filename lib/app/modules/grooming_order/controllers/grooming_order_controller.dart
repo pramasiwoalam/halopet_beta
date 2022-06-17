@@ -73,6 +73,8 @@ class GroomingOrderController extends GetxController {
       order.add({
         "bookingType": "Vet",
         "petId": localStorage.read('petId'),
+        "sessionId": localStorage.read('sessionId'),
+        "medicalId": localStorage.read('medicalId'),
         "orderCreated":
             formatDate(DateTime.now(), [MM, ' ', dd, ',', ' ', yyyy]),
         "orderDate": date,
@@ -95,12 +97,14 @@ class GroomingOrderController extends GetxController {
   void createGroomingOrder(String petId, String date, String serviceType,
       double charge, String time) {
     final localStorage = GetStorage();
+    var packageId = localStorage.read('packageId');
     CollectionReference order = firestore.collection("order");
 
     try {
       order.add({
-        "bookingType": "Grooming Services",
+        "bookingType": "Grooming Service",
         "petId": localStorage.read('petId'),
+        "packageId": packageId,
         "orderCreated":
             formatDate(DateTime.now(), [MM, ' ', dd, ',', ' ', yyyy]),
         "orderDate": date,
@@ -128,6 +132,7 @@ class GroomingOrderController extends GetxController {
       order.add({
         "bookingType": "Pet Hotel",
         "petId": localStorage.read('petId'),
+        "roomId": localStorage.read('roomId'),
         "orderCreated":
             formatDate(DateTime.now(), [MM, ' ', dd, ',', ' ', yyyy]),
         "orderDate": date,
@@ -157,10 +162,13 @@ class GroomingOrderController extends GetxController {
     final localStorage = GetStorage();
     CollectionReference order = firestore.collection("order");
 
+    var packageId = localStorage.read('packageId');
+
     try {
       order.add({
-        "bookingType": "Grooming Order",
+        "bookingType": "Grooming Service",
         "petId": localStorage.read('petId'),
+        "packageId": packageId,
         "orderCreated":
             formatDate(DateTime.now(), [MM, ' ', dd, ',', ' ', yyyy]),
         "orderDate": date,
@@ -196,6 +204,7 @@ class GroomingOrderController extends GetxController {
       order.add({
         "bookingType": "Pet Hotel",
         "petId": localStorage.read('petId'),
+        "roomId": localStorage.read('roomId'),
         "orderCreated":
             formatDate(DateTime.now(), [MM, ' ', dd, ',', ' ', yyyy]),
         "orderDate": date,
@@ -232,6 +241,8 @@ class GroomingOrderController extends GetxController {
       order.add({
         "bookingType": "Vet",
         "petId": localStorage.read('petId'),
+        "sessionId": localStorage.read('sessionId'),
+        "medicalId": localStorage.read('medicalId'),
         "orderCreated":
             formatDate(DateTime.now(), [MM, ' ', dd, ',', ' ', yyyy]),
         "orderDate": date,

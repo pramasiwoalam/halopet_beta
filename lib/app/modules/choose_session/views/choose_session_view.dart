@@ -65,7 +65,9 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                                 return InkWell(
                                     onTap: () => {
                                           Get.toNamed(Routes.SESSION_DETAIL,
-                                              arguments: data[index].id)
+                                              arguments: data[index].id),
+                                          localStorage.write(
+                                              'sessionId', data[index].id)
                                         },
                                     child: Padding(
                                         padding: const EdgeInsets.only(

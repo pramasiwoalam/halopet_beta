@@ -14,6 +14,22 @@ class OrderDetailController extends GetxController {
     return doc.get();
   }
 
+  Future<DocumentSnapshot<Object?>> getMedicalDetail(String medicalId) async {
+    DocumentReference doc =
+        firestore.collection("medical_service").doc(medicalId);
+    return doc.get();
+  }
+
+  Future<DocumentSnapshot<Object?>> getSession(String sessionId) async {
+    DocumentReference doc = firestore.collection("session").doc(sessionId);
+    return doc.get();
+  }
+
+  Future<DocumentSnapshot<Object?>> getRoom(String roomId) async {
+    DocumentReference doc = firestore.collection("room").doc(roomId);
+    return doc.get();
+  }
+
   Future<DocumentSnapshot<Object?>> getPetshopByOrder(String petshopId) async {
     print(petshopId);
     DocumentReference doc = firestore.collection("petshop").doc(petshopId);

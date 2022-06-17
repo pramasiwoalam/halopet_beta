@@ -218,14 +218,14 @@ class ProfileView extends GetView<ProfileController> {
                                                 style: GoogleFonts.roboto(
                                                     color: Colors.grey.shade800,
                                                     fontWeight: FontWeight.w700,
-                                                    fontSize: 16),
+                                                    fontSize: 14),
                                               ),
                                               Text(
                                                 'PawPay Coins',
                                                 style: GoogleFonts.roboto(
                                                     color: Colors.grey.shade800,
                                                     fontWeight: FontWeight.w300,
-                                                    fontSize: 12),
+                                                    fontSize: 11),
                                               )
                                             ],
                                           ),
@@ -256,7 +256,7 @@ class ProfileView extends GetView<ProfileController> {
                                               style: GoogleFonts.roboto(
                                                   color: Colors.grey.shade800,
                                                   fontWeight: FontWeight.w400,
-                                                  fontSize: 14),
+                                                  fontSize: 13),
                                             ),
                                           ],
                                         ),
@@ -365,12 +365,12 @@ class ProfileView extends GetView<ProfileController> {
                                               Expanded(
                                                 child: Center(
                                                   child: Text(
-                                                    "Create your own petshop",
-                                                    style: GoogleFonts.inter(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.blue),
-                                                  ),
+                                                      "Create your own petshop",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          color: Colors.blue,
+                                                          fontSize: 14)),
                                                 ),
                                               ),
                                             ],
@@ -400,12 +400,11 @@ class ProfileView extends GetView<ProfileController> {
                                               width: 30,
                                             ),
                                             Expanded(
-                                              child: Text(
-                                                "My Pets",
-                                                style: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
+                                              child: Text("My Pets",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
+                                                      fontSize: 14)),
                                             ),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
@@ -434,12 +433,11 @@ class ProfileView extends GetView<ProfileController> {
                                               width: 30,
                                             ),
                                             Expanded(
-                                              child: Text(
-                                                "Personal Detail",
-                                                style: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
+                                              child: Text("Personal Detail",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
+                                                      fontSize: 14)),
                                             ),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
@@ -668,18 +666,18 @@ class ProfileView extends GetView<ProfileController> {
                                 borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               children: [
-                                Icon(Icons.logout, color: Color(0xffF9813A)),
+                                Icon(Icons.logout,
+                                    size: 19, color: Color(0xffF9813A)),
                                 SizedBox(
-                                  width: 20,
+                                  width: 5,
                                 ),
                                 Expanded(
                                   child: Center(
-                                    child: Text(
-                                      "Log Out",
-                                      style: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.red),
-                                    ),
+                                    child: Text("Log Out",
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco.Regular',
+                                            fontSize: 14,
+                                            color: Color(0xffF9813A))),
                                   ),
                                 ),
                               ],

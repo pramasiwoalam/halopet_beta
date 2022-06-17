@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halopet_beta/app/modules/order/views/order_approval_view.dart';
 import 'package:halopet_beta/app/modules/seller_home/views/seller_home_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
@@ -14,7 +15,7 @@ class OrderView extends GetView<OrderController> {
   final localStorage = GetStorage();
 
   List<Widget> containerList = [
-    ApprovalContainer(),
+    ApprovalUserContainer(),
     PaymentContainer(),
     OnGoing(),
     Completed(),
@@ -871,25 +872,21 @@ class EmptyContainer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'There are no payments due.',
-                style: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey.shade500),
-              ),
+              Text('There are no payments due.',
+                  style: TextStyle(
+                      fontFamily: 'SanFrancisco.Light',
+                      fontSize: 13,
+                      color: Colors.grey.shade800)),
               const SizedBox(
                 height: 7,
               ),
               InkWell(
                 onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
-                child: Text(
-                  'Book your appointment here',
-                  style: GoogleFonts.inter(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.blue),
-                ),
+                child: Text('Book your appointment here',
+                    style: TextStyle(
+                        fontFamily: 'SanFrancisco',
+                        fontSize: 13,
+                        color: Colors.blue)),
               ),
             ],
           ),

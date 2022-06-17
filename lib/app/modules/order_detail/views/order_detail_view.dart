@@ -23,7 +23,7 @@ class OrderDetailView extends GetView<OrderDetailController> {
           title: Text(
             'Booking Detail',
             style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 17),
           ),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,

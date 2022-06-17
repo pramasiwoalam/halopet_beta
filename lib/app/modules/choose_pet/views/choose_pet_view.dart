@@ -22,7 +22,6 @@ class ChoosePetView extends GetView<ChoosePetController> {
     var userId = GetStorage().read('currentUserId');
     print(userId);
     var arguments = localStorage.read('selectedServiceName');
-    print("ARGUMEN2 $arguments");
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -88,7 +87,6 @@ class ChoosePetView extends GetView<ChoosePetController> {
 
                                       return InkWell(
                                         onTap: () => {
-                                          print("ARG $arguments"),
                                           Get.toNamed(Routes.CHOOSE_DATE,
                                               arguments: arguments),
                                           localStorage.write(
@@ -155,15 +153,11 @@ class ChoosePetView extends GetView<ChoosePetController> {
                                                             children: [
                                                               Text(
                                                                   '${dataMap['name']}',
-                                                                  style: GoogleFonts.roboto(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          'SanFrancisco',
                                                                       fontSize:
-                                                                          17,
-                                                                      color: Colors
-                                                                          .grey
-                                                                          .shade800)),
+                                                                          14)),
                                                               const SizedBox(
                                                                 width: 5,
                                                               ),
@@ -187,15 +181,11 @@ class ChoosePetView extends GetView<ChoosePetController> {
                                                           Spacer(),
                                                           Text(
                                                               'Hello! My Name is ${dataMap['name']}. I was adopted/ born on ${dataMap['birth']}.',
-                                                              style: GoogleFonts.roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade800,
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'SanFrancisco.Light',
                                                                   fontSize:
-                                                                      13)),
+                                                                      11)),
                                                           Spacer(),
                                                           Row(
                                                             children: [
@@ -211,12 +201,11 @@ class ChoosePetView extends GetView<ChoosePetController> {
                                                               ),
                                                               Text(
                                                                   "${dataMap['age']} months.",
-                                                                  style: GoogleFonts.roboto(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w400,
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          'SanFrancisco.Light',
                                                                       fontSize:
-                                                                          13)),
+                                                                          11)),
                                                             ],
                                                           ),
                                                           Spacer(),
@@ -234,12 +223,12 @@ class ChoosePetView extends GetView<ChoosePetController> {
                                                                 width: 5,
                                                               ),
                                                               Text(
-                                                                '${dataMap['weight']} kg(s).',
-                                                                style: GoogleFonts
-                                                                    .roboto(
-                                                                        fontSize:
-                                                                            13),
-                                                              ),
+                                                                  '${dataMap['weight']} kg(s).',
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          'SanFrancisco.Light',
+                                                                      fontSize:
+                                                                          11)),
                                                             ],
                                                           ),
                                                           Spacer(),
@@ -257,9 +246,11 @@ class ChoosePetView extends GetView<ChoosePetController> {
                                                                 child: Text(
                                                                   dataMap[
                                                                       'species'],
-                                                                  style: GoogleFonts.roboto(
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          'SanFrancisco.Light',
                                                                       fontSize:
-                                                                          12,
+                                                                          11,
                                                                       color: Colors
                                                                           .white),
                                                                 ),
@@ -280,7 +271,7 @@ class ChoosePetView extends GetView<ChoosePetController> {
                                   width: width,
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 70, vertical: 10),
+                                        horizontal: 90, vertical: 10),
                                     child: FlatButton(
                                       padding: EdgeInsets.all(15),
                                       shape: RoundedRectangleBorder(
@@ -292,22 +283,22 @@ class ChoosePetView extends GetView<ChoosePetController> {
                                         children: [
                                           Icon(
                                             Icons.add,
+                                            size: 19,
                                             color: Colors.grey.shade800,
                                           ),
                                           const SizedBox(
                                             width: 20,
                                           ),
                                           Expanded(
-                                            child: Text(
-                                              "Add More",
-                                              style: GoogleFonts.inter(
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.grey.shade800),
-                                            ),
+                                            child: Text("Add More",
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        'SanFrancisco.Light',
+                                                    fontSize: 12)),
                                           ),
                                           Icon(
                                             Icons.arrow_forward_ios,
-                                            size: 21,
+                                            size: 16,
                                           ),
                                         ],
                                       ),

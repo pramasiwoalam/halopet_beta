@@ -255,124 +255,88 @@ class ShopInfo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Information',
-                style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey.shade800),
-              ),
+              Text('Information',
+                  style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13)),
               Container(
-                width: width / 4,
+                width: width / 4.5,
                 child: Divider(
-                  thickness: 2,
+                  thickness: 1,
                   color: Colors.grey.shade800,
                 ),
               ),
               Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                  style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black)),
+                  style: TextStyle(
+                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
               const SizedBox(
                 height: 15,
               ),
-              Text(
-                'Services',
-                style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey.shade800),
-              ),
+              Text('Services',
+                  style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13)),
               Container(
-                width: width / 4,
+                width: width / 4.5,
                 child: Divider(
-                  thickness: 2,
+                  thickness: 1,
                   color: Colors.grey.shade800,
                 ),
               ),
               Text('Grooming Services',
-                  style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black)),
+                  style: TextStyle(
+                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
               const SizedBox(
                 height: 2,
               ),
               Text('Pet Hotel Services',
-                  style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black)),
+                  style: TextStyle(
+                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
               const SizedBox(
                 height: 2,
               ),
               Text('Vet Available',
-                  style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black)),
+                  style: TextStyle(
+                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
               const SizedBox(
                 height: 15,
               ),
-              Text(
-                'Location',
-                style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey.shade800),
-              ),
+              Text('Location',
+                  style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13)),
               Container(
-                width: width / 4,
+                width: width / 4.5,
                 child: Divider(
-                  thickness: 2,
+                  thickness: 1,
                   color: Colors.grey.shade800,
                 ),
               ),
               Text('Jl. Gang Pori No.99',
-                  style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black)),
+                  style: TextStyle(
+                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
               const SizedBox(
                 height: 3,
               ),
               Text('Pisangan, Jakarta Timur',
-                  style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black)),
+                  style: TextStyle(
+                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
               const SizedBox(
                 height: 15,
               ),
-              Text(
-                'Open Days',
-                style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey.shade800),
-              ),
+              Text('Open Days',
+                  style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13)),
               Container(
-                width: width / 4,
+                width: width / 4.5,
                 child: Divider(
-                  thickness: 2,
+                  thickness: 1,
                   color: Colors.grey.shade800,
                 ),
               ),
               Text('Monday - Saturday',
-                  style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black)),
+                  style: TextStyle(
+                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
               const SizedBox(
                 height: 3,
               ),
               Text('09.00 - 21.00',
-                  style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black)),
+                  style: TextStyle(
+                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
               const SizedBox(
                 height: 5,
               ),
@@ -460,7 +424,7 @@ class Service extends StatelessWidget {
                                 else
                                   {
                                     Get.dialog(AlertDialog(
-                                      title: Text(
+                                      title: const Text(
                                         'Booking Confirmation',
                                         style: TextStyle(
                                             fontFamily: 'SanFrancisco',
@@ -468,7 +432,7 @@ class Service extends StatelessWidget {
                                       ),
                                       titlePadding: EdgeInsets.only(
                                           left: 26, right: 26, top: 30),
-                                      contentPadding: EdgeInsets.only(
+                                      contentPadding: const EdgeInsets.only(
                                           left: 26,
                                           right: 26,
                                           top: 16,
@@ -476,7 +440,7 @@ class Service extends StatelessWidget {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(15)),
-                                      content: Text(
+                                      content: const Text(
                                           'Are you sure want to create this order?',
                                           style: TextStyle(
                                               fontFamily: 'SanFrancisco.Light',
@@ -486,7 +450,7 @@ class Service extends StatelessWidget {
                                       actions: [
                                         TextButton(
                                             onPressed: () => {Get.back()},
-                                            child: Text(
+                                            child: const Text(
                                               'Cancel',
                                               style: TextStyle(
                                                   fontFamily:

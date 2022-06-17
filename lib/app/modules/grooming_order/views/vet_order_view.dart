@@ -254,69 +254,109 @@ class VetOrderView extends GetView<GroomingOrderController> {
                         ),
                         FlatButton(
                             onPressed: () => {
-                                  if (controller.status == '0')
-                                    {
-                                      AwesomeDialog(
-                                        context: context,
-                                        dialogType: DialogType.INFO,
-                                        animType: AnimType.BOTTOMSLIDE,
-                                        title: 'Booking Confirmation',
-                                        desc:
-                                            'Are you sure want to create this booking?.',
-                                        btnCancelOnPress: () => {},
-                                        btnOkText: 'Yes',
-                                        buttonsTextStyle: GoogleFonts.roboto(
-                                            fontWeight: FontWeight.w600),
-                                        btnOkOnPress: () {
-                                          deliveryController.deliveryFee == 0
-                                              ? orderController.createVetOrder(
-                                                  typeController.text,
-                                                  orderController.date
-                                                      .toString(),
-                                                  "Vet",
-                                                  formData['symptoms'],
-                                                  localStorage
-                                                      .read('totalCharge'),
-                                                  controller
-                                                      .appointmentTime.value)
-                                              : orderController
-                                                  .createVetOrderWithDelivery(
-                                                      petId,
-                                                      orderController.date
-                                                          .toString(),
-                                                      localStorage
-                                                          .read('serviceType'),
-                                                      formData['symptoms'],
-                                                      localStorage
-                                                          .read('totalCharge'),
-                                                      controller.appointmentTime
-                                                          .value,
-                                                      deliveryController.time
-                                                          .toString(),
-                                                      deliveryController
-                                                          .deliveryFee);
-
-                                          AwesomeDialog(
-                                            context: context,
-                                            dialogType: DialogType.SUCCES,
-                                            animType: AnimType.BOTTOMSLIDE,
-                                            title: 'Booking Created.',
-                                            desc:
-                                                'You can check your order here.',
-                                            btnOkText: 'Check your order >',
-                                            buttonsTextStyle:
-                                                GoogleFonts.roboto(
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                            btnOkOnPress: () {
-                                              Get.toNamed(Routes.ORDER);
-                                            },
-                                          ).show();
-                                        },
-                                      ).show()
-                                    }
-                                  else
-                                    {Get.toNamed(Routes.DELIVERY_LIST)}
+                                  Get.dialog(AlertDialog(
+                                      title: Text(
+                                        'Booking Confirmation',
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco',
+                                            fontSize: 14),
+                                      ),
+                                      titlePadding: EdgeInsets.only(
+                                          left: 26, right: 26, top: 30),
+                                      contentPadding: EdgeInsets.only(
+                                          left: 26,
+                                          right: 26,
+                                          top: 16,
+                                          bottom: 12),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      content: Text(
+                                          'Are you the booking data is correct? Confirm if you want to create this booking.',
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco.Light',
+                                              fontSize: 12)),
+                                      actionsPadding: EdgeInsets.only(
+                                          right: 12, top: 6, bottom: 2),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () => {Get.back()},
+                                            child: Text(
+                                              'Cancel',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 13,
+                                                  color: Colors.orange),
+                                            )),
+                                        TextButton(
+                                            onPressed: () => {
+                                                  deliveryController.deliveryFee == 0
+                                                      ? orderController
+                                                          .createVetOrder(
+                                                              typeController
+                                                                  .text,
+                                                              orderController
+                                                                  .date
+                                                                  .toString(),
+                                                              "Vet",
+                                                              formData[
+                                                                  'symptoms'],
+                                                              localStorage.read(
+                                                                  'totalCharge'),
+                                                              controller
+                                                                  .appointmentTime
+                                                                  .value)
+                                                      : orderController
+                                                          .createVetOrderWithDelivery(
+                                                              petId,
+                                                              orderController
+                                                                  .date
+                                                                  .toString(),
+                                                              localStorage
+                                                                  .read(
+                                                                      'serviceType'),
+                                                              formData[
+                                                                  'symptoms'],
+                                                              localStorage.read(
+                                                                  'totalCharge'),
+                                                              controller
+                                                                  .appointmentTime
+                                                                  .value,
+                                                              deliveryController
+                                                                  .time
+                                                                  .toString(),
+                                                              deliveryController
+                                                                  .deliveryFee),
+                                                  AwesomeDialog(
+                                                    context: context,
+                                                    dialogType:
+                                                        DialogType.SUCCES,
+                                                    animType:
+                                                        AnimType.BOTTOMSLIDE,
+                                                    title: 'Booking Created.',
+                                                    desc:
+                                                        'You can check your order here.',
+                                                    btnOkText:
+                                                        'Check your order >',
+                                                    buttonsTextStyle: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco',
+                                                      fontSize: 14,
+                                                    ),
+                                                    btnOkOnPress: () {
+                                                      Get.toNamed(Routes.ORDER);
+                                                    },
+                                                  ).show()
+                                                },
+                                            child: Text(
+                                              'Confirm',
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 13,
+                                                  color: Colors.orange),
+                                            )),
+                                      ]))
                                 },
                             child: Container(
                                 height: height * 0.07,

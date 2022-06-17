@@ -13,6 +13,11 @@ class SellerHomeController extends GetxController {
     return order.snapshots();
   }
 
+  Future<DocumentSnapshot<Object?>> getPetshop(String petshopId) async {
+    DocumentReference doc = firestore.collection("petshop").doc(petshopId);
+    return doc.get();
+  }
+
   Future<DocumentSnapshot<Object?>> getUser(String userId) async {
     DocumentReference doc = firestore.collection("users").doc(userId);
     return doc.get();

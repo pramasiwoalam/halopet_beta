@@ -166,11 +166,10 @@ class TopUpView extends GetView<TopUpController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Choose Payment',
-                            style: GoogleFonts.roboto(
-                                color: Colors.grey.shade800,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14)),
+                        Text('  Choose Payment',
+                            style: TextStyle(
+                                fontFamily: 'SanFrancisco.Light',
+                                fontSize: 13)),
                         Text('')
                       ],
                     ),
@@ -182,10 +181,8 @@ class TopUpView extends GetView<TopUpController> {
                       buttonTextStyle: ButtonTextStyle(
                           selectedColor: Colors.white,
                           unSelectedColor: Color(0xffF9813A),
-                          textStyle: GoogleFonts.roboto(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 14,
-                              color: Colors.white)),
+                          textStyle: TextStyle(
+                              fontFamily: 'SanFrancisco', fontSize: 12)),
                       unSelectedColor: Colors.white,
                       buttonLables: const [
                         "Transfer Manual",
@@ -242,10 +239,9 @@ class TopUpView extends GetView<TopUpController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text('Virtual Account',
-                                          style: GoogleFonts.roboto(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 16,
-                                              color: Colors.black)),
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco',
+                                              fontSize: 14)),
                                       const Divider(
                                         thickness: 1,
                                       ),
@@ -257,15 +253,14 @@ class TopUpView extends GetView<TopUpController> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Virtual Account',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500)),
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 12)),
                                           Text('088266860291990',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 16,
-                                                  color: Colors.grey.shade500))
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 12)),
                                         ],
                                       ),
                                       Spacer(),
@@ -274,15 +269,14 @@ class TopUpView extends GetView<TopUpController> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Bank',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500)),
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 12)),
                                           Text('Bank Central Asia (BCA)',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500))
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 12)),
                                         ],
                                       ),
                                       Spacer(),
@@ -291,15 +285,14 @@ class TopUpView extends GetView<TopUpController> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Nama Rekening',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500)),
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 12)),
                                           Text('PT. Halopet Indonesia',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500))
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 12)),
                                         ],
                                       ),
                                       Spacer(),
@@ -331,10 +324,9 @@ class TopUpView extends GetView<TopUpController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text('Transfer Manual',
-                                          style: GoogleFonts.roboto(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 16,
-                                              color: Colors.black)),
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco',
+                                              fontSize: 14)),
                                       const Divider(
                                         thickness: 1,
                                       ),
@@ -346,15 +338,14 @@ class TopUpView extends GetView<TopUpController> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Rekening',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14,
-                                                  color: Colors.grey.shade500)),
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 12)),
                                           Text('6860291990',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500))
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 12)),
                                         ],
                                       ),
                                       Spacer(),
@@ -363,15 +354,14 @@ class TopUpView extends GetView<TopUpController> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Bank',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14,
-                                                  color: Colors.grey.shade500)),
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 12)),
                                           Text('Bank Central Asia (BCA)',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 14,
-                                                  color: Colors.grey.shade500))
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 12)),
                                         ],
                                       ),
                                       Spacer(),
@@ -380,15 +370,14 @@ class TopUpView extends GetView<TopUpController> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Nama Rekening',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14,
-                                                  color: Colors.grey.shade500)),
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 12)),
                                           Text('PT. Halopet Indonesia',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 14,
-                                                  color: Colors.grey.shade500))
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 12)),
                                         ],
                                       ),
                                       Spacer(),

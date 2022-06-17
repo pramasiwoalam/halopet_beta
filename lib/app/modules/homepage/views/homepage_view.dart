@@ -306,7 +306,7 @@ class Home extends StatelessWidget {
                                                               .grey.shade800,
                                                           fontWeight:
                                                               FontWeight.w700,
-                                                          fontSize: 16),
+                                                          fontSize: 14),
                                                     ),
                                                     Text(
                                                       'PawPay Coins',
@@ -315,7 +315,7 @@ class Home extends StatelessWidget {
                                                               .grey.shade800,
                                                           fontWeight:
                                                               FontWeight.w300,
-                                                          fontSize: 12),
+                                                          fontSize: 11),
                                                     )
                                                   ],
                                                 ),
@@ -348,7 +348,7 @@ class Home extends StatelessWidget {
                                                             .grey.shade800,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        fontSize: 14),
+                                                        fontSize: 13),
                                                   ),
                                                 ],
                                               ),
@@ -433,7 +433,8 @@ class Home extends StatelessWidget {
                                   margin: EdgeInsets.only(
                                       right: width * 0.07,
                                       left: width * 0.07,
-                                      top: 5),
+                                      top: 8,
+                                      bottom: 8),
                                   height: height * 0.05,
                                   child: Row(
                                     mainAxisAlignment:
@@ -444,7 +445,7 @@ class Home extends StatelessWidget {
                                           child: Text(
                                             'Explore More',
                                             style: TextStyle(
-                                                fontSize: 15,
+                                                fontSize: 14,
                                                 fontFamily: 'SanFrancisco',
                                                 fontWeight: FontWeight.w600),
                                           )),
