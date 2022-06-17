@@ -12,6 +12,7 @@ class LoginView extends GetView<LoginController> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final authController = Get.find<AuthController>();
+  final controller = Get.put(LoginController());
 
   bool _isObscure = true;
   @override
@@ -25,56 +26,30 @@ class LoginView extends GetView<LoginController> {
         child: Column(
           children: [
             Container(
-              height: height * 0.45,
+              height: height * 0.35,
               width: width,
               // color: Colors.red,
               child: Expanded(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 120),
-                    Text(
-                      "Welcome to",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: 'SanFrancisco',
-                          fontSize: 15,
-                          color: Colors.black),
+                    SizedBox(
+                      height: 120,
                     ),
-                    // SizedBox(height: 10),
-                    // Container(
-                    //   height: height * 0.07,
-                    //   width: width * 0.35,
-                    //   // color: Colors.amber,
-                    //   decoration: const BoxDecoration(
-                    //       image: DecorationImage(
-                    //           image:
-                    //               AssetImage("assets/images/textHalopet.png"),
-                    //           fit: BoxFit.cover)),
-                    // ),
-                    SizedBox(height: 15),
-                    Container(
-                      height: height * 0.16,
-                      width: width * 0.65,
-                      // color: Colors.yellowAccent,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/textHalopet.png"),
-                            fit: BoxFit.contain),
+                    Center(
+                      child: Container(
+                        height: height * 0.08,
+                        width: width * 0.6,
+                        // color: Colors.yellowAccent,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image:
+                                  AssetImage("assets/images/textHalopet.png"),
+                              fit: BoxFit.contain),
+                        ),
                       ),
                     ),
                     SizedBox(height: 30),
-                    Container(
-                      height: height * 0.03,
-                      width: width,
-                      child: Text(
-                        "Login in with",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'SanFrancisco.Light',
-                            fontSize: 15,
-                            color: Colors.black),
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -88,8 +63,7 @@ class LoginView extends GetView<LoginController> {
                   Container(
                     height: height * 0.21,
                     width: width,
-                    // color: Colors.brown,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                     child: Center(
                       child: Column(
                         children: <Widget>[
@@ -100,59 +74,87 @@ class LoginView extends GetView<LoginController> {
                             margin: EdgeInsets.symmetric(vertical: 9),
                             child: TextField(
                               controller: emailController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 // filled: true,
                                 fillColor: Color.fromARGB(255, 255, 183, 74),
                                 isDense: true,
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 19, 7, 7),
-                                        width: 1),
+                                        color: Colors.grey.shade600, width: 1),
                                     borderRadius: BorderRadius.all(
-                                        Radius.circular(30.0))),
+                                        Radius.circular(20.0))),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color.fromARGB(255, 19, 7, 7),
                                         width: 1),
                                     borderRadius: BorderRadius.all(
-                                        Radius.circular(30.0))),
+                                        Radius.circular(20.0))),
                                 hintText: "abc@gmail.com",
+                                hintStyle: TextStyle(
+                                    fontFamily: 'SanFrancisco.Regular',
+                                    fontSize: 14),
                                 prefixIcon: Icon(Icons.people),
                                 border: InputBorder.none,
                               ),
                             ),
                           ),
-                          Container(
-                            height: size.height * 0.073,
-                            width: size.width * 0.7,
-                            margin: EdgeInsets.symmetric(vertical: 2),
-                            padding: EdgeInsets.symmetric(horizontal: 3),
-                            child: TextField(
-                              obscureText: true,
-                              controller: passwordController,
-                              decoration: const InputDecoration(
-                                // filled: true,
-                                // fillColor: Color.fromARGB(255, 236, 236, 236),
-                                // isDense: true,
-
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 19, 7, 7),
-                                        width: 1),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(30.0))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 19, 7, 7),
-                                        width: 1),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(30.0))),
-                                hintText: "8 characters",
-                                prefixIcon: Icon(
-                                  Icons.lock,
-                                  size: 20,
+                          Obx(
+                            () => Container(
+                              height: size.height * 0.066,
+                              width: size.width * 0.7,
+                              margin: EdgeInsets.symmetric(vertical: 2),
+                              padding: EdgeInsets.symmetric(horizontal: 3),
+                              child: TextField(
+                                obscureText: controller.obscureFlag.value == 0
+                                    ? false
+                                    : true,
+                                controller: passwordController,
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey.shade600,
+                                          width: 1),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0))),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 19, 7, 7),
+                                          width: 1),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0))),
+                                  hintText: "8 characters",
+                                  hintStyle: TextStyle(
+                                      fontFamily: 'SanFrancisco.Regular',
+                                      fontSize: 14),
+                                  prefixIcon: Icon(
+                                    Icons.lock,
+                                    size: 16,
+                                  ),
+                                  suffixIcon: InkWell(
+                                    onTap: () => {
+                                      if (controller.obscureFlag.value == 0)
+                                        {
+                                          print(controller.obscureFlag),
+                                          controller.obscureFlag.value = 1
+                                        }
+                                      else
+                                        {
+                                          print(controller.obscureFlag),
+                                          controller.obscureFlag.value = 0
+                                        }
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 20.0),
+                                      child: Icon(
+                                        Icons.visibility,
+                                        size: 18,
+                                        color: Colors.grey.shade500,
+                                      ),
+                                    ),
+                                  ),
+                                  border: InputBorder.none,
                                 ),
-                                border: InputBorder.none,
                               ),
                             ),
                           ),
@@ -177,16 +179,17 @@ class LoginView extends GetView<LoginController> {
                             elevation: 5,
                             child: Text("Forgot your password?",
                                 textAlign: TextAlign.center,
-                                style: GoogleFonts.roboto(
-                                    fontSize: 12, fontWeight: FontWeight.w500)),
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontFamily: 'SanFrancisco.Light')),
                           ),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    height: size.height * 0.07,
-                    width: size.width * 0.5,
+                    height: size.height * 0.06,
+                    width: size.width * 0.6,
                     color: Colors.transparent,
                     child: ElevatedButton(
                         onPressed: () async {
@@ -227,60 +230,8 @@ class LoginView extends GetView<LoginController> {
                           shape: StadiumBorder(),
                         ),
                         child: Text("Login",
-                            style: GoogleFonts.roboto(
-                                fontSize: 17, fontWeight: FontWeight.w500))),
-                  ),
-                  // Container(
-                  //   height: height * 0.13,
-                  //   width: width,
-                  //   margin: EdgeInsets.symmetric(vertical: 5),
-                  //   color: Colors.green,
-                  //   child: Column(
-                  //     children: [
-                  SizedBox(
-                    height: 3,
-                  ),
-                  Container(
-                    height: height * 0.03,
-                    width: width,
-                    // color: Colors.amber,
-                    child: Text("or",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.roboto(
-                            fontSize: 14, fontWeight: FontWeight.w500)),
-                  ),
-                  Container(
-                    height: height * 0.04,
-                    width: width,
-                    // color: Colors.green,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: height * 0.04,
-                          width: width * 0.29,
-                          // color: Colors.yellow,
-                          child: MaterialButton(
-                            onPressed: () {},
-                            elevation: 10,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: height,
-                                  width: width * 0.18,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/google1.png"),
-                                        fit: BoxFit.cover),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                            style: TextStyle(
+                                fontSize: 16, fontFamily: 'SanFrancisco'))),
                   ),
 
                   Container(
@@ -292,8 +243,9 @@ class LoginView extends GetView<LoginController> {
                       children: [
                         Text("Don't have an account?",
                             textAlign: TextAlign.right,
-                            style: GoogleFonts.roboto(
-                                fontSize: 12, fontWeight: FontWeight.w500)),
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: 'SanFrancisco.Light')),
                         // Align(
                         //   alignment: Alignment.topLeft,
                         //   child:
@@ -304,11 +256,10 @@ class LoginView extends GetView<LoginController> {
                           child: Text(
                             "Register",
                             // textAlign: TextAlign.left,
-                            style: GoogleFonts.roboto(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: 'SanFrancisco',
                               color: Colors.black,
-                              decoration: TextDecoration.underline,
                             ),
                           ),
                         ),
