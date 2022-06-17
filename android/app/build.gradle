@@ -53,8 +53,8 @@ android {
         applicationId "com.staging.halopet_beta"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 15
-        versionName '15.0.1'
+        versionCode 16
+        versionName '16.0.1'
         multiDexEnabled true
     }
 
