@@ -145,9 +145,11 @@ class LoginView extends GetView<LoginController> {
                                     },
                                     child: Padding(
                                       padding:
-                                          const EdgeInsets.only(right: 20.0),
+                                          const EdgeInsets.only(right: 5.0),
                                       child: Icon(
-                                        Icons.visibility,
+                                        controller.obscureFlag.value == 0
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
                                         size: 18,
                                         color: Colors.grey.shade500,
                                       ),
@@ -166,13 +168,12 @@ class LoginView extends GetView<LoginController> {
 
                   Container(
                     height: height * 0.042,
-                    width: width * 0.4,
-                    // color: Colors.red,
+                    width: width * 0.9,
                     child: Column(
                       children: [
                         Container(
                           height: height * 0.042,
-                          width: width * 0.8,
+                          width: width * 0.9,
                           color: Colors.transparent,
                           child: MaterialButton(
                             onPressed: () {},
@@ -180,12 +181,15 @@ class LoginView extends GetView<LoginController> {
                             child: Text("Forgot your password?",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 13,
+                                    fontSize: 12,
                                     fontFamily: 'SanFrancisco.Light')),
                           ),
                         ),
                       ],
                     ),
+                  ),
+                  SizedBox(
+                    height: 3,
                   ),
                   Container(
                     height: size.height * 0.06,
@@ -233,7 +237,9 @@ class LoginView extends GetView<LoginController> {
                             style: TextStyle(
                                 fontSize: 16, fontFamily: 'SanFrancisco'))),
                   ),
-
+                  SizedBox(
+                    height: 3,
+                  ),
                   Container(
                     height: height * 0.04,
                     width: width,

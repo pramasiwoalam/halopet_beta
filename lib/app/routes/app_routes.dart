@@ -46,6 +46,8 @@ abstract class Routes {
   static const CHOOSE_DATE = _Paths.CHOOSE_DATE;
   static const MEDICAL_LIST = _Paths.MEDICAL_LIST;
   static const CHOOSE_ROOM = _Paths.CHOOSE_ROOM;
+  static const MEDICAL_RECORDS_LIST = _Paths.MEDICAL_RECORDS_LIST;
+  static const MEDICAL_RECORDS_FORM = _Paths.MEDICAL_RECORDS_FORM;
 }
 
 abstract class _Paths {
@@ -93,4 +95,6 @@ abstract class _Paths {
   static const CHOOSE_DATE = '/choose-date';
   static const MEDICAL_LIST = '/medical-list';
   static const CHOOSE_ROOM = '/choose-room';
+  static const MEDICAL_RECORDS_LIST = '/med-records-list';
+  static const MEDICAL_RECORDS_FORM = '/med-records-form';
 }

@@ -176,14 +176,14 @@ class ApprovalContainer extends StatelessWidget {
                                                   'Waiting for Approval',
                                                   style: TextStyle(
                                                       color: Color(0xff2596BE),
-                                                      fontSize: 11,
+                                                      fontSize: 10,
                                                       fontFamily:
                                                           'SanFrancisco'))),
                                         ),
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 9,
+                                      height: 12,
                                     ),
                                     SizedBox(
                                       width: width * 0.8,
@@ -199,9 +199,9 @@ class ApprovalContainer extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Text(' Order ID',
+                                              Text('  Order ID',
                                                   style: TextStyle(
-                                                      fontSize: 14,
+                                                      fontSize: 13,
                                                       color:
                                                           Colors.grey.shade800,
                                                       fontFamily:
@@ -214,7 +214,7 @@ class ApprovalContainer extends StatelessWidget {
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Color(0xff2596BE),
-                                                      fontSize: 15,
+                                                      fontSize: 13,
                                                       fontFamily:
                                                           'SanFrancisco'))
                                             ],
@@ -236,12 +236,12 @@ class ApprovalContainer extends StatelessWidget {
                                               'See details ',
                                               style: TextStyle(
                                                   color: Color(0xff2596BE),
-                                                  fontSize: 14,
+                                                  fontSize: 12,
                                                   fontFamily: 'SanFrancisco'),
                                             ),
                                             Icon(
                                               Icons.arrow_forward,
-                                              size: 15,
+                                              size: 14,
                                               color: Color(0xff2596BE),
                                             )
                                           ],
@@ -321,12 +321,12 @@ class ApprovalContainer extends StatelessWidget {
                                                                       labelText:
                                                                           "Cancellation Reason*",
                                                                       hintText:
-                                                                          'Reasin',
+                                                                          'Reason',
                                                                       hintStyle: TextStyle(
                                                                           fontFamily:
                                                                               'SanFrancisco.Light',
                                                                           fontSize:
-                                                                              13,
+                                                                              12,
                                                                           color: Colors
                                                                               .grey
                                                                               .shade600),
@@ -634,7 +634,7 @@ class PaymentContainer extends StatelessWidget {
                                               child: Text('Waiting for Payment',
                                                   style: TextStyle(
                                                       color: Color(0xff2596BE),
-                                                      fontSize: 11,
+                                                      fontSize: 10,
                                                       fontFamily:
                                                           'SanFrancisco'))),
                                         ),
@@ -657,7 +657,7 @@ class PaymentContainer extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Text(' Order ID',
+                                              Text('   Order ID',
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       color:

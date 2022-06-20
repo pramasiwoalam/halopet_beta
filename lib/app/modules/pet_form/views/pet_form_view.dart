@@ -45,8 +45,7 @@ class PetFormView extends GetView<PetFormController> {
           child: Column(
             children: [
               Container(
-                height: height * 0.28,
-                color: Color(0xffF9813A),
+                height: height * 0.2,
                 child: Center(
                   child: Column(
                     children: [
@@ -63,38 +62,6 @@ class PetFormView extends GetView<PetFormController> {
                               image: AssetImage('assets/images/user.png')),
                         ),
                       ),
-                      Container(
-                        width: width * 0.4,
-                        height: height * 0.055,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          controller: name,
-                          style: GoogleFonts.roboto(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                          decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.only(left: 15, right: 15),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.white, width: 1),
-                              ),
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.white, width: 1),
-                              ),
-                              border: const OutlineInputBorder(),
-                              label: Text('Pet Name'),
-                              labelStyle: GoogleFonts.roboto(
-                                  fontSize: 13, color: Colors.white),
-                              // hintText: 'Your pet name...',
-                              hintStyle: GoogleFonts.roboto(
-                                  fontSize: 14, color: Colors.white),
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.auto),
-                        ),
-                      )
                     ],
                   ),
                 ),
@@ -109,6 +76,37 @@ class PetFormView extends GetView<PetFormController> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          TextFormField(
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp("[a-zA-Z]")),
+                            ],
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                                labelText: "Pet's Name *",
+                                hintStyle: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey.shade600,
+                                    fontFamily: 'SanFrancisco.Light'),
+                                hintText: 'Write your pet name here...',
+                                contentPadding: EdgeInsets.all(18),
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always),
+                            validator: (value) {
+                              if (value!.contains('Wira')) {
+                                return 'Wira Dilarang daftar';
+                              }
+                            },
+                            onSaved: (value) {
+                              formData['name'] = value;
+                            },
+                          ),
+                          const SizedBox(
+                            height: 18,
+                          ),
                           TextFormField(
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
@@ -169,8 +167,10 @@ class PetFormView extends GetView<PetFormController> {
                           ),
                           Text(
                             '   Gender',
-                            style: GoogleFonts.roboto(
-                                fontSize: 15, color: Colors.grey.shade700),
+                            style: TextStyle(
+                                fontFamily: 'SanFrancisco.Regular',
+                                fontSize: 14,
+                                color: Colors.grey.shade700),
                           ),
                           CustomRadioButton(
                             elevation: 1,
@@ -327,26 +327,91 @@ class PetFormView extends GetView<PetFormController> {
                             height: 18,
                           ),
                           Container(
-                            width: width,
-                            height: height * 0.06,
+                            height: size.height * 0.06,
+                            width: size.width,
+                            color: Colors.transparent,
                             child: ElevatedButton(
-                                onPressed: () async {
-                                  if (form.currentState!.validate()) {
-                                    formData['name'] = name.text;
-
-                                    form.currentState!.save();
-                                    controller.createPets(formData);
-                                    Get.toNamed(Routes.PET_LIST);
-                                  }
-                                },
+                                onPressed: () => {
+                                      if (form.currentState!.validate())
+                                        {
+                                          Get.dialog(AlertDialog(
+                                            title: const Text(
+                                              'Medical Records Option',
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 14),
+                                            ),
+                                            titlePadding: EdgeInsets.only(
+                                                left: 26, right: 26, top: 30),
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    left: 26,
+                                                    right: 26,
+                                                    top: 16,
+                                                    bottom: 12),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            content: const Text(
+                                                'Do you own the medical record on your previous meet with vet?',
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        'SanFrancisco.Light',
+                                                    fontSize: 12)),
+                                            actionsPadding: EdgeInsets.only(
+                                                top: 6, bottom: 2),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () => {
+                                                        Get.back(),
+                                                        form.currentState!
+                                                            .save(),
+                                                        controller.createPets(
+                                                            formData),
+                                                        Get.toNamed(Routes
+                                                            .MEDICAL_RECORDS_LIST),
+                                                      },
+                                                  child: const Text(
+                                                    'Yes, i have.',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'SanFrancisco.Light',
+                                                        fontSize: 13,
+                                                        color: Colors.orange),
+                                                  )),
+                                              TextButton(
+                                                  onPressed: () => {
+                                                        Get.back(),
+                                                        form.currentState!
+                                                            .save(),
+                                                        controller.createPets(
+                                                            formData),
+                                                        Get.toNamed(
+                                                            Routes.PET_LIST),
+                                                      },
+                                                  child: Text(
+                                                    'No',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'SanFrancisco',
+                                                        fontSize: 13,
+                                                        color: Colors.orange),
+                                                  )),
+                                            ],
+                                          ))
+                                        }
+                                    },
                                 style: ElevatedButton.styleFrom(
-                                    primary: Color(0xffF9813A),
-                                    padding: EdgeInsets.all(12),
-                                    textStyle: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold)),
-                                child: Text('Register')),
-                          )
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 5.0),
+                                  primary: Color(0xffF9813A),
+                                  shape: StadiumBorder(),
+                                ),
+                                child: Text("Register",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: 'SanFrancisco'))),
+                          ),
                         ]),
                   ),
                 ),

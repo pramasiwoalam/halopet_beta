@@ -57,7 +57,7 @@ class ProfileView extends GetView<ProfileController> {
                             ConnectionState.active) {
                           var data = snapshot.data!.docs;
                           var unreadNotification = '';
-                          if (data.length == 0) {
+                          if (data.isEmpty) {
                             unreadNotification = 0.toString();
                           } else {
                             unreadNotification = data.length.toString();
@@ -683,17 +683,46 @@ class ProfileView extends GetView<ProfileController> {
                               ],
                             ),
                             onPressed: () {
-                              AwesomeDialog(
-                                context: context,
-                                dialogType: DialogType.INFO,
-                                animType: AnimType.BOTTOMSLIDE,
-                                title: 'Alert',
-                                desc: 'Are you sure want to logout?',
-                                btnCancelOnPress: () {},
-                                btnOkOnPress: () {
-                                  authController.logout();
-                                },
-                              ).show();
+                              Get.dialog(AlertDialog(
+                                title: Text(
+                                  'Alert',
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco', fontSize: 14),
+                                ),
+                                titlePadding: EdgeInsets.only(
+                                    left: 26, right: 26, top: 30),
+                                contentPadding: EdgeInsets.only(
+                                    left: 26, right: 26, top: 16, bottom: 12),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                content: Text('Are you sure want to logout?',
+                                    style: TextStyle(
+                                        fontFamily: 'SanFrancisco.Light',
+                                        fontSize: 12)),
+                                actionsPadding: EdgeInsets.only(
+                                    right: 12, top: 6, bottom: 2),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () => {Get.back()},
+                                      child: Text(
+                                        'Cancel',
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco.Light',
+                                            fontSize: 13,
+                                            color: Colors.orange),
+                                      )),
+                                  TextButton(
+                                      onPressed: () =>
+                                          {Get.back(), authController.logout()},
+                                      child: Text(
+                                        'Log Out',
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco',
+                                            fontSize: 13,
+                                            color: Colors.orange),
+                                      )),
+                                ],
+                              ));
                             },
                           ),
                         ),

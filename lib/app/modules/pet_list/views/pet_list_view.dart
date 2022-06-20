@@ -124,7 +124,8 @@ class PetListView extends GetView<PetListController> {
                                         as Map<String, dynamic>;
 
                                     return InkWell(
-                                      onTap: () => {},
+                                      onTap: () =>
+                                          {Routes.MEDICAL_RECORDS_LIST},
                                       child: Container(
                                           height: height * 0.21,
                                           width: width,

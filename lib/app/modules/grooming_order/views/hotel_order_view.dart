@@ -200,7 +200,7 @@ class HotelOrderView extends GetView<GroomingOrderController> {
                                   height: 2,
                                 ),
                                 Text(
-                                  'Session 2, Drh. Gheara Juniszca, 09.00 AM - 11.00 AM',
+                                  'Room B',
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco.Regular',
                                       fontSize: 13),

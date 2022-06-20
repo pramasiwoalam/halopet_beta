@@ -45,6 +45,10 @@ import '../modules/information/bindings/information_binding.dart';
 import '../modules/information/views/information_view.dart';
 import '../modules/medical_list/bindings/medical_list_binding.dart';
 import '../modules/medical_list/views/medical_list_view.dart';
+import '../modules/medical_records_form/bindings/medical_records_form_binding.dart';
+import '../modules/medical_records_form/views/medical_records_form_view.dart';
+import '../modules/medical_records_list/bindings/medical_records_list_binding.dart';
+import '../modules/medical_records_list/views/medical_records_list_view.dart';
 import '../modules/notification_detail/bindings/notification_detail_binding.dart';
 import '../modules/notification_detail/views/notification_detail_view.dart';
 import '../modules/notification_list/views/notification_list_view.dart';
@@ -305,6 +309,16 @@ class AppPages {
       name: _Paths.CHOOSE_ROOM,
       page: () => ChooseRoomView(),
       binding: ChooseRoomBinding(),
+    ),
+    GetPage(
+      name: _Paths.MEDICAL_RECORDS_LIST,
+      page: () => MedicalRecordsListView(),
+      binding: MedicalRecordsListBinding(),
+    ),
+    GetPage(
+      name: _Paths.MEDICAL_RECORDS_FORM,
+      page: () => MedicalRecordsFormView(),
+      binding: MedicalRecordsFormBinding(),
     ),
   ];
 }
