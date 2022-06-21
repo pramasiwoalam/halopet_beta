@@ -19,11 +19,8 @@ class FavoriteView extends GetView<FavoriteController> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Favorites',
-            style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 19),
-          ),
+          title: Text('Favorites',
+              style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 17)),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,
           centerTitle: true,

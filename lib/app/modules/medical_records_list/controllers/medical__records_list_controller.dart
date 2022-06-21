@@ -28,6 +28,12 @@ class MedicalRecordsListController extends GetxController {
     return doc.get();
   }
 
+  Stream<QuerySnapshot<Object?>> getMedicalRecords(String petId) {
+    CollectionReference medRecords = firestore.collection("medical_records");
+
+    return medRecords.where('petId', isEqualTo: petId).snapshots();
+  }
+
   Stream<QuerySnapshot<Object?>> getPets() {
     CollectionReference pets = firestore.collection("pets");
     CollectionReference users = firestore.collection("users");

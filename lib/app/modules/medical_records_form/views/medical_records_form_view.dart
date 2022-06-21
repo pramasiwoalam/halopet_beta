@@ -68,7 +68,7 @@ class MedicalRecordsFormView extends GetView<MedicalRecordsFormController> {
                               },
                               child: Container(
                                 height: height * 0.08,
-                                width: width * 0.9,
+                                width: width,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
@@ -121,7 +121,7 @@ class MedicalRecordsFormView extends GetView<MedicalRecordsFormController> {
                             ),
                           ),
                           const SizedBox(
-                            height: 18,
+                            height: 22,
                           ),
                           TextFormField(
                             inputFormatters: [
@@ -195,7 +195,7 @@ class MedicalRecordsFormView extends GetView<MedicalRecordsFormController> {
                                         {
                                           Get.dialog(AlertDialog(
                                             title: const Text(
-                                              'Medical Records Option',
+                                              'Register Confirmation',
                                               style: TextStyle(
                                                   fontFamily: 'SanFrancisco',
                                                   fontSize: 14),
@@ -212,7 +212,7 @@ class MedicalRecordsFormView extends GetView<MedicalRecordsFormController> {
                                                 borderRadius:
                                                     BorderRadius.circular(15)),
                                             content: const Text(
-                                                'Do you own the medical record on your previous meet with vet?',
+                                                'Are you sure the registered data is correct?',
                                                 style: TextStyle(
                                                     fontFamily:
                                                         'SanFrancisco.Light',
@@ -223,15 +223,9 @@ class MedicalRecordsFormView extends GetView<MedicalRecordsFormController> {
                                               TextButton(
                                                   onPressed: () => {
                                                         Get.back(),
-                                                        form.currentState!
-                                                            .save(),
-                                                        controller.createPets(
-                                                            formData),
-                                                        Get.toNamed(Routes
-                                                            .MEDICAL_RECORDS_LIST),
                                                       },
                                                   child: const Text(
-                                                    'Yes, i have.',
+                                                    'Cancel',
                                                     style: TextStyle(
                                                         fontFamily:
                                                             'SanFrancisco.Light',
@@ -243,13 +237,12 @@ class MedicalRecordsFormView extends GetView<MedicalRecordsFormController> {
                                                         Get.back(),
                                                         form.currentState!
                                                             .save(),
-                                                        controller.createPets(
-                                                            formData),
-                                                        Get.toNamed(
-                                                            Routes.PET_LIST),
+                                                        controller
+                                                            .createMedicalRecords(
+                                                                formData),
                                                       },
                                                   child: Text(
-                                                    'No',
+                                                    'Yes',
                                                     style: TextStyle(
                                                         fontFamily:
                                                             'SanFrancisco',

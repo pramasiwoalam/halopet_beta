@@ -42,7 +42,7 @@ class ApprovalUserContainer extends StatelessWidget {
                                 arguments: data[index].id)
                           },
                           child: Container(
-                            height: height * 0.19,
+                            height: height * 0.17,
                             width: width,
                             decoration: BoxDecoration(
                                 border: Border.all(
@@ -51,7 +51,7 @@ class ApprovalUserContainer extends StatelessWidget {
                                 ),
                                 color: Colors.white),
                             child: Padding(
-                              padding: const EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(12.0),
                               child: Row(
                                 children: [
                                   SizedBox(
@@ -105,7 +105,7 @@ class ApprovalUserContainer extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Container(
-                                            height: height * 0.026,
+                                            height: height * 0.025,
                                             width: width * 0.4,
                                             decoration: BoxDecoration(
                                               color: Colors.green,
@@ -117,11 +117,11 @@ class ApprovalUserContainer extends StatelessWidget {
                                                     'Waiting for Approval',
                                                     style: TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 11,
+                                                        fontSize: 10,
                                                         fontFamily:
                                                             'SanFrancisco.Light'))),
                                           ),
-                                          SizedBox(height: 9),
+                                          SizedBox(height: 5),
                                           FutureBuilder<
                                                   DocumentSnapshot<Object?>>(
                                               future:
@@ -152,9 +152,6 @@ class ApprovalUserContainer extends StatelessWidget {
                                                   );
                                                 }
                                               }),
-                                          SizedBox(
-                                            height: 3,
-                                          ),
                                           Text(dataMap['bookingType'],
                                               style: TextStyle(
                                                   fontSize: 11,

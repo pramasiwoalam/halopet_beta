@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:halopet_beta/app/modules/petshop_detail/views/petshop_detail_view.dart';
+import 'package:halopet_beta/app/routes/app_pages.dart';
 
 class MedicalRecordsFormController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -21,33 +24,24 @@ class MedicalRecordsFormController extends GetxController {
     return doc.get();
   }
 
-  void createPets(Map<String, dynamic> formData) {
-    CollectionReference pets = firestore.collection("pets");
-    CollectionReference medical_records =
+  void createMedicalRecords(Map<String, dynamic> formData) {
+    CollectionReference medicalRecords =
         firestore.collection("medical_records");
+    CollectionReference pets = firestore.collection("pets");
 
     var petId = GetStorage().read('temporaryPetId');
+    print('PETID$petId');
 
-    try {
-      medical_records.add({
-        'petId': petId,
-        'info': formData['info'],
-        'date': date,
-        'author': formData['author']
-      }).then(
-        (value) => {
-          pets.doc(petId).set(
-            {
-              'medicalRecordsId': FieldValue.arrayUnion([
-                {'medicalRecordsId': value.id}
-              ])
-            },
-            SetOptions(merge: true),
-          ),
-        },
-      );
-    } catch (e) {
-      print('ERROR : $e');
-    }
+    medicalRecords.add({
+      'petId': petId,
+      'info': formData['info'],
+      'date': date.toString(),
+      'author': formData['author']
+    }).then(
+      (value) => pets.doc(petId).update({'isMedical': true}),
+    );
+    Timer(Duration(milliseconds: 500), () {
+      Get.toNamed(Routes.MEDICAL_RECORDS_LIST, arguments: petId);
+    });
   }
 }

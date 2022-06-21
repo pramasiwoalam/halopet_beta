@@ -17,7 +17,6 @@ class AddPetshopController extends GetxController {
     CollectionReference petshop = firestore.collection("petshop");
     CollectionReference users = firestore.collection("users");
     var userId = GetStorage().read('currentUserId');
-    var petshopId = '';
 
     try {
       var res =

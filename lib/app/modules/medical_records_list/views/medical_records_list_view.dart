@@ -14,6 +14,7 @@ import '../controllers/medical__records_list_controller.dart';
 
 class MedicalRecordsListView extends GetView<MedicalRecordsListController> {
   final messageC = TextEditingController();
+  var arguments = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class MedicalRecordsListView extends GetView<MedicalRecordsListController> {
     var width = size.width;
     var height = size.height;
     var tempId = localStorage.read('temporaryPetId');
-    print(tempId);
+    print('TEMPPPPID$tempId');
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -34,302 +35,212 @@ class MedicalRecordsListView extends GetView<MedicalRecordsListController> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-          child: Container(
-        height: height,
-        width: width,
-        child: FutureBuilder<DocumentSnapshot<Object?>>(
-          future: controller.getPet(tempId),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              var data = snapshot.data!.data() as Map<String, dynamic>;
-              if (data['isMedical'] == false) {
-                return Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(40),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: height / 4,
-                        ),
-                        Text(
-                            "You dont have any registered medical records. Please register first",
-                            style: TextStyle(
-                                fontFamily: 'SanFrancisco.Light',
-                                fontSize: 14)),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: width * 0.25,
-                          height: width * 0.20,
-                          child: FlatButton(
-                            padding: EdgeInsets.all(15),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            color: Colors.grey.shade200,
-                            height: height * 0.04,
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.add,
-                                    size: 22,
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text('Register',
-                                      style: TextStyle(
-                                          fontFamily: 'SanFrancisco.Regular',
-                                          fontSize: 12,
-                                          color: Colors.grey.shade800))
-                                ],
-                              ),
-                            ),
-                            onPressed: () =>
-                                Get.toNamed(Routes.MEDICAL_RECORDS_FORM),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              } else {
-                return StreamBuilder<QuerySnapshot<Object?>>(
-                    stream: controller.getPets(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.active) {
-                        var data = snapshot.data!.docs;
-                        return Container(
+          child: FutureBuilder<DocumentSnapshot<Object?>>(
+        future: controller.getPet(arguments),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            var data = snapshot.data!.data() as Map<String, dynamic>;
+            if (data['isMedical'] == false) {
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: height / 4,
+                      ),
+                      Text(
+                          "You dont have any registered medical records. Please register first",
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco.Light', fontSize: 14)),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: width * 0.25,
+                        height: width * 0.20,
+                        child: FlatButton(
+                          padding: EdgeInsets.all(15),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          color: Colors.grey.shade200,
+                          height: height * 0.04,
+                          child: Center(
                             child: Column(
-                          children: [
-                            ListView.builder(
-                                physics: const ClampingScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount: data.length,
-                                itemBuilder: (context, index) {
-                                  var dataMap = data[index].data()
-                                      as Map<String, dynamic>;
+                              children: [
+                                Icon(
+                                  Icons.add,
+                                  size: 22,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text('Register',
+                                    style: TextStyle(
+                                        fontFamily: 'SanFrancisco.Regular',
+                                        fontSize: 12,
+                                        color: Colors.grey.shade800))
+                              ],
+                            ),
+                          ),
+                          onPressed: () =>
+                              Get.toNamed(Routes.MEDICAL_RECORDS_FORM),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              return StreamBuilder<QuerySnapshot<Object?>>(
+                  stream: controller.getMedicalRecords(tempId ?? arguments),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.active) {
+                      var data = snapshot.data!.docs;
+                      return Column(
+                        children: [
+                          ListView.builder(
+                              physics: const ClampingScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: data.length,
+                              itemBuilder: (context, index) {
+                                var dataMap =
+                                    data[index].data() as Map<String, dynamic>;
 
-                                  return InkWell(
+                                return InkWell(
                                     onTap: () => {},
-                                    child: Container(
-                                        height: height * 0.21,
-                                        width: width,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 1,
-                                              color: Colors.grey.shade300),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 6, right: 6, top: 6),
+                                        child: Container(
+                                            height: height * 0.14,
+                                            width: width,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color:
+                                                          Colors.grey.shade200,
+                                                      spreadRadius: 2,
+                                                      blurRadius: 3,
+                                                      offset: Offset(0, 4))
+                                                ],
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color:
+                                                        Colors.grey.shade200),
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            child: Padding(
                                               padding: const EdgeInsets.only(
-                                                  top: 10.0,
-                                                  bottom: 10,
-                                                  left: 6),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 8.0,
-                                                    bottom: 8,
-                                                    left: 10),
-                                                child: Container(
-                                                  height: height * 0.18,
-                                                  width: width * 0.3,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: AssetImage(
-                                                            '${dataMap['img']}')),
-                                                  ),
-                                                ),
+                                                left: 30,
+                                                top: 12,
+                                                bottom: 12,
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 7.0,
-                                                  bottom: 10,
-                                                  left: 15),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 9, bottom: 10),
-                                                child: Container(
-                                                  height: height * 0.2,
-                                                  width: width * 0.55,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                              '${dataMap['name']}',
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'SanFrancisco',
-                                                                  fontSize:
-                                                                      14)),
-                                                          const SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Icon(
-                                                            dataMap['gender'] ==
-                                                                    'Male'
-                                                                ? Icons.male
-                                                                : Icons.female,
-                                                            color: dataMap[
-                                                                        'gender'] ==
-                                                                    'Male'
-                                                                ? Colors.blue
-                                                                : Colors.pink,
-                                                            size: 20,
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Spacer(),
-                                                      Text(
-                                                          'Hello! My Name is ${dataMap['name']}. I was adopted/ born on ${dataMap['birth']}.',
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Container(
+                                                    width: width * 0.65,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          dataMap['date'],
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   'SanFrancisco.Light',
-                                                              fontSize: 11)),
-                                                      Spacer(),
-                                                      Row(
-                                                        children: [
-                                                          const Icon(
-                                                            Icons
-                                                                .baby_changing_station,
-                                                            color:
-                                                                Colors.orange,
-                                                            size: 17,
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 6,
-                                                          ),
-                                                          Text(
-                                                              "${dataMap['age']} months.",
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'SanFrancisco.Light',
-                                                                  fontSize:
-                                                                      11)),
-                                                        ],
-                                                      ),
-                                                      Spacer(),
-                                                      Row(
-                                                        children: [
-                                                          Icon(
-                                                            Icons
-                                                                .monitor_weight,
-                                                            color: Colors
-                                                                .grey.shade700,
-                                                            size: 17,
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                              '${dataMap['weight']} kg(s).',
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'SanFrancisco.Light',
-                                                                  fontSize:
-                                                                      11)),
-                                                        ],
-                                                      ),
-                                                      Spacer(),
-                                                      Container(
-                                                        height: height * 0.03,
-                                                        width: width * 0.23,
-                                                        color: Colors
-                                                            .blue.shade300,
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(5.0),
-                                                          child: Center(
-                                                            child: Text(
-                                                              dataMap[
-                                                                  'species'],
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'SanFrancisco.Light',
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 11),
-                                                            ),
-                                                          ),
+                                                              fontSize: 10),
                                                         ),
-                                                      ),
-                                                    ],
+                                                        SizedBox(
+                                                          height: 3,
+                                                        ),
+                                                        Text(
+                                                          dataMap['info'],
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco',
+                                                              fontSize: 15),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 3,
+                                                        ),
+                                                        Text(
+                                                          'Checked by: ${dataMap['author']}',
+                                                          style: const TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 12),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
+                                                ],
                                               ),
-                                            )
-                                          ],
-                                        )),
-                                  );
-                                }),
-                            Container(
-                              height: height * 0.09,
-                              width: width,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 70, vertical: 10),
-                                child: FlatButton(
-                                  padding: EdgeInsets.all(15),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  color: Colors.grey.shade200,
-                                  height: height * 0.05,
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.add,
-                                        size: 19,
-                                        color: Colors.grey.shade800,
-                                      ),
-                                      const SizedBox(
-                                        width: 20,
-                                      ),
-                                      Expanded(
-                                        child: Text("Add More",
-                                            style: TextStyle(
-                                                fontFamily:
-                                                    'SanFrancisco.Light',
-                                                fontSize: 12)),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        size: 16,
-                                      ),
-                                    ],
-                                  ),
-                                  onPressed: () => Get.toNamed(Routes.PET_FORM),
+                                            ))));
+                              }),
+                          Container(
+                            height: height * 0.09,
+                            width: width,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 70, vertical: 10),
+                              child: FlatButton(
+                                padding: EdgeInsets.all(15),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                color: Colors.grey.shade200,
+                                height: height * 0.05,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.add,
+                                      size: 19,
+                                      color: Colors.grey.shade800,
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Expanded(
+                                      child: Text("Add More",
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco.Light',
+                                              fontSize: 12)),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 16,
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () => Get.toNamed(
+                                  Routes.MEDICAL_RECORDS_FORM,
                                 ),
                               ),
-                            )
-                          ],
-                        ));
-                      } else {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    });
-              }
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+                            ),
+                          )
+                        ],
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  });
             }
-          },
-        ),
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       )),
     );
   }

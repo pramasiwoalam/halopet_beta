@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:halopet_beta/app/modules/petshop_detail/views/petshop_detail_view.dart';
+import 'package:halopet_beta/app/routes/app_pages.dart';
 
 class PetFormController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -25,35 +26,32 @@ class PetFormController extends GetxController {
     CollectionReference users = firestore.collection("users");
     var userId = GetStorage().read('currentUserId');
 
-    try {
-      pets.add({
-        'userId': userId,
-        'name': formData['name'],
-        'desc': formData['desc'],
-        'birth': formData['birth'],
-        'gender': formData['gender'],
-        'species': formData['species'],
-        'age': formData['age'],
-        'weight': formData['weight'],
-        'color': formData['color'],
-        'isMedical': false,
-        'img': 'assets/images/freddy.jpg'
-      }).then(
-        (value) => {
-          print('VALUEID INI ${value.id}'),
-          localStorage.write('temporaryPetId', value.id),
-          users.doc(userId).set(
-            {
-              'pets': FieldValue.arrayUnion([
-                {'petId': value.id}
-              ])
-            },
-            SetOptions(merge: true),
-          ),
-        },
-      );
-    } catch (e) {
-      print('ERROR : $e');
-    }
+    pets.add({
+      'userId': userId,
+      'name': formData['name'],
+      'desc': formData['desc'],
+      'birth': formData['birth'],
+      'gender': formData['gender'],
+      'species': formData['species'],
+      'age': formData['age'],
+      'weight': formData['weight'],
+      'color': formData['color'],
+      'isMedical': false,
+      'img': 'assets/images/freddy.jpg'
+    }).then(
+      (value) => {
+        print(value.id),
+        users.doc(userId).set(
+          {
+            'pets': FieldValue.arrayUnion([
+              {'petId': value.id}
+            ])
+          },
+          SetOptions(merge: true),
+        ),
+        localStorage.write('temporaryPetId', value.id),
+        Get.toNamed(Routes.MEDICAL_RECORDS_LIST, arguments: value.id),
+      },
+    );
   }
 }

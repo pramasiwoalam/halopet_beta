@@ -368,8 +368,6 @@ class PetFormView extends GetView<PetFormController> {
                                                             .save(),
                                                         controller.createPets(
                                                             formData),
-                                                        Get.toNamed(Routes
-                                                            .MEDICAL_RECORDS_LIST),
                                                       },
                                                   child: const Text(
                                                     'Yes, i have.',
