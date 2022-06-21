@@ -42,8 +42,10 @@ class SellerHomeView extends GetView<SellerHomeController> {
           title: Center(
               child: Text(
             'Booking Order',
-            style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+            style: TextStyle(
+              fontFamily: 'SanFrancisco',
+              fontSize: 15,
+            ),
           )),
           backgroundColor: Color(0xff2596BE),
           elevation: 0,
@@ -659,7 +661,7 @@ class PaymentContainer extends StatelessWidget {
                                             children: [
                                               Text('   Order ID',
                                                   style: TextStyle(
-                                                      fontSize: 14,
+                                                      fontSize: 13,
                                                       color:
                                                           Colors.grey.shade800,
                                                       fontFamily:
@@ -672,7 +674,7 @@ class PaymentContainer extends StatelessWidget {
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Color(0xff2596BE),
-                                                      fontSize: 15,
+                                                      fontSize: 13,
                                                       fontFamily:
                                                           'SanFrancisco'))
                                             ],
@@ -694,7 +696,7 @@ class PaymentContainer extends StatelessWidget {
                                               'See details ',
                                               style: TextStyle(
                                                   color: Color(0xff2596BE),
-                                                  fontSize: 14,
+                                                  fontSize: 12,
                                                   fontFamily: 'SanFrancisco'),
                                             ),
                                             Icon(

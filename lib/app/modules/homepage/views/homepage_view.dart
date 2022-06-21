@@ -62,9 +62,9 @@ class HomepageView extends GetView<HomepageController> {
           child: BottomNavigationBar(
             type: BottomNavigationBarType.shifting,
             currentIndex: homeController.index.value,
-            iconSize: 28,
+            iconSize: 22,
             unselectedFontSize: 10,
-            selectedFontSize: 13,
+            selectedFontSize: 12,
             selectedItemColor: Color(0xffF9813A),
             showSelectedLabels: true,
             items: const [
@@ -76,7 +76,7 @@ class HomepageView extends GetView<HomepageController> {
                   ),
                   backgroundColor: Color.fromARGB(255, 255, 255, 255)),
               BottomNavigationBarItem(
-                  label: "Order",
+                  label: "My Booking",
                   icon: Icon(
                     Icons.book,
                     color: Color(0xffF9813A),

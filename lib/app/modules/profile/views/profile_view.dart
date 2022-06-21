@@ -32,7 +32,9 @@ class ProfileView extends GetView<ProfileController> {
             child: Text(
           'Profile',
           style: TextStyle(
-              fontFamily: 'SanFrancisco', fontSize: 17, color: Colors.orange),
+              fontFamily: 'SanFrancisco',
+              fontSize: 17,
+              color: Colors.grey.shade800),
         )),
         leading: Icon(Icons.abc),
         centerTitle: true,
@@ -40,19 +42,19 @@ class ProfileView extends GetView<ProfileController> {
         elevation: 0.1,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 5.0),
+            padding: const EdgeInsets.only(right: 8.0),
             child: FlatButton(
               minWidth: 5,
               onPressed: () => Get.toNamed(Routes.NOTIFICATION_LIST),
               child: Stack(
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.notifications,
-                    size: 28,
-                    color: Colors.orange,
+                    size: 26,
+                    color: Colors.grey.shade700,
                   ),
                   StreamBuilder<QuerySnapshot<Object?>>(
-                      stream: controller.getUnreadNotification(),
+                      stream: profileController.getUnreadNotification(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.active) {
@@ -66,8 +68,8 @@ class ProfileView extends GetView<ProfileController> {
                           return Container(
                               width: 30,
                               height: 30,
-                              alignment: Alignment.topRight,
-                              margin: EdgeInsets.only(top: 5),
+                              alignment: Alignment.topLeft,
+                              margin: EdgeInsets.only(top: 3, left: 12),
                               child: Container(
                                 width: 14,
                                 height: 14,
@@ -98,10 +100,23 @@ class ProfileView extends GetView<ProfileController> {
       body: StreamBuilder<User?>(
           stream: authController.streamUser,
           builder: (context, userSnapshot) {
-            return FutureBuilder<Object>(
+            return FutureBuilder<DocumentSnapshot<Object?>>(
                 future: profileController.getUser(userId),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
+                    var data = snapshot.data!.data() as Map<String, dynamic>;
+                    var petshopId = data['petshopId'];
+                    print(petshopId);
+                    int balance = data['balance'];
+                    MoneyFormatter fmf = MoneyFormatter(
+                        amount: balance.roundToDouble(),
+                        settings: MoneyFormatterSettings(
+                          symbol: 'Rp.',
+                          thousandSeparator: '.',
+                          decimalSeparator: ',',
+                          symbolAndNumberSeparator: ' ',
+                        ));
+                    MoneyFormatterOutput fo = fmf.output;
                     return Column(
                       children: [
                         Column(
@@ -150,39 +165,101 @@ class ProfileView extends GetView<ProfileController> {
                                                 width: 10,
                                               ),
                                               Container(
-                                                margin: EdgeInsets.only(
-                                                  left: 10,
-                                                ),
-                                                height: height * 0.07,
-                                                width: width * 0.65,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Gheara Arsyandra',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'SanFrancisco',
-                                                          fontSize: 15),
-                                                    ),
-                                                    Spacer(),
-                                                    Text('Jakarta, Indonesia',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'SanFrancisco.Light',
-                                                            fontSize: 13)),
-                                                    Spacer(),
-                                                    Text('Member',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.orange,
-                                                            fontFamily:
-                                                                'SanFrancisco',
-                                                            fontSize: 12))
-                                                  ],
-                                                ),
-                                              )
+                                                  margin: EdgeInsets.only(
+                                                    left: 10,
+                                                  ),
+                                                  height: height * 0.07,
+                                                  width: width * 0.65,
+                                                  child: data['role'] ==
+                                                          'Member'
+                                                      ? Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              'Gheara Arsyandra',
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'SanFrancisco',
+                                                                  fontSize: 15),
+                                                            ),
+                                                            Spacer(),
+                                                            Text(
+                                                                'Jakarta, Indonesia',
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    fontSize:
+                                                                        13)),
+                                                            Spacer(),
+                                                            Text('Member',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .orange,
+                                                                    fontFamily:
+                                                                        'SanFrancisco',
+                                                                    fontSize:
+                                                                        12))
+                                                          ],
+                                                        )
+                                                      : FutureBuilder<
+                                                              DocumentSnapshot<
+                                                                  Object?>>(
+                                                          future: profileController
+                                                              .getPetshopDetail(
+                                                                  petshopId),
+                                                          builder: (context,
+                                                              snapshot) {
+                                                            if (snapshot
+                                                                    .connectionState ==
+                                                                ConnectionState
+                                                                    .done) {
+                                                              var petshop = snapshot
+                                                                      .data!
+                                                                      .data()
+                                                                  as Map<String,
+                                                                      dynamic>;
+                                                              return Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    petshop[
+                                                                        'petshopName'],
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'SanFrancisco',
+                                                                        fontSize:
+                                                                            15),
+                                                                  ),
+                                                                  Spacer(),
+                                                                  Text(
+                                                                      'Jakarta, Indonesia',
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              'SanFrancisco.Light',
+                                                                          fontSize:
+                                                                              13)),
+                                                                  Spacer(),
+                                                                  Text('Seller',
+                                                                      style: TextStyle(
+                                                                          color: Color(
+                                                                              0xff2596BE),
+                                                                          fontFamily:
+                                                                              'SanFrancisco',
+                                                                          fontSize:
+                                                                              12))
+                                                                ],
+                                                              );
+                                                            } else {
+                                                              return Center(
+                                                                child:
+                                                                    CircularProgressIndicator(),
+                                                              );
+                                                            }
+                                                          }))
                                             ],
                                           ),
                                         )
@@ -192,137 +269,99 @@ class ProfileView extends GetView<ProfileController> {
                                 ),
                               ),
                             ),
-                            FutureBuilder<DocumentSnapshot<Object?>>(
-                                future: profileController.getUser(userId),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    var data = snapshot.data!.data()
-                                        as Map<String, dynamic>;
-                                    int balance = data['balance'];
-                                    MoneyFormatter fmf = MoneyFormatter(
-                                        amount: balance.roundToDouble(),
-                                        settings: MoneyFormatterSettings(
-                                          symbol: 'Rp.',
-                                          thousandSeparator: '.',
-                                          decimalSeparator: ',',
-                                          symbolAndNumberSeparator: ' ',
-                                        ));
-                                    MoneyFormatterOutput fo = fmf.output;
-                                    return Container(
-                                      height: height * 0.1,
-                                      width: width * 0.9,
-                                      margin: EdgeInsets.only(top: 10),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              width: 0.8,
-                                              color: Colors.grey.shade300),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey.shade200,
-                                                spreadRadius: 1,
-                                                blurRadius: 1,
-                                                offset: Offset(1, 2))
-                                          ]),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16),
-                                          child: Row(
+                            Container(
+                              height: height * 0.1,
+                              width: width * 0.9,
+                              margin: EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      width: 0.8, color: Colors.grey.shade300),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.shade200,
+                                        spreadRadius: 1,
+                                        blurRadius: 1,
+                                        offset: Offset(1, 2))
+                                  ]),
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.monetization_on,
+                                            color: Colors.orange,
+                                            size: 20,
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Column(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.monetization_on,
-                                                    color: Colors.orange,
-                                                    size: 20,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        "${fo.symbolOnLeft}",
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade800,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                fontSize: 14),
-                                                      ),
-                                                      Text(
-                                                        'PawPay Coins',
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade800,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                                fontSize: 11),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
+                                              Text(
+                                                "${fo.symbolOnLeft}",
+                                                style: GoogleFonts.roboto(
+                                                    color: Colors.grey.shade800,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 14),
                                               ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              VerticalDivider(
-                                                color: Colors.grey.shade300,
-                                                thickness: 1,
-                                              ),
-                                              InkWell(
-                                                onTap: () => {
-                                                  Get.toNamed(Routes.TOPUP),
-                                                },
-                                                child: Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.add,
-                                                      color: Colors.orange,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text(
-                                                      'Top up PawPay',
-                                                      style: GoogleFonts.roboto(
-                                                          color: Colors
-                                                              .grey.shade800,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 13),
-                                                    ),
-                                                  ],
-                                                ),
+                                              Text(
+                                                'PawPay Coins',
+                                                style: GoogleFonts.roboto(
+                                                    color: Colors.grey.shade800,
+                                                    fontWeight: FontWeight.w300,
+                                                    fontSize: 11),
                                               )
                                             ],
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    );
-                                  } else {
-                                    return Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }
-                                }),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      VerticalDivider(
+                                        color: Colors.grey.shade300,
+                                        thickness: 1,
+                                      ),
+                                      InkWell(
+                                        onTap: () => {
+                                          Get.toNamed(Routes.TOPUP),
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.add,
+                                              color: Colors.orange,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              'Top up PawPay',
+                                              style: GoogleFonts.roboto(
+                                                  color: Colors.grey.shade800,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 13),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
                           ],
                         ),
                         SizedBox(
@@ -331,88 +370,77 @@ class ProfileView extends GetView<ProfileController> {
                         Padding(
                           padding: const EdgeInsets.all(0.5),
                           child: Column(
-                            // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              FutureBuilder<DocumentSnapshot<Object?>>(
-                                  future: profileController.getUser(userId),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      var data = snapshot.data!.data()
-                                          as Map<String, dynamic>;
-                                      var petshopId = data['petshopId'];
-
-                                      if (data['role'] == 'Seller') {
-                                        return FutureBuilder<
-                                                DocumentSnapshot<Object?>>(
-                                            future: profileController
-                                                .getPetshopDetail(petshopId),
-                                            builder:
-                                                (context, petshopSnapshot) {
-                                              if (petshopSnapshot
-                                                      .connectionState ==
-                                                  ConnectionState.done) {
-                                                var petshopData =
-                                                    petshopSnapshot.data!.data()
-                                                        as Map<String, dynamic>;
-                                                return Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Center(
-                                                      child: Text(
-                                                        "Hello ${data['name']}",
-                                                        style:
-                                                            GoogleFonts.inter(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 20,
+                              data['role'] == 'Seller'
+                                  ? FutureBuilder<DocumentSnapshot<Object?>>(
+                                      future: profileController
+                                          .getPetshopDetail(petshopId),
+                                      builder: (context, petshopSnapshot) {
+                                        if (petshopSnapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          var petshopData =
+                                              petshopSnapshot.data!.data()
+                                                  as Map<String, dynamic>;
+                                          return Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 30,
+                                                        vertical: 10),
+                                                child: FlatButton(
+                                                    padding: EdgeInsets.all(20),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15)),
+                                                    color: Colors.grey.shade100,
+                                                    child: Row(
+                                                      children: [
+                                                        const Icon(
+                                                            Icons.find_replace,
+                                                            color: Color(
+                                                                0xff2596BE)),
+                                                        const SizedBox(
+                                                          width: 30,
+                                                        ),
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Go back as member",
+                                                            style: GoogleFonts.inter(
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .bold),
-                                                      ),
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                        Icon(
+                                                          Icons
+                                                              .arrow_forward_ios,
+                                                          size: 20,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Center(
-                                                      child: Text(
-                                                        "Your Petshop: ${petshopData['petshopName']}",
-                                                        style:
-                                                            GoogleFonts.inter(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 20,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                );
-                                              } else {
-                                                return const Center(
-                                                    child:
-                                                        CircularProgressIndicator());
-                                              }
-                                            });
-                                      } else {
-                                        return SizedBox(
-                                          height: 1,
-                                        );
-                                      }
-                                    } else {
-                                      return Center(
-                                          child: CircularProgressIndicator());
-                                    }
-                                  }),
-                              FutureBuilder<DocumentSnapshot<Object?>>(
-                                  future: profileController.getUser(userId),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      var data = snapshot.data!.data()
-                                          as Map<String, dynamic>;
-                                      if (data['role'] == 'Member' &&
-                                          data['petshopOwner'] == false) {
-                                        return Column(
+                                                    onPressed: () => {
+                                                          profileController
+                                                              .changeRoleToMember(
+                                                                  userId)
+                                                        }),
+                                              ),
+                                            ],
+                                          );
+                                        } else {
+                                          return const Center(
+                                              child:
+                                                  CircularProgressIndicator());
+                                        }
+                                      })
+                                  : data['role'] == 'Member' &&
+                                          data['petshopOwner'] == false
+                                      ? Column(
                                           children: [
                                             Container(
                                               height: height * 0.042,
@@ -521,302 +549,314 @@ class ProfileView extends GetView<ProfileController> {
                                               ),
                                             ),
                                           ],
-                                        );
-                                      } else if (data['role'] == 'Member' &&
-                                          data['petshopOwner'] == true) {
-                                        return Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
+                                        )
+                                      : data['role'] == 'Member' &&
+                                              data['petshopOwner'] == true
+                                          ? Column(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
                                                       horizontal: 30,
                                                       vertical: 10),
-                                              child: FlatButton(
-                                                  padding: EdgeInsets.all(20),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
-                                                  color: Colors.grey.shade100,
-                                                  child: Row(
-                                                    children: [
-                                                      const Icon(Icons.pets,
-                                                          color: Color(
-                                                              0xffF9813A)),
-                                                      const SizedBox(
-                                                        width: 30,
-                                                      ),
-                                                      Expanded(
-                                                        child: Text(
-                                                          "Pet List",
-                                                          style:
-                                                              GoogleFonts.inter(
+                                                  child: FlatButton(
+                                                      padding:
+                                                          EdgeInsets.all(20),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15)),
+                                                      color:
+                                                          Colors.grey.shade100,
+                                                      child: Row(
+                                                        children: [
+                                                          const Icon(Icons.pets,
+                                                              color: Color(
+                                                                  0xffF9813A)),
+                                                          const SizedBox(
+                                                            width: 30,
+                                                          ),
+                                                          Expanded(
+                                                            child: Text(
+                                                              "Pet List",
+                                                              style: GoogleFonts.inter(
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400),
+                                                            ),
+                                                          ),
+                                                          Icon(Icons
+                                                              .arrow_forward_ios),
+                                                        ],
+                                                      ),
+                                                      onPressed: () => {
+                                                            Get.toNamed(
+                                                                Routes.PET_LIST)
+                                                          }),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 30,
+                                                      vertical: 10),
+                                                  child: FlatButton(
+                                                    padding: EdgeInsets.all(20),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15)),
+                                                    color: Colors.grey.shade100,
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(
+                                                          Icons.shopify,
+                                                          color:
+                                                              Color(0xffF9813A),
                                                         ),
-                                                      ),
-                                                      Icon(Icons
-                                                          .arrow_forward_ios),
-                                                    ],
+                                                        SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Go to seller page",
+                                                            style: GoogleFonts.inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                        Icon(Icons
+                                                            .arrow_forward_ios),
+                                                      ],
+                                                    ),
+                                                    onPressed: () =>
+                                                        profileController
+                                                            .changeRoleToSeller(
+                                                                userId),
                                                   ),
-                                                  onPressed: () => {
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 30,
+                                                      vertical: 10),
+                                                  child: FlatButton(
+                                                    padding: EdgeInsets.all(20),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15)),
+                                                    color: Colors.grey.shade100,
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(
+                                                          Icons.favorite,
+                                                          color:
+                                                              Color(0xffF9813A),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Favorite",
+                                                            style: GoogleFonts.inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                        Icon(Icons
+                                                            .arrow_forward_ios),
+                                                      ],
+                                                    ),
+                                                    onPressed: () =>
                                                         Get.toNamed(
-                                                            Routes.PET_LIST)
-                                                      }),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 30,
-                                                      vertical: 10),
-                                              child: FlatButton(
-                                                padding: EdgeInsets.all(20),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                color: Colors.grey.shade100,
-                                                child: Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.shopify,
-                                                      color: Color(0xffF9813A),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    Expanded(
-                                                      child: Text(
-                                                        "Go to seller page",
-                                                        style:
-                                                            GoogleFonts.inter(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                      ),
-                                                    ),
-                                                    Icon(Icons
-                                                        .arrow_forward_ios),
-                                                  ],
+                                                            Routes.FAVORITE),
+                                                  ),
                                                 ),
-                                                onPressed: () =>
-                                                    profileController
-                                                        .changeRoleToSeller(
-                                                            userId),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 30,
-                                                      vertical: 10),
-                                              child: FlatButton(
-                                                padding: EdgeInsets.all(20),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                color: Colors.grey.shade100,
-                                                child: Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.favorite,
-                                                      color: Color(0xffF9813A),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    Expanded(
-                                                      child: Text(
-                                                        "Favorite",
-                                                        style:
-                                                            GoogleFonts.inter(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                      ),
-                                                    ),
-                                                    Icon(Icons
-                                                        .arrow_forward_ios),
-                                                  ],
-                                                ),
-                                                onPressed: () => Get.toNamed(
-                                                    Routes.FAVORITE),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      } else if (data['role'] == 'Seller') {
-                                        return Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 30,
-                                                      vertical: 10),
-                                              child: FlatButton(
-                                                padding: EdgeInsets.all(15),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                color: Colors.white60,
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons.edit_attributes),
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    Expanded(
-                                                      child: Text(
-                                                        "Edit your petshop",
-                                                        style:
-                                                            GoogleFonts.inter(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                      ),
-                                                    ),
-                                                    Icon(Icons
-                                                        .arrow_forward_ios),
-                                                  ],
-                                                ),
-                                                onPressed: () => Get.toNamed(
-                                                    Routes.ADD_PETSHOP),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 30,
-                                                      vertical: 10),
-                                              child: FlatButton(
-                                                padding: EdgeInsets.all(15),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                color: Colors.white60,
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons.emoji_people),
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    Expanded(
-                                                      child: Text(
-                                                        "Go Back As User",
-                                                        style:
-                                                            GoogleFonts.inter(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                      ),
-                                                    ),
-                                                    Icon(Icons
-                                                        .arrow_forward_ios),
-                                                  ],
-                                                ),
-                                                onPressed: () =>
-                                                    profileController
-                                                        .changeRoleToMember(
-                                                            userId),
-                                              ),
+                                              ],
                                             )
-                                          ],
-                                        );
-                                      } else {
-                                        return SizedBox();
-                                      }
-                                    } else {
-                                      return Center(
-                                          child: CircularProgressIndicator());
-                                    }
-                                  }),
+                                          : data['role'] == 'Seller'
+                                              ? Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 30,
+                                                          vertical: 10),
+                                                      child: FlatButton(
+                                                        padding:
+                                                            EdgeInsets.all(15),
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15)),
+                                                        color: Colors.white60,
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(Icons
+                                                                .edit_attributes),
+                                                            SizedBox(
+                                                              width: 20,
+                                                            ),
+                                                            Expanded(
+                                                              child: Text(
+                                                                "Edit your petshop",
+                                                                style: GoogleFonts.inter(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                            ),
+                                                            Icon(Icons
+                                                                .arrow_forward_ios),
+                                                          ],
+                                                        ),
+                                                        onPressed: () =>
+                                                            Get.toNamed(Routes
+                                                                .ADD_PETSHOP),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 30,
+                                                          vertical: 10),
+                                                      child: FlatButton(
+                                                        padding:
+                                                            EdgeInsets.all(15),
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15)),
+                                                        color: Colors.white60,
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(Icons
+                                                                .emoji_people),
+                                                            SizedBox(
+                                                              width: 20,
+                                                            ),
+                                                            Expanded(
+                                                              child: Text(
+                                                                "Go Back As User",
+                                                                style: GoogleFonts.inter(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                              ),
+                                                            ),
+                                                            Icon(Icons
+                                                                .arrow_forward_ios),
+                                                          ],
+                                                        ),
+                                                        onPressed: () =>
+                                                            profileController
+                                                                .changeRoleToMember(
+                                                                    userId),
+                                                      ),
+                                                    )
+                                                  ],
+                                                )
+                                              : SizedBox(),
                               Container(
-                                height: height * 0.07,
-                                width: width * 0.4,
-                                color: Colors.transparent,
-                                child: Center(
-                                  child: MaterialButton(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.logout,
-                                            size: 19, color: Color(0xffF9813A)),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Expanded(
-                                          child: Center(
-                                            child: Text("Log Out",
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        'SanFrancisco.Regular',
-                                                    fontSize: 14,
-                                                    color: Color(0xffF9813A))),
+                                  height: height * 0.07,
+                                  width: width * 0.4,
+                                  color: Colors.transparent,
+                                  child: Center(
+                                    child: MaterialButton(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.logout,
+                                              size: 19,
+                                              color: data['role'] == 'Member'
+                                                  ? Color(0xffF9813A)
+                                                  : Color(0xff2596BE)),
+                                          SizedBox(
+                                            width: 5,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    onPressed: () {
-                                      Get.dialog(AlertDialog(
-                                        title: Text(
-                                          'Alert',
-                                          style: TextStyle(
-                                              fontFamily: 'SanFrancisco',
-                                              fontSize: 14),
-                                        ),
-                                        titlePadding: EdgeInsets.only(
-                                            left: 26, right: 26, top: 30),
-                                        contentPadding: EdgeInsets.only(
-                                            left: 26,
-                                            right: 26,
-                                            top: 16,
-                                            bottom: 12),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        content: Text(
-                                            'Are you sure want to logout?',
-                                            style: TextStyle(
-                                                fontFamily:
-                                                    'SanFrancisco.Light',
-                                                fontSize: 12)),
-                                        actionsPadding: EdgeInsets.only(
-                                            right: 12, top: 6, bottom: 2),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () => {Get.back()},
-                                              child: Text(
-                                                'Cancel',
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        'SanFrancisco.Light',
-                                                    fontSize: 13,
-                                                    color: Colors.orange),
-                                              )),
-                                          TextButton(
-                                              onPressed: () => {
-                                                    Get.back(),
-                                                    authController.logout()
-                                                  },
-                                              child: Text(
-                                                'Log Out',
-                                                style: TextStyle(
-                                                    fontFamily: 'SanFrancisco',
-                                                    fontSize: 13,
-                                                    color: Colors.orange),
-                                              )),
+                                          Expanded(
+                                            child: Center(
+                                              child: Text("Log Out",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco.Regular',
+                                                      fontSize: 14,
+                                                      color: data['role'] ==
+                                                              'Member'
+                                                          ? Color(0xffF9813A)
+                                                          : Color(0xff2596BE))),
+                                            ),
+                                          ),
                                         ],
-                                      ));
-                                    },
-                                  ),
-                                ),
-                              ),
+                                      ),
+                                      onPressed: () {
+                                        Get.dialog(AlertDialog(
+                                          title: Text(
+                                            'Alert',
+                                            style: TextStyle(
+                                                fontFamily: 'SanFrancisco',
+                                                fontSize: 14),
+                                          ),
+                                          titlePadding: EdgeInsets.only(
+                                              left: 26, right: 26, top: 30),
+                                          contentPadding: EdgeInsets.only(
+                                              left: 26,
+                                              right: 26,
+                                              top: 16,
+                                              bottom: 12),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          content: Text(
+                                              'Are you sure want to logout?',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 12)),
+                                          actionsPadding: EdgeInsets.only(
+                                              right: 12, top: 6, bottom: 2),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () => {Get.back()},
+                                                child: Text(
+                                                  'Cancel',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
+                                                      fontSize: 13,
+                                                      color: Colors.orange),
+                                                )),
+                                            TextButton(
+                                                onPressed: () => {
+                                                      Get.back(),
+                                                      authController.logout()
+                                                    },
+                                                child: Text(
+                                                  'Log Out',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco',
+                                                      fontSize: 13,
+                                                      color: Colors.orange),
+                                                )),
+                                          ],
+                                        ));
+                                      },
+                                    ),
+                                  ))
                             ],
                           ),
                         ),
