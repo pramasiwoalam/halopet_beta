@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,6 +20,11 @@ class ProfileView extends GetView<ProfileController> {
   final profileController = Get.put(ProfileController());
   var userId = GetStorage().read('currentUserId');
   var userRole = ''.obs;
+  var items = [
+    'OPEN',
+    'CLOSED',
+  ];
+  String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
@@ -147,20 +153,25 @@ class ProfileView extends GetView<ProfileController> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Container(
-                                                height: height / 7,
-                                                width: width / 7,
-                                                // color: Colors.blue,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                      color: Colors.black,
-                                                      width: width * 0.4),
-                                                  image: const DecorationImage(
-                                                      fit: BoxFit.fitWidth,
-                                                      image: AssetImage(
-                                                          'assets/images/user.jpeg')),
-                                                ),
-                                              ),
+                                                  height: height / 7,
+                                                  width: width / 7,
+                                                  // color: Colors.blue,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                          color: Colors.black,
+                                                          width: width * 0.4),
+                                                      image: DecorationImage(
+                                                          fit: data['role'] ==
+                                                                  'Member'
+                                                              ? BoxFit.fitWidth
+                                                              : BoxFit.cover,
+                                                          image: data['role'] ==
+                                                                  'Member'
+                                                              ? AssetImage(
+                                                                  'assets/images/user.jpeg')
+                                                              : AssetImage(
+                                                                  'assets/images/petshop-1.jpg')))),
                                               SizedBox(
                                                 width: 10,
                                               ),
@@ -225,14 +236,59 @@ class ProfileView extends GetView<ProfileController> {
                                                                     CrossAxisAlignment
                                                                         .start,
                                                                 children: [
-                                                                  Text(
-                                                                    petshop[
-                                                                        'petshopName'],
-                                                                    style: TextStyle(
-                                                                        fontFamily:
-                                                                            'SanFrancisco',
-                                                                        fontSize:
-                                                                            15),
+                                                                  Row(
+                                                                    children: [
+                                                                      Text(
+                                                                        petshop[
+                                                                            'petshopName'],
+                                                                        style: TextStyle(
+                                                                            fontFamily:
+                                                                                'SanFrancisco',
+                                                                            fontSize:
+                                                                                15),
+                                                                      ),
+                                                                      // DropdownButtonHideUnderline(
+                                                                      //   child:
+                                                                      //       DropdownButton2(
+                                                                      //     hint:
+                                                                      //         Text(
+                                                                      //       profileController.status.value.isEmpty
+                                                                      //           ? 'Open'
+                                                                      //           : 'Closed',
+                                                                      //       style:
+                                                                      //           TextStyle(
+                                                                      //         fontSize: 14,
+                                                                      //         color: Theme.of(context).hintColor,
+                                                                      //       ),
+                                                                      //     ),
+                                                                      //     items: items
+                                                                      //         .map((item) => DropdownMenuItem<String>(
+                                                                      //               value: item,
+                                                                      //               child: Text(
+                                                                      //                 item,
+                                                                      //                 style: const TextStyle(
+                                                                      //                   fontSize: 14,
+                                                                      //                 ),
+                                                                      //               ),
+                                                                      //             ))
+                                                                      //         .toList(),
+                                                                      //     value:
+                                                                      //         selectedValue,
+                                                                      //     onChanged:
+                                                                      //         (value) {
+                                                                      //       profileController.status.value =
+                                                                      //           value.toString();
+                                                                      //       print(profileController.status.value);
+                                                                      //     },
+                                                                      //     buttonHeight:
+                                                                      //         40,
+                                                                      //     buttonWidth:
+                                                                      //         140,
+                                                                      //     itemHeight:
+                                                                      //         40,
+                                                                      //   ),
+                                                                      // ),
+                                                                    ],
                                                                   ),
                                                                   Spacer(),
                                                                   Text(

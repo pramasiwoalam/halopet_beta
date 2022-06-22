@@ -119,6 +119,9 @@ class Home extends StatelessWidget {
     {'name': 'assets/images/9.png', 'value': 4},
   ];
 
+  var _current = 0.obs;
+  final CarouselController _controller = CarouselController();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -365,24 +368,14 @@ class Home extends StatelessWidget {
                                     ),
                                     height: height * 0.22,
                                     width: width,
-                                    child: CarouselSlider.builder(
-                                      itemCount: items.length,
+                                    child: CarouselSlider(
                                       options: CarouselOptions(
-                                        disableCenter: false,
+                                        aspectRatio: 1.0,
+                                        enlargeCenterPage: true,
+                                        scrollDirection: Axis.horizontal,
                                         autoPlay: true,
-                                        autoPlayInterval: Duration(seconds: 2),
-                                        // autoPlayCurve: Curves.fastOutSlowIn,
-
-                                        aspectRatio: 16 / 9,
                                       ),
-                                      itemBuilder: (context, index, realIdx) {
-                                        return Container(
-                                          child: Center(
-                                              child: Image.network(items[index],
-                                                  fit: BoxFit.cover,
-                                                  width: 1000)),
-                                        );
-                                      },
+                                      items: imageSliders,
                                     )),
                                 Container(
                                   height: height * 0.13,
