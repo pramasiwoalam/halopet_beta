@@ -8,6 +8,7 @@ import '../controllers/service_form_controller.dart';
 class VetService extends StatelessWidget {
   GlobalKey<FormState> form = GlobalKey<FormState>();
   final controller = Get.put(ServiceFormController());
+  final serviceController = Get.put(ServiceFormController());
   Map<String, dynamic> formData = {
     'number': null,
     'day': null,
@@ -25,289 +26,355 @@ class VetService extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     return SingleChildScrollView(
-      physics: ClampingScrollPhysics(),
-      child: Container(
-        width: width,
-        height: height,
-        child: Form(
-          key: form,
-          child: Stack(
-            children: [
-              Container(
-                height: height / 4,
-                color: Color(0xffF9813A),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: height * 0.015),
-                height: height,
-                width: width,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  ),
-                  color: Colors.white,
+      physics: const ClampingScrollPhysics(),
+      child: Form(
+        key: form,
+        child: Column(
+          children: [
+            Container(
+              height: height,
+              width: width,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                            labelText: "Session Number",
-                            hintText: 'Session 1',
-                            hintStyle: TextStyle(
-                                fontFamily: 'SanFrancisco.Regular',
-                                fontSize: 14,
-                                color: Colors.grey.shade600),
-                            contentPadding: EdgeInsets.all(18),
-                            floatingLabelBehavior:
-                                FloatingLabelBehavior.always),
-                        validator: (value) {
-                          if (value!.contains('Wira')) {
-                            return 'Wira Dilarang daftar';
-                          }
-                        },
-                        onSaved: (value) {
-                          formData['number'] = value;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                            labelText: "Session Day(s)",
-                            hintText: 'Monday, Wednesday, Friday',
-                            hintStyle: TextStyle(
-                                fontFamily: 'SanFrancisco.Regular',
-                                fontSize: 14,
-                                color: Colors.grey.shade600),
-                            contentPadding: EdgeInsets.all(18),
-                            floatingLabelBehavior:
-                                FloatingLabelBehavior.always),
-                        validator: (value) {
-                          if (value!.contains('Wira')) {
-                            return 'Wira Dilarang daftar';
-                          }
-                        },
-                        onSaved: (value) {
-                          formData['day'] = value;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                  labelText: "Open Hours *",
-                                  hintText: '07.00 am',
-                                  hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey.shade600),
-                                  contentPadding: EdgeInsets.all(18),
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always),
-                              validator: (value) {
-                                if (value!.contains('@')) {
-                                  return 'Error 2';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              onSaved: (value) {
-                                formData['openHoursStart'] = value;
-                              },
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  serviceController.sessionList.isEmpty
+                      ? Container(
+                          height: height * 0.25,
+                          width: width,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1, color: Colors.grey.shade300)),
+                          child: Center(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 40, right: 40),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "You don't have any session registered. Please register before create this vet service.",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco.Light',
+                                          color: Colors.grey.shade700,
+                                          fontSize: 13),
+                                    ),
+                                    TextButton(
+                                        onPressed: () => {
+                                              serviceController
+                                                  .createDefaultService(),
+                                              Get.toNamed(
+                                                Routes.PACKAGE_FORM,
+                                                arguments: 'Vet',
+                                              ),
+                                            },
+                                        child: Text(
+                                          'Register here.',
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco',
+                                              color: Color(0xffF9813A),
+                                              fontSize: 13),
+                                        ))
+                                  ]),
                             ),
                           ),
-                          Flexible(
-                              child: Container(
-                                  width: width * 0.1,
-                                  child: Center(
-                                      child: Text(
-                                    'until',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.grey.shade600),
-                                  )))),
-                          Flexible(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          const Radius.circular(20))),
-                                  labelText: "Open Hours *",
-                                  hintText: '21.00 pm',
-                                  hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey.shade600),
-                                  contentPadding: EdgeInsets.all(18),
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always),
-                              validator: (value) {
-                                if (value!.contains('@')) {
-                                  return 'Error 2';
-                                } else {
-                                  return null;
+                        )
+                      : Column(
+                          children: [
+                            ListView.builder(
+                                itemCount: serviceController.sessionList.length,
+                                physics: const ClampingScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    height: height * 0.18,
+                                    width: width,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey.shade200,
+                                              spreadRadius: 2,
+                                              blurRadius: 3,
+                                              offset: Offset(0, 4))
+                                        ],
+                                        border: Border.all(
+                                            width: 1,
+                                            color: Colors.grey.shade200),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8),
+                                          child: Container(
+                                            width: width * 0.32,
+                                            height: height,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              image: const DecorationImage(
+                                                  fit: BoxFit.fill,
+                                                  image: AssetImage(
+                                                      'assets/images/pet-hotel.jpg')),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            width: width * 0.55,
+                                            height: height,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Spacer(),
+                                                Text(
+                                                  serviceController
+                                                          .packageHotelList[
+                                                      index]['name'],
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco',
+                                                      fontSize: 14),
+                                                ),
+                                                Spacer(),
+                                                Text(
+                                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula vestibulum faucibus.',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
+                                                      fontSize: 12),
+                                                ),
+                                                Spacer(),
+                                                Row(
+                                                  children: const [
+                                                    Icon(
+                                                      Icons.pets,
+                                                      size: 13,
+                                                      color: Colors.orange,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      'Dog, Cat',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          fontSize: 11),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Spacer(),
+                                                Row(
+                                                  children: [
+                                                    Icon(
+                                                      Icons.price_change,
+                                                      size: 13,
+                                                      color: Colors.orange,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      '100.000',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          fontSize: 13),
+                                                    ),
+                                                    Text(
+                                                      ' / night',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          fontSize: 12),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Spacer(),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }),
+                            Container(
+                              height: height * 0.07,
+                              width: width,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    width: 1, color: Colors.grey.shade300),
+                              ),
+                              child: FlatButton(
+                                onPressed: () => {
+                                  if (localStorage.read('serviceFlag') == 0)
+                                    {
+                                      print('masuk'),
+                                      serviceController.createDefaultService(),
+                                      Get.toNamed(
+                                        Routes.PACKAGE_FORM,
+                                        arguments: 'Vet',
+                                      ),
+                                    }
+                                  else
+                                    {
+                                      Get.toNamed(
+                                        Routes.PACKAGE_FORM,
+                                        arguments: 'Vet',
+                                      ),
+                                    }
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.add_rounded,
+                                      size: 18,
+                                      color: Colors.grey.shade700,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      'Add more',
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco',
+                                          fontSize: 13,
+                                          color: Colors.grey.shade700),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                  Container(
+                    height: height * 0.08,
+                    width: width,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.grey.shade300),
+                      color: Colors.white,
+                    ),
+                    child: FlatButton(
+                        onPressed: () => {
+                              if (serviceController.packageHotelList.isNotEmpty)
+                                {
+                                  // controller.setService(formData),
+                                  localStorage.write('vet', true),
+                                  Get.toNamed(Routes.SERVICE_LIST)
                                 }
-                              },
-                              onSaved: (value) {
-                                formData['openHoursEnd'] = value;
-                              },
-                            ),
+                              else
+                                {
+                                  Get.dialog(AlertDialog(
+                                    title: Text(
+                                      'Alert',
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco',
+                                          fontSize: 14),
+                                    ),
+                                    titlePadding: EdgeInsets.only(
+                                        left: 26, right: 26, top: 30),
+                                    contentPadding: EdgeInsets.only(
+                                        left: 26,
+                                        right: 26,
+                                        top: 16,
+                                        bottom: 12),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    content: Text(
+                                        'You need to created atleast one session before you create this service.',
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco.Light',
+                                            fontSize: 12)),
+                                    actionsPadding: EdgeInsets.only(
+                                        right: 12, top: 6, bottom: 2),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () => {Get.back()},
+                                          child: Text(
+                                            'Agreed.',
+                                            style: TextStyle(
+                                                fontFamily: 'SanFrancisco',
+                                                fontSize: 13,
+                                                color: Colors.orange),
+                                          )),
+                                    ],
+                                  ))
+                                }
+                            },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Register",
+                                  style: TextStyle(
+                                    fontFamily: 'SanFrancisco',
+                                    fontSize: 13,
+                                    color: Colors.grey.shade800,
+                                  )),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.grey.shade800,
+                                size: 18,
+                              )
+                            ],
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                            labelText:
-                                "Doctor Name (with bachelor or specialist)*",
-                            hintStyle: TextStyle(
-                                fontFamily: 'SanFrancisco.Regular',
-                                fontSize: 14,
-                                color: Colors.grey.shade600),
-                            hintText: 'Drh. Lorem Ipsum S.Ked',
-                            contentPadding: EdgeInsets.all(18),
-                            floatingLabelBehavior:
-                                FloatingLabelBehavior.always),
-                        validator: (value) {
-                          if (value!.contains('Wira')) {
-                            return 'Wira Dilarang daftar';
-                          }
-                        },
-                        onSaved: (value) {
-                          formData['name'] = value;
-                        },
-                      ),
-                      SizedBox(height: 15),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                            labelText: "Doctor Specialist *",
-                            hintText: 'Dog Specialist',
-                            hintStyle: TextStyle(
-                                fontFamily: 'SanFrancisco.Regular',
-                                fontSize: 14,
-                                color: Colors.grey.shade600),
-                            contentPadding: EdgeInsets.all(18),
-                            floatingLabelBehavior:
-                                FloatingLabelBehavior.always),
-                        validator: (value) {
-                          if (value!.contains('Wira')) {
-                            return 'Wira Dilarang daftar';
-                          }
-                        },
-                        onSaved: (value) {
-                          formData['specialist'] = value;
-                        },
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                            labelText: "Years Active *",
-                            hintText: '2008',
-                            hintStyle: TextStyle(
-                                fontFamily: 'SanFrancisco.Regular',
-                                fontSize: 14,
-                                color: Colors.grey.shade600),
-                            contentPadding: EdgeInsets.all(18),
-                            floatingLabelBehavior:
-                                FloatingLabelBehavior.always),
-                        validator: (value) {
-                          if (value!.contains('Wira')) {
-                            return 'Wira Dilarang daftar';
-                          }
-                        },
-                        onSaved: (value) {
-                          formData['yearsActive'] = value;
-                        },
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                        maxLines: null,
-                        minLines: 3,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                            labelText: "Doctor Description",
-                            hintText:
-                                'Experienced from 2008, graduated from University of Indonesia.',
-                            hintStyle: TextStyle(
-                                fontFamily: 'SanFrancisco.Regular',
-                                fontSize: 14,
-                                color: Colors.grey.shade600),
-                            contentPadding: EdgeInsets.all(18),
-                            floatingLabelBehavior:
-                                FloatingLabelBehavior.always),
-                        validator: (value) {
-                          if (value!.contains('Wira')) {
-                            return 'Wira Dilarang daftar';
-                          }
-                        },
-                        onSaved: (value) {
-                          formData['desc'] = value;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      ElevatedButton(
-                          onPressed: () async {
-                            if (form.currentState!.validate()) {
-                              form.currentState!.save();
-                              controller.createSession(formData);
-
-                              Get.toNamed(Routes.SESSION_LIST,
-                                  arguments: 'Grooming');
-                            }
-                          },
-                          child: Text('Register')),
-                      ElevatedButton(
-                          onPressed: () => {Get.toNamed(Routes.SESSION_LIST)},
-                          child: Text('Back To Service List'))
-                    ],
+                        )),
                   ),
-                ),
+                  Container(
+                    height: height * 0.08,
+                    width: width,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.grey.shade300),
+                      color: Colors.white,
+                    ),
+                    child: FlatButton(
+                        onPressed: () => {
+                              Get.toNamed(Routes.SERVICE_LIST),
+                              // controller.cancellation(
+                              //     localStorage.read('savedPetshopId'),
+                              //     localStorage.read('savedServiceId')),
+                              localStorage.write('serviceFlag', 0),
+                              localStorage.write('hotelFlag', 1)
+                            },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Back to Service List",
+                                  style: TextStyle(
+                                    fontFamily: 'SanFrancisco',
+                                    fontSize: 13,
+                                    color: Colors.grey.shade800,
+                                  )),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.grey.shade800,
+                                size: 18,
+                              )
+                            ],
+                          ),
+                        )),
+                  )
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

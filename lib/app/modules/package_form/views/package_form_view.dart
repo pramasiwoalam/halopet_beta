@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/modules/package_form/views/package_grooming.dart';
 import 'package:halopet_beta/app/modules/package_form/views/package_hotel.dart';
+import 'package:halopet_beta/app/modules/package_form/views/package_session_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 import '../controllers/package_form_controller.dart';
@@ -21,14 +22,20 @@ class PackageFormView extends GetView<PackageFormController> {
         appBar: AppBar(
           title: Text(
             'Package Registration',
-            style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+            style: TextStyle(
+                fontFamily: 'SanFrancisco',
+                fontSize: 16,
+                color: Colors.grey.shade800),
           ),
-          backgroundColor: Color(0xffF9813A),
+          backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,
         ),
-        body: argument == 'Grooming' ? PackageGrooming() : PackageHotel()
+        body: argument == 'Grooming'
+            ? PackageGrooming()
+            : argument == 'Hotel'
+                ? PackageHotel()
+                : PackageSession()
         // argument == 'Hotel'
         // ? HotelService()
         // : argument == 'detailGrooming'

@@ -48,7 +48,7 @@ class AuthController extends GetxController {
     try {
       var res = await auth.createUserWithEmailAndPassword(
           email: formData['email'], password: formData['password']);
-      addUserCollection(formData['name'], formData['email'], res.user!.uid);
+      addUserCollection(formData, res.user!.uid);
       Get.back();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -68,7 +68,7 @@ class AuthController extends GetxController {
     homeController.index = 0.obs;
   }
 
-  void addUserCollection(String name, String email, String uid) async {
+  void addUserCollection(Map<String, dynamic> formData, String uid) async {
     CollectionReference user = firestore.collection("users");
 
     try {
@@ -79,12 +79,16 @@ class AuthController extends GetxController {
       // });
 
       await user.doc(uid).set({
-        "name": name,
-        "email": email,
+        "name": formData['name'],
+        "email": formData['email'],
         "userId": uid,
         "role": "Member",
         "petshopOwner": false,
-        "balance": 0
+        "balance": 0,
+        "address": formData['address'],
+        "city": formData['city'],
+        "postalCode": formData['postalCode'],
+        "phone": formData['phone']
       });
 
       // AwesomeDialog(

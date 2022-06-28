@@ -18,10 +18,12 @@ class ServiceFormView extends GetView<ServiceFormController> {
         appBar: AppBar(
           title: Text(
             'Service Registration',
-            style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+            style: TextStyle(
+                fontFamily: 'SanFrancisco',
+                fontSize: 15,
+                color: Colors.grey.shade800),
           ),
-          backgroundColor: Color(0xffF9813A),
+          backgroundColor: Colors.white,
           elevation: 0,
         ),
         body: argument == 'Grooming'

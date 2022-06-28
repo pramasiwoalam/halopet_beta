@@ -30,6 +30,7 @@ class ProfileView extends GetView<ProfileController> {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
+    var localStorage = GetStorage();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -111,7 +112,7 @@ class ProfileView extends GetView<ProfileController> {
                   if (snapshot.connectionState == ConnectionState.done) {
                     var data = snapshot.data!.data() as Map<String, dynamic>;
                     var petshopId = data['petshopId'];
-                    print(petshopId);
+
                     int balance = data['balance'];
                     MoneyFormatter fmf = MoneyFormatter(
                         amount: balance.roundToDouble(),
@@ -399,6 +400,55 @@ class ProfileView extends GetView<ProfileController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 30,
+                                                        vertical: 10),
+                                                child: FlatButton(
+                                                    padding: EdgeInsets.all(20),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15)),
+                                                    color: Colors.grey.shade100,
+                                                    child: Row(
+                                                      children: [
+                                                        const Icon(Icons.edit,
+                                                            color: Color(
+                                                                0xff2596BE)),
+                                                        const SizedBox(
+                                                          width: 30,
+                                                        ),
+                                                        Expanded(
+                                                          child: Text(
+                                                            "Edit petshop",
+                                                            style: GoogleFonts.inter(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                        Icon(
+                                                          Icons
+                                                              .arrow_forward_ios,
+                                                          size: 20,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    onPressed: () => {
+                                                          localStorage.write(
+                                                              'tempPetshopId',
+                                                              petshopId),
+                                                          Get.toNamed(
+                                                              Routes
+                                                                  .EDIT_PETSHOP,
+                                                              arguments:
+                                                                  petshopId)
+                                                        }),
+                                              ),
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.symmetric(

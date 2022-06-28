@@ -230,7 +230,7 @@ class LoginView extends GetView<LoginController> {
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10.0, vertical: 5.0),
-                          primary: Colors.orange,
+                          primary: Color(0xffF9813A),
                           shape: StadiumBorder(),
                         ),
                         child: Text("Login",

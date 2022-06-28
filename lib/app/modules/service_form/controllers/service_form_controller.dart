@@ -8,6 +8,7 @@ class ServiceFormController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   var packageGroomingList = [];
   var packageHotelList = [];
+  var sessionList = [];
 
   Future<DocumentSnapshot<Object?>> getUser(String userId) async {
     DocumentReference doc = firestore.collection("users").doc(userId);

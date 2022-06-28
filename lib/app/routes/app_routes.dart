@@ -48,6 +48,8 @@ abstract class Routes {
   static const CHOOSE_ROOM = _Paths.CHOOSE_ROOM;
   static const MEDICAL_RECORDS_LIST = _Paths.MEDICAL_RECORDS_LIST;
   static const MEDICAL_RECORDS_FORM = _Paths.MEDICAL_RECORDS_FORM;
+  static const EDIT_PETSHOP = _Paths.EDIT_PETSHOP;
+  static const EDIT_PETSHOP_FORM = _Paths.EDIT_PETSHOP_FORM;
 }
 
 abstract class _Paths {
@@ -97,4 +99,6 @@ abstract class _Paths {
   static const CHOOSE_ROOM = '/choose-room';
   static const MEDICAL_RECORDS_LIST = '/med-records-list';
   static const MEDICAL_RECORDS_FORM = '/med-records-form';
+  static const EDIT_PETSHOP = '/edit-petshop';
+  static const EDIT_PETSHOP_FORM = '/edit-petshop-form';
 }

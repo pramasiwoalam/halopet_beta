@@ -30,11 +30,6 @@ class PackageHotel extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            height: height / 4,
-            color: Color(0xffF9813A),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: height * 0.015),
             height: height,
             width: width,
             decoration: const BoxDecoration(
@@ -45,120 +40,196 @@ class PackageHotel extends StatelessWidget {
               color: Colors.white,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(25),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                padding: const EdgeInsets.all(25),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                            labelText: "Room Name *",
+                            hintText: 'Room A',
+                            hintStyle: GoogleFonts.roboto(
+                                fontSize: 14, color: Colors.grey.shade600),
+                            contentPadding: EdgeInsets.all(18),
+                            floatingLabelBehavior:
+                                FloatingLabelBehavior.always),
+                        validator: (value) {
+                          if (value!.contains('Wira')) {
+                            return 'Wira Dilarang daftar';
+                          }
+                        },
+                        onSaved: (value) {
+                          formData['name'] = value;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                            labelText: "Room Description *",
+                            hintStyle: GoogleFonts.roboto(
+                                fontSize: 14, color: Colors.grey.shade600),
+                            hintText: 'Air Conditioner',
+                            contentPadding: EdgeInsets.all(18),
+                            floatingLabelBehavior:
+                                FloatingLabelBehavior.always),
+                        validator: (value) {
+                          if (value!.contains('Wira')) {
+                            return 'Wira Dilarang daftar';
+                          }
+                        },
+                        onSaved: (value) {
+                          formData['desc'] = value;
+                        },
+                      ),
+                      SizedBox(height: 25),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                            labelText: "Room Price * (1 night)",
+                            hintText: 'Rp. 100.000 / night',
+                            hintStyle: GoogleFonts.roboto(
+                                fontSize: 14, color: Colors.grey.shade600),
+                            contentPadding: EdgeInsets.all(18),
+                            floatingLabelBehavior:
+                                FloatingLabelBehavior.always),
+                        validator: (value) {
+                          if (value!.contains('Wira')) {
+                            return 'Wira Dilarang daftar';
+                          }
+                        },
+                        onSaved: (value) {
+                          formData['price'] = value;
+                        },
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                            labelText:
+                                "Room Dimension * (length x width x height) in cm)",
+                            hintText: '100 cm x 200 x 300 cm',
+                            hintStyle: GoogleFonts.roboto(
+                                fontSize: 14, color: Colors.grey.shade600),
+                            contentPadding: EdgeInsets.all(18),
+                            floatingLabelBehavior:
+                                FloatingLabelBehavior.always),
+                        validator: (value) {
+                          if (value!.contains('Wira')) {
+                            return 'Wira Dilarang daftar';
+                          }
+                        },
+                        onSaved: (value) {
+                          formData['dimension'] = value;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Center(
+                        child: Container(
+                          height: size.height * 0.07,
+                          width: size.width * 0.9,
+                          color: Colors.transparent,
+                          child: ElevatedButton(
+                            onPressed: () => {
+                              if (form.currentState!.validate())
+                                {
+                                  form.currentState!.save(),
+                                  controller.createServiceDetail(formData),
+                                  controller.packageHotelList.add(formData),
+                                  localStorage.write('serviceFlag', 1),
+                                  localStorage.write('packageFlag', 1),
+                                  Get.toNamed(Routes.SERVICE_FORM,
+                                      arguments: 'Hotel')
+                                }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 5.0),
+                              primary: Color(0xffF9813A),
+                              shape: StadiumBorder(),
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 15, right: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Register',
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          fontFamily: 'SanFrancisco',
+                                          color: Colors.white)),
+                                  const Icon(
+                                    Icons.arrow_forward_rounded,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
-                        labelText: "Room Name *",
-                        hintText: 'Room A',
-                        hintStyle: GoogleFonts.roboto(
-                            fontSize: 14, color: Colors.grey.shade600),
-                        contentPadding: EdgeInsets.all(18),
-                        floatingLabelBehavior: FloatingLabelBehavior.always),
-                    validator: (value) {
-                      if (value!.contains('Wira')) {
-                        return 'Wira Dilarang daftar';
-                      }
-                    },
-                    onSaved: (value) {
-                      formData['name'] = value;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Center(
+                        child: Container(
+                          height: size.height * 0.07,
+                          width: size.width * 0.9,
+                          color: Colors.transparent,
+                          child: ElevatedButton(
+                            onPressed: () => {
+                              Get.back(),
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 5.0),
+                              primary: Colors.white,
+                              shape: StadiumBorder(),
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 15, right: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Cancel Registration',
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          fontFamily: 'SanFrancisco',
+                                          color: Color(0xffF9813A))),
+                                  const Icon(
+                                    Icons.arrow_forward_rounded,
+                                    color: Color(0xffF9813A),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
-                        labelText: "Room Description *",
-                        hintStyle: GoogleFonts.roboto(
-                            fontSize: 14, color: Colors.grey.shade600),
-                        hintText: 'Air Conditioner',
-                        contentPadding: EdgeInsets.all(18),
-                        floatingLabelBehavior: FloatingLabelBehavior.always),
-                    validator: (value) {
-                      if (value!.contains('Wira')) {
-                        return 'Wira Dilarang daftar';
-                      }
-                    },
-                    onSaved: (value) {
-                      formData['desc'] = value;
-                    },
-                  ),
-                  SizedBox(height: 15),
-                  TextFormField(
-                    decoration: InputDecoration(
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                        labelText: "Room Price * (1 night)",
-                        hintText: 'Rp. 100.000 / night',
-                        hintStyle: GoogleFonts.roboto(
-                            fontSize: 14, color: Colors.grey.shade600),
-                        contentPadding: EdgeInsets.all(18),
-                        floatingLabelBehavior: FloatingLabelBehavior.always),
-                    validator: (value) {
-                      if (value!.contains('Wira')) {
-                        return 'Wira Dilarang daftar';
-                      }
-                    },
-                    onSaved: (value) {
-                      formData['price'] = value;
-                    },
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                        labelText:
-                            "Room Dimension * (length x width x height) in cm)",
-                        hintText: '100 cm x 200 x 300 cm',
-                        hintStyle: GoogleFonts.roboto(
-                            fontSize: 14, color: Colors.grey.shade600),
-                        contentPadding: EdgeInsets.all(18),
-                        floatingLabelBehavior: FloatingLabelBehavior.always),
-                    validator: (value) {
-                      if (value!.contains('Wira')) {
-                        return 'Wira Dilarang daftar';
-                      }
-                    },
-                    onSaved: (value) {
-                      formData['dimension'] = value;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  ElevatedButton(
-                      onPressed: () async {
-                        if (form.currentState!.validate()) {
-                          form.currentState!.save();
-                          controller.createServiceDetail(formData);
-                          controller.packageHotelList.add(formData);
-                          localStorage.write('serviceFlag', 1);
-                          localStorage.write('packageFlag', 1);
-
-                          Get.toNamed(Routes.SERVICE_FORM, arguments: 'Hotel');
-                        }
-                      },
-                      child: Text('Register')),
-                  ElevatedButton(
-                      onPressed: () => {Get.toNamed(Routes.SERVICE_LIST)},
-                      child: Text('Back To Service List'))
-                ],
-              ),
-            ),
+                      ),
+                    ])),
           ),
         ],
       ),

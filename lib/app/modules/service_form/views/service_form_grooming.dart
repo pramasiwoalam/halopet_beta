@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halopet_beta/app/modules/order/views/order_approval_view.dart';
 import 'package:halopet_beta/app/modules/package_form/views/package_grooming.dart';
 import 'package:halopet_beta/app/modules/service_list/controllers/service_list_controller.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
@@ -28,14 +29,9 @@ class GroomingService extends StatelessWidget {
       physics: const ClampingScrollPhysics(),
       child: Form(
         key: form,
-        child: Stack(
+        child: Column(
           children: [
             Container(
-              height: height / 4,
-              color: Color(0xffF9813A),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: height * 0.015),
               height: height,
               width: width,
               decoration: const BoxDecoration(
@@ -45,246 +41,590 @@ class GroomingService extends StatelessWidget {
                 ),
                 color: Colors.white,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextFormField(
-                      enabled: false,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          labelText: "Service Name *",
-                          hintText: 'Grooming',
-                          hintStyle: GoogleFonts.roboto(
-                              fontSize: 14, color: Colors.grey.shade600),
-                          contentPadding: EdgeInsets.all(18),
-                          floatingLabelBehavior: FloatingLabelBehavior.always),
-                      validator: (value) {
-                        if (value!.contains('Wira')) {
-                          return 'Wira Dilarang daftar';
-                        }
-                      },
-                      onSaved: (value) {
-                        formData['name'] = 'Grooming';
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          labelText: "Service Description *",
-                          hintStyle: GoogleFonts.roboto(
-                              fontSize: 14, color: Colors.grey.shade600),
-                          hintText: 'Description',
-                          contentPadding: EdgeInsets.all(18),
-                          floatingLabelBehavior: FloatingLabelBehavior.always),
-                      validator: (value) {
-                        if (value!.contains('Wira')) {
-                          return 'Wira dilarang daftar';
-                        }
-                      },
-                      onSaved: (value) {
-                        formData['desc'] = value;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      '    Register Package(s) *',
-                      style: GoogleFonts.roboto(
-                          fontSize: 14, color: Colors.grey.shade700),
-                    ),
-                    serviceController.packageGroomingList.isEmpty
-                        ? InkWell(
-                            onTap: () => {
-                              Get.toNamed(Routes.PACKAGE_FORM,
-                                  arguments: 'Grooming')
-                            },
-                            child: Container(
-                              margin: EdgeInsets.only(left: 15, right: 15),
-                              height: height * 0.06,
-                              width: width * 0.8,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey.shade300,
-                                        spreadRadius: 2,
-                                        blurRadius: 3,
-                                        offset: Offset(0, 3))
+              child: Column(
+                children: [
+                  serviceController.packageGroomingList.isEmpty
+                      ? Container(
+                          height: height * 0.25,
+                          width: width,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1, color: Colors.grey.shade300)),
+                          child: Center(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 40, right: 40),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "You don't have any grooming package registered. Please register before create this grooming service.",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco.Light',
+                                          color: Colors.grey.shade700,
+                                          fontSize: 13),
+                                    ),
+                                    TextButton(
+                                        onPressed: () => {
+                                              serviceController
+                                                  .createDefaultService(),
+                                              Get.toNamed(
+                                                Routes.PACKAGE_FORM,
+                                                arguments: 'Grooming',
+                                              ),
+                                            },
+                                        child: Text(
+                                          'Register here.',
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco',
+                                              color: Color(0xffF9813A),
+                                              fontSize: 13),
+                                        ))
                                   ]),
-                              child: Center(
-                                  child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.add_rounded,
-                                    size: 18,
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    'Add Package',
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 14,
-                                        color: Colors.grey.shade700),
-                                  )
-                                ],
-                              )),
                             ),
-                          )
-                        : Column(
-                            children: [
-                              ListView.builder(
-                                  itemCount: serviceController
-                                      .packageGroomingList.length,
-                                  physics: const ClampingScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () => {},
+                          ),
+                        )
+                      : Column(
+                          children: [
+                            ListView.builder(
+                                itemCount: serviceController
+                                    .packageGroomingList.length,
+                                physics: const ClampingScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    height: height * 0.14,
+                                    width: width * 0.8,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            width: 0.8,
+                                            color: Colors.grey.shade300),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey.shade200,
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              offset: Offset(1, 2))
+                                        ]),
+                                    child: Center(
                                       child: Padding(
-                                        padding: const EdgeInsets.only(top: 12),
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          height: height * 0.06,
-                                          width: width * 0.8,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: Colors.grey.shade300,
-                                                    spreadRadius: 2,
-                                                    blurRadius: 3,
-                                                    offset: Offset(0, 3))
-                                              ]),
-                                          child: Center(
-                                              child: Text(
-                                            serviceController
-                                                    .packageGroomingList[index]
-                                                ['name'],
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 14,
-                                                color: Colors.grey.shade700),
-                                          )),
+                                        padding: const EdgeInsets.only(
+                                            top: 12,
+                                            bottom: 12,
+                                            left: 32,
+                                            right: 32),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  width: width * 0.35,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        serviceController
+                                                                .packageGroomingList[
+                                                            index]['name'],
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey.shade800,
+                                                            fontFamily:
+                                                                'SanFrancisco',
+                                                            fontSize: 14),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        'Detailing',
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey.shade800,
+                                                            fontFamily:
+                                                                'SanFrancisco.Light',
+                                                            fontSize: 11),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons.pets,
+                                                            size: 13,
+                                                            color:
+                                                                Colors.orange,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            'Cat, Dog',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade800,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                fontSize: 11),
+                                                          )
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons.timer,
+                                                            size: 13,
+                                                            color:
+                                                                Colors.orange,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            '1 hour',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade800,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                fontSize: 11),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            VerticalDivider(
+                                              color: Colors.grey.shade300,
+                                              thickness: 1,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.monetization_on,
+                                                  color: Colors.orange,
+                                                  size: 16,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  'Rp. 100.000',
+                                                  style: TextStyle(
+                                                      color:
+                                                          Colors.grey.shade800,
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
+                                                      fontSize: 13),
+                                                ),
+                                              ],
+                                            )
+                                          ],
                                         ),
                                       ),
-                                    );
-                                  }),
-                              SizedBox(
-                                height: 15,
+                                    ),
+                                  );
+                                }),
+                            Container(
+                              height: height * 0.07,
+                              width: width,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    width: 1, color: Colors.grey.shade300),
                               ),
-                              InkWell(
-                                onTap: () => {
+                              child: FlatButton(
+                                onPressed: () => {
                                   if (localStorage.read('serviceFlag') == 0)
                                     {
+                                      print('masuk'),
                                       serviceController.createDefaultService(),
                                       Get.toNamed(
                                         Routes.PACKAGE_FORM,
-                                        arguments: 'Grooming',
+                                        arguments: 'Hotel',
                                       ),
                                     }
                                   else
                                     {
                                       Get.toNamed(
                                         Routes.PACKAGE_FORM,
-                                        arguments: 'Grooming',
+                                        arguments: 'Hotel',
                                       ),
-                                    },
+                                    }
                                 },
-                                child: Container(
-                                  margin: EdgeInsets.only(left: 15, right: 15),
-                                  height: height * 0.06,
-                                  width: width * 0.8,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey.shade300,
-                                            spreadRadius: 2,
-                                            blurRadius: 3,
-                                            offset: Offset(0, 3))
-                                      ]),
-                                  child: Center(
-                                      child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.add_rounded,
-                                        size: 18,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        'Add Package',
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 14,
-                                            color: Colors.grey.shade700),
-                                      )
-                                    ],
-                                  )),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.add_rounded,
+                                      size: 18,
+                                      color: Colors.grey.shade700,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      'Add more',
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco',
+                                          fontSize: 13,
+                                          color: Colors.grey.shade700),
+                                    )
+                                  ],
                                 ),
+                              ),
+                            ),
+                          ],
+                        ),
+                  Container(
+                    height: height * 0.08,
+                    width: width,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.grey.shade300),
+                      color: Colors.white,
+                    ),
+                    child: FlatButton(
+                        onPressed: () => {
+                              if (serviceController
+                                  .packageGroomingList.isNotEmpty)
+                                {
+                                  // controller.setService(formData),
+                                  localStorage.write('hotel', true),
+                                  Get.toNamed(Routes.SERVICE_LIST)
+                                }
+                              else
+                                {
+                                  Get.dialog(AlertDialog(
+                                    title: Text(
+                                      'Alert',
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco',
+                                          fontSize: 14),
+                                    ),
+                                    titlePadding: EdgeInsets.only(
+                                        left: 26, right: 26, top: 30),
+                                    contentPadding: EdgeInsets.only(
+                                        left: 26,
+                                        right: 26,
+                                        top: 16,
+                                        bottom: 12),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    content: Text(
+                                        'You need to created atleast one room before you create this service.',
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco.Light',
+                                            fontSize: 12)),
+                                    actionsPadding: EdgeInsets.only(
+                                        right: 12, top: 6, bottom: 2),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () => {Get.back()},
+                                          child: Text(
+                                            'Agreed.',
+                                            style: TextStyle(
+                                                fontFamily: 'SanFrancisco',
+                                                fontSize: 13,
+                                                color: Colors.orange),
+                                          )),
+                                    ],
+                                  ))
+                                }
+                            },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Register",
+                                  style: TextStyle(
+                                    fontFamily: 'SanFrancisco',
+                                    fontSize: 13,
+                                    color: Colors.grey.shade800,
+                                  )),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.grey.shade800,
+                                size: 18,
                               )
                             ],
                           ),
-                    ElevatedButton(
-                        onPressed: () async {
-                          if (form.currentState!.validate() &&
-                              serviceController
-                                  .packageGroomingList.isNotEmpty) {
-                            form.currentState!.save();
+                        )),
+                  ),
 
-                            controller.setService(formData);
-                            localStorage.write('grooming', true);
-                            localStorage.write('serviceFlag', 0);
-
-                            Get.toNamed(Routes.SERVICE_LIST);
-                          } else {
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.WARNING,
-                              animType: AnimType.BOTTOMSLIDE,
-                              title: 'Package is Empty.',
-                              desc:
-                                  'Please fill the package(s) before you register.',
-                              btnOkColor: Color(0xffF9813A),
-                              btnOkText: 'Ok',
-                              btnOkOnPress: () => {},
-                              buttonsTextStyle: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.w600),
-                            ).show();
-                          }
-                        },
-                        child: Text('Register')),
-                    ElevatedButton(
+                  Container(
+                    height: height * 0.08,
+                    width: width,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.grey.shade300),
+                      color: Colors.white,
+                    ),
+                    child: FlatButton(
                         onPressed: () => {
                               Get.toNamed(Routes.SERVICE_LIST),
-                              controller.cancellation(
-                                  localStorage.read('savedPetshopId'),
-                                  localStorage.read('savedServiceId')),
-                              localStorage.write('serviceFlag', 0)
+                              // controller.cancellation(
+                              //     localStorage.read('savedPetshopId'),
+                              //     localStorage.read('savedServiceId')),
+                              localStorage.write('serviceFlag', 0),
+                              localStorage.write('groomingFlag', 1)
                             },
-                        child: Text('Back To Service List'))
-                  ],
-                ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Back to Service List",
+                                  style: TextStyle(
+                                    fontFamily: 'SanFrancisco',
+                                    fontSize: 13,
+                                    color: Colors.grey.shade800,
+                                  )),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.grey.shade800,
+                                size: 18,
+                              )
+                            ],
+                          ),
+                        )),
+                  )
+                  // Padding(
+                  //   padding: const EdgeInsets.all(25),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Text(
+                  //         '    Register Room(s) *',
+                  //         style: GoogleFonts.roboto(
+                  //             fontSize: 14, color: Colors.grey.shade700),
+                  //       ),
+                  //       serviceController.packageHotelList.isEmpty
+                  //           ? InkWell(
+                  //               onTap: () => {
+                  //                 print('${localStorage.read('serviceFlag')}'),
+                  //                 if (localStorage.read('serviceFlag') == 0)
+                  //                   {
+                  //                     print('masuk'),
+
+                  //                   }
+                  //                 else
+                  //                   {
+                  //                     Get.toNamed(
+                  //                       Routes.PACKAGE_FORM,
+                  //                       arguments: 'Hotel',
+                  //                     ),
+                  //                   }
+                  //               },
+                  //               child: Container(
+                  //                 margin: EdgeInsets.only(left: 15, right: 15),
+                  //                 height: height * 0.06,
+                  //                 width: width * 0.8,
+                  //                 decoration: BoxDecoration(
+                  //                     color: Colors.white,
+                  //                     borderRadius:
+                  //                         BorderRadius.all(Radius.circular(10)),
+                  //                     boxShadow: [
+                  //                       BoxShadow(
+                  //                           color: Colors.grey.shade300,
+                  //                           spreadRadius: 2,
+                  //                           blurRadius: 3,
+                  //                           offset: Offset(0, 3))
+                  //                     ]),
+                  //                 child: Center(
+                  //                     child: Row(
+                  //                   mainAxisAlignment: MainAxisAlignment.center,
+                  //                   children: [
+                  //                     Icon(
+                  //                       Icons.add_rounded,
+                  //                       size: 18,
+                  //                     ),
+                  //                     SizedBox(
+                  //                       width: 5,
+                  //                     ),
+                  //                     Text(
+                  //                       'Register Room Type',
+                  //                       style: GoogleFonts.roboto(
+                  //                           fontSize: 14,
+                  //                           color: Colors.grey.shade700),
+                  //                     )
+                  //                   ],
+                  //                 )),
+                  //               ),
+                  //             )
+                  //           : Column(
+                  //               children: [
+                  //                 ListView.builder(
+                  //                     itemCount: serviceController
+                  //                         .packageHotelList.length,
+                  //                     physics: const ClampingScrollPhysics(),
+                  //                     scrollDirection: Axis.vertical,
+                  //                     shrinkWrap: true,
+                  //                     itemBuilder: (context, index) {
+                  //                       return InkWell(
+                  //                         onTap: () => {},
+                  //                         child: Padding(
+                  //                           padding:
+                  //                               const EdgeInsets.only(top: 12),
+                  //                           child: Container(
+                  //                             margin: EdgeInsets.only(
+                  //                                 left: 15, right: 15),
+                  //                             height: height * 0.06,
+                  //                             width: width * 0.8,
+                  //                             decoration: BoxDecoration(
+                  //                                 color: Colors.white,
+                  //                                 borderRadius:
+                  //                                     BorderRadius.all(
+                  //                                         Radius.circular(10)),
+                  //                                 boxShadow: [
+                  //                                   BoxShadow(
+                  //                                       color: Colors
+                  //                                           .grey.shade300,
+                  //                                       spreadRadius: 2,
+                  //                                       blurRadius: 3,
+                  //                                       offset: Offset(0, 3))
+                  //                                 ]),
+                  //                             child: Center(
+                  //                                 child: Text(
+                  //                               serviceController
+                  //                                       .packageHotelList[index]
+                  //                                   ['name'],
+                  //                               style: GoogleFonts.roboto(
+                  //                                   fontSize: 14,
+                  //                                   color:
+                  //                                       Colors.grey.shade700),
+                  //                             )),
+                  //                           ),
+                  //                         ),
+                  //                       );
+                  //                     }),
+                  //                 SizedBox(
+                  //                   height: 15,
+                  //                 ),
+                  //                 InkWell(
+                  //                   onTap: () => {
+                  //                     print(
+                  //                         '${localStorage.read('serviceFlag')}'),
+                  //                     if (localStorage.read('serviceFlag') == 0)
+                  //                       {
+                  //                         print('masuk'),
+                  //                         serviceController
+                  //                             .createDefaultService(),
+                  //                         Get.toNamed(
+                  //                           Routes.PACKAGE_FORM,
+                  //                           arguments: 'Hotel',
+                  //                         ),
+                  //                       }
+                  //                     else
+                  //                       {
+                  //                         Get.toNamed(
+                  //                           Routes.PACKAGE_FORM,
+                  //                           arguments: 'Hotel',
+                  //                         ),
+                  //                       }
+                  //                   },
+                  //                   child: Container(
+                  //                     margin:
+                  //                         EdgeInsets.only(left: 15, right: 15),
+                  //                     height: height * 0.06,
+                  //                     width: width * 0.8,
+                  //                     decoration: BoxDecoration(
+                  //                         color: Colors.white,
+                  //                         borderRadius: BorderRadius.all(
+                  //                             Radius.circular(10)),
+                  //                         boxShadow: [
+                  //                           BoxShadow(
+                  //                               color: Colors.grey.shade300,
+                  //                               spreadRadius: 2,
+                  //                               blurRadius: 3,
+                  //                               offset: Offset(0, 3))
+                  //                         ]),
+                  //                     child: Center(
+                  //                         child: Row(
+                  //                       mainAxisAlignment:
+                  //                           MainAxisAlignment.center,
+                  //                       children: [
+                  //                         Icon(
+                  //                           Icons.add_rounded,
+                  //                           size: 18,
+                  //                         ),
+                  //                         SizedBox(
+                  //                           width: 5,
+                  //                         ),
+                  //                         Text(
+                  //                           'Register Room Type',
+                  //                           style: GoogleFonts.roboto(
+                  //                               fontSize: 14,
+                  //                               color: Colors.grey.shade700),
+                  //                         )
+                  //                       ],
+                  //                     )),
+                  //                   ),
+                  //                 )
+                  //               ],
+                  //             ),
+                  //       ElevatedButton(
+                  //           onPressed: () async {
+                  //             if (form.currentState!.validate() &&
+                  //                 serviceController
+                  //                     .packageHotelList.isNotEmpty) {
+                  //               form.currentState!.save();
+
+                  //               controller.setService(formData);
+                  //               localStorage.write('hotel', true);
+
+                  //               Get.toNamed(Routes.SERVICE_LIST);
+                  //             } else {
+                  //               AwesomeDialog(
+                  //                 context: context,
+                  //                 dialogType: DialogType.WARNING,
+                  //                 animType: AnimType.BOTTOMSLIDE,
+                  //                 title: 'Room is Empty.',
+                  //                 desc:
+                  //                     'Please register the room before you submit.',
+                  //                 btnOkColor: Color(0xffF9813A),
+                  //                 btnOkText: 'Ok',
+                  //                 btnOkOnPress: () => {},
+                  //                 buttonsTextStyle: GoogleFonts.roboto(
+                  //                     fontWeight: FontWeight.w600),
+                  //               ).show();
+                  //             }
+                  //           },
+                  //           child: Text('Register')),
+                  //       ElevatedButton(
+                  //           onPressed: () => {
+                  //                 Get.toNamed(Routes.SERVICE_LIST),
+                  //                 controller.cancellation(
+                  //                     localStorage.read('savedPetshopId'),
+                  //                     localStorage.read('savedServiceId'))
+                  //               },
+                  //           child: Text('Back To Service List'))
+                  //     ],
+                  //   ),
+                  // ),
+                ],
               ),
             ),
           ],

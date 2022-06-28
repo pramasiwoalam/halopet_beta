@@ -3,6 +3,7 @@ import 'package:halopet_beta/app/modules/choose_room/bindings/choose_room_bindin
 import 'package:halopet_beta/app/modules/choose_room/views/choose_room_view.dart';
 import 'package:halopet_beta/app/modules/delivery_list/bindings/delivery_list_binding.dart';
 import 'package:halopet_beta/app/modules/delivery_list/views/delivery_list_view.dart';
+import 'package:halopet_beta/app/modules/edit_petshop_form/bindings/edit_petshop_form_binding.dart';
 import 'package:halopet_beta/app/modules/notification_list/bindings/notification_list_binding.dart';
 import 'package:halopet_beta/app/modules/package_list/bindings/package_list_binding.dart';
 import 'package:halopet_beta/app/modules/package_list/views/package_list_view.dart';
@@ -31,6 +32,9 @@ import '../modules/choose_session/bindings/choose_session_binding.dart';
 import '../modules/choose_session/views/choose_session_view.dart';
 import '../modules/doctor_registration/bindings/doctor_registration_binding.dart';
 import '../modules/doctor_registration/views/doctor_registration_view.dart';
+import '../modules/edit_petshop/bindings/edit_petshop_binding.dart';
+import '../modules/edit_petshop/views/edit_petshop_view.dart';
+import '../modules/edit_petshop_form/views/edit_petshop_form_view.dart';
 import '../modules/favorite/bindings/favorite_binding.dart';
 import '../modules/favorite/views/favorite_view.dart';
 import '../modules/grooming_order/bindings/grooming_order_binding.dart';
@@ -319,6 +323,16 @@ class AppPages {
       name: _Paths.MEDICAL_RECORDS_FORM,
       page: () => MedicalRecordsFormView(),
       binding: MedicalRecordsFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PETSHOP,
+      page: () => EditPetshopView(),
+      binding: EditPetshopBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PETSHOP_FORM,
+      page: () => EditPetshopFormView(),
+      binding: EditPetshopFormBinding(),
     ),
   ];
 }

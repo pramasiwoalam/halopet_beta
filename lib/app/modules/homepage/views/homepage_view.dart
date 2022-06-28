@@ -578,7 +578,7 @@ class Home extends StatelessWidget {
                                                                               SizedBox(
                                                                                 width: 3,
                                                                               ),
-                                                                              Text(dataMap['district'], style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5, fontFamily: 'SanFrancisco.Reguler')),
+                                                                              Text('Jakarta', style: TextStyle(fontSize: 12.5, fontFamily: 'SanFrancisco.Reguler')),
                                                                             ],
                                                                           ),
                                                                           Padding(

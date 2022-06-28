@@ -5,7 +5,6 @@ import 'package:halopet_beta/app/routes/app_pages.dart';
 
 class SignupController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  //TODO: Implement SignupController
 
   void signupUser(Map<String, dynamic> formData) {
     CollectionReference petshop = firestore.collection("petshop");

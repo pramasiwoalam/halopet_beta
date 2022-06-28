@@ -30,11 +30,6 @@ class PackageGrooming extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            height: height / 4,
-            color: Color(0xffF9813A),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: height * 0.015),
             height: height,
             width: width,
             decoration: const BoxDecoration(
@@ -70,7 +65,7 @@ class PackageGrooming extends StatelessWidget {
                     },
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
                   TextFormField(
                     decoration: InputDecoration(
@@ -92,7 +87,7 @@ class PackageGrooming extends StatelessWidget {
                       formData['desc'] = value;
                     },
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 25),
                   TextFormField(
                     decoration: InputDecoration(
                         border: const OutlineInputBorder(
@@ -114,7 +109,7 @@ class PackageGrooming extends StatelessWidget {
                     },
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
                   TextFormField(
                     decoration: InputDecoration(
@@ -137,24 +132,90 @@ class PackageGrooming extends StatelessWidget {
                     },
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
-                  ElevatedButton(
-                      onPressed: () async {
-                        if (form.currentState!.validate()) {
-                          form.currentState!.save();
-                          controller.createServiceDetail(formData);
-                          controller.packageGroomingList.add(formData);
-                          localStorage.write('packageFlag', 1);
-                          localStorage.write('serviceFlag', 1);
-                          Get.toNamed(Routes.SERVICE_FORM,
-                              arguments: 'Grooming');
-                        }
-                      },
-                      child: Text('Register')),
-                  ElevatedButton(
-                      onPressed: () => {Get.toNamed(Routes.SERVICE_LIST)},
-                      child: Text('Back To Service List'))
+                  Center(
+                    child: Container(
+                      height: size.height * 0.07,
+                      width: size.width * 0.9,
+                      color: Colors.transparent,
+                      child: ElevatedButton(
+                        onPressed: () => {
+                          if (form.currentState!.validate())
+                            {
+                              form.currentState!.save(),
+                              controller.createServiceDetail(formData),
+                              controller.packageGroomingList.add(formData),
+                              localStorage.write('packageFlag', 1),
+                              localStorage.write('serviceFlag', 1),
+                              Get.toNamed(Routes.SERVICE_FORM,
+                                  arguments: 'Grooming')
+                            }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 5.0),
+                          primary: Color(0xffF9813A),
+                          shape: StadiumBorder(),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Register',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontFamily: 'SanFrancisco',
+                                      color: Colors.white)),
+                              const Icon(
+                                Icons.arrow_forward_rounded,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: Container(
+                      height: size.height * 0.07,
+                      width: size.width * 0.9,
+                      color: Colors.transparent,
+                      child: ElevatedButton(
+                        onPressed: () => {
+                          Get.back(),
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 5.0),
+                          primary: Colors.grey.shade100,
+                          shape: StadiumBorder(),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Cancel Registration',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontFamily: 'SanFrancisco',
+                                      color: Color(0xffF9813A))),
+                              const Icon(
+                                Icons.arrow_forward_rounded,
+                                color: Color(0xffF9813A),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

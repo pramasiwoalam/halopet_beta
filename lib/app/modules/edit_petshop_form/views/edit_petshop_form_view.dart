@@ -4,10 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halopet_beta/app/modules/petshop_detail/views/petshop_detail_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 import '../../service_list/controllers/service_list_controller.dart';
-import '../controllers/add_petshop_controller.dart';
+import '../controllers/edit_petshop_form_controller.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 
 class Days {
@@ -20,8 +21,8 @@ class Days {
   });
 }
 
-class AddPetshopView extends GetView<AddPetshopController> {
-  final petshopController = Get.put(AddPetshopController());
+class EditPetshopFormView extends GetView<EditPetshopFormController> {
+  final petshopController = Get.put(EditPetshopFormController());
   final serviceListController = Get.put(ServiceListController());
 
   Map<String, dynamic> formData = {
@@ -46,17 +47,16 @@ class AddPetshopView extends GetView<AddPetshopController> {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
+    Map<String, dynamic> dataMap = GetStorage().read('tempPetshopData');
     var localStorage = GetStorage();
+    var petshopId = localStorage.read('tempPetshopId');
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Create Petshop',
-          style: TextStyle(
-              fontFamily: 'SanFrancisco',
-              fontSize: 16,
-              color: Colors.grey.shade800),
+          'Edit Petshop',
+          style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 16),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff2596BE),
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -64,6 +64,11 @@ class AddPetshopView extends GetView<AddPetshopController> {
         child: Stack(
           children: [
             Container(
+              height: height / 4,
+              color: Color(0xff2596BE),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: height * 0.02),
               height: height,
               width: width,
               decoration: const BoxDecoration(
@@ -74,8 +79,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 25, bottom: 25, right: 25, top: 10),
+                padding: const EdgeInsets.all(25),
                 child: Form(
                   key: form,
                   child: Column(
@@ -91,7 +95,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                   BorderRadius.all(Radius.circular(20)),
                             ),
                             labelText: "Petshop Name *",
-                            hintText: 'Name',
+                            hintText: dataMap['petshopName'],
                             hintStyle: GoogleFonts.roboto(
                                 fontSize: 14, color: Colors.grey.shade600),
                             contentPadding: EdgeInsets.all(18),
@@ -107,7 +111,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         },
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 25),
+                        padding: EdgeInsets.only(top: 15),
                         child: TextFormField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -136,14 +140,14 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         children: [
                           Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 25),
+                              padding: const EdgeInsets.only(top: 15),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20))),
                                     labelText: "District *",
-                                    hintText: 'District',
+                                    hintText: dataMap['district'],
                                     hintStyle: GoogleFonts.roboto(
                                         fontSize: 14,
                                         color: Colors.grey.shade600),
@@ -165,14 +169,14 @@ class AddPetshopView extends GetView<AddPetshopController> {
                           ),
                           Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 25, left: 15),
+                              padding: const EdgeInsets.only(top: 15, left: 15),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20))),
                                     labelText: "City *",
-                                    hintText: 'City',
+                                    hintText: dataMap['city'],
                                     hintStyle: GoogleFonts.roboto(
                                         fontSize: 14,
                                         color: Colors.grey.shade600),
@@ -195,14 +199,14 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 25),
+                        padding: const EdgeInsets.only(top: 15),
                         child: TextFormField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
                               labelText: "Petshop Phone Number *",
-                              hintText: 'Phone',
+                              hintText: dataMap['phone'],
                               hintStyle: GoogleFonts.roboto(
                                   fontSize: 14, color: Colors.grey.shade600),
                               contentPadding: EdgeInsets.all(18),
@@ -221,7 +225,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 25),
+                        padding: const EdgeInsets.only(top: 15),
                         child: TextFormField(
                           maxLines: null,
                           minLines: 2,
@@ -231,7 +235,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
                               labelText: "Petshop Description *",
-                              hintText: 'Description',
+                              hintText: dataMap['desc'],
                               hintStyle: GoogleFonts.roboto(
                                   fontSize: 14, color: Colors.grey.shade600),
                               contentPadding: EdgeInsets.all(18),
@@ -250,7 +254,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 25),
+                        padding: const EdgeInsets.only(top: 10),
                         child: MultiSelectFormField(
                           chipBackGroundColor: Color(0xffF9813A),
                           chipLabelStyle: GoogleFonts.roboto(
@@ -323,14 +327,14 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         children: [
                           Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 25),
+                              padding: const EdgeInsets.only(top: 15),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20))),
                                     labelText: "Open Hours *",
-                                    hintText: '07.00 am',
+                                    hintText: dataMap['openHoursStart'],
                                     hintStyle: GoogleFonts.roboto(
                                         fontSize: 14,
                                         color: Colors.grey.shade600),
@@ -353,7 +357,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                           Flexible(
                               child: Container(
                                   width: width * 0.1,
-                                  margin: EdgeInsets.only(top: 15),
+                                  margin: EdgeInsets.only(top: 10),
                                   child: Center(
                                       child: Text(
                                     'until',
@@ -370,7 +374,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                         borderRadius: BorderRadius.all(
                                             const Radius.circular(20))),
                                     labelText: "Open Hours *",
-                                    hintText: '21.00 pm',
+                                    hintText: dataMap['openHoursEnd'],
                                     hintStyle: GoogleFonts.roboto(
                                         fontSize: 14,
                                         color: Colors.grey.shade600),
@@ -395,14 +399,8 @@ class AddPetshopView extends GetView<AddPetshopController> {
                       SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        height: size.height * 0.07,
-                        width: size.width * 0.9,
-                        color: Colors.transparent,
-                        child: ElevatedButton(
+                      FlatButton(
                           onPressed: () => {
-                            if (form.currentState!.validate())
-                              {
                                 Get.dialog(AlertDialog(
                                   title: Text(
                                     'Booking Confirmation',
@@ -417,7 +415,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15)),
                                   content: Text(
-                                      'Are you the data is correct? Confirm to create service.',
+                                      'Are you the data is correct? Confirm if you sure.',
                                       style: TextStyle(
                                           fontFamily: 'SanFrancisco.Light',
                                           fontSize: 12)),
@@ -431,66 +429,65 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                           style: TextStyle(
                                               fontFamily: 'SanFrancisco.Light',
                                               fontSize: 13,
-                                              color: Color(0xffF9813A)),
+                                              color: Color(0xff2596BE)),
                                         )),
                                     TextButton(
                                         onPressed: () => {
                                               Get.back(),
-
-                                              form.currentState!.save(),
-                                              localStorage.write(
-                                                  'generalData', formData),
-                                              // petshopController
-                                              //     .createPetshop(formData),
-                                              localStorage.write(
-                                                  'groomingFlag', false),
-                                              localStorage.write(
-                                                  'hotelFlag', false),
-                                              localStorage.write(
-                                                  'vetFlag', false),
-                                              Get.toNamed(Routes.SERVICE_LIST),
+                                              if (form.currentState!.validate())
+                                                {
+                                                  form.currentState!.save(),
+                                                  localStorage.write(
+                                                      'generalData', formData),
+                                                  petshopController.editPetshop(
+                                                      formData, petshopId),
+                                                },
                                             },
                                         child: Text(
                                           'Confirm',
                                           style: TextStyle(
                                               fontFamily: 'SanFrancisco',
                                               fontSize: 13,
-                                              color: Color(0xffF9813A)),
+                                              color: Color(0xff2596BE)),
                                         )),
                                   ],
                                 ))
                               },
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 5.0),
-                            primary: Color(0xffF9813A),
-                            shape: StadiumBorder(),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text("Save",
-                                    style: TextStyle(
-                                      fontFamily: 'SanFrancisco',
-                                      fontSize: 15,
+                          child: Container(
+                              height: height * 0.07,
+                              width: width,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.shade300,
+                                        spreadRadius: 3,
+                                        blurRadius: 4,
+                                        offset: Offset(0, 4))
+                                  ],
+                                  color: Color(0xff2596BE),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 30, right: 30),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Text("Confirm",
+                                        style: TextStyle(
+                                          fontFamily: 'SanFrancisco',
+                                          fontSize: 15,
+                                          color: Colors.white,
+                                        )),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
                                       color: Colors.white,
-                                    )),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.white,
-                                  size: 18,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
+                                      size: 18,
+                                    )
+                                  ],
+                                ),
+                              ))),
                     ],
                   ),
                 ),
