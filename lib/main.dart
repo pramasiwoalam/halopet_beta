@@ -41,7 +41,8 @@ class MyApp extends StatelessWidget {
                   StreamBuilder<Object>(
                       stream: authC.streamRole(),
                       builder: (context, snapshot) {
-                        if (snapshot.hasData && snapshot.data != null) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.active) {
                           final user = snapshot.data as DocumentSnapshot;
                           if (user['petshopOwner'] == true) {
                             localStorage.write(
