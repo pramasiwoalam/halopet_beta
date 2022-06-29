@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halopet_beta/app/routes/app_pages.dart';
 import 'package:money_formatter/money_formatter.dart';
 
 import '../controllers/payment_controller.dart';
@@ -23,7 +24,7 @@ class PaymentView extends GetView<PaymentController> {
       appBar: AppBar(
         title: Text(
           'Payment',
-          style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+          style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
         ),
         backgroundColor: Color(0xffF9813A),
         elevation: 0,
@@ -73,10 +74,10 @@ class PaymentView extends GetView<PaymentController> {
                           children: [
                             Text(
                               '   Order Summary',
-                              style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18,
-                                  color: Color(0xffF9813A)),
+                              style: TextStyle(
+                                  fontFamily: 'SanFrancisco',
+                                  fontSize: 14,
+                                  color: Colors.grey.shade700),
                             ),
                             const SizedBox(
                               height: 12,
@@ -106,16 +107,21 @@ class PaymentView extends GetView<PaymentController> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text('Order ID',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  color: Colors.white)),
-                                          Text(orderId,
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16,
-                                                  color: Colors.white))
+                                          Text(
+                                            'Order ID',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily:
+                                                    'SanFrancisco.Light',
+                                                fontSize: 13),
+                                          ),
+                                          Text(
+                                            orderId,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: 'SanFrancisco',
+                                                fontSize: 13),
+                                          )
                                         ],
                                       ),
                                       Spacer(),
@@ -123,16 +129,21 @@ class PaymentView extends GetView<PaymentController> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text('Charge',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w300,
-                                                  fontSize: 15,
-                                                  color: Colors.white)),
-                                          Text(fo.symbolOnLeft,
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w800,
-                                                  fontSize: 16,
-                                                  color: Colors.white))
+                                          Text(
+                                            'Charge',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily:
+                                                    'SanFrancisco.Light',
+                                                fontSize: 13),
+                                          ),
+                                          Text(
+                                            fo.symbolOnLeft,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: 'SanFrancisco',
+                                                fontSize: 13),
+                                          )
                                         ],
                                       )
                                     ],
@@ -145,23 +156,23 @@ class PaymentView extends GetView<PaymentController> {
                             ),
                             Text(
                               '   Choose Payment Method',
-                              style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18,
-                                  color: Color(0xffF9813A)),
+                              style: TextStyle(
+                                  fontFamily: 'SanFrancisco',
+                                  fontSize: 14,
+                                  color: Colors.grey.shade700),
                             ),
                             const SizedBox(
                               height: 10,
                             ),
                             CustomRadioButton(
-                              elevation: 3,
+                              elevation: 1,
                               buttonTextStyle: ButtonTextStyle(
                                   selectedColor: Colors.white,
                                   unSelectedColor: Color(0xffF9813A),
-                                  textStyle: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 14,
-                                      color: Colors.white)),
+                                  textStyle: TextStyle(
+                                      fontFamily: 'SanFrancisco',
+                                      fontSize: 11,
+                                      color: Colors.grey.shade700)),
                               unSelectedColor: Colors.white,
                               buttonLables: const [
                                 "PawPay Coins",
@@ -182,7 +193,7 @@ class PaymentView extends GetView<PaymentController> {
                               spacing: 1,
                               horizontal: false,
                               enableButtonWrap: false,
-                              height: height * 0.04,
+                              height: height * 0.03,
                               enableShape: true,
                               width: width * 0.38,
                               absoluteZeroSpacing: false,
@@ -248,15 +259,12 @@ class PaymentView extends GetView<PaymentController> {
                                                       ),
                                                       Text(
                                                         'PawPay Coins',
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade800,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                                fontSize: 12),
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'SanFrancisco',
+                                                            fontSize: 11,
+                                                            color: Colors
+                                                                .grey.shade700),
                                                       )
                                                     ],
                                                   ),
@@ -282,12 +290,12 @@ class PaymentView extends GetView<PaymentController> {
                                                     ),
                                                     Text(
                                                       'Top up PawPay',
-                                                      style: GoogleFonts.roboto(
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          fontSize: 11,
                                                           color: Colors
-                                                              .grey.shade800,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14),
+                                                              .grey.shade700),
                                                     ),
                                                   ],
                                                 ),
@@ -324,12 +332,15 @@ class PaymentView extends GetView<PaymentController> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text('Virtual Account',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 15,
-                                                          color: Colors.black)),
+                                                  Text(
+                                                    'Virtual Account',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'SanFrancisco',
+                                                        fontSize: 13,
+                                                        color: Colors
+                                                            .grey.shade700),
+                                                  ),
                                                   const Divider(
                                                     thickness: 1,
                                                   ),
@@ -342,25 +353,21 @@ class PaymentView extends GetView<PaymentController> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text('Virtual Account',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
-                                                      Text('088266860291990',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                  fontSize: 15,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500))
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade500)),
+                                                      Text(
+                                                        '088266860291990',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'SanFrancisco',
+                                                            fontSize: 12,
+                                                            color: Colors
+                                                                .grey.shade700),
+                                                      )
                                                     ],
                                                   ),
                                                   Spacer(),
@@ -370,26 +377,20 @@ class PaymentView extends GetView<PaymentController> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text('Bank',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                       Text(
                                                           'Bank Central Asia (BCA)',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500))
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade700)),
                                                     ],
                                                   ),
                                                   Spacer(),
@@ -399,26 +400,20 @@ class PaymentView extends GetView<PaymentController> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text('Nama Rekening',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                       Text(
                                                           'PT. Halopet Indonesia',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500))
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade700)),
                                                     ],
                                                   ),
                                                   Spacer(),
@@ -453,11 +448,12 @@ class PaymentView extends GetView<PaymentController> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text('Transfer Manual',
-                                                      style: GoogleFonts.roboto(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 15,
-                                                          color: Colors.black)),
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          fontSize: 13,
+                                                          color: Colors
+                                                              .grey.shade700)),
                                                   const Divider(
                                                     thickness: 1,
                                                   ),
@@ -470,25 +466,19 @@ class PaymentView extends GetView<PaymentController> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text('Rekening',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                       Text('6860291990',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                  fontSize: 15,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500))
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade700)),
                                                     ],
                                                   ),
                                                   Spacer(),
@@ -498,26 +488,20 @@ class PaymentView extends GetView<PaymentController> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text('Bank',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                       Text(
                                                           'Bank Central Asia (BCA)',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500))
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade700)),
                                                     ],
                                                   ),
                                                   Spacer(),
@@ -527,26 +511,20 @@ class PaymentView extends GetView<PaymentController> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text('Nama Rekening',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500)),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade500)),
                                                       Text(
                                                           'PT. Halopet Indonesia',
-                                                          style: GoogleFonts
-                                                              .roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                  fontSize: 14,
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500))
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco',
+                                                              fontSize: 12,
+                                                              color: Colors.grey
+                                                                  .shade700)),
                                                     ],
                                                   ),
                                                   Spacer(),
@@ -559,37 +537,138 @@ class PaymentView extends GetView<PaymentController> {
                             Center(
                               child: GestureDetector(
                                 onTap: () => {
-                                  AwesomeDialog(
-                                    context: context,
-                                    dialogType: DialogType.INFO,
-                                    animType: AnimType.BOTTOMSLIDE,
-                                    title: 'Payment Confirmation',
-                                    desc:
-                                        'Are you sure you have did your payment?.',
-                                    btnCancelOnPress: () => {},
-                                    btnCancelColor: Colors.blue,
-                                    btnOkColor: Color(0xffF9813A),
-                                    btnOkText: 'Yes',
-                                    buttonsTextStyle: GoogleFonts.roboto(
-                                        fontWeight: FontWeight.w600),
-                                    btnOkOnPress: () {
-                                      AwesomeDialog(
-                                        context: context,
-                                        dialogType: DialogType.SUCCES,
-                                        animType: AnimType.BOTTOMSLIDE,
-                                        title: 'Thank You.',
-                                        desc:
-                                            'Thank you for your payment. Your payment will be validated automatically',
-                                        btnOkColor: Color(0xffF9813A),
-                                        btnOkText: 'Ok',
-                                        buttonsTextStyle: GoogleFonts.roboto(
-                                            fontWeight: FontWeight.w600),
-                                        btnOkOnPress: () {
-                                          controller.paymentAccepted(orderId);
-                                        },
-                                      ).show();
-                                    },
-                                  ).show()
+                                  Get.dialog(AlertDialog(
+                                    title: const Text(
+                                      'Payment Confirmation',
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco',
+                                          fontSize: 14),
+                                    ),
+                                    titlePadding: EdgeInsets.only(
+                                        left: 26, right: 26, top: 30),
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 26,
+                                        right: 26,
+                                        top: 16,
+                                        bottom: 12),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    content: const Text(
+                                        'Are you sure you have do your payment?',
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco.Light',
+                                            fontSize: 12)),
+                                    actionsPadding: EdgeInsets.only(
+                                        right: 15, top: 6, bottom: 2),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () => {Get.back()},
+                                          child: const Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                                fontFamily:
+                                                    'SanFrancisco.Light',
+                                                fontSize: 13,
+                                                color: Colors.orange),
+                                          )),
+                                      TextButton(
+                                          onPressed: () => {
+                                                Get.back(),
+                                                Get.dialog(AlertDialog(
+                                                  title: Text(
+                                                    'Booking Created',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'SanFrancisco',
+                                                        fontSize: 14),
+                                                  ),
+                                                  titlePadding: EdgeInsets.only(
+                                                      left: 26,
+                                                      right: 26,
+                                                      top: 30),
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 26,
+                                                          right: 26,
+                                                          top: 16,
+                                                          bottom: 12),
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15)),
+                                                  content: Text(
+                                                      'Thank you for your payment. Your payment will be validated automatically',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          fontSize: 12)),
+                                                  actionsPadding:
+                                                      EdgeInsets.only(
+                                                          right: 12,
+                                                          top: 6,
+                                                          bottom: 2),
+                                                  actions: [
+                                                    TextButton(
+                                                        onPressed: () => {
+                                                              controller
+                                                                  .paymentAccepted(
+                                                                      orderId),
+                                                              Get.toNamed(Routes
+                                                                  .HOMEPAGE)
+                                                            },
+                                                        child: Text(
+                                                          'Ok',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco',
+                                                              fontSize: 13,
+                                                              color: Colors
+                                                                  .orange),
+                                                        )),
+                                                  ],
+                                                ))
+                                              },
+                                          child: Text(
+                                            'Yes',
+                                            style: TextStyle(
+                                                fontFamily: 'SanFrancisco',
+                                                fontSize: 13,
+                                                color: Colors.orange),
+                                          )),
+                                    ],
+                                  ))
+                                  // AwesomeDialog(
+                                  //   context: context,
+                                  //   dialogType: DialogType.INFO,
+                                  //   animType: AnimType.BOTTOMSLIDE,
+                                  //   title: 'Payment Confirmation',
+                                  //   desc:
+                                  //       'Are you sure you have did your payment?.',
+                                  //   btnCancelOnPress: () => {},
+                                  //   btnCancelColor: Colors.blue,
+                                  //   btnOkColor: Color(0xffF9813A),
+                                  //   btnOkText: 'Yes',
+                                  //   buttonsTextStyle: GoogleFonts.roboto(
+                                  //       fontWeight: FontWeight.w600),
+                                  //   btnOkOnPress: () => {
+                                  //     AwesomeDialog(
+                                  //       context: context,
+                                  //       dialogType: DialogType.SUCCES,
+                                  //       animType: AnimType.BOTTOMSLIDE,
+                                  //       title: 'Thank You.',
+                                  //       desc:
+                                  //           'Thank you for your payment. Your payment will be validated automatically',
+                                  //       btnOkColor: Color(0xffF9813A),
+                                  //       btnOkText: 'Ok',
+                                  //       buttonsTextStyle: GoogleFonts.roboto(
+                                  //           fontWeight: FontWeight.w600),
+                                  //       btnOkOnPress: () {
+                                  //         controller.paymentAccepted(orderId);
+                                  //       },
+                                  //     ).show();
+                                  //   },
+                                  // ).show()
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(top: height * 0.025),
@@ -614,9 +693,9 @@ class PaymentView extends GetView<PaymentController> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Done',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 17,
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 14,
                                                   color: Colors.white)),
                                           const Icon(
                                             Icons.arrow_forward,
@@ -653,14 +732,14 @@ class PaymentView extends GetView<PaymentController> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text('Cancel Order',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 17,
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 14,
                                                   color: Color(0xffF9813A))),
                                           const Icon(
                                             Icons.cancel_schedule_send,
                                             color: Color(0xffF9813A),
-                                            size: 22,
+                                            size: 18,
                                           )
                                         ],
                                       )),

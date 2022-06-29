@@ -61,7 +61,7 @@ flutter:
         - asset: assets/fonts/SFUIDisplay-Light.ttf
         
   assets:
-    - assets/images/user.jpeg
+    - assets/images/user.png
     - assets/images/bg1.png
     - assets/images/vet-card.jpg
     - assets/images/grooming-card.jpg

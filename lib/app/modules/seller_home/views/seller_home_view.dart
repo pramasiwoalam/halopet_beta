@@ -122,414 +122,397 @@ class ApprovalContainer extends StatelessWidget {
                         itemBuilder: (context, index) {
                           var dataMap =
                               data[index].data() as Map<String, dynamic>;
-                          return InkWell(
-                            onTap: () => {},
-                            child: Container(
-                              height: height * 0.21,
-                              width: width,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Colors.grey.shade200,
-                                  ),
-                                  color: Colors.white),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 20.0, top: 16, bottom: 16, right: 24),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(' Grooming ',
+                          return Container(
+                            height: height * 0.21,
+                            width: width,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Colors.grey.shade200,
+                                ),
+                                color: Colors.white),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20.0, top: 16, bottom: 16, right: 24),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(' Grooming ',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.grey.shade800,
+                                                  fontFamily: 'SanFrancisco')),
+                                          Text('Service',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontFamily:
+                                                      'SanFrancisco.Light')),
+                                        ],
+                                      ),
+                                      Container(
+                                        height: height * 0.026,
+                                        width: width * 0.4,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey.shade300,
+                                                spreadRadius: 0.5,
+                                                blurRadius: 0.5,
+                                                offset: Offset(0, 1))
+                                          ],
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: const Center(
+                                            child: Text('Waiting for Approval',
                                                 style: TextStyle(
-                                                    fontSize: 14,
+                                                    color: Color(0xff2596BE),
+                                                    fontSize: 10,
+                                                    fontFamily:
+                                                        'SanFrancisco'))),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 12,
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.8,
+                                    height: height * 0.02,
+                                    child: Container(
+                                        width: width * 0.8,
+                                        height: height * 0.04,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text('  Order ID',
+                                                style: TextStyle(
+                                                    fontSize: 13,
                                                     color: Colors.grey.shade800,
                                                     fontFamily:
                                                         'SanFrancisco')),
-                                            Text('Service',
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily:
-                                                        'SanFrancisco.Light')),
-                                          ],
-                                        ),
-                                        Container(
-                                          height: height * 0.026,
-                                          width: width * 0.4,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Colors.grey.shade300,
-                                                  spreadRadius: 0.5,
-                                                  blurRadius: 0.5,
-                                                  offset: Offset(0, 1))
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: const Center(
-                                              child: Text(
-                                                  'Waiting for Approval',
-                                                  style: TextStyle(
-                                                      color: Color(0xff2596BE),
-                                                      fontSize: 10,
-                                                      fontFamily:
-                                                          'SanFrancisco'))),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 12,
-                                    ),
-                                    SizedBox(
-                                      width: width * 0.8,
-                                      height: height * 0.02,
-                                      child: Container(
-                                          width: width * 0.8,
-                                          height: height * 0.04,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text('  Order ID',
-                                                  style: TextStyle(
-                                                      fontSize: 13,
-                                                      color:
-                                                          Colors.grey.shade800,
-                                                      fontFamily:
-                                                          'SanFrancisco')),
-                                              SizedBox(
-                                                width: 8,
-                                              ),
-                                              Text(
-                                                  "#${data[index].id.toUpperCase()}",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: Color(0xff2596BE),
-                                                      fontSize: 13,
-                                                      fontFamily:
-                                                          'SanFrancisco'))
-                                            ],
-                                          )),
-                                    ),
-                                    Container(
-                                      height: height * 0.04,
-                                      child: TextButton(
-                                        onPressed: () => {
-                                          localStorage.write('petshopId',
-                                              data[index]['petshopId']),
-                                          Get.toNamed(
-                                              Routes.SELLER_ORDER_DETAIL,
-                                              arguments: data[index].id)
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              'See details ',
-                                              style: TextStyle(
-                                                  color: Color(0xff2596BE),
-                                                  fontSize: 12,
-                                                  fontFamily: 'SanFrancisco'),
+                                            SizedBox(
+                                              width: 8,
                                             ),
-                                            Icon(
-                                              Icons.arrow_forward,
-                                              size: 14,
-                                              color: Color(0xff2596BE),
-                                            )
+                                            Text(
+                                                "#${data[index].id.toUpperCase()}",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Color(0xff2596BE),
+                                                    fontSize: 13,
+                                                    fontFamily: 'SanFrancisco'))
                                           ],
-                                        ),
+                                        )),
+                                  ),
+                                  Container(
+                                    height: height * 0.04,
+                                    child: TextButton(
+                                      onPressed: () => {
+                                        localStorage.write('petshopId',
+                                            data[index]['petshopId']),
+                                        Get.toNamed(Routes.SELLER_ORDER_DETAIL,
+                                            arguments: data[index].id)
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'See details ',
+                                            style: TextStyle(
+                                                color: Color(0xff2596BE),
+                                                fontSize: 12,
+                                                fontFamily: 'SanFrancisco'),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward,
+                                            size: 14,
+                                            color: Color(0xff2596BE),
+                                          )
+                                        ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    SizedBox(
-                                        width: width * 0.9,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  height: size.height * 0.05,
-                                                  width: size.width * 0.25,
-                                                  color: Colors.transparent,
-                                                  child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal:
-                                                                    10.0,
-                                                                vertical: 5.0),
-                                                        primary: Colors
-                                                            .grey.shade100,
-                                                        shape: StadiumBorder(),
-                                                      ),
-                                                      onPressed: () => {
-                                                            Get.dialog(
-                                                                AlertDialog(
-                                                              title: Text(
-                                                                'Booking Confirmation',
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  SizedBox(
+                                      width: width * 0.9,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                height: size.height * 0.05,
+                                                width: size.width * 0.25,
+                                                color: Colors.transparent,
+                                                child: ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 10.0,
+                                                          vertical: 5.0),
+                                                      primary:
+                                                          Colors.grey.shade100,
+                                                      shape: StadiumBorder(),
+                                                    ),
+                                                    onPressed: () => {
+                                                          Get.dialog(
+                                                              AlertDialog(
+                                                            title: Text(
+                                                              'Booking Confirmation',
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'SanFrancisco',
+                                                                  fontSize: 14),
+                                                            ),
+                                                            titlePadding:
+                                                                EdgeInsets.only(
+                                                                    left: 26,
+                                                                    right: 26,
+                                                                    top: 30),
+                                                            contentPadding:
+                                                                EdgeInsets.only(
+                                                              left: 26,
+                                                              right: 26,
+                                                              top: 12,
+                                                            ),
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15)),
+                                                            content: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top:
+                                                                          12.0),
+                                                              child:
+                                                                  TextFormField(
+                                                                decoration: InputDecoration(
+                                                                    border: OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(
+                                                                                20))),
+                                                                    labelText:
+                                                                        "Cancellation Reason*",
+                                                                    hintText:
+                                                                        'Reason',
+                                                                    hintStyle: TextStyle(
+                                                                        fontFamily:
+                                                                            'SanFrancisco.Light',
+                                                                        fontSize:
+                                                                            12,
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade600),
+                                                                    contentPadding:
+                                                                        EdgeInsets.all(
+                                                                            18),
+                                                                    floatingLabelBehavior:
+                                                                        FloatingLabelBehavior
+                                                                            .always),
+                                                              ),
+                                                            ),
+                                                            actionsPadding:
+                                                                EdgeInsets.only(
+                                                                    right: 12,
+                                                                    top: 6,
+                                                                    bottom: 2),
+                                                            actions: [
+                                                              TextButton(
+                                                                  onPressed:
+                                                                      () => {
+                                                                            Get.back()
+                                                                          },
+                                                                  child: Text(
+                                                                    'Cancel',
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'SanFrancisco.Light',
+                                                                        fontSize:
+                                                                            12,
+                                                                        color: Color(
+                                                                            0xff2596BE)),
+                                                                  )),
+                                                              TextButton(
+                                                                  onPressed:
+                                                                      () => {
+                                                                            orderController.bookingCancellation(data[index].id,
+                                                                                reasons.text)
+                                                                          },
+                                                                  child: Text(
+                                                                    'Confirm',
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'SanFrancisco',
+                                                                        fontSize:
+                                                                            12,
+                                                                        color: Color(
+                                                                            0xff2596BE)),
+                                                                  )),
+                                                            ],
+                                                          ))
+                                                        },
+                                                    child: Column(
+                                                      children: const [
+                                                        SizedBox(
+                                                          height: 2,
+                                                        ),
+                                                        Center(
+                                                          child: Icon(
+                                                            Icons.cancel,
+                                                            size: 12,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 2,
+                                                        ),
+                                                        Center(
+                                                          child: Text(
+                                                            'Cancel',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 11,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light'),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Container(
+                                                height: size.height * 0.05,
+                                                width: size.width * 0.25,
+                                                color: Colors.transparent,
+                                                child: ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 10.0,
+                                                          vertical: 5.0),
+                                                      primary: Colors.green,
+                                                      shape: StadiumBorder(),
+                                                    ),
+                                                    onPressed: () => {
+                                                          Get.dialog(
+                                                              AlertDialog(
+                                                            title: Text(
+                                                              'Booking Confirmation',
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'SanFrancisco',
+                                                                  fontSize: 14),
+                                                            ),
+                                                            titlePadding:
+                                                                EdgeInsets.only(
+                                                                    left: 26,
+                                                                    right: 26,
+                                                                    top: 30),
+                                                            contentPadding:
+                                                                EdgeInsets.only(
+                                                                    left: 26,
+                                                                    right: 26,
+                                                                    top: 16,
+                                                                    bottom: 12),
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15)),
+                                                            content: Text(
+                                                                'Are you sure want to accept this booking?',
                                                                 style: TextStyle(
                                                                     fontFamily:
-                                                                        'SanFrancisco',
+                                                                        'SanFrancisco.Light',
                                                                     fontSize:
-                                                                        14),
-                                                              ),
-                                                              titlePadding:
-                                                                  EdgeInsets.only(
-                                                                      left: 26,
-                                                                      right: 26,
-                                                                      top: 30),
-                                                              contentPadding:
-                                                                  EdgeInsets
-                                                                      .only(
-                                                                left: 26,
-                                                                right: 26,
-                                                                top: 12,
-                                                              ),
-                                                              shape: RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15)),
-                                                              content: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        top:
-                                                                            12.0),
-                                                                child:
-                                                                    TextFormField(
-                                                                  decoration: InputDecoration(
-                                                                      border: OutlineInputBorder(
-                                                                          borderRadius: BorderRadius.all(Radius.circular(
-                                                                              20))),
-                                                                      labelText:
-                                                                          "Cancellation Reason*",
-                                                                      hintText:
-                                                                          'Reason',
-                                                                      hintStyle: TextStyle(
-                                                                          fontFamily:
-                                                                              'SanFrancisco.Light',
-                                                                          fontSize:
-                                                                              12,
-                                                                          color: Colors
-                                                                              .grey
-                                                                              .shade600),
-                                                                      contentPadding:
-                                                                          EdgeInsets.all(
-                                                                              18),
-                                                                      floatingLabelBehavior:
-                                                                          FloatingLabelBehavior
-                                                                              .always),
-                                                                ),
-                                                              ),
-                                                              actionsPadding:
-                                                                  EdgeInsets.only(
-                                                                      right: 12,
-                                                                      top: 6,
-                                                                      bottom:
-                                                                          2),
-                                                              actions: [
-                                                                TextButton(
-                                                                    onPressed:
-                                                                        () => {
-                                                                              Get.back()
-                                                                            },
-                                                                    child: Text(
-                                                                      'Cancel',
-                                                                      style: TextStyle(
-                                                                          fontFamily:
-                                                                              'SanFrancisco.Light',
-                                                                          fontSize:
-                                                                              12,
-                                                                          color:
-                                                                              Color(0xff2596BE)),
-                                                                    )),
-                                                                TextButton(
-                                                                    onPressed:
-                                                                        () => {
-                                                                              orderController.bookingCancellation(data[index].id, reasons.text)
-                                                                            },
-                                                                    child: Text(
-                                                                      'Confirm',
-                                                                      style: TextStyle(
-                                                                          fontFamily:
-                                                                              'SanFrancisco',
-                                                                          fontSize:
-                                                                              12,
-                                                                          color:
-                                                                              Color(0xff2596BE)),
-                                                                    )),
-                                                              ],
-                                                            ))
-                                                          },
-                                                      child: Column(
-                                                        children: const [
-                                                          SizedBox(
-                                                            height: 2,
+                                                                        12)),
+                                                            actionsPadding:
+                                                                EdgeInsets.only(
+                                                                    right: 12,
+                                                                    top: 6,
+                                                                    bottom: 2),
+                                                            actions: [
+                                                              TextButton(
+                                                                  onPressed:
+                                                                      () => {
+                                                                            Get.back()
+                                                                          },
+                                                                  child: Text(
+                                                                    'Cancel',
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'SanFrancisco.Light',
+                                                                        fontSize:
+                                                                            12,
+                                                                        color: Color(
+                                                                            0xff2596BE)),
+                                                                  )),
+                                                              TextButton(
+                                                                  onPressed:
+                                                                      () => {
+                                                                            orderController.accepted(data[index].id)
+                                                                          },
+                                                                  child: Text(
+                                                                    'Yes, accept this booking',
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'SanFrancisco',
+                                                                        fontSize:
+                                                                            12,
+                                                                        color: Color(
+                                                                            0xff2596BE)),
+                                                                  )),
+                                                            ],
+                                                          ))
+                                                        },
+                                                    child: Column(
+                                                      children: [
+                                                        Center(
+                                                          child: Icon(
+                                                            Icons.done,
+                                                            size: 14,
                                                           ),
-                                                          Center(
-                                                            child: Icon(
-                                                              Icons.cancel,
-                                                              size: 12,
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
+                                                        ),
+                                                        Center(
+                                                          child: Text(
+                                                            'Accept',
+                                                            style: TextStyle(
+                                                                fontSize: 11,
+                                                                fontFamily:
+                                                                    'SanFrancisco'),
                                                           ),
-                                                          SizedBox(
-                                                            height: 2,
-                                                          ),
-                                                          Center(
-                                                            child: Text(
-                                                              'Cancel',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 11,
-                                                                  fontFamily:
-                                                                      'SanFrancisco.Light'),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      )),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Container(
-                                                  height: size.height * 0.05,
-                                                  width: size.width * 0.25,
-                                                  color: Colors.transparent,
-                                                  child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal:
-                                                                    10.0,
-                                                                vertical: 5.0),
-                                                        primary: Colors.green,
-                                                        shape: StadiumBorder(),
-                                                      ),
-                                                      onPressed: () => {
-                                                            Get.dialog(
-                                                                AlertDialog(
-                                                              title: Text(
-                                                                'Booking Confirmation',
-                                                                style: TextStyle(
-                                                                    fontFamily:
-                                                                        'SanFrancisco',
-                                                                    fontSize:
-                                                                        14),
-                                                              ),
-                                                              titlePadding:
-                                                                  EdgeInsets.only(
-                                                                      left: 26,
-                                                                      right: 26,
-                                                                      top: 30),
-                                                              contentPadding:
-                                                                  EdgeInsets.only(
-                                                                      left: 26,
-                                                                      right: 26,
-                                                                      top: 16,
-                                                                      bottom:
-                                                                          12),
-                                                              shape: RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15)),
-                                                              content: Text(
-                                                                  'Are you sure want to accept this booking?',
-                                                                  style: TextStyle(
-                                                                      fontFamily:
-                                                                          'SanFrancisco.Light',
-                                                                      fontSize:
-                                                                          12)),
-                                                              actionsPadding:
-                                                                  EdgeInsets.only(
-                                                                      right: 12,
-                                                                      top: 6,
-                                                                      bottom:
-                                                                          2),
-                                                              actions: [
-                                                                TextButton(
-                                                                    onPressed:
-                                                                        () => {
-                                                                              Get.back()
-                                                                            },
-                                                                    child: Text(
-                                                                      'Cancel',
-                                                                      style: TextStyle(
-                                                                          fontFamily:
-                                                                              'SanFrancisco.Light',
-                                                                          fontSize:
-                                                                              12,
-                                                                          color:
-                                                                              Color(0xff2596BE)),
-                                                                    )),
-                                                                TextButton(
-                                                                    onPressed:
-                                                                        () => {
-                                                                              orderController.accepted(data[index].id)
-                                                                            },
-                                                                    child: Text(
-                                                                      'Yes, accept this booking',
-                                                                      style: TextStyle(
-                                                                          fontFamily:
-                                                                              'SanFrancisco',
-                                                                          fontSize:
-                                                                              12,
-                                                                          color:
-                                                                              Color(0xff2596BE)),
-                                                                    )),
-                                                              ],
-                                                            ))
-                                                          },
-                                                      child: Column(
-                                                        children: [
-                                                          Center(
-                                                            child: Icon(
-                                                              Icons.done,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                          Center(
-                                                            child: Text(
-                                                              'Accept',
-                                                              style: TextStyle(
-                                                                  fontSize: 11,
-                                                                  fontFamily:
-                                                                      'SanFrancisco'),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      )),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ))
-                                  ],
-                                ),
+                                                        )
+                                                      ],
+                                                    )),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ))
+                                ],
                               ),
                             ),
                           );

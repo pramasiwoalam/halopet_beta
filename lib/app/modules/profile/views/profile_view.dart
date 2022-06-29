@@ -169,7 +169,7 @@ class ProfileView extends GetView<ProfileController> {
                                                           image: data['role'] ==
                                                                   'Member'
                                                               ? AssetImage(
-                                                                  'assets/images/user.jpeg')
+                                                                  'assets/images/user.png')
                                                               : AssetImage(
                                                                   'assets/images/petshop-1.jpg')))),
                                               SizedBox(
@@ -189,7 +189,7 @@ class ProfileView extends GetView<ProfileController> {
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              'Gheara Arsyandra',
+                                                              'User',
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       'SanFrancisco',

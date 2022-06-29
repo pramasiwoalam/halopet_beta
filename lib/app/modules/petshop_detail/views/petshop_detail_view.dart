@@ -625,7 +625,7 @@ class Review extends StatelessWidget {
                               ),
                               color: Colors.white),
                           child: Padding(
-                            padding: const EdgeInsets.all(24),
+                            padding: const EdgeInsets.all(28),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -639,19 +639,20 @@ class Review extends StatelessWidget {
                                       children: [
                                         Text(
                                           '${dataMap['userName']}',
-                                          style: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 15),
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco',
+                                              color: Colors.grey.shade700,
+                                              fontSize: 14),
                                         ),
                                         const SizedBox(
                                           height: 3,
                                         ),
                                         Text(
                                           'Service: Pet Hotel',
-                                          style: GoogleFonts.roboto(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 13,
-                                              color: Colors.grey.shade700),
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco.Light',
+                                              color: Colors.grey.shade700,
+                                              fontSize: 12),
                                         )
                                       ],
                                     ),
@@ -664,11 +665,14 @@ class Review extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text('${dataMap['rating']}',
-                                              style: GoogleFonts.inter(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  color: Colors.white)),
+                                          Text(
+                                            '${dataMap['rating']}',
+                                            style: TextStyle(
+                                                fontFamily:
+                                                    'SanFrancisco.Regular',
+                                                color: Colors.white,
+                                                fontSize: 12),
+                                          ),
                                           const SizedBox(
                                             width: 2,
                                           ),
@@ -693,9 +697,10 @@ class Review extends StatelessWidget {
                                 ),
                                 Text(
                                   '${dataMap['message']}',
-                                  style: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14),
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco.Regular',
+                                      color: Colors.grey.shade700,
+                                      fontSize: 13),
                                 ),
                                 Spacer(),
                                 Row(
@@ -704,12 +709,12 @@ class Review extends StatelessWidget {
                                   children: [
                                     SizedBox(),
                                     Text(
-                                        '${timeago.format((dataMap['reviewCreated'] as Timestamp).toDate())}',
-                                        style: GoogleFonts.roboto(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14,
+                                      '${timeago.format((dataMap['reviewCreated'] as Timestamp).toDate())}',
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco.Light',
                                           color: Colors.grey.shade700,
-                                        ))
+                                          fontSize: 11),
+                                    )
                                   ],
                                 )
                               ],

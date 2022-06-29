@@ -24,7 +24,8 @@ class RatingView extends GetView<RatingController> {
       appBar: AppBar(
         title: Text(
           'Rate your order',
-          style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+          style: TextStyle(
+              fontFamily: 'SanFrancisco', color: Colors.white, fontSize: 15),
         ),
         backgroundColor: Color(0xffF9813A),
         elevation: 0,
@@ -72,12 +73,15 @@ class RatingView extends GetView<RatingController> {
                                     return Container(
                                       child: Column(
                                         children: [
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           Text(
                                             'Thank you for your order.',
-                                            style: GoogleFonts.roboto(
-                                                fontWeight: FontWeight.w700,
+                                            style: TextStyle(
+                                                fontFamily: 'SanFrancisco',
                                                 color: Colors.grey.shade700,
-                                                fontSize: 18),
+                                                fontSize: 14),
                                           ),
                                           const SizedBox(
                                             height: 16,
@@ -91,22 +95,22 @@ class RatingView extends GetView<RatingController> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'Order from:',
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                  'Booking from',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
                                                       color:
                                                           Colors.grey.shade700,
-                                                      fontSize: 15),
+                                                      fontSize: 12),
                                                 ),
                                                 Text(
-                                                  'Dita Genday Petshop',
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                  'Deku Petshop',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco',
                                                       color:
                                                           Colors.grey.shade700,
-                                                      fontSize: 15),
+                                                      fontSize: 12),
                                                 )
                                               ],
                                             ),
@@ -120,22 +124,22 @@ class RatingView extends GetView<RatingController> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'Service:',
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                  'Service',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
                                                       color:
                                                           Colors.grey.shade700,
-                                                      fontSize: 15),
+                                                      fontSize: 12),
                                                 ),
                                                 Text(
                                                   'Grooming',
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco',
                                                       color:
                                                           Colors.grey.shade700,
-                                                      fontSize: 15),
+                                                      fontSize: 12),
                                                 )
                                               ],
                                             ),
@@ -175,13 +179,13 @@ class RatingView extends GetView<RatingController> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 38.0, top: 25, bottom: 10),
+                                left: 38.0, top: 25, bottom: 15),
                             child: Text(
                               'How was the service?',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.grey.shade800),
+                              style: TextStyle(
+                                  fontFamily: 'SanFrancisco',
+                                  color: Colors.grey.shade700,
+                                  fontSize: 14),
                             ),
                           ),
                           Row(
@@ -195,13 +199,13 @@ class RatingView extends GetView<RatingController> {
                                   direction: Axis.horizontal,
                                   allowHalfRating: false,
                                   itemCount: 5,
-                                  itemSize: 45,
+                                  itemSize: 35,
                                   itemPadding: const EdgeInsets.symmetric(
                                       horizontal: 4.0),
                                   itemBuilder: (context, _) => const Icon(
                                     Icons.star,
                                     color: Color(0xffF9813A),
-                                    size: 50,
+                                    size: 30,
                                   ),
                                   onRatingUpdate: (rating) {
                                     controller.rating = rating;
@@ -236,10 +240,10 @@ class RatingView extends GetView<RatingController> {
                                 left: 26.0, top: 30, bottom: 14),
                             child: Text(
                               'Let us know what your thought.',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.grey.shade800),
+                              style: TextStyle(
+                                  fontFamily: 'SanFrancisco.Light',
+                                  color: Colors.grey.shade700,
+                                  fontSize: 13),
                             ),
                           ),
                           Padding(
@@ -300,11 +304,13 @@ class RatingView extends GetView<RatingController> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Submit',
-                                      style: GoogleFonts.roboto(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 17,
-                                          color: Colors.white)),
+                                  Text(
+                                    'Submit',
+                                    style: TextStyle(
+                                        fontFamily: 'SanFrancisco',
+                                        color: Colors.white,
+                                        fontSize: 14),
+                                  ),
                                   const Icon(
                                     Icons.arrow_forward,
                                     color: Colors.white,

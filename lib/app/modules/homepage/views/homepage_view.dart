@@ -250,7 +250,7 @@ class Home extends StatelessWidget {
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
                                               image: AssetImage(
-                                                  'assets/images/user.jpeg')),
+                                                  'assets/images/user.png')),
                                         ),
                                       )
                                     ],

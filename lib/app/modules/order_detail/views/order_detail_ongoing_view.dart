@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/modules/order/views/order_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
+import 'package:money_formatter/money_formatter.dart';
 import '../controllers/order_detail_controller.dart';
 
 final reasons = TextEditingController();
@@ -18,6 +19,8 @@ class OnGoing extends GetView<OrderDetailController> {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
+
+    bool isDelivery = false;
     dynamic arguments = Get.arguments;
 
     return Scaffold(
@@ -29,410 +32,772 @@ class OnGoing extends GetView<OrderDetailController> {
               if (snapshot.connectionState == ConnectionState.done) {
                 var data = snapshot.data!.data() as Map<String, dynamic>;
                 var currentUserId = localStorage.read('currentUserId');
-                var orderId = localStorage.read('orderId');
+                var orderId = Get.arguments;
+                var bookingType = data['bookingType'];
                 localStorage.write('petshopId', Get.arguments);
-                return Stack(
-                  children: [
-                    Container(
-                      height: height / 4,
-                      width: width,
-                      color: Color(0xffF9813A),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: height * 0.01),
-                      height: height,
-                      width: width,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
-                        color: Colors.white,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                return FutureBuilder<DocumentSnapshot<Object?>>(
+                    future: bookingType == 'Grooming Service'
+                        ? controller.getPackage(data['packageId'])
+                        : bookingType == 'Vet'
+                            ? controller.getSession(data['sessionId'])
+                            : controller.getRoom(data['roomId']),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        var packageData =
+                            snapshot.data!.data() as Map<String, dynamic>;
+                        double bookingFee = 5000;
+                        double charge = 0;
+                        double tax = 0;
+                        if (bookingType == 'Vet') {
+                          charge = bookingFee;
+                        } else {
+                          tax = packageData['price'] * 10 / 100;
+                          charge = 0;
+                          if (data['isDelivery'] == false) {
+                            charge = packageData['price'] + bookingFee + tax;
+                          } else {
+                            charge = packageData['price'] +
+                                bookingFee +
+                                tax +
+                                data['deliveryFee'];
+                          }
+                        }
+                        MoneyFormatter fmf = MoneyFormatter(
+                            amount: charge,
+                            settings: MoneyFormatterSettings(
+                              symbol: 'Rp.',
+                              thousandSeparator: '.',
+                              decimalSeparator: ',',
+                              symbolAndNumberSeparator: ' ',
+                            ));
+                        MoneyFormatterOutput fo = fmf.output;
+
+                        return Stack(
                           children: [
-                            Text(
-                              '   Booking Status',
-                              style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18,
-                                  color: Color(0xffF9813A)),
+                            Container(
+                              height: height / 4,
+                              width: width,
+                              color: Color(0xffF9813A),
                             ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Center(
-                              child: Container(
-                                height: height * 0.12,
-                                width: width * 0.9,
-                                decoration: BoxDecoration(
-                                    color: Color(0xffF9813A),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade300,
-                                          spreadRadius: 3,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 3))
-                                    ]),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Order ID',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  color: Colors.white)),
-                                          Text('TR0018ASDJ2',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16,
-                                                  color: Colors.white))
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Status',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w300,
-                                                  fontSize: 15,
-                                                  color: Colors.white)),
-                                          Text('Booking On Going',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w800,
-                                                  fontSize: 16,
-                                                  color: Colors.white))
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                            Container(
+                              margin: EdgeInsets.only(top: height * 0.01),
+                              height: height,
+                              width: width,
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30),
                                 ),
+                                color: Colors.white,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 18,
-                            ),
-                            Text(
-                              '   Booking Summary',
-                              style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18,
-                                  color: Color(0xffF9813A)),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Center(
-                              child: Container(
-                                height: height * 0.4,
-                                width: width * 0.9,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade300,
-                                          spreadRadius: 2,
-                                          blurRadius: 2,
-                                          offset: Offset(0, 2))
-                                    ]),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(24),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Service',
-                                          style: GoogleFonts.roboto(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 16,
-                                              color: Colors.black)),
-                                      const Divider(
-                                        thickness: 1,
-                                      ),
-                                      const SizedBox(
-                                        height: 7,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Service type',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500)),
-                                          Text('Grooming',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500))
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Service package',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500)),
-                                          Text('Full Service Grooming',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500))
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Booking from',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500)),
-                                          Text('Dita Genday Petshop',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500))
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Booking created',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500)),
-                                          Text('27 February 2022',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500))
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Booking appointment',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500)),
-                                          Text('3 March 2022',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 15,
-                                                  color: Colors.grey.shade500)),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: GestureDetector(
-                                onTap: () => AwesomeDialog(
-                                  context: context,
-                                  dialogType: DialogType.INFO,
-                                  animType: AnimType.BOTTOMSLIDE,
-                                  title: 'Confirmation',
-                                  desc:
-                                      'Are you sure want to finish this booking?',
-                                  btnCancelOnPress: () {},
-                                  btnCancelText: 'No',
-                                  btnOkText: 'Yes',
-                                  btnOkOnPress: () => {
-                                    Get.toNamed(Routes.RATING,
-                                        arguments: orderId)
-                                  },
-                                ).show(),
-                                child: Container(
-                                  margin: EdgeInsets.only(top: height * 0.025),
-                                  width: width * 0.82,
-                                  height: height * 0.07,
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey.shade300,
-                                            spreadRadius: 3,
-                                            blurRadius: 4,
-                                            offset: Offset(0, 4))
-                                      ],
-                                      color: Color(0xffF9813A),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(30))),
-                                  child: Padding(
-                                      padding:
-                                          EdgeInsets.only(left: 30, right: 25),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Finish Booking',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 17,
-                                                  color: Colors.white)),
-                                          const Icon(
-                                            Icons.done,
-                                            color: Colors.white,
-                                            size: 22,
-                                          )
-                                        ],
-                                      )),
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: GestureDetector(
-                                onTap: () => {
-                                  AwesomeDialog(
-                                    context: context,
-                                    dialogType: DialogType.WARNING,
-                                    animType: AnimType.BOTTOMSLIDE,
-                                    title: 'Warning',
-                                    desc:
-                                        'Are you sure want to cancel this booking?',
-                                    btnCancelOnPress: () {},
-                                    btnOkOnPress: () {
-                                      late AwesomeDialog dialog;
-                                      dialog = AwesomeDialog(
-                                        context: context,
-                                        animType: AnimType.BOTTOMSLIDE,
-                                        dialogType: DialogType.INFO,
-                                        keyboardAware: true,
-                                        body: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(24.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '   Order Status',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'SanFrancisco',
+                                          color: Color(0xffF9813A)),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Center(
+                                      child: Container(
+                                        height: height * 0.11,
+                                        width: width * 0.9,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffF9813A),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20)),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.grey.shade300,
+                                                  spreadRadius: 3,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 3))
+                                            ]),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20),
                                           child: Column(
-                                            children: <Widget>[
-                                              Text(
-                                                'Cancellation Reason',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headline6,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Order ID',
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          color: Colors.white)),
+                                                  Text(
+                                                      "#${arguments.toString().toUpperCase()}",
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          color: Colors.white)),
+                                                ],
                                               ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              Material(
-                                                elevation: 0,
-                                                color: Colors.grey.shade100,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    controller: reasons,
-                                                    autofocus: true,
-                                                    minLines: 1,
-                                                    maxLines: null,
-                                                    keyboardType:
-                                                        TextInputType.multiline,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                      border: InputBorder.none,
-                                                      labelText: 'Reason',
-                                                      prefixIcon: Icon(
-                                                        Icons.message,
-                                                        size: 20,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              AnimatedButton(
-                                                  isFixedHeight: false,
-                                                  text: 'Submit',
-                                                  pressEvent: () {
-                                                    controller
-                                                        .bookingCancellation(
-                                                            orderId,
-                                                            reasons.text);
-                                                    dialog.dismiss();
-                                                  })
+                                              Spacer(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Status',
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          color: Colors.white)),
+                                                  Text(data['status'],
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          color: Colors.white)),
+                                                ],
+                                              )
                                             ],
                                           ),
                                         ),
-                                      )..show();
-                                    },
-                                  ).show()
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(top: height * 0.025),
-                                  width: width * 0.82,
-                                  height: height * 0.07,
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey.shade300,
-                                            spreadRadius: 3,
-                                            blurRadius: 4,
-                                            offset: Offset(0, 4))
-                                      ],
-                                      color: Colors.white,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(30))),
-                                  child: Padding(
-                                      padding:
-                                          EdgeInsets.only(left: 30, right: 25),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Cancel Order',
-                                              style: GoogleFonts.roboto(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 17,
-                                                  color: Color(0xffF9813A))),
-                                          const Icon(
-                                            Icons.cancel_schedule_send,
-                                            color: Color(0xffF9813A),
-                                            size: 22,
-                                          )
-                                        ],
-                                      )),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Text(
+                                      '   Order Detail',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'SanFrancisco',
+                                          color: Color(0xffF9813A)),
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Center(
+                                      child: Container(
+                                        height: height * 0.62,
+                                        width: width * 0.9,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20)),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.grey.shade300,
+                                                  spreadRadius: 2,
+                                                  blurRadius: 2,
+                                                  offset: Offset(0, 2))
+                                            ]),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(24),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Service',
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                          'SanFrancisco',
+                                                      color: Colors.black)),
+                                              const Divider(
+                                                thickness: 1,
+                                              ),
+                                              const SizedBox(
+                                                height: 7,
+                                              ),
+                                              bookingType == 'Grooming Service'
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text('Service type',
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade700)),
+                                                        Text(
+                                                            data['serviceType'],
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600)),
+                                                      ],
+                                                    )
+                                                  : bookingType == 'Pet Hotel'
+                                                      ? Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Service Type',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade700)),
+                                                            Text('Pet Hotel',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600)),
+                                                          ],
+                                                        )
+                                                      : Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Service Type',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade700)),
+                                                            Text('Vet Service',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600)),
+                                                          ],
+                                                        ),
+                                              Spacer(),
+                                              bookingType == 'Grooming Service'
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text('Service package',
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade700)),
+                                                        Text(
+                                                            'Full Service Grooming',
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600)),
+                                                      ],
+                                                    )
+                                                  : bookingType == 'Vet'
+                                                      ? Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Session',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade700)),
+                                                            Text(
+                                                                packageData[
+                                                                    'number'],
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600)),
+                                                          ],
+                                                        )
+                                                      : Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Room',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade700)),
+                                                            Text(
+                                                                packageData[
+                                                                    'name'],
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade600)),
+                                                          ],
+                                                        ),
+                                              Spacer(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Pet Name',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          color: Colors
+                                                              .grey.shade700)),
+                                                  Text("Aero",
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          color: Colors
+                                                              .grey.shade600)),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              bookingType == 'Vet'
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text('Medical service',
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade700)),
+                                                        FutureBuilder<
+                                                                DocumentSnapshot<
+                                                                    Object?>>(
+                                                            future: controller
+                                                                .getMedicalDetail(
+                                                                    data[
+                                                                        'medicalId']),
+                                                            builder: (context,
+                                                                snapshot) {
+                                                              if (snapshot
+                                                                      .connectionState ==
+                                                                  ConnectionState
+                                                                      .done) {
+                                                                var medicalData = snapshot
+                                                                        .data!
+                                                                        .data()
+                                                                    as Map<
+                                                                        String,
+                                                                        dynamic>;
+                                                                return Text(
+                                                                    medicalData[
+                                                                        'name'],
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontFamily:
+                                                                            'SanFrancisco',
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade600));
+                                                              } else {
+                                                                return Center(
+                                                                  child:
+                                                                      CircularProgressIndicator(),
+                                                                );
+                                                              }
+                                                            }),
+                                                      ],
+                                                    )
+                                                  : Spacer(),
+                                              bookingType == 'Vet'
+                                                  ? Spacer()
+                                                  : SizedBox(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Booking from',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          color: Colors
+                                                              .grey.shade700)),
+                                                  Text('Dita Genday Petshop',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          color: Colors
+                                                              .grey.shade600)),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Booking created',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          color: Colors
+                                                              .grey.shade700)),
+                                                  Text(data['orderCreated'],
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          color: Colors
+                                                              .grey.shade600)),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Booking appointment',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          color: Colors
+                                                              .grey.shade700)),
+                                                  Text(
+                                                      data['orderDate']
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          color: Colors
+                                                              .grey.shade600)),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              bookingType == 'Grooming Service'
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text('Booking time',
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade700)),
+                                                        Text("12.00 PM",
+                                                            style: TextStyle(
+                                                                fontSize: 12,
+                                                                fontFamily:
+                                                                    'SanFrancisco',
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600)),
+                                                      ],
+                                                    )
+                                                  : Spacer(),
+                                              bookingType == 'Vet'
+                                                  ? Spacer()
+                                                  : bookingType ==
+                                                          'Grooming Service'
+                                                      ? Spacer()
+                                                      : SizedBox(),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+                                              Spacer(),
+                                              Text('Charge',
+                                                  style: GoogleFonts.roboto(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 15,
+                                                      color: Colors.black)),
+                                              const Divider(
+                                                thickness: 1,
+                                              ),
+                                              const SizedBox(
+                                                height: 7,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Service charge',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          color: Colors
+                                                              .grey.shade700)),
+                                                  Text(
+                                                      "Rp. ${packageData['price']}",
+                                                      style: GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 13,
+                                                          color: Colors
+                                                              .grey.shade500)),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Booking fee',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          color: Colors
+                                                              .grey.shade700)),
+                                                  Text(
+                                                      "Rp. ${bookingFee.toString()}",
+                                                      style: GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 13,
+                                                          color: Colors
+                                                              .grey.shade500)),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              data['isDelivery'] == true
+                                                  ? Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Delivery fee',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade700)),
+                                                            Text(
+                                                                "Rp. ${data['deliveryFee']}",
+                                                                style: GoogleFonts.roboto(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontSize:
+                                                                        13,
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade500)),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 14,
+                                                        )
+                                                      ],
+                                                    )
+                                                  : SizedBox(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Tax',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco.Light',
+                                                          color: Colors
+                                                              .grey.shade700)),
+                                                  Text("Rp. ${tax.toString()}",
+                                                      style: GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 13,
+                                                          color: Colors
+                                                              .grey.shade500)),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text('Total charge',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily:
+                                                              'SanFrancisco',
+                                                          color: Colors
+                                                              .grey.shade700)),
+                                                  Text(fo.symbolOnLeft,
+                                                      style: GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                          fontSize: 14,
+                                                          color: Color(
+                                                              0xffF9813A))),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () => {
+                                        Get.dialog(AlertDialog(
+                                          title: const Text(
+                                            'Confirmation',
+                                            style: TextStyle(
+                                                fontFamily: 'SanFrancisco',
+                                                fontSize: 14),
+                                          ),
+                                          titlePadding: EdgeInsets.only(
+                                              left: 26, right: 26, top: 30),
+                                          contentPadding: const EdgeInsets.only(
+                                              left: 26,
+                                              right: 26,
+                                              top: 16,
+                                              bottom: 12),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          content: const Text(
+                                              'Are you sure you want to finish this booking?',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 12)),
+                                          actionsPadding: EdgeInsets.only(
+                                              right: 15, top: 6, bottom: 2),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () => {Get.back()},
+                                                child: const Text(
+                                                  'Cancel',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
+                                                      fontSize: 13,
+                                                      color: Colors.orange),
+                                                )),
+                                            TextButton(
+                                                onPressed: () => {
+                                                      Get.back(),
+                                                      Get.toNamed(Routes.RATING,
+                                                          arguments: orderId)
+                                                    },
+                                                child: Text(
+                                                  'Yes',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco',
+                                                      fontSize: 13,
+                                                      color: Colors.orange),
+                                                )),
+                                          ],
+                                        ))
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 5.0),
+                                        primary: Color(0xffF9813A),
+                                        shape: StadiumBorder(),
+                                      ),
+                                      child: Container(
+                                        height: height * 0.06,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 15, right: 15),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: const [
+                                              Text("Finish Booking",
+                                                  style: TextStyle(
+                                                    fontFamily: 'SanFrancisco',
+                                                    fontSize: 14,
+                                                    color: Colors.white,
+                                                  )),
+                                              Icon(
+                                                Icons.done,
+                                                color: Colors.white,
+                                                size: 20,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             )
                           ],
-                        ),
-                      ),
-                    )
-                  ],
-                );
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    });
               } else {
                 return Center(child: CircularProgressIndicator());
               }

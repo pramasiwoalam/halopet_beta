@@ -88,7 +88,7 @@ class AuthController extends GetxController {
         "address": formData['address'],
         "city": formData['city'],
         "postalCode": formData['postalCode'],
-        "phone": formData['phone']
+        "phone": formData['phone'],
       });
 
       // AwesomeDialog(
@@ -100,18 +100,37 @@ class AuthController extends GetxController {
       //   btnOkOnPress: () {},
       // )..show();
 
-      Get.defaultDialog(
-          title: "Register Success",
-          middleText: "Your registration success. Welcome!",
-          onConfirm: () => Get.back(),
-          textConfirm: "Ok");
+      Get.dialog(AlertDialog(
+        title: Text(
+          'Welcome',
+          style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 14),
+        ),
+        titlePadding: EdgeInsets.only(left: 26, right: 26, top: 30),
+        contentPadding:
+            EdgeInsets.only(left: 26, right: 26, top: 16, bottom: 12),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        content: Text(
+            'Register success. Welcome to HaloPet. The solution for your pet needs.',
+            style: TextStyle(fontFamily: 'SanFrancisco.Light', fontSize: 12)),
+        actionsPadding: EdgeInsets.only(right: 12, top: 6, bottom: 2),
+        actions: [
+          TextButton(
+              onPressed: () => {Get.back()},
+              child: Text(
+                'Agreed.',
+                style: TextStyle(
+                    fontFamily: 'SanFrancisco',
+                    fontSize: 13,
+                    color: Colors.orange),
+              )),
+        ],
+      ));
     } catch (e) {
       Get.defaultDialog(
           title: "Register Failed",
           middleText: "Please try again",
           onConfirm: () => Get.back(),
           textConfirm: "Ok");
-      print(e);
     }
   }
 }
