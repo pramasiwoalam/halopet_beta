@@ -100,8 +100,8 @@ class SignupView extends GetView<SignupController> {
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always),
                           validator: (value) {
-                            if (value!.contains('Wira')) {
-                              return 'Wira Dilarang daftar';
+                            if (value!.isEmpty) {
+                              return 'Name must be filled.';
                             }
                           },
                           onSaved: (value) {
@@ -160,13 +160,11 @@ class SignupView extends GetView<SignupController> {
                                 contentPadding: EdgeInsets.all(18),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
-                            // validator: (value) {
-                            //   if (value!.contains('@')) {
-                            //     return 'Error 2';
-                            //   } else {
-                            //     return null;
-                            //   }
-                            // },
+                            validator: (value) {
+                              if (value!.isEmpty || value!.length < 8) {
+                                return 'Password must be 8 characters or more.';
+                              }
+                            },
                             onSaved: (value) {
                               formData['password'] = value;
                             },
@@ -193,8 +191,8 @@ class SignupView extends GetView<SignupController> {
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
                             validator: (value) {
-                              if (value!.contains('Wira')) {
-                                return 'Wira Dilarang daftar';
+                              if (value!.isEmpty) {
+                                return 'Phone number must be filled.';
                               }
                             },
                             onSaved: (value) {
@@ -223,8 +221,8 @@ class SignupView extends GetView<SignupController> {
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
                             validator: (value) {
-                              if (value!.contains('Wira')) {
-                                return 'Wira Dilarang daftar';
+                              if (value!.isEmpty) {
+                                return 'Address must be filled.';
                               }
                             },
                             onSaved: (value) {
@@ -255,8 +253,8 @@ class SignupView extends GetView<SignupController> {
                                     floatingLabelBehavior:
                                         FloatingLabelBehavior.always),
                                 validator: (value) {
-                                  if (value!.contains('Wira')) {
-                                    return 'Wira Dilarang daftar';
+                                  if (value!.isEmpty) {
+                                    return 'Mandatory';
                                   }
                                 },
                                 onSaved: (value) {
@@ -285,8 +283,8 @@ class SignupView extends GetView<SignupController> {
                                     floatingLabelBehavior:
                                         FloatingLabelBehavior.always),
                                 validator: (value) {
-                                  if (value!.contains('Wira')) {
-                                    return 'Wira Dilarang daftar';
+                                  if (value!.isEmpty) {
+                                    return 'Mandatory';
                                   }
                                 },
                                 onSaved: (value) {

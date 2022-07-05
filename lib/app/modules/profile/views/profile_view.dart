@@ -42,7 +42,16 @@ class ProfileView extends GetView<ProfileController> {
               fontSize: 17,
               color: Colors.grey.shade800),
         )),
-        leading: Icon(Icons.abc),
+        leading: Container(
+          padding: EdgeInsets.only(left: 10),
+          child: InkWell(
+            onTap: () => Get.back(),
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.grey.shade800,
+            ),
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.grey.shade100,
         elevation: 0.1,
@@ -349,15 +358,14 @@ class ProfileView extends GetView<ProfileController> {
                                       color: Colors.grey.shade300,
                                       thickness: 1,
                                     ),
-                                    InkWell(
-                                      onTap: () => {
-                                        Get.toNamed(Routes.TOPUP),
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Column(
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          onTap: () =>
+                                              {Get.toNamed(Routes.TOPUP)},
+                                          child: Column(
                                             children: [
                                               Icon(
                                                 Icons.add,
@@ -373,10 +381,14 @@ class ProfileView extends GetView<ProfileController> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Column(
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        InkWell(
+                                          onTap: () =>
+                                              {Get.toNamed(Routes.WITHDRAW)},
+                                          child: Column(
                                             children: [
                                               Icon(
                                                 Icons.arrow_downward,
@@ -392,8 +404,8 @@ class ProfileView extends GetView<ProfileController> {
                                               ),
                                             ],
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     )
                                   ],
                                 ),
@@ -631,7 +643,7 @@ class ProfileView extends GetView<ProfileController> {
                                                   ],
                                                 ),
                                                 onPressed: () => Get.toNamed(
-                                                    Routes.FAVORITE),
+                                                    Routes.EDIT_PROFILE),
                                               ),
                                             ),
                                           ],
@@ -679,7 +691,10 @@ class ProfileView extends GetView<ProfileController> {
                                                               .arrow_forward_ios),
                                                         ],
                                                       ),
-                                                      onPressed: () => {}),
+                                                      onPressed: () => {
+                                                            Get.toNamed(Routes
+                                                                .EDIT_PROFILE)
+                                                          }),
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets

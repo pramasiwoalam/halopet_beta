@@ -53,6 +53,9 @@ abstract class Routes {
   static const EXPLORE_SERVICE = _Paths.EXPLORE_SERVICE;
   static const MEDICAL_LIST_FORM = _Paths.MEDICAL_LIST_FORM;
   static const MEDICAL_LIST_REG = _Paths.MEDICAL_LIST_REG;
+  static const WITHDRAW = _Paths.WITHDRAW;
+  static const BANK_ACCOUNT_REG = _Paths.BANK_ACCOUNT_REG;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
 }
 
 abstract class _Paths {
@@ -107,4 +110,7 @@ abstract class _Paths {
   static const EXPLORE_SERVICE = '/explore-service';
   static const MEDICAL_LIST_FORM = '/medical_list_form';
   static const MEDICAL_LIST_REG = '/medical_list_reg';
+  static const WITHDRAW = '/withdraw';
+  static const BANK_ACCOUNT_REG = '/bank-account-reg';
+  static const EDIT_PROFILE = '/edit-profile';
 }

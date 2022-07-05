@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
+import 'package:halopet_beta/app/modules/bank_account_reg/bindings/bank_account_reg_binding.dart';
+import 'package:halopet_beta/app/modules/bank_account_reg/views/bank_account_reg_view.dart';
 import 'package:halopet_beta/app/modules/choose_room/bindings/choose_room_binding.dart';
 import 'package:halopet_beta/app/modules/choose_room/views/choose_room_view.dart';
 import 'package:halopet_beta/app/modules/delivery_list/bindings/delivery_list_binding.dart';
 import 'package:halopet_beta/app/modules/delivery_list/views/delivery_list_view.dart';
 import 'package:halopet_beta/app/modules/edit_petshop_form/bindings/edit_petshop_form_binding.dart';
+import 'package:halopet_beta/app/modules/edit_profile/bindings/edit_profile_binding.dart';
+import 'package:halopet_beta/app/modules/edit_profile/views/edit_profile_view.dart';
 import 'package:halopet_beta/app/modules/explore_service/views/explore_service_view.dart';
 import 'package:halopet_beta/app/modules/medical_list_form/views/medical_list_form_view.dart';
 import 'package:halopet_beta/app/modules/medical_list_reg/bindings/medical_list_reg_binding.dart';
@@ -18,6 +22,8 @@ import 'package:halopet_beta/app/modules/service_list/bindings/service_list_bind
 import 'package:halopet_beta/app/modules/service_list/views/service_list_view.dart';
 import 'package:halopet_beta/app/modules/topup/bindings/topup_binding.dart';
 import 'package:halopet_beta/app/modules/topup/views/topup_view.dart';
+import 'package:halopet_beta/app/modules/withdraw/bindings/withdraw_binding.dart';
+import 'package:halopet_beta/app/modules/withdraw/views/withdraw_view.dart';
 import '../modules/add_petshop/bindings/add_petshop_binding.dart';
 import '../modules/add_petshop/views/add_petshop_view.dart';
 import '../modules/admin_home/bindings/admin_home_binding.dart';
@@ -353,6 +359,21 @@ class AppPages {
       name: _Paths.MEDICAL_LIST_REG,
       page: () => MedicalListRegView(),
       binding: MedicalListRegBinding(),
+    ),
+    GetPage(
+      name: _Paths.WITHDRAW,
+      page: () => WithdrawView(),
+      binding: WithdrawBinding(),
+    ),
+    GetPage(
+      name: _Paths.BANK_ACCOUNT_REG,
+      page: () => BankAccountRegView(),
+      binding: BankAccountRegBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => EditProfileView(),
+      binding: EditProfileBinding(),
     ),
   ];
 }

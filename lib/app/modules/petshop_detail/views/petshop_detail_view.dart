@@ -42,7 +42,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   var data = snapshot.data!.data() as Map<String, dynamic>;
-                  var currentUserId = localStorage.read('currentUserId');
+
                   return Stack(
                     children: [
                       Positioned(
