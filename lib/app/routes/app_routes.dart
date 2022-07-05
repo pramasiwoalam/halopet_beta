@@ -50,6 +50,9 @@ abstract class Routes {
   static const MEDICAL_RECORDS_FORM = _Paths.MEDICAL_RECORDS_FORM;
   static const EDIT_PETSHOP = _Paths.EDIT_PETSHOP;
   static const EDIT_PETSHOP_FORM = _Paths.EDIT_PETSHOP_FORM;
+  static const EXPLORE_SERVICE = _Paths.EXPLORE_SERVICE;
+  static const MEDICAL_LIST_FORM = _Paths.MEDICAL_LIST_FORM;
+  static const MEDICAL_LIST_REG = _Paths.MEDICAL_LIST_REG;
 }
 
 abstract class _Paths {
@@ -101,4 +104,7 @@ abstract class _Paths {
   static const MEDICAL_RECORDS_FORM = '/med-records-form';
   static const EDIT_PETSHOP = '/edit-petshop';
   static const EDIT_PETSHOP_FORM = '/edit-petshop-form';
+  static const EXPLORE_SERVICE = '/explore-service';
+  static const MEDICAL_LIST_FORM = '/medical_list_form';
+  static const MEDICAL_LIST_REG = '/medical_list_reg';
 }

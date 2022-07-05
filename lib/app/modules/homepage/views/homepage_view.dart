@@ -176,7 +176,6 @@ class Home extends StatelessWidget {
                                 Container(
                                   height: height / 7,
                                   width: width / 2,
-                                  // color: Colors.lightBlue,
                                   margin: const EdgeInsets.only(
                                       left: 16, right: 16, top: 10),
                                   child: Row(
@@ -184,13 +183,11 @@ class Home extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
-                                          // color: Colors.red,
                                           margin: EdgeInsets.only(
                                               left: width * 0.05,
                                               top: height * 0.03),
                                           height: height / 5,
                                           width: width / 2,
-                                          // color: Colors.black,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -325,7 +322,7 @@ class Home extends StatelessWidget {
                                               ],
                                             ),
                                             SizedBox(
-                                              width: 5,
+                                              width: 10,
                                             ),
                                             VerticalDivider(
                                               color: Colors.grey.shade300,
@@ -336,22 +333,127 @@ class Home extends StatelessWidget {
                                                 Get.toNamed(Routes.TOPUP),
                                               },
                                               child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
-                                                  Icon(
-                                                    Icons.add,
-                                                    color: Colors.orange,
+                                                  Column(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.add,
+                                                        color: Colors.orange,
+                                                      ),
+                                                      Text(
+                                                        'Top up',
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey.shade800,
+                                                            fontFamily:
+                                                                'SanFrancisco.Light',
+                                                            fontSize: 11),
+                                                      ),
+                                                    ],
                                                   ),
                                                   SizedBox(
-                                                    width: 5,
+                                                    width: 20,
                                                   ),
-                                                  Text(
-                                                    'Top up PawPay',
-                                                    style: GoogleFonts.roboto(
-                                                        color: Colors
-                                                            .grey.shade800,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 13),
+                                                  FlatButton(
+                                                    color: Colors.transparent,
+                                                    onPressed: () => {
+                                                      if (data['bankAccount'] ==
+                                                          null)
+                                                        {
+                                                          Get.dialog(
+                                                              AlertDialog(
+                                                            title: Text(
+                                                              'Alert',
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'SanFrancisco',
+                                                                  fontSize: 14),
+                                                            ),
+                                                            titlePadding:
+                                                                EdgeInsets.only(
+                                                                    left: 26,
+                                                                    right: 26,
+                                                                    top: 30),
+                                                            contentPadding:
+                                                                EdgeInsets.only(
+                                                                    left: 26,
+                                                                    right: 26,
+                                                                    top: 16,
+                                                                    bottom: 12),
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15)),
+                                                            content: Text(
+                                                                'You need to register your personal bank account. Please register before you withdraw',
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    fontSize:
+                                                                        12)),
+                                                            actionsPadding:
+                                                                EdgeInsets.only(
+                                                                    right: 12,
+                                                                    top: 6,
+                                                                    bottom: 2),
+                                                            actions: [
+                                                              TextButton(
+                                                                  onPressed:
+                                                                      () => {
+                                                                            Get.back()
+                                                                          },
+                                                                  child: Text(
+                                                                    'Not Now',
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'SanFrancisco.Light',
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: Colors
+                                                                            .orange),
+                                                                  )),
+                                                              TextButton(
+                                                                  onPressed:
+                                                                      () => {
+                                                                            Get.back()
+                                                                          },
+                                                                  child: Text(
+                                                                    'Register',
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'SanFrancisco',
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: Colors
+                                                                            .orange),
+                                                                  )),
+                                                            ],
+                                                          ))
+                                                        }
+                                                      else
+                                                        {}
+                                                    },
+                                                    child: Column(
+                                                      children: [
+                                                        Icon(
+                                                          Icons.arrow_downward,
+                                                          color: Colors.orange,
+                                                        ),
+                                                        Text(
+                                                          'Withdraw',
+                                                          style: TextStyle(
+                                                              color: Colors.grey
+                                                                  .shade800,
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 11),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -389,15 +491,7 @@ class Home extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           onTap: () => {
-                                            if (cards[index]['value'] == 4)
-                                              {Get.toNamed(Routes.INFORMATION)}
-                                            else
-                                              {
-                                                Get.toNamed(
-                                                    Routes.CATEGORY_PAGE,
-                                                    arguments: cards[index]
-                                                        ['value'])
-                                              }
+                                            Get.toNamed(Routes.EXPLORE_SERVICE)
                                           },
                                           child: Stack(
                                             children: [

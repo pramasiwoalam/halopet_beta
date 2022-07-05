@@ -67,8 +67,6 @@ class GroomingService extends StatelessWidget {
                                     ),
                                     TextButton(
                                         onPressed: () => {
-                                              serviceController
-                                                  .createDefaultService(),
                                               Get.toNamed(
                                                 Routes.PACKAGE_FORM,
                                                 arguments: 'Grooming',
@@ -257,22 +255,10 @@ class GroomingService extends StatelessWidget {
                               ),
                               child: FlatButton(
                                 onPressed: () => {
-                                  if (localStorage.read('serviceFlag') == 0)
-                                    {
-                                      print('masuk'),
-                                      serviceController.createDefaultService(),
-                                      Get.toNamed(
-                                        Routes.PACKAGE_FORM,
-                                        arguments: 'Hotel',
-                                      ),
-                                    }
-                                  else
-                                    {
-                                      Get.toNamed(
-                                        Routes.PACKAGE_FORM,
-                                        arguments: 'Hotel',
-                                      ),
-                                    }
+                                  Get.toNamed(
+                                    Routes.PACKAGE_FORM,
+                                    arguments: 'Grooming',
+                                  ),
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -310,8 +296,7 @@ class GroomingService extends StatelessWidget {
                               if (serviceController
                                   .packageGroomingList.isNotEmpty)
                                 {
-                                  // controller.setService(formData),
-                                  localStorage.write('hotel', true),
+                                  localStorage.write('groomingFlag', true),
                                   Get.toNamed(Routes.SERVICE_LIST)
                                 }
                               else
@@ -389,7 +374,7 @@ class GroomingService extends StatelessWidget {
                               //     localStorage.read('savedPetshopId'),
                               //     localStorage.read('savedServiceId')),
                               localStorage.write('serviceFlag', 0),
-                              localStorage.write('groomingFlag', 1)
+                              // localStorage.write('groomingFlag', 1)
                             },
                         child: Padding(
                           padding: const EdgeInsets.only(left: 15, right: 15),

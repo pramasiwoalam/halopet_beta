@@ -13,7 +13,6 @@ class HotelService extends StatelessWidget {
   GlobalKey<FormState> form = GlobalKey<FormState>();
   final controller = Get.put(ServiceListController());
   final serviceController = Get.put(ServiceFormController());
-  Map<String, dynamic> formData = {'name': null, 'desc': null};
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +63,6 @@ class HotelService extends StatelessWidget {
                                     ),
                                     TextButton(
                                         onPressed: () => {
-                                              serviceController
-                                                  .createDefaultService(),
                                               Get.toNamed(
                                                 Routes.PACKAGE_FORM,
                                                 arguments: 'Hotel',
@@ -217,22 +214,10 @@ class HotelService extends StatelessWidget {
                               ),
                               child: FlatButton(
                                 onPressed: () => {
-                                  if (localStorage.read('serviceFlag') == 0)
-                                    {
-                                      print('masuk'),
-                                      serviceController.createDefaultService(),
-                                      Get.toNamed(
-                                        Routes.PACKAGE_FORM,
-                                        arguments: 'Hotel',
-                                      ),
-                                    }
-                                  else
-                                    {
-                                      Get.toNamed(
-                                        Routes.PACKAGE_FORM,
-                                        arguments: 'Hotel',
-                                      ),
-                                    }
+                                  Get.toNamed(
+                                    Routes.PACKAGE_FORM,
+                                    arguments: 'Hotel',
+                                  ),
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -333,7 +318,6 @@ class HotelService extends StatelessWidget {
                           ),
                         )),
                   ),
-
                   Container(
                     height: height * 0.08,
                     width: width,
@@ -348,7 +332,7 @@ class HotelService extends StatelessWidget {
                               //     localStorage.read('savedPetshopId'),
                               //     localStorage.read('savedServiceId')),
                               localStorage.write('serviceFlag', 0),
-                              localStorage.write('hotelFlag', 1)
+                              localStorage.write('hotelFlag', 0)
                             },
                         child: Padding(
                           padding: const EdgeInsets.only(left: 15, right: 15),
@@ -370,219 +354,6 @@ class HotelService extends StatelessWidget {
                           ),
                         )),
                   )
-                  // Padding(
-                  //   padding: const EdgeInsets.all(25),
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Text(
-                  //         '    Register Room(s) *',
-                  //         style: GoogleFonts.roboto(
-                  //             fontSize: 14, color: Colors.grey.shade700),
-                  //       ),
-                  //       serviceController.packageHotelList.isEmpty
-                  //           ? InkWell(
-                  //               onTap: () => {
-                  //                 print('${localStorage.read('serviceFlag')}'),
-                  //                 if (localStorage.read('serviceFlag') == 0)
-                  //                   {
-                  //                     print('masuk'),
-
-                  //                   }
-                  //                 else
-                  //                   {
-                  //                     Get.toNamed(
-                  //                       Routes.PACKAGE_FORM,
-                  //                       arguments: 'Hotel',
-                  //                     ),
-                  //                   }
-                  //               },
-                  //               child: Container(
-                  //                 margin: EdgeInsets.only(left: 15, right: 15),
-                  //                 height: height * 0.06,
-                  //                 width: width * 0.8,
-                  //                 decoration: BoxDecoration(
-                  //                     color: Colors.white,
-                  //                     borderRadius:
-                  //                         BorderRadius.all(Radius.circular(10)),
-                  //                     boxShadow: [
-                  //                       BoxShadow(
-                  //                           color: Colors.grey.shade300,
-                  //                           spreadRadius: 2,
-                  //                           blurRadius: 3,
-                  //                           offset: Offset(0, 3))
-                  //                     ]),
-                  //                 child: Center(
-                  //                     child: Row(
-                  //                   mainAxisAlignment: MainAxisAlignment.center,
-                  //                   children: [
-                  //                     Icon(
-                  //                       Icons.add_rounded,
-                  //                       size: 18,
-                  //                     ),
-                  //                     SizedBox(
-                  //                       width: 5,
-                  //                     ),
-                  //                     Text(
-                  //                       'Register Room Type',
-                  //                       style: GoogleFonts.roboto(
-                  //                           fontSize: 14,
-                  //                           color: Colors.grey.shade700),
-                  //                     )
-                  //                   ],
-                  //                 )),
-                  //               ),
-                  //             )
-                  //           : Column(
-                  //               children: [
-                  //                 ListView.builder(
-                  //                     itemCount: serviceController
-                  //                         .packageHotelList.length,
-                  //                     physics: const ClampingScrollPhysics(),
-                  //                     scrollDirection: Axis.vertical,
-                  //                     shrinkWrap: true,
-                  //                     itemBuilder: (context, index) {
-                  //                       return InkWell(
-                  //                         onTap: () => {},
-                  //                         child: Padding(
-                  //                           padding:
-                  //                               const EdgeInsets.only(top: 12),
-                  //                           child: Container(
-                  //                             margin: EdgeInsets.only(
-                  //                                 left: 15, right: 15),
-                  //                             height: height * 0.06,
-                  //                             width: width * 0.8,
-                  //                             decoration: BoxDecoration(
-                  //                                 color: Colors.white,
-                  //                                 borderRadius:
-                  //                                     BorderRadius.all(
-                  //                                         Radius.circular(10)),
-                  //                                 boxShadow: [
-                  //                                   BoxShadow(
-                  //                                       color: Colors
-                  //                                           .grey.shade300,
-                  //                                       spreadRadius: 2,
-                  //                                       blurRadius: 3,
-                  //                                       offset: Offset(0, 3))
-                  //                                 ]),
-                  //                             child: Center(
-                  //                                 child: Text(
-                  //                               serviceController
-                  //                                       .packageHotelList[index]
-                  //                                   ['name'],
-                  //                               style: GoogleFonts.roboto(
-                  //                                   fontSize: 14,
-                  //                                   color:
-                  //                                       Colors.grey.shade700),
-                  //                             )),
-                  //                           ),
-                  //                         ),
-                  //                       );
-                  //                     }),
-                  //                 SizedBox(
-                  //                   height: 15,
-                  //                 ),
-                  //                 InkWell(
-                  //                   onTap: () => {
-                  //                     print(
-                  //                         '${localStorage.read('serviceFlag')}'),
-                  //                     if (localStorage.read('serviceFlag') == 0)
-                  //                       {
-                  //                         print('masuk'),
-                  //                         serviceController
-                  //                             .createDefaultService(),
-                  //                         Get.toNamed(
-                  //                           Routes.PACKAGE_FORM,
-                  //                           arguments: 'Hotel',
-                  //                         ),
-                  //                       }
-                  //                     else
-                  //                       {
-                  //                         Get.toNamed(
-                  //                           Routes.PACKAGE_FORM,
-                  //                           arguments: 'Hotel',
-                  //                         ),
-                  //                       }
-                  //                   },
-                  //                   child: Container(
-                  //                     margin:
-                  //                         EdgeInsets.only(left: 15, right: 15),
-                  //                     height: height * 0.06,
-                  //                     width: width * 0.8,
-                  //                     decoration: BoxDecoration(
-                  //                         color: Colors.white,
-                  //                         borderRadius: BorderRadius.all(
-                  //                             Radius.circular(10)),
-                  //                         boxShadow: [
-                  //                           BoxShadow(
-                  //                               color: Colors.grey.shade300,
-                  //                               spreadRadius: 2,
-                  //                               blurRadius: 3,
-                  //                               offset: Offset(0, 3))
-                  //                         ]),
-                  //                     child: Center(
-                  //                         child: Row(
-                  //                       mainAxisAlignment:
-                  //                           MainAxisAlignment.center,
-                  //                       children: [
-                  //                         Icon(
-                  //                           Icons.add_rounded,
-                  //                           size: 18,
-                  //                         ),
-                  //                         SizedBox(
-                  //                           width: 5,
-                  //                         ),
-                  //                         Text(
-                  //                           'Register Room Type',
-                  //                           style: GoogleFonts.roboto(
-                  //                               fontSize: 14,
-                  //                               color: Colors.grey.shade700),
-                  //                         )
-                  //                       ],
-                  //                     )),
-                  //                   ),
-                  //                 )
-                  //               ],
-                  //             ),
-                  //       ElevatedButton(
-                  //           onPressed: () async {
-                  //             if (form.currentState!.validate() &&
-                  //                 serviceController
-                  //                     .packageHotelList.isNotEmpty) {
-                  //               form.currentState!.save();
-
-                  //               controller.setService(formData);
-                  //               localStorage.write('hotel', true);
-
-                  //               Get.toNamed(Routes.SERVICE_LIST);
-                  //             } else {
-                  //               AwesomeDialog(
-                  //                 context: context,
-                  //                 dialogType: DialogType.WARNING,
-                  //                 animType: AnimType.BOTTOMSLIDE,
-                  //                 title: 'Room is Empty.',
-                  //                 desc:
-                  //                     'Please register the room before you submit.',
-                  //                 btnOkColor: Color(0xffF9813A),
-                  //                 btnOkText: 'Ok',
-                  //                 btnOkOnPress: () => {},
-                  //                 buttonsTextStyle: GoogleFonts.roboto(
-                  //                     fontWeight: FontWeight.w600),
-                  //               ).show();
-                  //             }
-                  //           },
-                  //           child: Text('Register')),
-                  //       ElevatedButton(
-                  //           onPressed: () => {
-                  //                 Get.toNamed(Routes.SERVICE_LIST),
-                  //                 controller.cancellation(
-                  //                     localStorage.read('savedPetshopId'),
-                  //                     localStorage.read('savedServiceId'))
-                  //               },
-                  //           child: Text('Back To Service List'))
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             ),

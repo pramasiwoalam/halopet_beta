@@ -4,6 +4,10 @@ import 'package:halopet_beta/app/modules/choose_room/views/choose_room_view.dart
 import 'package:halopet_beta/app/modules/delivery_list/bindings/delivery_list_binding.dart';
 import 'package:halopet_beta/app/modules/delivery_list/views/delivery_list_view.dart';
 import 'package:halopet_beta/app/modules/edit_petshop_form/bindings/edit_petshop_form_binding.dart';
+import 'package:halopet_beta/app/modules/explore_service/views/explore_service_view.dart';
+import 'package:halopet_beta/app/modules/medical_list_form/views/medical_list_form_view.dart';
+import 'package:halopet_beta/app/modules/medical_list_reg/bindings/medical_list_reg_binding.dart';
+import 'package:halopet_beta/app/modules/medical_list_reg/views/medical_list_reg_view.dart';
 import 'package:halopet_beta/app/modules/notification_list/bindings/notification_list_binding.dart';
 import 'package:halopet_beta/app/modules/package_list/bindings/package_list_binding.dart';
 import 'package:halopet_beta/app/modules/package_list/views/package_list_view.dart';
@@ -35,6 +39,7 @@ import '../modules/doctor_registration/views/doctor_registration_view.dart';
 import '../modules/edit_petshop/bindings/edit_petshop_binding.dart';
 import '../modules/edit_petshop/views/edit_petshop_view.dart';
 import '../modules/edit_petshop_form/views/edit_petshop_form_view.dart';
+import '../modules/explore_service/bindings/explore_service_binding.dart';
 import '../modules/favorite/bindings/favorite_binding.dart';
 import '../modules/favorite/views/favorite_view.dart';
 import '../modules/grooming_order/bindings/grooming_order_binding.dart';
@@ -333,6 +338,21 @@ class AppPages {
       name: _Paths.EDIT_PETSHOP_FORM,
       page: () => EditPetshopFormView(),
       binding: EditPetshopFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.EXPLORE_SERVICE,
+      page: () => ExploreServiceView(),
+      binding: ExploreServiceBinding(),
+    ),
+    GetPage(
+      name: _Paths.MEDICAL_LIST_FORM,
+      page: () => MedicalListFormView(),
+      binding: MedicalRecordsFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.MEDICAL_LIST_REG,
+      page: () => MedicalListRegView(),
+      binding: MedicalListRegBinding(),
     ),
   ];
 }

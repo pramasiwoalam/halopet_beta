@@ -13,15 +13,11 @@ class ServiceListController extends GetxController {
     CollectionReference users = firestore.collection("users");
     var userId = GetStorage().read('currentUserId');
 
-    print(localStorage.read('generalData'));
     var data = localStorage.read('generalData');
     try {
       var res = petshop.doc(localStorage.read('tempPetshopId')).update({
         "petshopName": data['name'],
         "petshopAddress": data['address'],
-        "groomingService": localStorage.read('grooming'),
-        "petHotelService": localStorage.read('hotel'),
-        "vetServices": localStorage.read('vet'),
         "district": data['district'],
         "city": data['city'],
         'petshopOwner': userId,
@@ -35,25 +31,43 @@ class ServiceListController extends GetxController {
     }
   }
 
-  void setService(Map<String, dynamic> data) {
+  void createGroomingService() {
     CollectionReference petshop = firestore.collection("petshop");
     CollectionReference service = firestore.collection("service");
-    CollectionReference users = firestore.collection("users");
-    var userId = GetStorage().read('currentUserId');
-    var petshopId = '';
-    service.doc(localStorage.read('tempServiceId')).update({
-      'petshopId': localStorage.read('tempPetshopId'),
-      'serviceName': data['name']
-    }).then((value) => {
-          petshop.doc(localStorage.read('tempPetshopId')).set(
-            {
-              'serviceId': FieldValue.arrayUnion([
-                {'id': localStorage.read('tempServiceId')}
-              ])
-            },
-            SetOptions(merge: true),
-          )
-        });
+    var tempPetshopId = localStorage.read('tempPetshopId');
+    print(tempPetshopId);
+
+    service.add({'name': 'Grooming Service', 'petshopId': tempPetshopId}).then(
+        (value) => {
+              localStorage.write('tempServiceId', value.id),
+              petshop.doc(tempPetshopId).update({'groomingService': true})
+            });
+  }
+
+  void createVetService() {
+    CollectionReference petshop = firestore.collection("petshop");
+    CollectionReference service = firestore.collection("service");
+    var tempPetshopId = localStorage.read('tempPetshopId');
+    print(tempPetshopId);
+
+    service.add({'name': 'Vet Service', 'petshopId': tempPetshopId}).then(
+        (value) => {
+              localStorage.write('tempServiceId', value.id),
+              petshop.doc(tempPetshopId).update({'vetService': true})
+            });
+  }
+
+  void createHotelService() {
+    CollectionReference petshop = firestore.collection("petshop");
+    CollectionReference service = firestore.collection("service");
+    var tempPetshopId = localStorage.read('tempPetshopId');
+    print(tempPetshopId);
+
+    service.add({'name': 'Pet Hotel Service', 'petshopId': tempPetshopId}).then(
+        (value) => {
+              localStorage.write('tempServiceId', value.id),
+              petshop.doc(tempPetshopId).update({'petHotelService': true})
+            });
   }
 
   void cancellation(String petshopId, String serviceId) {

@@ -836,21 +836,18 @@ class EmptyContainer extends StatelessWidget {
             children: [
               Text(
                 'There are no payments due.',
-                style: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'SanFrancisco.Light',
                     color: Colors.grey.shade500),
               ),
-              const SizedBox(
-                height: 7,
-              ),
-              InkWell(
-                onTap: () => {Get.toNamed(Routes.HOMEPAGE)},
+              TextButton(
+                onPressed: () => {Get.toNamed(Routes.HOMEPAGE)},
                 child: Text(
                   'Book your appointment here',
-                  style: GoogleFonts.inter(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontFamily: 'SanFrancisco',
                       color: Colors.blue),
                 ),
               ),

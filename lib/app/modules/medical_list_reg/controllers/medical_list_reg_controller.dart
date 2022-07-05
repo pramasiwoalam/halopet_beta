@@ -4,11 +4,9 @@ import 'package:get_storage/get_storage.dart';
 
 final localStorage = GetStorage();
 
-class ServiceFormController extends GetxController {
+class MedicalListRegController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  var packageGroomingList = [];
-  var packageHotelList = [];
-  var sessionList = [];
+  var medicalList = [];
 
   Future<DocumentSnapshot<Object?>> getUser(String userId) async {
     DocumentReference doc = firestore.collection("users").doc(userId);
@@ -44,6 +42,14 @@ class ServiceFormController extends GetxController {
           ),
         });
   }
+
+  // void createDefaultSession() {
+  //   CollectionReference session = firestore.collection("session");
+
+  //   session.add({'name': 'null'}).then((value) => {
+  //         localStorage.write('tempSessionId', value.id),
+  //       });
+  // }
 
   void createVetServiceDetail(Map<String, dynamic> formData) {
     CollectionReference service = firestore.collection("service");
@@ -110,7 +116,7 @@ class ServiceFormController extends GetxController {
       'specialist': formData['specialist'],
       'desc': formData['desc'],
       'yearsActive': formData['yearsActive']
-    }).then((value) => localStorage.write('tempSessionId', value.id));
+    });
   }
 
   void createService() {

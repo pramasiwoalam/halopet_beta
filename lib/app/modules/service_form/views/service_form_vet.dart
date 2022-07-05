@@ -67,8 +67,6 @@ class VetService extends StatelessWidget {
                                     ),
                                     TextButton(
                                         onPressed: () => {
-                                              serviceController
-                                                  .createDefaultService(),
                                               Get.toNamed(
                                                 Routes.PACKAGE_FORM,
                                                 arguments: 'Vet',
@@ -219,22 +217,10 @@ class VetService extends StatelessWidget {
                               ),
                               child: FlatButton(
                                 onPressed: () => {
-                                  if (localStorage.read('serviceFlag') == 0)
-                                    {
-                                      print('masuk'),
-                                      serviceController.createDefaultService(),
-                                      Get.toNamed(
-                                        Routes.PACKAGE_FORM,
-                                        arguments: 'Vet',
-                                      ),
-                                    }
-                                  else
-                                    {
-                                      Get.toNamed(
-                                        Routes.PACKAGE_FORM,
-                                        arguments: 'Vet',
-                                      ),
-                                    }
+                                  Get.toNamed(
+                                    Routes.PACKAGE_FORM,
+                                    arguments: 'Vet',
+                                  ),
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -271,8 +257,7 @@ class VetService extends StatelessWidget {
                         onPressed: () => {
                               if (serviceController.packageHotelList.isNotEmpty)
                                 {
-                                  // controller.setService(formData),
-                                  localStorage.write('vet', true),
+                                  localStorage.write('vetFlag', true),
                                   Get.toNamed(Routes.SERVICE_LIST)
                                 }
                               else

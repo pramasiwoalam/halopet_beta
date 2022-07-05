@@ -144,7 +144,7 @@ class PackageGrooming extends StatelessWidget {
                           if (form.currentState!.validate())
                             {
                               form.currentState!.save(),
-                              controller.createServiceDetail(formData),
+                              controller.createGroomingServiceDetail(formData),
                               controller.packageGroomingList.add(formData),
                               localStorage.write('packageFlag', 1),
                               localStorage.write('serviceFlag', 1),

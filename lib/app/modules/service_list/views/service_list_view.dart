@@ -54,7 +54,7 @@ class ServiceListView extends GetView<ServiceListController> {
                           onTap: () => {
                             Get.toNamed(Routes.SERVICE_FORM,
                                 arguments: 'Grooming'),
-                            // controller.createService()
+                            controller.createGroomingService()
                           },
                           child: Container(
                             height: height * 0.12,
@@ -149,8 +149,8 @@ class ServiceListView extends GetView<ServiceListController> {
                           onTap: () => {
                             localStorage.write('serviceFlag', 0),
                             Get.toNamed(Routes.SERVICE_FORM,
-                                arguments: 'Hotel'),
-                            print('flag: ${localStorage.read('serviceFlag')}')
+                                arguments: 'Grooming'),
+                            controller.createHotelService()
                           },
                           child: Container(
                             height: height * 0.12,
@@ -245,6 +245,7 @@ class ServiceListView extends GetView<ServiceListController> {
                           onTap: () => {
                             localStorage.write('vetFlag', 0),
                             Get.toNamed(Routes.SERVICE_FORM, arguments: 'Vet'),
+                            controller.createVetService()
                           },
                           child: Container(
                             height: height * 0.12,
@@ -352,17 +353,9 @@ class ServiceListView extends GetView<ServiceListController> {
                       color: Colors.transparent,
                       child: ElevatedButton(
                         onPressed: () => {
-                          if (localStorage.read('groomingFlag') == true)
-                            {
-                              controller.createPetshop(),
-                              Get.toNamed(Routes.HOMEPAGE)
-                            }
-                          else if (localStorage.read('vetFlag') == true)
-                            {
-                              controller.createPetshop(),
-                              Get.toNamed(Routes.HOMEPAGE)
-                            }
-                          else if (localStorage.read('hotelFlag') == true)
+                          if (groomingStatus == true ||
+                              vetStatus == true ||
+                              hotelStatus == true)
                             {
                               controller.createPetshop(),
                               Get.toNamed(Routes.HOMEPAGE)
@@ -445,7 +438,7 @@ class ServiceListView extends GetView<ServiceListController> {
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10.0, vertical: 5.0),
-                          primary: Colors.grey.shade100,
+                          primary: Colors.white,
                           shape: StadiumBorder(),
                         ),
                         child: Padding(

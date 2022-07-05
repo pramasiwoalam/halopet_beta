@@ -18,15 +18,11 @@ class AddPetshopController extends GetxController {
     CollectionReference users = firestore.collection("users");
     var userId = GetStorage().read('currentUserId');
 
-    try {
-      var res =
-          petshop.add({'status': 'Waiting for Approval'}).then((value) => {
-                localStorage.write('tempPetshopId', value.id),
-                users.doc(userId).update({'petshopId': value.id})
-              });
-      Get.back();
-    } catch (e) {
-      print(e);
-    }
+    petshop.add({'status': 'Waiting for Approval'}).then((value) => {
+          localStorage.write('tempPetshopId', value.id),
+          print(localStorage.read('tempPetshopId')),
+          users.doc(userId).update({'petshopId': value.id})
+        });
+    Get.back();
   }
 }

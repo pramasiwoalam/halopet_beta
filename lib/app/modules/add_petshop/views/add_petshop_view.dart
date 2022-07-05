@@ -88,7 +88,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             labelText: "Petshop Name *",
                             hintText: 'Name',
@@ -112,7 +112,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
+                                      BorderRadius.all(Radius.circular(10))),
                               labelText: "Petshop Address *",
                               hintText: 'Address',
                               hintStyle: GoogleFonts.roboto(
@@ -141,7 +141,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
+                                            Radius.circular(10))),
                                     labelText: "District *",
                                     hintText: 'District',
                                     hintStyle: GoogleFonts.roboto(
@@ -170,7 +170,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
+                                            Radius.circular(10))),
                                     labelText: "City *",
                                     hintText: 'City',
                                     hintStyle: GoogleFonts.roboto(
@@ -200,7 +200,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
+                                      BorderRadius.all(Radius.circular(10))),
                               labelText: "Petshop Phone Number *",
                               hintText: 'Phone',
                               hintStyle: GoogleFonts.roboto(
@@ -229,7 +229,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
+                                      BorderRadius.all(Radius.circular(10))),
                               labelText: "Petshop Description *",
                               hintText: 'Description',
                               hintStyle: GoogleFonts.roboto(
@@ -264,7 +264,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                           border: const OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.red),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
+                                  BorderRadius.all(Radius.circular(10))),
                           title: Text(
                             "Choose Open Day(s) *",
                             style: GoogleFonts.roboto(
@@ -328,7 +328,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
+                                            Radius.circular(10))),
                                     labelText: "Open Hours *",
                                     hintText: '07.00 am',
                                     hintStyle: GoogleFonts.roboto(
@@ -368,7 +368,7 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
-                                            const Radius.circular(20))),
+                                            const Radius.circular(10))),
                                     labelText: "Open Hours *",
                                     hintText: '21.00 pm',
                                     hintStyle: GoogleFonts.roboto(
@@ -436,12 +436,11 @@ class AddPetshopView extends GetView<AddPetshopController> {
                                     TextButton(
                                         onPressed: () => {
                                               Get.back(),
-
                                               form.currentState!.save(),
                                               localStorage.write(
                                                   'generalData', formData),
-                                              // petshopController
-                                              //     .createPetshop(formData),
+                                              petshopController
+                                                  .createPetshop(formData),
                                               localStorage.write(
                                                   'groomingFlag', false),
                                               localStorage.write(

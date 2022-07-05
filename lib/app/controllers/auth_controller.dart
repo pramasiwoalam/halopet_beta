@@ -17,6 +17,10 @@ class AuthController extends GetxController {
 
   Stream<User?> get streamUser => auth.authStateChanges();
 
+  void resetPassword(String email) async {
+    await auth.sendPasswordResetEmail(email: email);
+  }
+
   Stream<DocumentSnapshot<Object?>> streamRole() {
     var userId = localStorage.read('currentUserId');
     DocumentReference doc = firestore.collection('users').doc(userId);

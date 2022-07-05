@@ -301,79 +301,101 @@ class ProfileView extends GetView<ProfileController> {
                                         blurRadius: 1,
                                         offset: Offset(1, 2))
                                   ]),
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Row(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.monetization_on,
+                                          color: Colors.orange,
+                                          size: 20,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${fo.symbolOnLeft}",
+                                              style: GoogleFonts.roboto(
+                                                  color: Colors.grey.shade800,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 14),
+                                            ),
+                                            Text(
+                                              'PawPay Coins',
+                                              style: TextStyle(
+                                                  color: Colors.grey.shade800,
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 11),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    VerticalDivider(
+                                      color: Colors.grey.shade300,
+                                      thickness: 1,
+                                    ),
+                                    InkWell(
+                                      onTap: () => {
+                                        Get.toNamed(Routes.TOPUP),
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Icon(
-                                            Icons.monetization_on,
-                                            color: Colors.orange,
-                                            size: 20,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
                                           Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                "${fo.symbolOnLeft}",
-                                                style: GoogleFonts.roboto(
-                                                    color: Colors.grey.shade800,
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: 14),
+                                              Icon(
+                                                Icons.add,
+                                                color: Colors.orange,
                                               ),
                                               Text(
-                                                'PawPay Coins',
-                                                style: GoogleFonts.roboto(
+                                                'Top up',
+                                                style: TextStyle(
                                                     color: Colors.grey.shade800,
-                                                    fontWeight: FontWeight.w300,
+                                                    fontFamily:
+                                                        'SanFrancisco.Light',
                                                     fontSize: 11),
-                                              )
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Column(
+                                            children: [
+                                              Icon(
+                                                Icons.arrow_downward,
+                                                color: Colors.orange,
+                                              ),
+                                              Text(
+                                                'Withdraw',
+                                                style: TextStyle(
+                                                    color: Colors.grey.shade800,
+                                                    fontFamily:
+                                                        'SanFrancisco.Light',
+                                                    fontSize: 11),
+                                              ),
                                             ],
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      VerticalDivider(
-                                        color: Colors.grey.shade300,
-                                        thickness: 1,
-                                      ),
-                                      InkWell(
-                                        onTap: () => {
-                                          Get.toNamed(Routes.TOPUP),
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.add,
-                                              color: Colors.orange,
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              'Top up PawPay',
-                                              style: GoogleFonts.roboto(
-                                                  color: Colors.grey.shade800,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 13),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                    )
+                                  ],
                                 ),
                               ),
                             )
@@ -618,6 +640,47 @@ class ProfileView extends GetView<ProfileController> {
                                               data['petshopOwner'] == true
                                           ? Column(
                                               children: [
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 30,
+                                                      vertical: 10),
+                                                  child: FlatButton(
+                                                      padding:
+                                                          EdgeInsets.all(20),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15)),
+                                                      color:
+                                                          Colors.grey.shade100,
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons.person,
+                                                            color: Color(
+                                                                0xffF9813A),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 20,
+                                                          ),
+                                                          Expanded(
+                                                            child: Text(
+                                                              "Personal Detail",
+                                                              style: GoogleFonts.inter(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                            ),
+                                                          ),
+                                                          Icon(Icons
+                                                              .arrow_forward_ios),
+                                                        ],
+                                                      ),
+                                                      onPressed: () => {}),
+                                                ),
                                                 Padding(
                                                   padding: const EdgeInsets
                                                           .symmetric(

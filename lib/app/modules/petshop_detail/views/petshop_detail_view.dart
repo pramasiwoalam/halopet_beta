@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,7 +52,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                           width: width,
                           // color: Colors.red,
                           decoration: BoxDecoration(
-                              color: Colors.black,
+                              color: Colors.red,
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
@@ -67,7 +68,7 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                         children: [
                           Container(
                             margin: EdgeInsets.only(top: height / 3.05),
-                            height: height * 0.015,
+                            height: height * 0.012,
                             width: width,
                             decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.only(
@@ -360,15 +361,15 @@ class Service extends StatelessWidget {
     var petshopId = localStorage.read('petshopId');
     var userPetStatus = localStorage.read('userPet');
 
-    return StreamBuilder<QuerySnapshot<Object?>>(
-        stream: controller.getServiceByPetshop(petshopId),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            var data = snapshot.data!.docs;
-            return Container(
-              height: height,
-              width: width * 0.5,
-              child: ListView.builder(
+    return Container(
+      height: height,
+      width: width,
+      child: StreamBuilder<QuerySnapshot<Object?>>(
+          stream: controller.getServiceByPetshop(petshopId),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.active) {
+              var data = snapshot.data!.docs;
+              return ListView.builder(
                 physics: const ClampingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
@@ -376,10 +377,9 @@ class Service extends StatelessWidget {
                 itemBuilder: (context, index) {
                   var dataMap = data[index].data() as Map<String, dynamic>;
                   return Padding(
-                    padding:
-                        const EdgeInsets.only(left: 6, right: 6, bottom: 6),
+                    padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Container(
-                      height: height * 0.18,
+                      height: height * 0.16,
                       width: width * 0.7,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -401,25 +401,45 @@ class Service extends StatelessWidget {
                               onTap: () => {
                                 if (userPetStatus == 0)
                                   {
-                                    AwesomeDialog(
-                                      context: context,
-                                      padding: EdgeInsets.all(20),
-                                      dialogType: DialogType.WARNING,
-                                      animType: AnimType.BOTTOMSLIDE,
-                                      title: 'Warning',
-                                      desc:
+                                    Get.dialog(AlertDialog(
+                                      title: Text(
+                                        'Pet Not Found',
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco',
+                                            fontSize: 14),
+                                      ),
+                                      titlePadding: EdgeInsets.only(
+                                          left: 26, right: 26, top: 30),
+                                      contentPadding: EdgeInsets.only(
+                                          left: 26,
+                                          right: 26,
+                                          top: 16,
+                                          bottom: 12),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      content: Text(
                                           "You don't have any pet registered. Please register your pet.",
-                                      btnCancelOnPress: () => {},
-                                      btnCancelColor: Colors.grey.shade200,
-                                      btnOkColor: Colors.green.shade200,
-                                      btnOkText: 'Ok',
-                                      buttonsTextStyle: GoogleFonts.roboto(
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.grey.shade800),
-                                      btnOkOnPress: () {
-                                        Get.toNamed(Routes.PET_LIST);
-                                      },
-                                    ).show()
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco.Light',
+                                              fontSize: 12)),
+                                      actionsPadding: EdgeInsets.only(
+                                          right: 12, top: 6, bottom: 2),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () => {
+                                                  Get.back(),
+                                                  Get.toNamed(Routes.PET_LIST)
+                                                },
+                                            child: Text(
+                                              'Agreed.',
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 13,
+                                                  color: Colors.orange),
+                                            )),
+                                      ],
+                                    ))
                                   }
                                 else
                                   {
@@ -483,57 +503,13 @@ class Service extends StatelessWidget {
                                             )),
                                       ],
                                     ))
-                                    // AwesomeDialog(
-                                    //   context: context,
-                                    //   padding: EdgeInsets.all(20),
-                                    //   dialogType: DialogType.NO_HEADER,
-                                    //   animType: AnimType.BOTTOMSLIDE,
-                                    //   title: 'Confirmation',
-                                    //   desc:
-                                    //       'Are you sure want to create this order?.',
-                                    //   btnCancelOnPress: () => {},
-                                    //   btnCancelColor: Colors.grey.shade200,
-                                    //   btnOkColor: Colors.green.shade200,
-                                    //   btnOkText: 'Yes',
-                                    //   buttonsTextStyle: GoogleFonts.roboto(
-                                    //       fontWeight: FontWeight.w600,
-                                    //       color: Colors.grey.shade800),
-                                    //   btnOkOnPress: () {
-                                    //     localStorage.write('selectedServiceId',
-                                    //         data[index].id);
-
-                                    //     localStorage.write(
-                                    //         'selectedPetshop', petshopId);
-                                    //     localStorage.write(
-                                    //         'selectedServiceName',
-                                    //         dataMap['serviceName']);
-                                    //     Get.toNamed(Routes.CHOOSE_PET,
-                                    //         arguments: dataMap['serviceName']);
-
-                                    //     AwesomeDialog(
-                                    //       padding: EdgeInsets.all(20),
-                                    //       context: context,
-                                    //       dialogType: DialogType.INFO_REVERSED,
-                                    //       animType: AnimType.BOTTOMSLIDE,
-                                    //       title: 'Choose your pet.',
-                                    //       desc:
-                                    //           'Choose who will be in service. Make sure you already registered your pet.',
-                                    //       btnOkText: 'Ok',
-                                    //       btnOkColor: Colors.grey.shade300,
-                                    //       buttonsTextStyle: GoogleFonts.roboto(
-                                    //           fontWeight: FontWeight.w600,
-                                    //           color: Colors.grey.shade800),
-                                    //       btnOkOnPress: () {},
-                                    //     ).show();
-                                    //   },
-                                    // ).show()
                                   }
                               },
                               child: Container(
                                 width: width * 0.65,
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.only(left: 12, top: 8),
+                                      const EdgeInsets.only(left: 12, top: 6),
                                   child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -541,9 +517,9 @@ class Service extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              dataMap['serviceName'],
+                                              dataMap['name'],
                                               style: TextStyle(
-                                                  fontSize: 15,
+                                                  fontSize: 14,
                                                   fontFamily: 'SanFrancisco',
                                                   color: Colors.grey.shade800),
                                             ),
@@ -558,7 +534,7 @@ class Service extends StatelessWidget {
                                         Text(
                                           'Book your service at this petshop.',
                                           style: TextStyle(
-                                              fontSize: 12,
+                                              fontSize: 11,
                                               fontFamily: 'SanFrancisco.Light',
                                               color: Colors.grey.shade800),
                                         ),
@@ -578,14 +554,14 @@ class Service extends StatelessWidget {
                     ),
                   );
                 },
-              ),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
+    );
   }
 }
 

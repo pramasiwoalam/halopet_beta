@@ -24,12 +24,11 @@ class PackageFormView extends GetView<PackageFormController> {
             'Package Registration',
             style: TextStyle(
                 fontFamily: 'SanFrancisco',
-                fontSize: 16,
+                fontSize: 15,
                 color: Colors.grey.shade800),
           ),
           backgroundColor: Colors.white,
           elevation: 0,
-          centerTitle: true,
         ),
         body: argument == 'Grooming'
             ? PackageGrooming()

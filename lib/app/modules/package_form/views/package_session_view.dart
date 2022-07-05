@@ -32,7 +32,7 @@ class PackageSession extends StatelessWidget {
       physics: ClampingScrollPhysics(),
       child: Form(
         key: form,
-        child: Stack(
+        child: Column(
           children: [
             Container(
               height: height,
@@ -232,12 +232,13 @@ class PackageSession extends StatelessWidget {
                                 if (form.currentState!.validate())
                                   {
                                     form.currentState!.save(),
-                                    controller.createServiceDetail(formData),
+                                    controller.createSession(formData),
                                     controller.packageHotelList.add(formData),
                                     localStorage.write('serviceFlag', 1),
                                     localStorage.write('packageFlag', 1),
-                                    Get.toNamed(Routes.SERVICE_FORM,
-                                        arguments: 'Hotel')
+                                    Get.toNamed(
+                                      Routes.MEDICAL_LIST_FORM,
+                                    )
                                   }
                               },
                               style: ElevatedButton.styleFrom(
@@ -253,9 +254,10 @@ class PackageSession extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Register',
+                                    Text(
+                                        'Continue to Register Medical Services',
                                         style: TextStyle(
-                                            fontSize: 13,
+                                            fontSize: 12,
                                             fontFamily: 'SanFrancisco',
                                             color: Colors.white)),
                                     const Icon(

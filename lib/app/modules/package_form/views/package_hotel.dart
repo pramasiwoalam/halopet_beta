@@ -153,7 +153,7 @@ class PackageHotel extends StatelessWidget {
                               if (form.currentState!.validate())
                                 {
                                   form.currentState!.save(),
-                                  controller.createServiceDetail(formData),
+                                  controller.createHotelServiceDetail(formData),
                                   controller.packageHotelList.add(formData),
                                   localStorage.write('serviceFlag', 1),
                                   localStorage.write('packageFlag', 1),

@@ -28,7 +28,6 @@ class LoginView extends GetView<LoginController> {
             Container(
               height: height * 0.35,
               width: width,
-              // color: Colors.red,
               child: Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -167,30 +166,146 @@ class LoginView extends GetView<LoginController> {
                   //
 
                   Container(
-                    height: height * 0.042,
-                    width: width * 0.9,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: height * 0.042,
-                          width: width * 0.9,
-                          color: Colors.transparent,
-                          child: MaterialButton(
-                            onPressed: () {},
-                            elevation: 5,
-                            child: Text("Forgot your password?",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'SanFrancisco.Light')),
+                    height: height * 0.05,
+                    width: width * 0.5,
+                    child: TextButton(
+                      onPressed: () => {
+                        Get.dialog(AlertDialog(
+                          title: const Text(
+                            'Confirmation',
+                            style: TextStyle(
+                                fontFamily: 'SanFrancisco', fontSize: 14),
                           ),
-                        ),
-                      ],
+                          titlePadding:
+                              EdgeInsets.only(left: 26, right: 26, top: 30),
+                          contentPadding: const EdgeInsets.only(
+                              left: 26, right: 26, top: 16, bottom: 12),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          content: const Text(
+                              'Are you sure want to reset your password?',
+                              style: TextStyle(
+                                  fontFamily: 'SanFrancisco.Light',
+                                  fontSize: 12)),
+                          actionsPadding:
+                              EdgeInsets.only(right: 15, top: 6, bottom: 2),
+                          actions: [
+                            TextButton(
+                                onPressed: () => {Get.back()},
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco.Light',
+                                      fontSize: 13,
+                                      color: Colors.orange),
+                                )),
+                            TextButton(
+                                onPressed: () => {
+                                      Get.back(),
+                                      if (emailController.text.isEmpty)
+                                        {
+                                          Get.dialog(AlertDialog(
+                                            title: const Text(
+                                              'Email is Empty',
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 14),
+                                            ),
+                                            titlePadding: EdgeInsets.only(
+                                                left: 26, right: 26, top: 30),
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    left: 26,
+                                                    right: 26,
+                                                    top: 16,
+                                                    bottom: 12),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            content: const Text(
+                                                'Please fill the email correctly.',
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        'SanFrancisco.Light',
+                                                    fontSize: 12)),
+                                            actionsPadding: EdgeInsets.only(
+                                                right: 15, top: 6, bottom: 2),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () => {Get.back()},
+                                                  child: Text(
+                                                    'Ok',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'SanFrancisco',
+                                                        fontSize: 13,
+                                                        color: Colors.orange),
+                                                  )),
+                                            ],
+                                          ))
+                                        }
+                                      else
+                                        {
+                                          authController.resetPassword(
+                                              emailController.text),
+                                          Get.dialog(AlertDialog(
+                                            title: const Text(
+                                              'Reset Password',
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 14),
+                                            ),
+                                            titlePadding: EdgeInsets.only(
+                                                left: 26, right: 26, top: 30),
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    left: 26,
+                                                    right: 26,
+                                                    top: 16,
+                                                    bottom: 12),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            content: const Text(
+                                                'Your reset password request has been sent to your email',
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        'SanFrancisco.Light',
+                                                    fontSize: 12)),
+                                            actionsPadding: EdgeInsets.only(
+                                                right: 15, top: 6, bottom: 2),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () => {Get.back()},
+                                                  child: Text(
+                                                    'Ok',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'SanFrancisco',
+                                                        fontSize: 13,
+                                                        color: Colors.orange),
+                                                  )),
+                                            ],
+                                          ))
+                                        }
+                                    },
+                                child: Text(
+                                  'Confirm',
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco',
+                                      fontSize: 13,
+                                      color: Colors.orange),
+                                )),
+                          ],
+                        ))
+                      },
+                      child: Text("Forgot your password?",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 12, fontFamily: 'SanFrancisco.Light')),
                     ),
                   ),
-                  SizedBox(
-                    height: 3,
-                  ),
+
                   Container(
                     height: size.height * 0.06,
                     width: size.width * 0.6,
@@ -274,29 +389,6 @@ class LoginView extends GetView<LoginController> {
                       ],
                     ),
                   ),
-                  // Container(
-                  //   height: height * 0.034,
-                  //   width: width * 0.25,
-                  //   // margin: EdgeInsets.symmetric(vertical: 3),
-                  //   // color: Colors.brown,
-                  //   child: MaterialButton(
-                  //     onPressed: () => Get.toNamed(Routes.SIGNUP),
-                  //     elevation: 10,
-                  //     child: Text(
-                  //       "Register",
-                  //       textAlign: TextAlign.center,
-                  //       style: GoogleFonts.roboto(
-                  //         fontSize: 12,
-                  //         fontWeight: FontWeight.w500,
-                  //         color: Colors.black,
-                  //         decoration: TextDecoration.underline,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // )
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             ),
