@@ -391,37 +391,89 @@ class TopUpView extends GetView<TopUpController> {
                   Center(
                     child: GestureDetector(
                       onTap: () => {
-                        AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.INFO,
-                          animType: AnimType.BOTTOMSLIDE,
-                          title: 'Payment Confirmation',
-                          desc: 'Are you sure you have did your payment?.',
-                          btnCancelOnPress: () => {},
-                          btnOkText: 'Yes',
-                          buttonsTextStyle:
-                              GoogleFonts.roboto(fontWeight: FontWeight.w600),
-                          btnOkOnPress: () {
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.SUCCES,
-                              animType: AnimType.BOTTOMSLIDE,
-                              title: 'Payment Success',
-                              desc:
-                                  'Your payment request has success. Thank You.',
-                              btnOkText: 'Ok',
-                              buttonsTextStyle: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.w600),
-                              btnOkOnPress: () {
-                                controller.topUp(
-                                  userId,
-                                  int.parse(balanceController.text),
-                                );
-                                Get.toNamed(Routes.HOMEPAGE);
-                              },
-                            ).show();
-                          },
-                        ).show()
+                        Get.dialog(AlertDialog(
+                          title: const Text(
+                            'Confirmation',
+                            style: TextStyle(
+                                fontFamily: 'SanFrancisco', fontSize: 14),
+                          ),
+                          titlePadding:
+                              EdgeInsets.only(left: 26, right: 26, top: 30),
+                          contentPadding: const EdgeInsets.only(
+                              left: 26, right: 26, top: 16, bottom: 12),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          content: const Text('Are you sure want to top up?',
+                              style: TextStyle(
+                                  fontFamily: 'SanFrancisco.Light',
+                                  fontSize: 12)),
+                          actionsPadding:
+                              EdgeInsets.only(right: 15, top: 6, bottom: 2),
+                          actions: [
+                            TextButton(
+                                onPressed: () => {Get.back()},
+                                child: Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco.Light',
+                                      fontSize: 13,
+                                      color: Colors.orange),
+                                )),
+                            TextButton(
+                                onPressed: () => {
+                                      Get.back(),
+                                      Get.dialog(AlertDialog(
+                                        title: const Text(
+                                          'Top Up Success',
+                                          style: TextStyle(
+                                              fontFamily: 'SanFrancisco',
+                                              fontSize: 14),
+                                        ),
+                                        titlePadding: EdgeInsets.only(
+                                            left: 26, right: 26, top: 30),
+                                        contentPadding: const EdgeInsets.only(
+                                            left: 26,
+                                            right: 26,
+                                            top: 16,
+                                            bottom: 12),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        content: const Text(
+                                            'Your top up request is succesful. Thank You for using PawPay',
+                                            style: TextStyle(
+                                                fontFamily:
+                                                    'SanFrancisco.Light',
+                                                fontSize: 12)),
+                                        actionsPadding: EdgeInsets.only(
+                                            right: 15, top: 6, bottom: 2),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () => {
+                                                    Get.back(),
+                                                    controller.topUp(
+                                                        userId, balance),
+                                                    Get.toNamed(Routes.HOMEPAGE)
+                                                  },
+                                              child: Text(
+                                                'Ok',
+                                                style: TextStyle(
+                                                    fontFamily: 'SanFrancisco',
+                                                    fontSize: 13,
+                                                    color: Colors.orange),
+                                              )),
+                                        ],
+                                      ))
+                                    },
+                                child: Text(
+                                  'Yes',
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco',
+                                      fontSize: 13,
+                                      color: Colors.orange),
+                                )),
+                          ],
+                        ))
                       },
                       child: Container(
                         margin: EdgeInsets.only(top: height * 0.025),

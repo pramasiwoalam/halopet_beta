@@ -198,7 +198,7 @@ class ProfileView extends GetView<ProfileController> {
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              'User',
+                                                              'John Doe',
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       'SanFrancisco',
@@ -633,6 +633,43 @@ class ProfileView extends GetView<ProfileController> {
                                                     Expanded(
                                                       child: Text(
                                                           "Personal Detail",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 14)),
+                                                    ),
+                                                    Icon(Icons
+                                                        .arrow_forward_ios),
+                                                  ],
+                                                ),
+                                                onPressed: () => Get.toNamed(
+                                                    Routes.EDIT_PROFILE),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 30,
+                                                      vertical: 5),
+                                              child: FlatButton(
+                                                padding: EdgeInsets.all(15),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                color: Colors.grey.shade100,
+                                                height: height * 0.08,
+                                                child: Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.favorite,
+                                                      color: Color(0xffF9813A),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 30,
+                                                    ),
+                                                    Expanded(
+                                                      child: Text("Favorite",
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   'SanFrancisco.Light',

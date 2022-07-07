@@ -149,7 +149,7 @@ class ServiceListView extends GetView<ServiceListController> {
                           onTap: () => {
                             localStorage.write('serviceFlag', 0),
                             Get.toNamed(Routes.SERVICE_FORM,
-                                arguments: 'Grooming'),
+                                arguments: 'Hotel'),
                             controller.createHotelService()
                           },
                           child: Container(

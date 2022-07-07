@@ -334,7 +334,6 @@ class VetService extends StatelessWidget {
                               //     localStorage.read('savedPetshopId'),
                               //     localStorage.read('savedServiceId')),
                               localStorage.write('serviceFlag', 0),
-                              localStorage.write('hotelFlag', 1)
                             },
                         child: Padding(
                           padding: const EdgeInsets.only(left: 15, right: 15),

@@ -159,7 +159,7 @@ class Home extends StatelessWidget {
                 MoneyFormatterOutput fo = fmf.output;
                 localStorage.write('balance', data['balance']);
                 if (data['favoriteId'] != null) {
-                  localStorage.write('favArr', []);
+                  localStorage.write('favArr', data['favoriteId']);
                 } else {
                   localStorage.write('favArr', []);
                 }
@@ -329,7 +329,7 @@ class Home extends StatelessWidget {
                                               thickness: 1,
                                             ),
                                             SizedBox(
-                                              width: 22,
+                                              width: 5,
                                             ),
                                             Row(
                                               mainAxisAlignment:
@@ -337,6 +337,7 @@ class Home extends StatelessWidget {
                                                       .spaceBetween,
                                               children: [
                                                 InkWell(
+                                                  splashColor: Colors.pink,
                                                   onTap: () => {
                                                     Get.toNamed(Routes.TOPUP)
                                                   },
@@ -359,11 +360,11 @@ class Home extends StatelessWidget {
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  width: 10,
+                                                  width: 20,
                                                 ),
-                                                FlatButton(
-                                                  color: Colors.transparent,
-                                                  onPressed: () => {
+                                                InkWell(
+                                                  splashColor: Colors.pink,
+                                                  onTap: () => {
                                                     if (data['bankAccount'] ==
                                                         null)
                                                       {
@@ -497,7 +498,9 @@ class Home extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           onTap: () => {
-                                            Get.toNamed(Routes.EXPLORE_SERVICE)
+                                            Get.toNamed(Routes.EXPLORE_SERVICE,
+                                                arguments: cards[index]
+                                                    ['value'])
                                           },
                                           child: Stack(
                                             children: [
@@ -514,11 +517,6 @@ class Home extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-
-                                          // child: Align(
-                                          //   alignment: Alignment.center,
-                                          //   child: Text('${cards[index]['name']}'),
-                                          // ),
                                         );
                                       }),
                                 ),
@@ -591,7 +589,6 @@ class Home extends StatelessWidget {
                                                         Get.toNamed(
                                                           Routes.PETSHOP_DETAIL,
                                                         ),
-                                                        print('asd'),
                                                         localStorage.write(
                                                             'petshopId',
                                                             data[index].id)

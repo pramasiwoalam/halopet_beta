@@ -54,7 +54,7 @@ class HotelService extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "You don't have any hotel room registered. Please register before create this grooming service.",
+                                      "You don't have any hotel room registered. Please register before create this service.",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontFamily: 'SanFrancisco.Light',
@@ -254,8 +254,7 @@ class HotelService extends StatelessWidget {
                         onPressed: () => {
                               if (serviceController.packageHotelList.isNotEmpty)
                                 {
-                                  // controller.setService(formData),
-                                  localStorage.write('hotel', true),
+                                  localStorage.write('hotelFlag', true),
                                   Get.toNamed(Routes.SERVICE_LIST)
                                 }
                               else
@@ -331,8 +330,6 @@ class HotelService extends StatelessWidget {
                               // controller.cancellation(
                               //     localStorage.read('savedPetshopId'),
                               //     localStorage.read('savedServiceId')),
-                              localStorage.write('serviceFlag', 0),
-                              localStorage.write('hotelFlag', 0)
                             },
                         child: Padding(
                           padding: const EdgeInsets.only(left: 15, right: 15),

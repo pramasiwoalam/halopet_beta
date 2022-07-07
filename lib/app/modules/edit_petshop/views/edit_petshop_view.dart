@@ -38,9 +38,114 @@ class EditPetshopView extends GetView<EditPetshopController> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 var dataMap = snapshot.data!.data() as Map<String, dynamic>;
+                var isOpen = dataMap['isOpen'] == true
+                    ? controller.isOpen.value = true
+                    : controller.isOpen.value = false;
+
                 localStorage.write('tempPetshopData', dataMap);
                 return Column(
                   children: [
+                    Container(
+                      height: height * 0.08,
+                      width: width,
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(width: 1, color: Colors.grey.shade200),
+                        color: Colors.white,
+                      ),
+                      child: FlatButton(
+                        color: Colors.transparent,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Petshop Status',
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco',
+                                      fontSize: 14,
+                                      color: Colors.grey.shade800)),
+                              Obx(
+                                () => Row(
+                                  children: [
+                                    Text(
+                                        controller.isOpen.value == true
+                                            ? 'OPEN'
+                                            : 'CLOSED',
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco',
+                                            fontSize: 15,
+                                            color:
+                                                controller.isOpen.value == true
+                                                    ? Color(0xff2596BE)
+                                                    : Colors.red)),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Icon(
+                                      Icons.change_circle,
+                                      size: 18,
+                                      color: Colors.grey.shade600,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onPressed: () => {
+                          Get.dialog(AlertDialog(
+                            title: const Text(
+                              'Confirmation',
+                              style: TextStyle(
+                                  fontFamily: 'SanFrancisco', fontSize: 14),
+                            ),
+                            titlePadding:
+                                EdgeInsets.only(left: 26, right: 26, top: 30),
+                            contentPadding: const EdgeInsets.only(
+                                left: 26, right: 26, top: 16, bottom: 12),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            content: Text(
+                                controller.isOpen.value == false
+                                    ? 'Are you sure want to open this petshop? Confirm to continue.'
+                                    : 'Are you sure want to closed this petshop? Confirm to continue.',
+                                style: TextStyle(
+                                    fontFamily: 'SanFrancisco.Light',
+                                    fontSize: 12)),
+                            actionsPadding:
+                                EdgeInsets.only(right: 15, top: 6, bottom: 2),
+                            actions: [
+                              TextButton(
+                                  onPressed: () => {Get.back()},
+                                  child: const Text(
+                                    'Cancel',
+                                    style: TextStyle(
+                                        fontFamily: 'SanFrancisco.Light',
+                                        fontSize: 13,
+                                        color: Colors.orange),
+                                  )),
+                              TextButton(
+                                  onPressed: () => {
+                                        Get.back(),
+                                        controller.isOpen.value == true
+                                            ? controller.isOpen.value = false
+                                            : controller.isOpen.value = true,
+                                        controller.updateIsOpen(
+                                            controller.isOpen.value, petshopId)
+                                      },
+                                  child: Text(
+                                    'Confirm',
+                                    style: TextStyle(
+                                        fontFamily: 'SanFrancisco',
+                                        fontSize: 13,
+                                        color: Colors.orange),
+                                  )),
+                            ],
+                          ))
+                        },
+                      ),
+                    ),
                     Container(
                       height: height * 0.08,
                       width: width,
@@ -206,7 +311,7 @@ class EditPetshopView extends GetView<EditPetshopController> {
                         onPressed: () => {
                               Get.dialog(AlertDialog(
                                 title: Text(
-                                  'Booking Confirmation',
+                                  'Update Confirmation',
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco', fontSize: 14),
                                 ),
@@ -217,7 +322,7 @@ class EditPetshopView extends GetView<EditPetshopController> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 content: Text(
-                                    'Are you the booking data is correct? Confirm if you want to create this booking.',
+                                    'Are you the update data is correct? Confirm if you want to create this booking.',
                                     style: TextStyle(
                                         fontFamily: 'SanFrancisco.Light',
                                         fontSize: 12)),

@@ -10,6 +10,7 @@ class FavoriteController extends GetxController {
 
   var userId = GetStorage().read('currentUserId');
   var petshopId = GetStorage().read('petshopId');
+  List favoriteArr = [];
 
   Stream<QuerySnapshot<Object?>> streamData() {
     CollectionReference favorite = firestore.collection("favorite");
@@ -24,10 +25,10 @@ class FavoriteController extends GetxController {
   // }
 
   Stream<QuerySnapshot<Object?>> getPetshopByFavId() {
-    List favoriteArr = GetStorage().read('favArr');
-    print(favoriteArr);
+    // List favoriteArr = GetStorage().read('favArr');
+
     CollectionReference petshop = firestore.collection("petshop");
-    CollectionReference users = firestore.collection("users");
+    print(favoriteArr);
     if (favoriteArr.isNotEmpty) {
       return petshop
           .where('favoriteId', arrayContainsAny: favoriteArr)
@@ -35,5 +36,10 @@ class FavoriteController extends GetxController {
     } else {
       return petshop.where('favoriteId', isEqualTo: 0).snapshots();
     }
+  }
+
+  Future<DocumentSnapshot<Object?>> getUser(String userId) async {
+    DocumentReference doc = firestore.collection("users").doc(userId);
+    return doc.get();
   }
 }

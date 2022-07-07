@@ -7,14 +7,15 @@ class EditPetshopController extends GetxController {
 
   var dropdown = false.obs;
 
+  var isOpen = true.obs;
+
   Future<DocumentSnapshot<Object?>> getPetshop(String petshopId) async {
     DocumentReference petshop = firestore.collection('petshop').doc(petshopId);
     return petshop.get();
   }
 
-  void paymentAccepted(String orderId) {
-    DocumentReference docRef = firestore.collection('order').doc(orderId);
-    docRef.update({'status': 'On Going'});
-    Get.back();
+  void updateIsOpen(bool status, String petshopId) {
+    DocumentReference docRef = firestore.collection('petshop').doc(petshopId);
+    docRef.update({'isOpen': status});
   }
 }

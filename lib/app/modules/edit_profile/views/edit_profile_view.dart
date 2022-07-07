@@ -61,8 +61,48 @@ class EditProfileView extends GetView<EditProfileController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 25,
+                      Stack(
+                        children: [
+                          Center(
+                            child: Container(
+                              height: height / 5,
+                              width: width / 3.5,
+                              // color: Colors.blue,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: Colors.black, width: width * 0.4),
+                                image: const DecorationImage(
+                                    fit: BoxFit.scaleDown,
+                                    image:
+                                        AssetImage('assets/images/user.png')),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: height / 8,
+                            right: 110,
+                            child: GestureDetector(
+                              onTap: () => {},
+                              child: Container(
+                                  height: height * 0.04,
+                                  width: height * 0.04,
+                                  // color: Colors.red,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 2,
+                                          color: const Color(0xFFf2f2f2)),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(40)),
+                                  child: Center(
+                                    child: Icon(Icons.edit),
+                                  )),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
@@ -220,7 +260,43 @@ class EditProfileView extends GetView<EditProfileController> {
                         ),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 25,
+                      ),
+                      Container(
+                        height: size.height * 0.07,
+                        width: size.width * 0.9,
+                        color: Colors.transparent,
+                        child: ElevatedButton(
+                          onPressed: () =>
+                              {Get.toNamed(Routes.BANK_ACCOUNT_REG)},
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 5.0),
+                            primary: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 15, right: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text("Edit Bank Account",
+                                    style: TextStyle(
+                                      fontFamily: 'SanFrancisco',
+                                      fontSize: 13,
+                                      color: Color(0xffF9813A),
+                                    )),
+                                Icon(
+                                  Icons.arrow_forward,
+                                  color: Color(0xffF9813A),
+                                  size: 18,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 25,
                       ),
                       Container(
                         height: size.height * 0.07,

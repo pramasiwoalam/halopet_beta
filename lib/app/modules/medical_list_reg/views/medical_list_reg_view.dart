@@ -250,7 +250,7 @@ class MedicalListRegView extends GetView<MedicalListRegController> {
                                           borderRadius:
                                               BorderRadius.circular(15)),
                                       content: Text(
-                                          'You need to created atleast one room before you create this service.',
+                                          'You need to created atleast one medical service before you create this service.',
                                           style: TextStyle(
                                               fontFamily: 'SanFrancisco.Light',
                                               fontSize: 12)),

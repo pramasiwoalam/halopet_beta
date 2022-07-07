@@ -111,7 +111,7 @@ class EditPetshopFormView extends GetView<EditPetshopFormController> {
                         },
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 15),
+                        padding: EdgeInsets.only(top: 25),
                         child: TextFormField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -140,7 +140,7 @@ class EditPetshopFormView extends GetView<EditPetshopFormController> {
                         children: [
                           Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 15),
+                              padding: const EdgeInsets.only(top: 25),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -169,7 +169,7 @@ class EditPetshopFormView extends GetView<EditPetshopFormController> {
                           ),
                           Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 15, left: 15),
+                              padding: const EdgeInsets.only(top: 25, left: 15),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -199,7 +199,7 @@ class EditPetshopFormView extends GetView<EditPetshopFormController> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15),
+                        padding: const EdgeInsets.only(top: 25),
                         child: TextFormField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -225,7 +225,7 @@ class EditPetshopFormView extends GetView<EditPetshopFormController> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15),
+                        padding: const EdgeInsets.only(top: 20),
                         child: TextFormField(
                           maxLines: null,
                           minLines: 2,
@@ -254,7 +254,7 @@ class EditPetshopFormView extends GetView<EditPetshopFormController> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 10),
+                        padding: const EdgeInsets.only(top: 20),
                         child: MultiSelectFormField(
                           chipBackGroundColor: Color(0xffF9813A),
                           chipLabelStyle: GoogleFonts.roboto(
@@ -305,12 +305,6 @@ class EditPetshopFormView extends GetView<EditPetshopFormController> {
                               "value": "Sunday",
                             },
                           ],
-                          // validator: (value) {
-                          //   if (value == null) {
-                          //     return 'Please select one or more options';
-                          //   }
-                          //   return null;
-                          // },
                           textField: 'display',
                           valueField: 'value',
                           okButtonLabel: 'Choose',
@@ -327,7 +321,7 @@ class EditPetshopFormView extends GetView<EditPetshopFormController> {
                         children: [
                           Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 15),
+                              padding: const EdgeInsets.only(top: 25),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -357,7 +351,7 @@ class EditPetshopFormView extends GetView<EditPetshopFormController> {
                           Flexible(
                               child: Container(
                                   width: width * 0.1,
-                                  margin: EdgeInsets.only(top: 10),
+                                  margin: EdgeInsets.only(top: 15),
                                   child: Center(
                                       child: Text(
                                     'until',
@@ -367,7 +361,7 @@ class EditPetshopFormView extends GetView<EditPetshopFormController> {
                                   )))),
                           Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 15),
+                              padding: const EdgeInsets.only(top: 25),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(

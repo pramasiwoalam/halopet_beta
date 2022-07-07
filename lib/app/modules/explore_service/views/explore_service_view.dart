@@ -12,47 +12,29 @@ import 'vet_service_list.dart';
 import 'hotel_service_list.dart';
 
 class ExploreServiceView extends GetView<ExploreServiceController> {
-  List<Widget> containerList = [
-    GroomingServiceView(),
-    VetServiceView(),
-    HotelServiceView(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    var arguments = Get.arguments;
     return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            title: Text(
-              'Explore by Categories',
-              style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
+        length: 3,
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            appBar: AppBar(
+              title: Text(
+                arguments == 1
+                    ? 'Grooming Available'
+                    : arguments == 2
+                        ? 'Pet Hotel Available'
+                        : 'Vet Available',
+                style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
+              ),
+              backgroundColor: Color(0xffF9813A),
+              elevation: 0,
             ),
-            backgroundColor: Color(0xffF9813A),
-            elevation: 0,
-            bottom: TabBar(
-                labelStyle: TextStyle(
-                  fontFamily: 'SanFrancisco',
-                  fontSize: 13,
-                ),
-                indicatorColor: Colors.white,
-                labelColor: Colors.white,
-                tabs: const <Widget>[
-                  Tab(
-                    text: "Grooming",
-                  ),
-                  Tab(
-                    text: "Vet Available",
-                  ),
-                  Tab(
-                    text: "Pet Hotel",
-                  ),
-                ]),
-          ),
-          body: TabBarView(
-            children: containerList,
-          )),
-    );
+            body: arguments == 1
+                ? GroomingServiceView()
+                : arguments == 2
+                    ? HotelServiceView()
+                    : VetServiceView()));
   }
 }

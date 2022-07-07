@@ -178,8 +178,8 @@ class PackageSession extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
                               ),
-                              labelText: "Doctor Credential",
-                              hintText: 'Monday - Friday',
+                              labelText: "Doctor Degree",
+                              hintText: 'Doctor Degree',
                               hintStyle: GoogleFonts.roboto(
                                   fontSize: 14, color: Colors.grey.shade600),
                               contentPadding: EdgeInsets.all(18),

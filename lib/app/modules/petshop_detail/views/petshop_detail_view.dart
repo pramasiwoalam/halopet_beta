@@ -25,7 +25,6 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
   var tabIndex = 0;
   @override
   Widget build(BuildContext context) {
-    print('asd');
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;

@@ -50,7 +50,7 @@ class PetshopDetailController extends GetxController {
             users.doc(userId).set(
               {
                 'favoriteId': FieldValue.arrayUnion([
-                  {'favId': value.id, 'asd': 'asd'}
+                  {'favId': value.id}
                 ])
               },
               SetOptions(merge: true),
@@ -85,8 +85,6 @@ class PetshopDetailController extends GetxController {
                   });
                 }));
       }
-
-      // users.where('favId', isEqualTo: localStorage.read('favoriteId')).get().then((value) => null)
     } catch (e) {
       print(e);
     }
