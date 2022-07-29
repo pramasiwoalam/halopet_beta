@@ -56,6 +56,8 @@ abstract class Routes {
   static const WITHDRAW = _Paths.WITHDRAW;
   static const BANK_ACCOUNT_REG = _Paths.BANK_ACCOUNT_REG;
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const ADMIN_USER_DETAIL = _Paths.ADMIN_USER_DETAIL;
+  static const EDIT_SERVICE = _Paths.EDIT_SERVICE;
 }
 
 abstract class _Paths {
@@ -113,4 +115,6 @@ abstract class _Paths {
   static const WITHDRAW = '/withdraw';
   static const BANK_ACCOUNT_REG = '/bank-account-reg';
   static const EDIT_PROFILE = '/edit-profile';
+  static const ADMIN_USER_DETAIL = '/admin-user-detail';
+  static const EDIT_SERVICE = '/edit-service';
 }

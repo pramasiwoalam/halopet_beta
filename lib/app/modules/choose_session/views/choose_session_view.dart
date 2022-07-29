@@ -138,8 +138,7 @@ class ChooseSessionView extends GetView<ChooseSessionController> {
                                                             ),
                                                             Spacer(),
                                                             Text(
-                                                              dataMap[
-                                                                  'openHours'],
+                                                              dataMap['time'],
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       'SanFrancisco.Regular',

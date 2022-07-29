@@ -93,6 +93,7 @@ class AuthController extends GetxController {
         "city": formData['city'],
         "postalCode": formData['postalCode'],
         "phone": formData['phone'],
+        'img': 'assets/images/user.png'
       });
 
       // AwesomeDialog(

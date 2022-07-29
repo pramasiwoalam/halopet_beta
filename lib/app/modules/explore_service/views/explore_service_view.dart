@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halopet_beta/app/modules/information/views/information_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 import '../controllers/explore_service_controller.dart';
@@ -25,7 +26,9 @@ class ExploreServiceView extends GetView<ExploreServiceController> {
                     ? 'Grooming Available'
                     : arguments == 2
                         ? 'Pet Hotel Available'
-                        : 'Vet Available',
+                        : arguments == 3
+                            ? 'Vet Available'
+                            : 'Pet Information',
                 style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
               ),
               backgroundColor: Color(0xffF9813A),
@@ -35,6 +38,8 @@ class ExploreServiceView extends GetView<ExploreServiceController> {
                 ? GroomingServiceView()
                 : arguments == 2
                     ? HotelServiceView()
-                    : VetServiceView()));
+                    : arguments == 3
+                        ? VetServiceView()
+                        : InformationView()));
   }
 }

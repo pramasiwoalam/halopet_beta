@@ -30,7 +30,7 @@ class SessionDetailView extends GetView<SessionDetailController> {
       appBar: AppBar(
         title: Text(
           'Session Detail',
-          style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+          style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
         ),
         backgroundColor: Color(0xffF9813A),
         elevation: 0,
@@ -97,7 +97,7 @@ class SessionDetailView extends GetView<SessionDetailController> {
                                         fontWeight: FontWeight.w400,
                                         fontSize: 13,
                                         color: Colors.grey.shade500)),
-                                Text(data['openHours'],
+                                Text(data['time'],
                                     style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 13,
@@ -113,7 +113,7 @@ class SessionDetailView extends GetView<SessionDetailController> {
                                         fontWeight: FontWeight.w400,
                                         fontSize: 13,
                                         color: Colors.grey.shade500)),
-                                Text(data['day'],
+                                Text(data['dayOpen'],
                                     style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 13,
@@ -187,12 +187,12 @@ class SessionDetailView extends GetView<SessionDetailController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Vet Credential(s)',
+                                Text('Vet Degree(s)',
                                     style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 13,
                                         color: Colors.grey.shade500)),
-                                Text(data['credential'],
+                                Text(data['degree'],
                                     style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 13,
@@ -200,21 +200,6 @@ class SessionDetailView extends GetView<SessionDetailController> {
                               ],
                             ),
                             Spacer(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Vet Description',
-                                    style: GoogleFonts.roboto(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 13,
-                                        color: Colors.grey.shade500)),
-                                Text(data['desc'],
-                                    style: GoogleFonts.roboto(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 13,
-                                        color: Colors.grey.shade500)),
-                              ],
-                            ),
                           ],
                         ),
                       ),
@@ -222,7 +207,10 @@ class SessionDetailView extends GetView<SessionDetailController> {
                   ),
                   Center(
                     child: GestureDetector(
-                      onTap: () => {Get.toNamed(Routes.MEDICAL_LIST)},
+                      onTap: () => {
+                        Get.toNamed(Routes.MEDICAL_LIST,
+                            arguments: snapshot.data!.id)
+                      },
                       child: Container(
                         margin: EdgeInsets.only(top: height * 0.025),
                         width: width * 0.82,

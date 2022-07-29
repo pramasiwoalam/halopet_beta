@@ -21,15 +21,14 @@ class ChoosePetView extends GetView<ChoosePetController> {
     var height = size.height;
     var userId = GetStorage().read('currentUserId');
     print(userId);
-    var arguments = localStorage.read('selectedServiceName');
+    var arguments = Get.arguments;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             'Choose your pet',
-            style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+            style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
           ),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,

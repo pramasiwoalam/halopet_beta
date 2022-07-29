@@ -39,4 +39,20 @@ class SellerHomeController extends GetxController {
         .where('status', isEqualTo: 'Waiting for payment')
         .snapshots();
   }
+
+  Stream<QuerySnapshot<Object?>> getByOnGoing(String petshopId) {
+    CollectionReference order = firestore.collection("order");
+    return order
+        .where('petshopId', isEqualTo: petshopId)
+        .where('status', isEqualTo: 'On Going')
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot<Object?>> getByCompleted(String petshopId) {
+    CollectionReference order = firestore.collection("order");
+    return order
+        .where('petshopId', isEqualTo: petshopId)
+        .where('status', isEqualTo: 'Completed')
+        .snapshots();
+  }
 }

@@ -1,44 +1,43 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:halopet_beta/app/modules/order/views/order_view.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
-import 'package:intl/intl.dart';
 import 'package:money_formatter/money_formatter.dart';
-import 'package:timeago/timeago.dart';
-import '../controllers/order_detail_controller.dart';
+
+import '../controllers/seller_order_detail_controller.dart';
 
 final reasons = TextEditingController();
 
-class WaitingApproval extends GetView<OrderDetailController> {
+class SellerOnGoing extends GetView<SellerOrderDetailController> {
   final localStorage = GetStorage();
+  final messageC = TextEditingController();
+  RxBool isDeclined = false.obs;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
-
-    bool isDelivery = false;
     dynamic arguments = Get.arguments;
-    DateFormat format = new DateFormat("MMMM dd, yyyy");
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
         child: FutureBuilder<DocumentSnapshot<Object?>>(
-            future: controller.getOrder(arguments),
+            future: controller.getOrder(Get.arguments),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 var data = snapshot.data!.data() as Map<String, dynamic>;
-
+                var currentUserId = localStorage.read('currentUserId');
                 var orderId = Get.arguments;
                 var bookingType = data['bookingType'];
                 localStorage.write('petshopId', Get.arguments);
+
                 return FutureBuilder<DocumentSnapshot<Object?>>(
                     future: bookingType == 'Grooming Service'
                         ? controller.getPackage(data['packageId'])
@@ -55,12 +54,10 @@ class WaitingApproval extends GetView<OrderDetailController> {
                         if (bookingType == 'Vet') {
                           charge = bookingFee;
                         } else {
-                          tax = int.parse(packageData['price']) * 10 / 100;
+                          tax = packageData['price'] * 10 / 100;
                           charge = 0;
                           if (data['isDelivery'] == false) {
-                            charge = int.parse(packageData['price']) +
-                                bookingFee +
-                                tax;
+                            charge = packageData['price'] + bookingFee + tax;
                           } else {
                             charge = packageData['price'] +
                                 bookingFee +
@@ -77,13 +74,12 @@ class WaitingApproval extends GetView<OrderDetailController> {
                               symbolAndNumberSeparator: ' ',
                             ));
                         MoneyFormatterOutput fo = fmf.output;
-
                         return Stack(
                           children: [
                             Container(
                               height: height / 4,
                               width: width,
-                              color: Color(0xffF9813A),
+                              color: Color(0xff2596BE),
                             ),
                             Container(
                               margin: EdgeInsets.only(top: height * 0.01),
@@ -102,21 +98,22 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '   Order Status',
+                                      '   Order Detail',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: 'SanFrancisco',
-                                          color: Color(0xffF9813A)),
+                                        fontSize: 14,
+                                        fontFamily: 'SanFrancisco',
+                                        color: Color(0xff2596BE),
+                                      ),
                                     ),
                                     const SizedBox(
-                                      height: 10,
+                                      height: 12,
                                     ),
                                     Center(
                                       child: Container(
                                         height: height * 0.11,
                                         width: width * 0.9,
                                         decoration: BoxDecoration(
-                                            color: Color(0xffF9813A),
+                                            color: Color(0xff2596BE),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20)),
                                             boxShadow: [
@@ -178,14 +175,15 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                       ),
                                     ),
                                     const SizedBox(
-                                      height: 16,
+                                      height: 18,
                                     ),
                                     Text(
-                                      '   Order Detail',
+                                      '   Service Detail',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: 'SanFrancisco',
-                                          color: Color(0xffF9813A)),
+                                        fontSize: 14,
+                                        fontFamily: 'SanFrancisco',
+                                        color: Color(0xff2596BE),
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 15,
@@ -552,9 +550,13 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                                     .shade600)),
                                                       ],
                                                     )
-                                                  : Spacer(),
+                                                  : SizedBox(
+                                                      height: 1,
+                                                    ),
                                               bookingType == 'Vet'
-                                                  ? Spacer()
+                                                  ? SizedBox(
+                                                      height: 6,
+                                                    )
                                                   : bookingType ==
                                                           'Grooming Service'
                                                       ? Spacer()
@@ -697,7 +699,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                               FontWeight.w800,
                                                           fontSize: 14,
                                                           color: Color(
-                                                              0xffF9813A))),
+                                                              0xff2596BE))),
                                                 ],
                                               ),
                                             ],
@@ -705,131 +707,6 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                         ),
                                       ),
                                     ),
-                                    Center(
-                                      child: GestureDetector(
-                                        onTap: () => {
-                                          AwesomeDialog(
-                                            context: context,
-                                            dialogType: DialogType.WARNING,
-                                            animType: AnimType.BOTTOMSLIDE,
-                                            title: 'Warning',
-                                            desc:
-                                                'Are you sure want to cancel this booking?',
-                                            btnCancelOnPress: () {},
-                                            btnOkOnPress: () {
-                                              late AwesomeDialog dialog;
-                                              dialog = AwesomeDialog(
-                                                context: context,
-                                                animType: AnimType.BOTTOMSLIDE,
-                                                dialogType: DialogType.INFO,
-                                                keyboardAware: true,
-                                                body: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Column(
-                                                    children: <Widget>[
-                                                      Text(
-                                                        'Cancellation Reason',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .headline6,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Material(
-                                                        elevation: 0,
-                                                        color: Colors
-                                                            .grey.shade100,
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: TextFormField(
-                                                            controller: reasons,
-                                                            autofocus: true,
-                                                            minLines: 1,
-                                                            maxLines: null,
-                                                            keyboardType:
-                                                                TextInputType
-                                                                    .multiline,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                              border:
-                                                                  InputBorder
-                                                                      .none,
-                                                              labelText:
-                                                                  'Reason',
-                                                              prefixIcon: Icon(
-                                                                Icons.message,
-                                                                size: 20,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      AnimatedButton(
-                                                          isFixedHeight: false,
-                                                          text: 'Submit',
-                                                          pressEvent: () {
-                                                            controller
-                                                                .bookingCancellation(
-                                                                    orderId,
-                                                                    reasons
-                                                                        .text);
-                                                            dialog.dismiss();
-                                                          })
-                                                    ],
-                                                  ),
-                                                ),
-                                              )..show();
-                                            },
-                                          ).show()
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              top: height * 0.03),
-                                          width: width * 0.82,
-                                          height: height * 0.07,
-                                          decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: Colors.grey.shade300,
-                                                    spreadRadius: 3,
-                                                    blurRadius: 4,
-                                                    offset: Offset(0, 4))
-                                              ],
-                                              color: Color(0xffF9813A),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(30))),
-                                          child: Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 30, right: 25),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text('Cancel Order Request',
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          fontFamily:
-                                                              'SanFrancisco',
-                                                          color: Colors.white)),
-                                                  const Icon(
-                                                    Icons.cancel_schedule_send,
-                                                    color: Colors.white,
-                                                    size: 22,
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                      ),
-                                    )
                                   ],
                                 ),
                               ),
@@ -837,7 +714,9 @@ class WaitingApproval extends GetView<OrderDetailController> {
                           ],
                         );
                       } else {
-                        return Center(child: CircularProgressIndicator());
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
                       }
                     });
               } else {

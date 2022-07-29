@@ -35,12 +35,10 @@ class DeliveryListView extends GetView<DeliveryListController> {
         appBar: AppBar(
           title: Text(
             'Delivery Form',
-            style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 19),
+            style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
           ),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,
-          centerTitle: true,
         ),
         body: FutureBuilder<DocumentSnapshot<Object?>>(
             future: orderController.getUser(userId),
@@ -59,7 +57,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                         ),
                         Container(
                           width: width * 0.8,
-                          height: height * 0.07,
+                          height: height * 0.06,
                           child: ToggleSwitch(
                             minWidth: width * 0.395,
                             cornerRadius: 20.0,
@@ -72,7 +70,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                             inactiveFgColor: Colors.white,
                             initialLabelIndex: 0,
                             totalSwitches: 2,
-                            fontSize: 14,
+                            fontSize: 13,
                             labels: ['Pick Up Only', 'Pick Up & Delivery'],
                             radiusStyle: true,
                             onToggle: (index) {
@@ -82,7 +80,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                           ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 25,
                         ),
                         Container(
                           height: size.height * 0.065,
@@ -113,7 +111,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                           ),
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 25,
                         ),
                         Row(
                           children: [
@@ -149,7 +147,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                               ),
                             ),
                             const SizedBox(
-                              width: 10,
+                              width: 25,
                             ),
                             Container(
                               height: size.height * 0.065,
@@ -186,7 +184,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                           ],
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 25,
                         ),
                         Container(
                           height: size.height * 0.065,
@@ -217,7 +215,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                           ),
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 25,
                         ),
                         Obx(
                           () => Container(
@@ -260,7 +258,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                           ),
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 25,
                         ),
                         Obx(() => orderController.status == '0'
                             ? Column(
@@ -271,9 +269,6 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
-                                          var packageData = snapshot.data!
-                                              .data() as Map<String, dynamic>;
-
                                           double pickUpFee = 20000;
 
                                           double charge = pickUpFee;
@@ -374,7 +369,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                         onPressed: () => {
                                               groomingController.status = 0,
                                               Get.toNamed(Routes.CREATE_ORDER,
-                                                  arguments: arguments),
+                                                  arguments: 'Grooming'),
                                             },
                                         style: ElevatedButton.styleFrom(
                                           padding: const EdgeInsets.symmetric(
@@ -523,7 +518,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                         onPressed: () => {
                                               groomingController.status = 0,
                                               Get.toNamed(Routes.CREATE_ORDER,
-                                                  arguments: arguments),
+                                                  arguments: 'Grooming'),
                                             },
                                         style: ElevatedButton.styleFrom(
                                           padding: const EdgeInsets.symmetric(

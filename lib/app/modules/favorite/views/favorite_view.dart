@@ -46,7 +46,6 @@ class FavoriteView extends GetView<FavoriteController> {
                                 shrinkWrap: true,
                                 itemCount: data.length,
                                 itemBuilder: (context, index) {
-                                  print('MASUK');
                                   var dataMap = data[index].data()
                                       as Map<String, dynamic>;
                                   return InkWell(
@@ -105,22 +104,17 @@ class FavoriteView extends GetView<FavoriteController> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        ' ${dataMap['petshopName']}',
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                fontSize: 15),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 1,
-                                                      ),
+                                                          ' ${dataMap['petshopName']}',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco',
+                                                              fontSize: 14)),
                                                       Text(
                                                         ' Jakarta, Indonesia',
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                                fontSize: 13),
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'SanFrancisco.Light',
+                                                            fontSize: 12),
                                                       ),
                                                       const SizedBox(
                                                         height: 4,
@@ -137,10 +131,11 @@ class FavoriteView extends GetView<FavoriteController> {
                                                             width: 4,
                                                           ),
                                                           Text('5.0 (238)',
-                                                              style: GoogleFonts.roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400)),
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'SanFrancisco.Light',
+                                                                  fontSize:
+                                                                      12)),
                                                         ],
                                                       ),
                                                       const SizedBox(
@@ -160,10 +155,10 @@ class FavoriteView extends GetView<FavoriteController> {
                                                           ),
                                                           Text(
                                                             'Grooming, Pet Hotel, Vet',
-                                                            style: GoogleFonts
-                                                                .roboto(
-                                                                    fontSize:
-                                                                        13),
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    'SanFrancisco.Light',
+                                                                fontSize: 12),
                                                           ),
                                                         ],
                                                       ),
@@ -171,7 +166,7 @@ class FavoriteView extends GetView<FavoriteController> {
                                                         height: 6,
                                                       ),
                                                       Container(
-                                                        height: height * 0.034,
+                                                        height: height * 0.036,
                                                         width: width * 0.25,
                                                         color: Colors
                                                             .blue.shade300,
@@ -182,12 +177,12 @@ class FavoriteView extends GetView<FavoriteController> {
                                                           child: Center(
                                                             child: Text(
                                                               'Most Favorites',
-                                                              style: GoogleFonts
-                                                                  .roboto(
-                                                                      fontSize:
-                                                                          10,
-                                                                      color: Colors
-                                                                          .white),
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'SanFrancisco.Light',
+                                                                  fontSize: 11,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                           ),
                                                         ),

@@ -31,11 +31,9 @@ class BankAccountRegView extends GetView<BankAccountRegController> {
         title: Text(
           'Bank Account Registration',
           style: TextStyle(
-              fontFamily: 'SanFrancisco',
-              fontSize: 15,
-              color: Colors.grey.shade800),
+              fontFamily: 'SanFrancisco', fontSize: 15, color: Colors.white),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xffF9813A),
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -61,7 +59,7 @@ class BankAccountRegView extends GetView<BankAccountRegController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       TextFormField(
                         decoration: InputDecoration(

@@ -157,6 +157,7 @@ class Home extends StatelessWidget {
                       symbolAndNumberSeparator: ' ',
                     ));
                 MoneyFormatterOutput fo = fmf.output;
+
                 localStorage.write('balance', data['balance']);
                 if (data['favoriteId'] != null) {
                   localStorage.write('favArr', data['favoriteId']);
@@ -243,11 +244,10 @@ class Home extends StatelessWidget {
                                             bottom: height * 0.005),
                                         height: height / 5,
                                         width: width / 5,
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
-                                              image: AssetImage(
-                                                  'assets/images/user.png')),
+                                              image: AssetImage(data['img'])),
                                         ),
                                       )
                                     ],

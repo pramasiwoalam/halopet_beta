@@ -154,7 +154,6 @@ class ProfileView extends GetView<ProfileController> {
                                         Container(
                                           height: height * 0.08,
                                           width: width,
-                                          // color: Colors.pink,
                                           margin: EdgeInsets.only(
                                               left: width * 0.01, top: 12),
                                           child: Row(
@@ -178,7 +177,7 @@ class ProfileView extends GetView<ProfileController> {
                                                           image: data['role'] ==
                                                                   'Member'
                                                               ? AssetImage(
-                                                                  'assets/images/user.png')
+                                                                  data['img'])
                                                               : AssetImage(
                                                                   'assets/images/petshop-1.jpg')))),
                                               SizedBox(
@@ -198,7 +197,7 @@ class ProfileView extends GetView<ProfileController> {
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              'John Doe',
+                                                              data['name'],
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       'SanFrancisco',
@@ -427,9 +426,6 @@ class ProfileView extends GetView<ProfileController> {
                                       builder: (context, petshopSnapshot) {
                                         if (petshopSnapshot.connectionState ==
                                             ConnectionState.done) {
-                                          var petshopData =
-                                              petshopSnapshot.data!.data()
-                                                  as Map<String, dynamic>;
                                           return Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -646,43 +642,6 @@ class ProfileView extends GetView<ProfileController> {
                                                     Routes.EDIT_PROFILE),
                                               ),
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 30,
-                                                      vertical: 5),
-                                              child: FlatButton(
-                                                padding: EdgeInsets.all(15),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                color: Colors.grey.shade100,
-                                                height: height * 0.08,
-                                                child: Row(
-                                                  children: [
-                                                    const Icon(
-                                                      Icons.favorite,
-                                                      color: Color(0xffF9813A),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 30,
-                                                    ),
-                                                    Expanded(
-                                                      child: Text("Favorite",
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'SanFrancisco.Light',
-                                                              fontSize: 14)),
-                                                    ),
-                                                    Icon(Icons
-                                                        .arrow_forward_ios),
-                                                  ],
-                                                ),
-                                                onPressed: () => Get.toNamed(
-                                                    Routes.EDIT_PROFILE),
-                                              ),
-                                            ),
                                           ],
                                         )
                                       : data['role'] == 'Member' &&
@@ -816,48 +775,6 @@ class ProfileView extends GetView<ProfileController> {
                                                         profileController
                                                             .changeRoleToSeller(
                                                                 userId),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 30,
-                                                      vertical: 10),
-                                                  child: FlatButton(
-                                                    padding: EdgeInsets.all(20),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        15)),
-                                                    color: Colors.grey.shade100,
-                                                    child: Row(
-                                                      children: [
-                                                        Icon(
-                                                          Icons.favorite,
-                                                          color:
-                                                              Color(0xffF9813A),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 20,
-                                                        ),
-                                                        Expanded(
-                                                          child: Text(
-                                                            "Favorite",
-                                                            style: GoogleFonts.inter(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                          ),
-                                                        ),
-                                                        Icon(Icons
-                                                            .arrow_forward_ios),
-                                                      ],
-                                                    ),
-                                                    onPressed: () =>
-                                                        Get.toNamed(
-                                                            Routes.FAVORITE),
                                                   ),
                                                 ),
                                               ],

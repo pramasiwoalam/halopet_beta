@@ -20,9 +20,9 @@ class MedicalListController extends GetxController {
     return doc.get();
   }
 
-  Stream<QuerySnapshot<Object?>> getMedicalList(String petshopId) {
+  Stream<QuerySnapshot<Object?>> getMedicalList(String sessionId) {
     CollectionReference medicalList = firestore.collection("medical_service");
-    return medicalList.where('petshopId', isEqualTo: petshopId).snapshots();
+    return medicalList.where('sessionId', isEqualTo: sessionId).snapshots();
   }
 
   Stream<QuerySnapshot<Object?>> getPets() {

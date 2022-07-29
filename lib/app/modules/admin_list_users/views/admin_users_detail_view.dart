@@ -3,30 +3,42 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:halopet_beta/app/routes/app_pages.dart';
 
-import '../controllers/admin_petshop_approval_controller.dart';
+import '../controllers/admin_list_users_controller.dart';
 
-class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
+class AdminUserDetailView extends GetView<AdminListUsersController> {
+  final listController = Get.put(AdminListUsersController());
   final localStorage = GetStorage();
-  dynamic arguments = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
+    var arguments = Get.arguments;
+
+    double bookingFee = 5000;
+    double charge = 0;
+    if (localStorage.read('deliveryCharge') == null) {
+      charge = bookingFee;
+    } else {
+      charge = bookingFee + localStorage.read('deliveryCharge');
+    }
+
+    localStorage.write('totalCharge', charge);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Petshop Approval',
-          style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
-        ),
+        title: Text('User Detail',
+            style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15)),
+        centerTitle: true,
         backgroundColor: Color(0xFFF33ca7f),
       ),
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: FutureBuilder<DocumentSnapshot<Object?>>(
-            future: controller.getPetshop(arguments),
+            future: controller.getUser(arguments),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 var dataMap = snapshot.data!.data() as Map<String, dynamic>;
@@ -60,7 +72,7 @@ class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
                                       width: 10,
                                     ),
                                     Icon(
-                                      Icons.house,
+                                      Icons.person,
                                       size: 22,
                                       color: Color(0xFFF33ca7f),
                                     ),
@@ -75,7 +87,7 @@ class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
                                       width: 10,
                                     ),
                                     Text(
-                                      'Petshop Detail',
+                                      'User Detail',
                                       style: TextStyle(
                                           fontFamily: 'SanFrancisco.Light',
                                           fontSize: 16),
@@ -96,7 +108,7 @@ class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
                                   height: 2,
                                 ),
                                 Text(
-                                  dataMap['petshopName'],
+                                  dataMap['name'],
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco', fontSize: 13),
                                 ),
@@ -115,7 +127,7 @@ class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
                                   height: 2,
                                 ),
                                 Text(
-                                  dataMap['petshopAddress'],
+                                  dataMap['address'],
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco', fontSize: 13),
                                 ),
@@ -125,7 +137,7 @@ class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
                                 ),
                                 Spacer(),
                                 Text(
-                                  'District',
+                                  'Phone Number',
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco.Light',
                                       fontSize: 10),
@@ -134,7 +146,26 @@ class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
                                   height: 2,
                                 ),
                                 Text(
-                                  dataMap['district'],
+                                  dataMap['phone'],
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco', fontSize: 13),
+                                ),
+                                Spacer(),
+                                Divider(
+                                  thickness: 1,
+                                ),
+                                Spacer(),
+                                Text(
+                                  'Email',
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco.Light',
+                                      fontSize: 10),
+                                ),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Text(
+                                  dataMap['email'],
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco', fontSize: 13),
                                 ),
@@ -163,26 +194,7 @@ class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
                                 ),
                                 Spacer(),
                                 Text(
-                                  'Petshop Created',
-                                  style: TextStyle(
-                                      fontFamily: 'SanFrancisco.Light',
-                                      fontSize: 10),
-                                ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                Text(
-                                  'June 6, 2022',
-                                  style: TextStyle(
-                                      fontFamily: 'SanFrancisco', fontSize: 13),
-                                ),
-                                Spacer(),
-                                Divider(
-                                  thickness: 1,
-                                ),
-                                Spacer(),
-                                Text(
-                                  'Service Available',
+                                  'Postal Code',
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco.Light',
                                       fontSize: 10),
@@ -190,33 +202,11 @@ class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
                                 SizedBox(
                                   height: 3,
                                 ),
-                                dataMap['vetService'] == true
-                                    ? Text(
-                                        'Vet Available',
-                                        style: TextStyle(
-                                          fontFamily: 'SanFrancisco',
-                                          fontSize: 13,
-                                        ),
-                                      )
-                                    : SizedBox(),
-                                dataMap['groomingService'] == true
-                                    ? Text(
-                                        'Grooming Services',
-                                        style: TextStyle(
-                                          fontFamily: 'SanFrancisco',
-                                          fontSize: 13,
-                                        ),
-                                      )
-                                    : SizedBox(),
-                                dataMap['petHotelService'] == true
-                                    ? Text(
-                                        'Pet Hotel Services',
-                                        style: TextStyle(
-                                          fontFamily: 'SanFrancisco',
-                                          fontSize: 13,
-                                        ),
-                                      )
-                                    : SizedBox(),
+                                Text(
+                                  dataMap['postalCode'],
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco', fontSize: 13),
+                                ),
                               ],
                             ),
                           ),
@@ -224,89 +214,6 @@ class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
                         SizedBox(
                           height: 25,
                         ),
-                        FlatButton(
-                            onPressed: () => {
-                                  Get.dialog(AlertDialog(
-                                      title: Text(
-                                        'Approval Confirmation',
-                                        style: TextStyle(
-                                            fontFamily: 'SanFrancisco',
-                                            fontSize: 14),
-                                      ),
-                                      titlePadding: EdgeInsets.only(
-                                          left: 26, right: 26, top: 30),
-                                      contentPadding: EdgeInsets.only(
-                                          left: 26,
-                                          right: 26,
-                                          top: 16,
-                                          bottom: 12),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      content: Text(
-                                          'Are you want to approve this petshop?',
-                                          style: TextStyle(
-                                              fontFamily: 'SanFrancisco.Light',
-                                              fontSize: 12)),
-                                      actionsPadding: EdgeInsets.only(
-                                          right: 12, top: 6, bottom: 2),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () => {Get.back()},
-                                            child: Text(
-                                              'Cancel',
-                                              style: TextStyle(
-                                                  fontFamily:
-                                                      'SanFrancisco.Light',
-                                                  fontSize: 13,
-                                                  color: Colors.orange),
-                                            )),
-                                        TextButton(
-                                            onPressed: () => {},
-                                            child: Text(
-                                              'Confirm',
-                                              style: TextStyle(
-                                                  fontFamily: 'SanFrancisco',
-                                                  fontSize: 13,
-                                                  color: Colors.orange),
-                                            )),
-                                      ]))
-                                },
-                            child: Container(
-                                height: height * 0.07,
-                                width: width,
-                                decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade300,
-                                          spreadRadius: 3,
-                                          blurRadius: 4,
-                                          offset: Offset(0, 4))
-                                    ],
-                                    color: Color(0xFFF33ca7f),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 30, right: 30),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: const [
-                                      Text("Approve",
-                                          style: TextStyle(
-                                            fontFamily: 'SanFrancisco',
-                                            fontSize: 14,
-                                            color: Colors.white,
-                                          )),
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: Colors.white,
-                                        size: 18,
-                                      )
-                                    ],
-                                  ),
-                                )))
                       ],
                     ));
               } else {

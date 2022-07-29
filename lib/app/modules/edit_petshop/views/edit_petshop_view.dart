@@ -188,20 +188,19 @@ class EditPetshopView extends GetView<EditPetshopController> {
                         color: Colors.transparent,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 16, right: 16),
-                          child: Obx(
-                            () => Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Edit Services',
-                                    style: TextStyle(
-                                        fontFamily: 'SanFrancisco',
-                                        fontSize: 14,
-                                        color: Colors.grey.shade800)),
-                                Icon(controller.dropdown.value == false
-                                    ? Icons.arrow_drop_down
-                                    : Icons.arrow_drop_up)
-                              ],
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Edit Services',
+                                  style: TextStyle(
+                                      fontFamily: 'SanFrancisco',
+                                      fontSize: 14,
+                                      color: Colors.grey.shade800)),
+                              Icon(
+                                Icons.abc,
+                                color: Colors.white,
+                              )
+                            ],
                           ),
                         ),
                         onPressed: () => {
@@ -211,99 +210,62 @@ class EditPetshopView extends GetView<EditPetshopController> {
                         },
                       ),
                     ),
-                    Obx(() => controller.dropdown.value == false &&
-                            dataMap['groomingService'] == true
-                        ? Container(
-                            height: height * 0.08,
-                            width: width,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1, color: Colors.grey.shade200),
-                              color: Colors.white,
-                            ),
-                            child: FlatButton(
-                              color: Colors.transparent,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 16, right: 16),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Grooming Services',
-                                        style: TextStyle(
-                                            fontFamily: 'SanFrancisco.Light',
-                                            fontSize: 14,
-                                            color: Colors.grey.shade800)),
-                                  ],
-                                ),
-                              ),
-                              onPressed: () => {},
-                            ),
-                          )
-                        : SizedBox()),
-                    Obx(() => controller.dropdown.value == false &&
-                            dataMap['vetService'] == true
-                        ? Container(
-                            height: height * 0.08,
-                            width: width,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1, color: Colors.grey.shade200),
-                              color: Colors.white,
-                            ),
-                            child: FlatButton(
-                              color: Colors.transparent,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 16, right: 16),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Vet Services',
-                                        style: TextStyle(
-                                            fontFamily: 'SanFrancisco.Light',
-                                            fontSize: 14,
-                                            color: Colors.grey.shade800)),
-                                  ],
-                                ),
-                              ),
-                              onPressed: () => {},
-                            ),
-                          )
-                        : SizedBox()),
-                    Obx(() => controller.dropdown.value == false &&
-                            dataMap['petHotelService'] == true
-                        ? Container(
-                            height: height * 0.08,
-                            width: width,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1, color: Colors.grey.shade200),
-                              color: Colors.white,
-                            ),
-                            child: FlatButton(
-                              color: Colors.transparent,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 16, right: 16),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Pet Hotel Services',
-                                        style: TextStyle(
-                                            fontFamily: 'SanFrancisco.Light',
-                                            fontSize: 14,
-                                            color: Colors.grey.shade800)),
-                                  ],
-                                ),
-                              ),
-                              onPressed: () => {},
-                            ),
-                          )
-                        : SizedBox()),
+                    StreamBuilder<QuerySnapshot<Object?>>(
+                        stream: controller.getService(petshopId),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.active) {
+                            var data = snapshot.data!.docs;
+                            return ListView.builder(
+                                physics: const ClampingScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: data.length,
+                                itemBuilder: (context, index) {
+                                  var dataMap = data[index].data()
+                                      as Map<String, dynamic>;
+
+                                  return Container(
+                                    height: height * 0.08,
+                                    width: width,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1,
+                                          color: Colors.grey.shade200),
+                                      color: Colors.white,
+                                    ),
+                                    child: FlatButton(
+                                      color: Colors.transparent,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(dataMap['name'],
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        'SanFrancisco.Light',
+                                                    fontSize: 14,
+                                                    color:
+                                                        Colors.grey.shade800)),
+                                          ],
+                                        ),
+                                      ),
+                                      onPressed: () => {
+                                        localStorage.write(
+                                            'editServiceId', data[index].id),
+                                        Get.toNamed(Routes.EDIT_SERVICE,
+                                            arguments: dataMap['name']),
+                                      },
+                                    ),
+                                  );
+                                });
+                          } else {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                        }),
                     SizedBox(
                       height: 20,
                     ),

@@ -53,12 +53,11 @@ class ServiceFormController extends GetxController {
 
     session.add({
       'number': formData['number'],
-      'day': formData['day'],
+      'dayOpen': formData['dayOpen'],
       'name': formData['name'],
-      'openHours':
-          "${formData['openHoursStart']} - ${formData['openHoursEnd']}",
+      'time': formData['time'],
+      'degree': formData['degree'],
       'specialist': formData['specialist'],
-      'desc': formData['desc'],
       'yearsActive': formData['yearsActive'],
       'serviceId': tempServiceId
     }).then((value) => {
@@ -101,15 +100,16 @@ class ServiceFormController extends GetxController {
 
   void createSession(Map<String, dynamic> formData) {
     CollectionReference session = firestore.collection("session");
+    var tempServiceId = localStorage.read('tempServiceId');
     session.add({
       'number': formData['number'],
-      'day': formData['day'],
+      'dayOpen': formData['dayOpen'],
       'name': formData['name'],
-      'openHours':
-          "${formData['openHoursStart']} - ${formData['openHoursEnd']}",
+      'time': formData['time'],
+      'degree': formData['degree'],
       'specialist': formData['specialist'],
-      'desc': formData['desc'],
-      'yearsActive': formData['yearsActive']
+      'yearsActive': formData['yearsActive'],
+      'serviceId': tempServiceId
     }).then((value) => localStorage.write('tempSessionId', value.id));
   }
 

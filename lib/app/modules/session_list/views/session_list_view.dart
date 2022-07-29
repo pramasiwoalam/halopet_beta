@@ -125,8 +125,12 @@ class SessionListView extends GetView<SessionListController> {
 
                                     return InkWell(
                                         onTap: () => {
-                                              Get.toNamed(Routes.SESSION_DETAIL,
-                                                  arguments: data[index].id)
+                                              localStorage.write(
+                                                  'sessionId', data[index].id),
+                                              Get.toNamed(
+                                                Routes.SESSION_DETAIL,
+                                                arguments: data[index].id,
+                                              )
                                             },
                                         child: Padding(
                                             padding: const EdgeInsets.only(

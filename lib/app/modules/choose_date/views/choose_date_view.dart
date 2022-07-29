@@ -116,9 +116,6 @@ class ChooseDateView extends GetView<ChooseDateController> {
                   ),
                 ),
               ),
-              // controller.date == "null" && serviceName == 'Grooming'
-              //     ? SizedBox()
-              //     : Obx(() => Container()),
               SizedBox(
                 height: 25,
               ),
@@ -160,12 +157,13 @@ class ChooseDateView extends GetView<ChooseDateController> {
                           }
                         else
                           {
-                            if (arguments == 'Vet')
+                            print(arguments),
+                            if (arguments == 'Vet Service')
                               {
                                 Get.toNamed(Routes.CHOOSE_SESSION,
                                     arguments: arguments)
                               }
-                            else if (arguments == 'Hotel')
+                            else if (arguments == 'Pet Hotel Service')
                               {Get.toNamed(Routes.CHOOSE_ROOM)}
                             else
                               {Get.toNamed(Routes.PACKAGE_LIST)}

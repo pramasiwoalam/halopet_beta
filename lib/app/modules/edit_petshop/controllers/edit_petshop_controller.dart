@@ -18,4 +18,10 @@ class EditPetshopController extends GetxController {
     DocumentReference docRef = firestore.collection('petshop').doc(petshopId);
     docRef.update({'isOpen': status});
   }
+
+  Stream<QuerySnapshot<Object?>> getService(String petshopId) {
+    CollectionReference service = firestore.collection("service");
+
+    return service.where('petshopId', isEqualTo: petshopId).snapshots();
+  }
 }

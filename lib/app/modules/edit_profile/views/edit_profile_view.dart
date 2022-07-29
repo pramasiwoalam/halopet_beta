@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/modules/medical_list_reg/controllers/medical_list_reg_controller.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../service_list/controllers/service_list_controller.dart';
 import '../controllers/edit_profile_controller.dart';
@@ -21,6 +24,22 @@ class EditProfileView extends GetView<EditProfileController> {
   };
 
   GlobalKey<FormState> form = GlobalKey<FormState>();
+
+  File? image;
+
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) {
+        return;
+      }
+      final imageTemporary = File(image.path);
+      this.image = imageTemporary;
+      controller.edited.value = true;
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,19 +82,22 @@ class EditProfileView extends GetView<EditProfileController> {
                     children: [
                       Stack(
                         children: [
-                          Center(
-                            child: Container(
-                              height: height / 5,
-                              width: width / 3.5,
-                              // color: Colors.blue,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: Colors.black, width: width * 0.4),
-                                image: const DecorationImage(
-                                    fit: BoxFit.scaleDown,
-                                    image:
-                                        AssetImage('assets/images/user.png')),
+                          Obx(
+                            () => Center(
+                              child: Container(
+                                height: height / 5,
+                                width: width / 3.5,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: Colors.black, width: width * 0.4),
+                                  image: DecorationImage(
+                                      fit: BoxFit.scaleDown,
+                                      image: controller.edited.value == false
+                                          ? AssetImage('assets/images/user.png')
+                                          : AssetImage(
+                                              'assets/images/user2.png')),
+                                ),
                               ),
                             ),
                           ),
@@ -83,11 +105,10 @@ class EditProfileView extends GetView<EditProfileController> {
                             top: height / 8,
                             right: 110,
                             child: GestureDetector(
-                              onTap: () => {},
+                              onTap: () => pickImage(ImageSource.gallery),
                               child: Container(
-                                  height: height * 0.04,
-                                  width: height * 0.04,
-                                  // color: Colors.red,
+                                  height: height * 0.045,
+                                  width: height * 0.045,
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                           width: 2,

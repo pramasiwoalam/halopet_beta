@@ -4,6 +4,7 @@ import 'package:date_format/date_format.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -14,6 +15,12 @@ import '../controllers/petshop_detail_controller.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 final localStorage = GetStorage();
+
+var cards = [
+  {'name': 'assets/images/petshop-1.jpg', 'value': 1},
+  {'name': 'assets/images/petshop-2.jpg', 'value': 2},
+  {'name': 'assets/images/pet-hotel.jpg', 'value': 3},
+];
 
 class PetshopDetailView extends GetView<PetshopDetailController> {
   List<Widget> containerList = [
@@ -143,7 +150,6 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                           child: Container(
                             height: height * 0.08,
                             width: height * 0.08,
-                            // color: Colors.red,
                             decoration: BoxDecoration(
                                 border: Border.all(
                                     width: 2, color: const Color(0xFFf2f2f2)),
@@ -338,7 +344,50 @@ class ShopInfo extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: 'SanFrancisco.Light', fontSize: 12)),
               const SizedBox(
-                height: 5,
+                height: 15,
+              ),
+              Text('Photos',
+                  style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13)),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: height * 0.2,
+                width: width,
+                // color: Colors.black,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: cards.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Container(
+                          height: height * 0.58,
+                          width: width * 0.42,
+                          decoration:
+                              BoxDecoration(border: Border.all(width: 0.05)),
+                          child: InkWell(
+                            onTap: () => {},
+                            child: Stack(
+                              children: [
+                                FullScreenWidget(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(3),
+                                    child: Image(
+                                      height: height * 0.6,
+                                      width: width * 0.42,
+                                      image:
+                                          AssetImage("${cards[index]['name']}"),
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
               ),
             ],
           ),
@@ -490,8 +539,8 @@ class Service extends StatelessWidget {
                                                       'selectedServiceName',
                                                       dataMap['serviceName']),
                                                   Get.toNamed(Routes.CHOOSE_PET,
-                                                      arguments: dataMap[
-                                                          'serviceName']),
+                                                      arguments:
+                                                          dataMap['name']),
                                                 },
                                             child: Text(
                                               'Confirm',

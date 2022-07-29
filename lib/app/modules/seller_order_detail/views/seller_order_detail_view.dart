@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halopet_beta/app/modules/seller_order_detail/views/seller_detail_on_going.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 import 'package:money_formatter/money_formatter.dart';
 
@@ -23,8 +24,7 @@ class SellerOrderDetailView extends GetView<SellerOrderDetailController> {
         appBar: AppBar(
           title: Text(
             'Booking Detail',
-            style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+            style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
           ),
           backgroundColor: Color(0xff2596BE),
           elevation: 0,
@@ -36,8 +36,8 @@ class SellerOrderDetailView extends GetView<SellerOrderDetailController> {
                 var data = snapshot.data!.data() as Map<String, dynamic>;
                 if (data['status'] == 'Waiting for approval') {
                   return WaitingApproval();
-                } else if (data['status'] == 'Declined') {
-                  return Declined();
+                } else if (data['status'] == 'On Going') {
+                  return SellerOnGoing();
                 } else if (data['status'] == 'Completed') {
                   return Declined();
                 } else {

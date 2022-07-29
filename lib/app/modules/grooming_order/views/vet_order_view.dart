@@ -37,7 +37,9 @@ class VetOrderView extends GetView<GroomingOrderController> {
     var height = size.height;
     var width = size.width;
     var petId = localStorage.read('petId');
-    var roomId = localStorage.read('roomId');
+    var sessionId = localStorage.read('sessionId');
+
+    var medicalId = localStorage.read('medicalId');
     DateFormat format = new DateFormat("MMMM dd, yyyy");
     print(localStorage.read('deliveryCharge'));
 
@@ -70,7 +72,7 @@ class VetOrderView extends GetView<GroomingOrderController> {
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: FutureBuilder<DocumentSnapshot<Object?>>(
-            future: controller.getRoom(roomId),
+            future: controller.getSession(sessionId),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 var dataMap = snapshot.data!.data() as Map<String, dynamic>;
@@ -240,7 +242,7 @@ class VetOrderView extends GetView<GroomingOrderController> {
                                   height: 3,
                                 ),
                                 Text(
-                                  'Rp. ${dataMap['price']}',
+                                  'Rp. ${bookingFee.toString()}',
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco.Regular',
                                       fontSize: 13),

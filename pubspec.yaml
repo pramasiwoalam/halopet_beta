@@ -36,6 +36,10 @@ dependencies:
   flutter_switch: ^0.3.2
   toggle_switch: ^2.0.1
   flutter_picker: ^2.0.3 
+  image_picker: ^0.8.5+3
+  full_screen_image_null_safe: ^2.0.0 
+
+
 
 dev_dependencies: 
   flutter_test: 
@@ -86,3 +90,4 @@ flutter:
     - assets/images/8.png
     - assets/images/9.png
     - assets/images/pet-hotel.jpg
+    - assets/images/user2.png

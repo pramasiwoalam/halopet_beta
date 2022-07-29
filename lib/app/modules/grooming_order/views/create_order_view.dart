@@ -37,8 +37,7 @@ class CreateOrderView extends GetView<GroomingOrderController> {
         appBar: AppBar(
           title: Text(
             'Booking Confirmation',
-            style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+            style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
           ),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,

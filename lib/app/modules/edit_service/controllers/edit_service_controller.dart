@@ -4,13 +4,16 @@ import 'package:get_storage/get_storage.dart';
 
 final localStorage = GetStorage();
 
-class MedicalListRegController extends GetxController {
+class EditServiceController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  var medicalList = [];
+  var packageGroomingList = [];
+  var packageHotelList = [];
+  var sessionList = [];
 
-  Future<DocumentSnapshot<Object?>> getUser(String userId) async {
-    DocumentReference doc = firestore.collection("users").doc(userId);
-    return doc.get();
+  Stream<QuerySnapshot<Object?>> getPackage(String serviceId) {
+    CollectionReference package = firestore.collection("package");
+
+    return package.where('serviceId', isEqualTo: serviceId).snapshots();
   }
 
   Future<DocumentSnapshot<Object?>> getPetshopDetail(String petshopId) async {
@@ -43,14 +46,6 @@ class MedicalListRegController extends GetxController {
         });
   }
 
-  // void createDefaultSession() {
-  //   CollectionReference session = firestore.collection("session");
-
-  //   session.add({'name': 'null'}).then((value) => {
-  //         localStorage.write('tempSessionId', value.id),
-  //       });
-  // }
-
   void createVetServiceDetail(Map<String, dynamic> formData) {
     CollectionReference service = firestore.collection("service");
     CollectionReference session = firestore.collection("session");
@@ -59,12 +54,11 @@ class MedicalListRegController extends GetxController {
 
     session.add({
       'number': formData['number'],
-      'day': formData['day'],
+      'dayOpen': formData['dayOpen'],
       'name': formData['name'],
-      'openHours':
-          "${formData['openHoursStart']} - ${formData['openHoursEnd']}",
+      'time': formData['time'],
+      'degree': formData['degree'],
       'specialist': formData['specialist'],
-      'desc': formData['desc'],
       'yearsActive': formData['yearsActive'],
       'serviceId': tempServiceId
     }).then((value) => {
@@ -110,15 +104,14 @@ class MedicalListRegController extends GetxController {
     var tempServiceId = localStorage.read('tempServiceId');
     session.add({
       'number': formData['number'],
-      'day': formData['day'],
+      'dayOpen': formData['dayOpen'],
       'name': formData['name'],
-      'openHours':
-          "${formData['openHoursStart']} - ${formData['openHoursEnd']}",
+      'time': formData['time'],
+      'degree': formData['degree'],
       'specialist': formData['specialist'],
-      'desc': formData['desc'],
       'yearsActive': formData['yearsActive'],
       'serviceId': tempServiceId
-    });
+    }).then((value) => localStorage.write('tempSessionId', value.id));
   }
 
   void createService() {

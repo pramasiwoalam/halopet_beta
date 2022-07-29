@@ -22,6 +22,7 @@ class MedicalListView extends GetView<MedicalListController> {
     var height = size.height;
     var userId = GetStorage().read('currentUserId');
     var petshopId = localStorage.read('selectedPetshop');
+    var arguments = Get.arguments;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -39,7 +40,7 @@ class MedicalListView extends GetView<MedicalListController> {
                 height: height,
                 width: width,
                 child: StreamBuilder<QuerySnapshot<Object?>>(
-                    stream: controller.getMedicalList(petshopId),
+                    stream: controller.getMedicalList(arguments),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.active) {
                         var data = snapshot.data!.docs;
@@ -60,7 +61,7 @@ class MedicalListView extends GetView<MedicalListController> {
                                       onTap: () => {
                                             Get.dialog(AlertDialog(
                                               title: const Text(
-                                                'Delivey Option',
+                                                'Delivery Option',
                                                 style: TextStyle(
                                                     fontFamily: 'SanFrancisco',
                                                     fontSize: 14),

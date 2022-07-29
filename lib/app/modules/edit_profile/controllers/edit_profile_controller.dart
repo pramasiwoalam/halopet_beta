@@ -12,6 +12,7 @@ class EditProfileController extends GetxController {
   var checkValue1 = false.obs;
   var checkValue2 = false.obs;
   var checkValue3 = false.obs;
+  var edited = false.obs;
 
   void updateProfile(Map<String, dynamic> formData) {
     CollectionReference user = firestore.collection("users");
@@ -20,7 +21,8 @@ class EditProfileController extends GetxController {
     user.doc(userId).update({
       'name': formData['name'],
       'phone': formData['phone'],
-      'address': formData['address']
+      'address': formData['address'],
+      'img': 'assets/images/user2.png'
     });
   }
 }

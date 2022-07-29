@@ -31,6 +31,11 @@ class GroomingOrderController extends GetxController {
     return doc.get();
   }
 
+  Future<DocumentSnapshot<Object?>> getSession(String sessionId) async {
+    DocumentReference doc = firestore.collection("session").doc(sessionId);
+    return doc.get();
+  }
+
   Future<DocumentSnapshot<Object?>> getPackage(String packageId) async {
     DocumentReference doc = firestore.collection("package").doc(packageId);
     return doc.get();
