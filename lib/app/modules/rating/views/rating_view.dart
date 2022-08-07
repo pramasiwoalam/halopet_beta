@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
@@ -18,6 +19,9 @@ class RatingView extends GetView<RatingController> {
     var width = size.width;
     var height = size.height;
     var orderId = Get.arguments;
+    print(GetStorage().read('expense'));
+    var charge = GetStorage().read('expense');
+    double currentBalance = 0;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -67,9 +71,11 @@ class RatingView extends GetView<RatingController> {
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.done) {
-                                    var data = snapshot.data!.data()
+                                    var userData = snapshot.data!.data()
                                         as Map<String, dynamic>;
-                                    controller.userName = data['name'];
+                                    double userBalance = userData['balance'];
+                                    currentBalance = userBalance.toDouble();
+                                    controller.userName = userData['name'];
                                     return Container(
                                       child: Column(
                                         children: [
@@ -280,9 +286,39 @@ class RatingView extends GetView<RatingController> {
                       child: GestureDetector(
                         onTap: () => {
                           controller.createReview(messageC.text),
-                          controller.done(orderId)
+                          controller.done(orderId, charge, currentBalance),
+                          Get.dialog(AlertDialog(
+                            title: Text(
+                              'Review Created.',
+                              style: TextStyle(
+                                  fontFamily: 'SanFrancisco', fontSize: 14),
+                            ),
+                            titlePadding:
+                                EdgeInsets.only(left: 26, right: 26, top: 30),
+                            contentPadding: EdgeInsets.only(
+                                left: 26, right: 26, top: 16, bottom: 12),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            content: Text(
+                                'Thank you for the review. Your review has succesfully created.',
+                                style: TextStyle(
+                                    fontFamily: 'SanFrancisco.Light',
+                                    fontSize: 12)),
+                            actionsPadding:
+                                EdgeInsets.only(right: 12, top: 6, bottom: 2),
+                            actions: [
+                              TextButton(
+                                  onPressed: () => {Get.back()},
+                                  child: Text(
+                                    'Ok',
+                                    style: TextStyle(
+                                        fontFamily: 'SanFrancisco',
+                                        fontSize: 13,
+                                        color: Colors.orange),
+                                  )),
+                            ],
+                          )),
                         },
-                        // Get.toNamed(Routes.PAYMENT, arguments: orderId)
                         child: Container(
                           margin: EdgeInsets.only(top: height * 0.025),
                           width: width * 0.82,

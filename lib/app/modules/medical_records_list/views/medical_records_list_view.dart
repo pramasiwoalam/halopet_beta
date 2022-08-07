@@ -29,7 +29,7 @@ class MedicalRecordsListView extends GetView<MedicalRecordsListController> {
       appBar: AppBar(
         title: Text(
           'Medical Records List',
-          style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 17),
+          style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
         ),
         backgroundColor: Color(0xffF9813A),
         elevation: 0,
@@ -225,7 +225,42 @@ class MedicalRecordsListView extends GetView<MedicalRecordsListController> {
                                 ),
                               ),
                             ),
-                          )
+                          ),
+                          Center(
+                            child: Container(
+                              height: size.height * 0.07,
+                              width: size.width * 0.9,
+                              color: Colors.transparent,
+                              child: ElevatedButton(
+                                onPressed: () => {Get.toNamed(Routes.HOMEPAGE)},
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 5.0),
+                                  primary: Color(0xffF9813A),
+                                  shape: StadiumBorder(),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15, right: 15),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Register',
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              fontFamily: 'SanFrancisco',
+                                              color: Colors.white)),
+                                      const Icon(
+                                        Icons.arrow_forward_rounded,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       );
                     } else {

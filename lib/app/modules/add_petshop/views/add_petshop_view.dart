@@ -48,454 +48,452 @@ class AddPetshopView extends GetView<AddPetshopController> {
     var width = size.width;
     var localStorage = GetStorage();
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(
           'Create Petshop',
           style: TextStyle(
               fontFamily: 'SanFrancisco',
-              fontSize: 16,
+              fontSize: 15,
               color: Colors.grey.shade800),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Stack(
-          children: [
-            Container(
-              height: height,
-              width: width,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 100),
+          child: Column(
+            children: [
+              Container(
+                height: height,
+                width: width,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  color: Colors.white,
                 ),
-                color: Colors.white,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 25, bottom: 25, right: 25, top: 10),
-                child: Form(
-                  key: form,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            labelText: "Petshop Name *",
-                            hintText: 'Name',
-                            hintStyle: GoogleFonts.roboto(
-                                fontSize: 14, color: Colors.grey.shade600),
-                            contentPadding: EdgeInsets.all(18),
-                            floatingLabelBehavior:
-                                FloatingLabelBehavior.always),
-                        validator: (value) {
-                          if (value!.contains('Wira')) {
-                            return 'Wira Dilarang daftar';
-                          }
-                        },
-                        onSaved: (value) {
-                          formData['name'] = value;
-                        },
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 25),
-                        child: TextFormField(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 25, bottom: 25, right: 25, top: 10),
+                  child: Form(
+                    key: form,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              labelText: "Petshop Address *",
-                              hintText: 'Address',
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                              labelText: "Petshop Name *",
+                              hintText: 'Name',
                               hintStyle: GoogleFonts.roboto(
                                   fontSize: 14, color: Colors.grey.shade600),
                               contentPadding: EdgeInsets.all(18),
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always),
                           validator: (value) {
-                            if (value!.contains('@')) {
-                              return 'Error 2';
-                            } else {
-                              return null;
+                            if (value!.isEmpty) {
+                              return 'Petshop name cannot be null.';
                             }
                           },
                           onSaved: (value) {
-                            formData['address'] = value;
+                            formData['name'] = value;
                           },
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 25),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    labelText: "District *",
-                                    hintText: 'District',
-                                    hintStyle: GoogleFonts.roboto(
-                                        fontSize: 14,
-                                        color: Colors.grey.shade600),
-                                    contentPadding: EdgeInsets.all(18),
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.always),
-                                validator: (value) {
-                                  if (value!.contains('@')) {
-                                    return 'Error 2';
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                onSaved: (value) {
-                                  formData['district'] = value;
-                                },
+                        Padding(
+                          padding: EdgeInsets.only(top: 25),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                labelText: "Petshop Address *",
+                                hintText: 'Address',
+                                hintStyle: GoogleFonts.roboto(
+                                    fontSize: 14, color: Colors.grey.shade600),
+                                contentPadding: EdgeInsets.all(18),
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Petshop address cannot be null.';
+                              }
+                            },
+                            onSaved: (value) {
+                              formData['address'] = value;
+                            },
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Flexible(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 25),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10))),
+                                      labelText: "District *",
+                                      hintText: 'District',
+                                      hintStyle: GoogleFonts.roboto(
+                                          fontSize: 14,
+                                          color: Colors.grey.shade600),
+                                      contentPadding: EdgeInsets.all(18),
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.always),
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Petshop district cannot be null.';
+                                    }
+                                  },
+                                  onSaved: (value) {
+                                    formData['district'] = value;
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 25, left: 15),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    labelText: "City *",
-                                    hintText: 'City',
-                                    hintStyle: GoogleFonts.roboto(
-                                        fontSize: 14,
-                                        color: Colors.grey.shade600),
-                                    contentPadding: EdgeInsets.all(18),
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.always),
-                                validator: (value) {
-                                  if (value!.contains('@')) {
-                                    return 'Error 2';
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                onSaved: (value) {
-                                  formData['city'] = value;
-                                },
+                            Flexible(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 25, left: 15),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10))),
+                                      labelText: "City *",
+                                      hintText: 'City',
+                                      hintStyle: GoogleFonts.roboto(
+                                          fontSize: 14,
+                                          color: Colors.grey.shade600),
+                                      contentPadding: EdgeInsets.all(18),
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.always),
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Petshop city cannot be null.';
+                                    }
+                                  },
+                                  onSaved: (value) {
+                                    formData['city'] = value;
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              labelText: "Petshop Phone Number *",
-                              hintText: 'Phone',
-                              hintStyle: GoogleFonts.roboto(
-                                  fontSize: 14, color: Colors.grey.shade600),
-                              contentPadding: EdgeInsets.all(18),
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always),
-                          validator: (value) {
-                            if (value!.contains('@')) {
-                              return 'Error 2';
-                            } else {
-                              return null;
-                            }
-                          },
-                          onSaved: (value) {
-                            formData['phone'] = value;
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25),
-                        child: TextFormField(
-                          maxLines: null,
-                          minLines: 2,
-                          keyboardType: TextInputType.multiline,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              labelText: "Petshop Description *",
-                              hintText: 'Description',
-                              hintStyle: GoogleFonts.roboto(
-                                  fontSize: 14, color: Colors.grey.shade600),
-                              contentPadding: EdgeInsets.all(18),
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always),
-                          validator: (value) {
-                            if (value!.contains('@')) {
-                              return 'Error 2';
-                            } else {
-                              return null;
-                            }
-                          },
-                          onSaved: (value) {
-                            formData['desc'] = value;
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25),
-                        child: MultiSelectFormField(
-                          chipBackGroundColor: Color(0xffF9813A),
-                          chipLabelStyle: GoogleFonts.roboto(
-                              fontSize: 14, color: Colors.white),
-                          dialogTextStyle: GoogleFonts.roboto(
-                              fontWeight: FontWeight.w300, fontSize: 15),
-                          checkBoxActiveColor: Color(0xffF9813A),
-                          dialogShapeBorder: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                          border: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          title: Text(
-                            "Choose Open Day(s) *",
-                            style: GoogleFonts.roboto(
-                                fontSize: 14, color: Colors.grey.shade600),
-                          ),
-                          trailing: Icon(Icons.delete),
-                          dataSource: const [
-                            {
-                              "display": "Monday",
-                              "value": "Monday",
-                            },
-                            {
-                              "display": "Tuesday",
-                              "value": "Tuesday",
-                            },
-                            {
-                              "display": "Wednesday",
-                              "value": "Wednesday",
-                            },
-                            {
-                              "display": "Thursday",
-                              "value": "Thursday",
-                            },
-                            {
-                              "display": "Friday",
-                              "value": "Friday",
-                            },
-                            {
-                              "display": "Saturday",
-                              "value": "Saturday",
-                            },
-                            {
-                              "display": "Sunday",
-                              "value": "Sunday",
-                            },
                           ],
-                          // validator: (value) {
-                          //   if (value == null) {
-                          //     return 'Please select one or more options';
-                          //   }
-                          //   return null;
-                          // },
-                          textField: 'display',
-                          valueField: 'value',
-                          okButtonLabel: 'Choose',
-                          cancelButtonLabel: 'Cancel',
-                          initialValue: formData['dayOpen'],
-                          onSaved: (value) {
-                            if (value == null) return;
-                            formData['dayOpen'] = value;
-                          },
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 25),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    labelText: "Open Hours *",
-                                    hintText: '07.00 am',
-                                    hintStyle: GoogleFonts.roboto(
-                                        fontSize: 14,
-                                        color: Colors.grey.shade600),
-                                    contentPadding: EdgeInsets.all(18),
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.always),
-                                validator: (value) {
-                                  if (value!.contains('@')) {
-                                    return 'Error 2';
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                onSaved: (value) {
-                                  formData['openHoursStart'] = value;
-                                },
-                              ),
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                labelText: "Petshop Phone Number *",
+                                hintText: 'Phone',
+                                hintStyle: GoogleFonts.roboto(
+                                    fontSize: 14, color: Colors.grey.shade600),
+                                contentPadding: EdgeInsets.all(18),
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Petshop phone number cannot be null.';
+                              }
+                            },
+                            onSaved: (value) {
+                              formData['phone'] = value;
+                            },
                           ),
-                          Flexible(
-                              child: Container(
-                                  width: width * 0.1,
-                                  margin: EdgeInsets.only(top: 15),
-                                  child: Center(
-                                      child: Text(
-                                    'until',
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 14,
-                                        color: Colors.grey.shade600),
-                                  )))),
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 15),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            const Radius.circular(10))),
-                                    labelText: "Open Hours *",
-                                    hintText: '21.00 pm',
-                                    hintStyle: GoogleFonts.roboto(
-                                        fontSize: 14,
-                                        color: Colors.grey.shade600),
-                                    contentPadding: EdgeInsets.all(18),
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.always),
-                                validator: (value) {
-                                  if (value!.contains('@')) {
-                                    return 'Error 2';
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                onSaved: (value) {
-                                  formData['openHoursEnd'] = value;
-                                },
-                              ),
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: TextFormField(
+                            maxLines: null,
+                            minLines: 2,
+                            keyboardType: TextInputType.multiline,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                labelText: "Petshop Description *",
+                                hintText: 'Description',
+                                hintStyle: GoogleFonts.roboto(
+                                    fontSize: 14, color: Colors.grey.shade600),
+                                contentPadding: EdgeInsets.all(18),
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Petshop description cannot be null.';
+                              }
+                            },
+                            onSaved: (value) {
+                              formData['desc'] = value;
+                            },
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        height: size.height * 0.07,
-                        width: size.width * 0.9,
-                        color: Colors.transparent,
-                        child: ElevatedButton(
-                          onPressed: () => {
-                            if (form.currentState!.validate())
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: MultiSelectFormField(
+                            chipBackGroundColor: Color(0xffF9813A),
+                            chipLabelStyle: GoogleFonts.roboto(
+                                fontSize: 14, color: Colors.white),
+                            dialogTextStyle: GoogleFonts.roboto(
+                                fontWeight: FontWeight.w300, fontSize: 15),
+                            checkBoxActiveColor: Color(0xffF9813A),
+                            dialogShapeBorder: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0))),
+                            border: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.red),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            title: Text(
+                              "Choose Open Day(s) *",
+                              style: GoogleFonts.roboto(
+                                  fontSize: 14, color: Colors.grey.shade600),
+                            ),
+                            trailing: Icon(Icons.delete),
+                            dataSource: const [
                               {
-                                Get.dialog(AlertDialog(
-                                  title: Text(
-                                    'Booking Confirmation',
-                                    style: TextStyle(
-                                        fontFamily: 'SanFrancisco',
-                                        fontSize: 14),
-                                  ),
-                                  titlePadding: EdgeInsets.only(
-                                      left: 26, right: 26, top: 30),
-                                  contentPadding: EdgeInsets.only(
-                                      left: 26, right: 26, top: 16, bottom: 12),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  content: Text(
-                                      'Are you the data is correct? Confirm to create service.',
-                                      style: TextStyle(
-                                          fontFamily: 'SanFrancisco.Light',
-                                          fontSize: 12)),
-                                  actionsPadding: EdgeInsets.only(
-                                      right: 12, top: 6, bottom: 2),
-                                  actions: [
-                                    TextButton(
-                                        onPressed: () => {Get.back()},
-                                        child: Text(
-                                          'Cancel',
-                                          style: TextStyle(
-                                              fontFamily: 'SanFrancisco.Light',
-                                              fontSize: 13,
-                                              color: Color(0xffF9813A)),
-                                        )),
-                                    TextButton(
-                                        onPressed: () => {
-                                              Get.back(),
-                                              form.currentState!.save(),
-                                              localStorage.write(
-                                                  'generalData', formData),
-                                              petshopController
-                                                  .createPetshop(formData),
-                                              localStorage.write(
-                                                  'groomingFlag', false),
-                                              localStorage.write(
-                                                  'hotelFlag', false),
-                                              localStorage.write(
-                                                  'vetFlag', false),
-                                              Get.toNamed(Routes.SERVICE_LIST),
-                                            },
-                                        child: Text(
-                                          'Confirm',
-                                          style: TextStyle(
-                                              fontFamily: 'SanFrancisco',
-                                              fontSize: 13,
-                                              color: Color(0xffF9813A)),
-                                        )),
-                                  ],
-                                ))
+                                "display": "Monday",
+                                "value": "Monday",
                               },
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 5.0),
-                            primary: Color(0xffF9813A),
-                            shape: StadiumBorder(),
+                              {
+                                "display": "Tuesday",
+                                "value": "Tuesday",
+                              },
+                              {
+                                "display": "Wednesday",
+                                "value": "Wednesday",
+                              },
+                              {
+                                "display": "Thursday",
+                                "value": "Thursday",
+                              },
+                              {
+                                "display": "Friday",
+                                "value": "Friday",
+                              },
+                              {
+                                "display": "Saturday",
+                                "value": "Saturday",
+                              },
+                              {
+                                "display": "Sunday",
+                                "value": "Sunday",
+                              },
+                            ],
+                            // validator: (value) {
+                            //   if (value == null) {
+                            //     return 'Please select one or more options';
+                            //   }
+                            //   return null;
+                            // },
+                            textField: 'display',
+                            valueField: 'value',
+                            okButtonLabel: 'Choose',
+                            cancelButtonLabel: 'Cancel',
+                            initialValue: formData['dayOpen'],
+                            onSaved: (value) {
+                              if (value == null) return;
+                              formData['dayOpen'] = value;
+                            },
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text("Save",
-                                    style: TextStyle(
-                                      fontFamily: 'SanFrancisco',
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                    )),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.white,
-                                  size: 18,
-                                )
-                              ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 25),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10))),
+                                      labelText: "Open Hours *",
+                                      hintText: '07.00 am',
+                                      hintStyle: GoogleFonts.roboto(
+                                          fontSize: 14,
+                                          color: Colors.grey.shade600),
+                                      contentPadding: EdgeInsets.all(18),
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.always),
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Petshop open hours cannot be null.';
+                                    }
+                                  },
+                                  onSaved: (value) {
+                                    formData['openHoursStart'] = value;
+                                  },
+                                ),
+                              ),
+                            ),
+                            Flexible(
+                                child: Container(
+                                    width: width * 0.1,
+                                    margin: EdgeInsets.only(top: 15),
+                                    child: Center(
+                                        child: Text(
+                                      'until',
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 14,
+                                          color: Colors.grey.shade600),
+                                    )))),
+                            Flexible(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 15),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              const Radius.circular(10))),
+                                      labelText: "Open Hours *",
+                                      hintText: '21.00 pm',
+                                      hintStyle: GoogleFonts.roboto(
+                                          fontSize: 14,
+                                          color: Colors.grey.shade600),
+                                      contentPadding: EdgeInsets.all(18),
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.always),
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Petshop closed hours cannot be null.';
+                                    }
+                                  },
+                                  onSaved: (value) {
+                                    formData['openHoursEnd'] = value;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          height: size.height * 0.07,
+                          width: size.width * 0.9,
+                          color: Colors.transparent,
+                          child: ElevatedButton(
+                            onPressed: () => {
+                              if (form.currentState!.validate())
+                                {
+                                  Get.dialog(AlertDialog(
+                                    title: Text(
+                                      'Booking Confirmation',
+                                      style: TextStyle(
+                                          fontFamily: 'SanFrancisco',
+                                          fontSize: 14),
+                                    ),
+                                    titlePadding: EdgeInsets.only(
+                                        left: 26, right: 26, top: 30),
+                                    contentPadding: EdgeInsets.only(
+                                        left: 26,
+                                        right: 26,
+                                        top: 16,
+                                        bottom: 12),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    content: Text(
+                                        'Are you the data is correct? Confirm to create service.',
+                                        style: TextStyle(
+                                            fontFamily: 'SanFrancisco.Light',
+                                            fontSize: 12)),
+                                    actionsPadding: EdgeInsets.only(
+                                        right: 12, top: 6, bottom: 2),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () => {Get.back()},
+                                          child: Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                                fontFamily:
+                                                    'SanFrancisco.Light',
+                                                fontSize: 13,
+                                                color: Color(0xffF9813A)),
+                                          )),
+                                      TextButton(
+                                          onPressed: () => {
+                                                Get.back(),
+                                                form.currentState!.save(),
+                                                localStorage.write(
+                                                    'generalData', formData),
+                                                petshopController
+                                                    .createPetshop(formData),
+                                                localStorage.write(
+                                                    'groomingFlag', false),
+                                                localStorage.write(
+                                                    'hotelFlag', false),
+                                                localStorage.write(
+                                                    'vetFlag', false),
+                                                Get.toNamed(
+                                                    Routes.SERVICE_LIST),
+                                              },
+                                          child: Text(
+                                            'Confirm',
+                                            style: TextStyle(
+                                                fontFamily: 'SanFrancisco',
+                                                fontSize: 13,
+                                                color: Color(0xffF9813A)),
+                                          )),
+                                    ],
+                                  ))
+                                },
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 5.0),
+                              primary: Color(0xffF9813A),
+                              shape: StadiumBorder(),
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 15, right: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text("Save",
+                                      style: TextStyle(
+                                        fontFamily: 'SanFrancisco',
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      )),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Colors.white,
+                                    size: 18,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                    ],
+                        SizedBox(
+                          height: 3,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

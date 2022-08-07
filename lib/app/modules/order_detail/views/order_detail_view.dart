@@ -40,7 +40,7 @@ class OrderDetailView extends GetView<OrderDetailController> {
                 } else if (data['status'] == 'On Going') {
                   return OnGoing();
                 } else if (data['status'] == 'Completed') {
-                  return WaitingApproval();
+                  return Cancellation();
                 } else {
                   return Cancellation();
                 }

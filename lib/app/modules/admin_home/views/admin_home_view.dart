@@ -150,7 +150,7 @@ class Home extends StatelessWidget {
                                         : SizedBox(),
                                     dataMap['groomingService'] == true
                                         ? Text(
-                                            'Grooming Services',
+                                            'Grooming Service',
                                             style: TextStyle(
                                                 fontFamily: 'SanFrancisco',
                                                 fontSize: 13,

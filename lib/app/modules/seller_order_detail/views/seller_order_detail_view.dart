@@ -71,8 +71,7 @@ class WaitingApproval extends GetView<SellerOrderDetailController> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 var data = snapshot.data!.data() as Map<String, dynamic>;
-                var currentUserId = localStorage.read('currentUserId');
-                var orderId = Get.arguments;
+
                 var bookingType = data['bookingType'];
                 localStorage.write('petshopId', Get.arguments);
 
@@ -92,12 +91,14 @@ class WaitingApproval extends GetView<SellerOrderDetailController> {
                         if (bookingType == 'Vet') {
                           charge = bookingFee;
                         } else {
-                          tax = packageData['price'] * 10 / 100;
+                          tax = double.parse(packageData['price']) * 10 / 100;
                           charge = 0;
                           if (data['isDelivery'] == false) {
-                            charge = packageData['price'] + bookingFee + tax;
+                            charge = double.parse(packageData['price']) +
+                                bookingFee +
+                                tax;
                           } else {
-                            charge = packageData['price'] +
+                            charge = double.parse(packageData['price']) +
                                 bookingFee +
                                 tax +
                                 data['deliveryFee'];
@@ -112,6 +113,7 @@ class WaitingApproval extends GetView<SellerOrderDetailController> {
                               symbolAndNumberSeparator: ' ',
                             ));
                         MoneyFormatterOutput fo = fmf.output;
+
                         return Stack(
                           children: [
                             Container(
@@ -417,85 +419,111 @@ class WaitingApproval extends GetView<SellerOrderDetailController> {
                                                           ],
                                                         ),
                                               Spacer(),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text('Pet Name',
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontFamily:
-                                                              'SanFrancisco.Light',
-                                                          color: Colors
-                                                              .grey.shade700)),
-                                                  Text("Aero",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontFamily:
-                                                              'SanFrancisco',
-                                                          color: Colors
-                                                              .grey.shade600)),
-                                                ],
-                                              ),
-                                              Spacer(),
-                                              bookingType == 'Vet'
-                                                  ? Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
+                                              InkWell(
+                                                onTap: () => {
+                                                  Get.toNamed(
+                                                      Routes.ADDITIONAL_INFO,
+                                                      arguments: 2),
+                                                  localStorage.write(
+                                                      'petInfoId',
+                                                      data['petId'])
+                                                },
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text('Pet ID',
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily:
+                                                                'SanFrancisco.Light',
+                                                            color: Colors.grey
+                                                                .shade700)),
+                                                    Row(
                                                       children: [
-                                                        Text('Medical service',
+                                                        Text(
+                                                            "#${data['petId'].toString().toUpperCase()}",
                                                             style: TextStyle(
                                                                 fontSize: 12,
                                                                 fontFamily:
-                                                                    'SanFrancisco.Light',
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade700)),
-                                                        FutureBuilder<
-                                                                DocumentSnapshot<
-                                                                    Object?>>(
-                                                            future: controller
-                                                                .getMedicalDetail(
-                                                                    data[
-                                                                        'medicalId']),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              if (snapshot
-                                                                      .connectionState ==
-                                                                  ConnectionState
-                                                                      .done) {
-                                                                var medicalData = snapshot
-                                                                        .data!
-                                                                        .data()
-                                                                    as Map<
-                                                                        String,
-                                                                        dynamic>;
-                                                                return Text(
-                                                                    medicalData[
-                                                                        'name'],
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontFamily:
-                                                                            'SanFrancisco',
-                                                                        color: Colors
-                                                                            .grey
-                                                                            .shade600));
-                                                              } else {
-                                                                return Center(
-                                                                  child:
-                                                                      CircularProgressIndicator(),
-                                                                );
-                                                              }
-                                                            }),
+                                                                    'SanFrancisco',
+                                                                color: Color(
+                                                                    0xff2596BE))),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Icon(
+                                                          Icons.info,
+                                                          size: 15,
+                                                          color:
+                                                              Color(0xff2596BE),
+                                                        )
                                                       ],
-                                                    )
-                                                  : Spacer(),
-                                              bookingType == 'Vet'
-                                                  ? Spacer()
-                                                  : SizedBox(),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              InkWell(
+                                                onTap: () => {
+                                                  Get.toNamed(
+                                                      Routes.ADDITIONAL_INFO,
+                                                      arguments: 1)
+                                                },
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text('Delivery Option',
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily:
+                                                                'SanFrancisco.Light',
+                                                            color: Colors.grey
+                                                                .shade700)),
+                                                    data['isDelivery'] == true
+                                                        ? Row(
+                                                            children: [
+                                                              Text(
+                                                                  "Pick Up & Delivery",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontFamily:
+                                                                          'SanFrancisco',
+                                                                      color: Color(
+                                                                          0xff2596BE))),
+                                                              SizedBox(
+                                                                width: 5,
+                                                              ),
+                                                              Icon(
+                                                                Icons.info,
+                                                                size: 15,
+                                                                color: Color(
+                                                                    0xff2596BE),
+                                                              )
+                                                            ],
+                                                          )
+                                                        : Row(
+                                                            children: [
+                                                              Text(
+                                                                  "Without Delivery",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontFamily:
+                                                                          'SanFrancisco',
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .shade600)),
+                                                            ],
+                                                          )
+                                                  ],
+                                                ),
+                                              ),
+                                              Spacer(),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -508,7 +536,7 @@ class WaitingApproval extends GetView<SellerOrderDetailController> {
                                                               'SanFrancisco.Light',
                                                           color: Colors
                                                               .grey.shade700)),
-                                                  Text('Dita Genday Petshop',
+                                                  Text('Petshop A',
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily:

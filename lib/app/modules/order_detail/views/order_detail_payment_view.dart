@@ -51,12 +51,14 @@ class WaitingPayment extends GetView<OrderDetailController> {
                         if (bookingType == 'Vet') {
                           charge = bookingFee;
                         } else {
-                          tax = packageData['price'] * 10 / 100;
+                          tax = double.parse(packageData['price']) * 10 / 100;
                           charge = 0;
                           if (data['isDelivery'] == false) {
-                            charge = packageData['price'] + bookingFee + tax;
+                            charge = double.parse(packageData['price']) +
+                                bookingFee +
+                                tax;
                           } else {
-                            charge = packageData['price'] +
+                            charge = double.parse(packageData['price']) +
                                 bookingFee +
                                 tax +
                                 data['deliveryFee'];
@@ -71,6 +73,7 @@ class WaitingPayment extends GetView<OrderDetailController> {
                               symbolAndNumberSeparator: ' ',
                             ));
                         MoneyFormatterOutput fo = fmf.output;
+                        localStorage.write('expense', charge);
 
                         return Stack(
                           children: [
@@ -466,7 +469,7 @@ class WaitingPayment extends GetView<OrderDetailController> {
                                                               'SanFrancisco.Light',
                                                           color: Colors
                                                               .grey.shade700)),
-                                                  Text('Dita Genday Petshop',
+                                                  Text('Petshop A',
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily:
@@ -705,7 +708,9 @@ class WaitingPayment extends GetView<OrderDetailController> {
                                     ElevatedButton(
                                       onPressed: () => {
                                         Get.toNamed(Routes.PAYMENT,
-                                            arguments: orderId)
+                                            arguments: orderId),
+                                        localStorage.write(
+                                            'orderPrice', fo.symbolOnLeft)
                                       },
                                       style: ElevatedButton.styleFrom(
                                         padding: const EdgeInsets.symmetric(

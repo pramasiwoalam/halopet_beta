@@ -19,6 +19,7 @@ class SignupView extends GetView<SignupController> {
     'email': null,
     'password': null,
     'phone': null,
+    'district': null,
     'city': null,
     'address': null,
     'postalCode': null,
@@ -161,7 +162,7 @@ class SignupView extends GetView<SignupController> {
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
                             validator: (value) {
-                              if (value!.isEmpty || value!.length < 8) {
+                              if (value!.isEmpty || value.length < 8) {
                                 return 'Password must be 8 characters or more.';
                               }
                             },
@@ -227,6 +228,36 @@ class SignupView extends GetView<SignupController> {
                             },
                             onSaved: (value) {
                               formData['address'] = value;
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                                labelText: "District *",
+                                hintText: 'District',
+                                hintStyle: TextStyle(
+                                  fontFamily: 'SanFrancisco.Light',
+                                  fontSize: 13,
+                                ),
+                                contentPadding: EdgeInsets.all(18),
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Address must be filled.';
+                              }
+                            },
+                            onSaved: (value) {
+                              formData['district'] = value;
                             },
                           ),
                         ),

@@ -46,7 +46,7 @@ class PackageListView extends GetView<PackageListController> {
                         onTap: () => {
                           Get.dialog(AlertDialog(
                             title: const Text(
-                              'Delivey Option',
+                              'Delivery Option',
                               style: TextStyle(
                                   fontFamily: 'SanFrancisco', fontSize: 14),
                             ),

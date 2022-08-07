@@ -26,7 +26,7 @@ class EditPetshopView extends GetView<EditPetshopController> {
       appBar: AppBar(
         title: Text(
           'Edit Petshop',
-          style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 16),
+          style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
         ),
         backgroundColor: Color(0xff2596BE),
         elevation: 0,
@@ -222,44 +222,292 @@ class EditPetshopView extends GetView<EditPetshopController> {
                                 shrinkWrap: true,
                                 itemCount: data.length,
                                 itemBuilder: (context, index) {
-                                  var dataMap = data[index].data()
+                                  var serviceData = data[index].data()
                                       as Map<String, dynamic>;
 
-                                  return Container(
-                                    height: height * 0.08,
-                                    width: width,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          width: 1,
-                                          color: Colors.grey.shade200),
-                                      color: Colors.white,
-                                    ),
-                                    child: FlatButton(
-                                      color: Colors.transparent,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16, right: 16),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(dataMap['name'],
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        'SanFrancisco.Light',
-                                                    fontSize: 14,
+                                  return Column(
+                                    children: [
+                                      dataMap['groomingService'] == true
+                                          ? Container(
+                                              height: height * 0.08,
+                                              width: width,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1,
                                                     color:
-                                                        Colors.grey.shade800)),
-                                          ],
-                                        ),
-                                      ),
-                                      onPressed: () => {
-                                        localStorage.write(
-                                            'editServiceId', data[index].id),
-                                        Get.toNamed(Routes.EDIT_SERVICE,
-                                            arguments: dataMap['name']),
-                                      },
-                                    ),
+                                                        Colors.grey.shade200),
+                                                color: Colors.white,
+                                              ),
+                                              child: FlatButton(
+                                                color: Colors.transparent,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 16, right: 16),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.edit,
+                                                        size: 15,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 15,
+                                                      ),
+                                                      Text(
+                                                          'Edit Grooming Service',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 14,
+                                                              color: Colors.grey
+                                                                  .shade800)),
+                                                    ],
+                                                  ),
+                                                ),
+                                                onPressed: () => {
+                                                  localStorage.write(
+                                                      'editServiceId',
+                                                      data[index].id),
+                                                  Get.toNamed(
+                                                      Routes.EDIT_SERVICE,
+                                                      arguments:
+                                                          'Grooming Service'),
+                                                },
+                                              ),
+                                            )
+                                          : Container(
+                                              height: height * 0.08,
+                                              width: width,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color:
+                                                        Colors.grey.shade200),
+                                                color: Colors.white,
+                                              ),
+                                              child: FlatButton(
+                                                color: Colors.transparent,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 16, right: 16),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.add,
+                                                        size: 15,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 15,
+                                                      ),
+                                                      Text(
+                                                          'Add Grooming Service',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 14,
+                                                              color: Colors.grey
+                                                                  .shade800)),
+                                                    ],
+                                                  ),
+                                                ),
+                                                onPressed: () => {
+                                                  localStorage.write(
+                                                      'editServiceId',
+                                                      data[index].id),
+                                                  Get.toNamed(
+                                                      Routes.EDIT_SERVICE,
+                                                      arguments:
+                                                          'Grooming Service'),
+                                                },
+                                              ),
+                                            ),
+                                      dataMap['vetService'] == true
+                                          ? Container(
+                                              height: height * 0.08,
+                                              width: width,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color:
+                                                        Colors.grey.shade200),
+                                                color: Colors.white,
+                                              ),
+                                              child: FlatButton(
+                                                color: Colors.transparent,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 16, right: 16),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.edit,
+                                                        size: 15,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 15,
+                                                      ),
+                                                      Text('Edit Vet Service',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 14,
+                                                              color: Colors.grey
+                                                                  .shade800)),
+                                                    ],
+                                                  ),
+                                                ),
+                                                onPressed: () => {
+                                                  localStorage.write(
+                                                      'editServiceId',
+                                                      data[index].id),
+                                                  Get.toNamed(
+                                                      Routes.EDIT_SERVICE,
+                                                      arguments: 'Vet Service'),
+                                                },
+                                              ),
+                                            )
+                                          : Container(
+                                              height: height * 0.08,
+                                              width: width,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color:
+                                                        Colors.grey.shade200),
+                                                color: Colors.white,
+                                              ),
+                                              child: FlatButton(
+                                                color: Colors.transparent,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 16, right: 16),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.add,
+                                                        size: 15,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 15,
+                                                      ),
+                                                      Text('Add Vet Service',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 14,
+                                                              color: Colors.grey
+                                                                  .shade800)),
+                                                    ],
+                                                  ),
+                                                ),
+                                                onPressed: () => {
+                                                  localStorage.write(
+                                                      'editServiceId',
+                                                      data[index].id),
+                                                  Get.toNamed(
+                                                      Routes.EDIT_SERVICE,
+                                                      arguments:
+                                                          serviceData['name']),
+                                                },
+                                              ),
+                                            ),
+                                      dataMap['hotelService'] == true
+                                          ? Container(
+                                              height: height * 0.08,
+                                              width: width,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color:
+                                                        Colors.grey.shade200),
+                                                color: Colors.white,
+                                              ),
+                                              child: FlatButton(
+                                                color: Colors.transparent,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 16, right: 16),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.edit,
+                                                        size: 15,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 15,
+                                                      ),
+                                                      Text('Edit Hotel Service',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 14,
+                                                              color: Colors.grey
+                                                                  .shade800)),
+                                                    ],
+                                                  ),
+                                                ),
+                                                onPressed: () => {
+                                                  localStorage.write(
+                                                      'editServiceId',
+                                                      data[index].id),
+                                                  Get.toNamed(
+                                                      Routes.EDIT_SERVICE,
+                                                      arguments:
+                                                          serviceData['name']),
+                                                },
+                                              ),
+                                            )
+                                          : Container(
+                                              height: height * 0.08,
+                                              width: width,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color:
+                                                        Colors.grey.shade200),
+                                                color: Colors.white,
+                                              ),
+                                              child: FlatButton(
+                                                color: Colors.transparent,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 16, right: 16),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.add,
+                                                        size: 15,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 15,
+                                                      ),
+                                                      Text('Add Hotel Service',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 14,
+                                                              color: Colors.grey
+                                                                  .shade800)),
+                                                    ],
+                                                  ),
+                                                ),
+                                                onPressed: () => {
+                                                  localStorage.write(
+                                                      'editServiceId',
+                                                      data[index].id),
+                                                  Get.toNamed(
+                                                      Routes.EDIT_SERVICE,
+                                                      arguments:
+                                                          serviceData['name']),
+                                                },
+                                              ),
+                                            )
+                                    ],
                                   );
                                 });
                           } else {

@@ -3,10 +3,15 @@ import 'package:get/get.dart';
 
 class PaymentController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  var paymentType = ''.obs;
+  var paymentType = 'ewallet'.obs;
 
   Future<DocumentSnapshot<Object?>> getOrder(String orderId) async {
     DocumentReference doc = firestore.collection("order").doc(orderId);
+    return doc.get();
+  }
+
+  Future<DocumentSnapshot<Object?>> getUser(String userId) async {
+    DocumentReference doc = firestore.collection("users").doc(userId);
     return doc.get();
   }
 

@@ -147,7 +147,7 @@ class Home extends StatelessWidget {
                 } else {
                   localStorage.write('userPet', 1);
                 }
-                int balance = data['balance'];
+                double balance = data['balance'];
                 MoneyFormatter fmf = MoneyFormatter(
                     amount: balance.roundToDouble(),
                     settings: MoneyFormatterSettings(

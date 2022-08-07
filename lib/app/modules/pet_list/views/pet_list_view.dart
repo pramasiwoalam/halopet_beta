@@ -1,13 +1,17 @@
+import 'dart:io';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../controllers/pet_list_controller.dart';
 
@@ -26,7 +30,7 @@ class PetListView extends GetView<PetListController> {
       appBar: AppBar(
         title: Text(
           'Pet List',
-          style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+          style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
         ),
         backgroundColor: Color(0xffF9813A),
         elevation: 0,

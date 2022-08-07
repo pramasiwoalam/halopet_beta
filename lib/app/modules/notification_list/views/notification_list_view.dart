@@ -24,7 +24,7 @@ class NotificationListView extends GetView<NotificationListController> {
           title: Text(
             'Notification Center',
             style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 17),
+                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 15),
           ),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,

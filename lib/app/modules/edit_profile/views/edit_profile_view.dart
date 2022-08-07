@@ -191,7 +191,7 @@ class EditProfileView extends GetView<EditProfileController> {
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10))),
-                              labelText: "Address*",
+                              labelText: "Address",
                               hintText: userData['address'],
                               hintStyle: TextStyle(
                                   fontFamily: 'SanFrancisco.Light',

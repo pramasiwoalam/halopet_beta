@@ -182,7 +182,7 @@ class VetOrderView extends GetView<GroomingOrderController> {
                                   height: 2,
                                 ),
                                 Text(
-                                  'Dita Gendut Petshop',
+                                  'Petshop A',
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco.Regular',
                                       fontSize: 13),

@@ -170,7 +170,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                   height: 2,
                                 ),
                                 Text(
-                                  'Dita Gendut Petshop',
+                                  'Petshop A',
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco.Regular',
                                       fontSize: 13),
@@ -262,7 +262,7 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                         borderRadius:
                                             BorderRadius.circular(15)),
                                     content: Text(
-                                        'Are you the booking data is correct? Confirm if you want to create this booking.',
+                                        'Are the booking data is correct? Confirm if you want to create this booking.',
                                         style: TextStyle(
                                             fontFamily: 'SanFrancisco.Light',
                                             fontSize: 12)),
@@ -281,25 +281,29 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                           )),
                                       TextButton(
                                           onPressed: () => {
-                                                deliveryController.deliveryFee == 0
-                                                    ? orderController.createGroomingOrder(
-                                                        typeController.text,
-                                                        orderController.date
-                                                            .toString(),
-                                                        "Grooming Services",
-                                                        localStorage.read(
-                                                            'totalCharge'),
-                                                        controller.appointmentTime
-                                                            .value)
+                                                deliveryController
+                                                            .deliveryFee ==
+                                                        0
+                                                    ? orderController
+                                                        .createGroomingOrder(
+                                                            typeController.text,
+                                                            orderController.date
+                                                                .toString(),
+                                                            "Grooming Service",
+                                                            localStorage
+                                                                .read(
+                                                                    'totalCharge'),
+                                                            controller.appointmentTime
+                                                                .value)
                                                     : orderController
                                                         .createGroomingOrderWithDelivery(
                                                             petId,
                                                             orderController.date
                                                                 .toString(),
-                                                            localStorage.read(
-                                                                'serviceType'),
-                                                            localStorage.read(
-                                                                'totalCharge'),
+                                                            'Grooming Service',
+                                                            localStorage
+                                                                .read(
+                                                                    'totalCharge'),
                                                             controller
                                                                 .appointmentTime
                                                                 .value,
@@ -307,7 +311,25 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                                                 .time
                                                                 .toString(),
                                                             deliveryController
-                                                                .deliveryFee)
+                                                                .deliveryFee),
+                                                AwesomeDialog(
+                                                  context: context,
+                                                  dialogType: DialogType.SUCCES,
+                                                  animType:
+                                                      AnimType.BOTTOMSLIDE,
+                                                  title: 'Booking Created.',
+                                                  desc:
+                                                      'You can check your order here.',
+                                                  btnOkText:
+                                                      'Check your order >',
+                                                  buttonsTextStyle: TextStyle(
+                                                    fontFamily: 'SanFrancisco',
+                                                    fontSize: 14,
+                                                  ),
+                                                  btnOkOnPress: () {
+                                                    Get.toNamed(Routes.ORDER);
+                                                  },
+                                                ).show()
                                               },
                                           child: Text(
                                             'Confirm',
@@ -318,56 +340,6 @@ class GroomingOrderView extends GetView<GroomingOrderController> {
                                           )),
                                     ],
                                   ))
-                                  //   AwesomeDialog(
-                                  //     context: context,
-                                  //     dialogType: DialogType.INFO,
-                                  //     animType: AnimType.BOTTOMSLIDE,
-                                  //     title: 'Booking Confirmation',
-                                  //     desc:
-                                  //         'Are you sure want to create this booking?.',
-                                  //     btnCancelOnPress: () => {},
-                                  //     btnOkText: 'Yes',
-                                  //     buttonsTextStyle: GoogleFonts.roboto(
-                                  //         fontWeight: FontWeight.w600),
-                                  //     btnOkOnPress: () {
-                                  //       deliveryController.deliveryFee == 0
-                                  //           ? orderController.createGroomingOrder(
-                                  //               typeController.text,
-                                  //               orderController.date.toString(),
-                                  //               "Grooming Services",
-                                  //               localStorage.read('totalCharge'),
-                                  //               controller.appointmentTime.value)
-                                  //           : orderController
-                                  //               .createGroomingOrderWithDelivery(
-                                  //                   petId,
-                                  //                   orderController.date
-                                  //                       .toString(),
-                                  //                   localStorage
-                                  //                       .read('serviceType'),
-                                  //                   localStorage
-                                  //                       .read('totalCharge'),
-                                  //                   controller
-                                  //                       .appointmentTime.value,
-                                  //                   deliveryController.time
-                                  //                       .toString(),
-                                  //                   deliveryController
-                                  //                       .deliveryFee);
-
-                                  //       AwesomeDialog(
-                                  //         context: context,
-                                  //         dialogType: DialogType.SUCCES,
-                                  //         animType: AnimType.BOTTOMSLIDE,
-                                  //         title: 'Booking Created.',
-                                  //         desc: 'You can check your order here.',
-                                  //         btnOkText: 'Check your order >',
-                                  //         buttonsTextStyle: GoogleFonts.roboto(
-                                  //             fontWeight: FontWeight.w600),
-                                  //         btnOkOnPress: () {
-                                  //           Get.toNamed(Routes.ORDER);
-                                  //         },
-                                  //       ).show();
-                                  //     },
-                                  //   ).show()
                                 },
                             child: Container(
                                 height: height * 0.07,

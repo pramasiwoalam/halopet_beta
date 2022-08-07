@@ -21,7 +21,7 @@ class TopUpView extends GetView<TopUpController> {
     var height = size.height;
     var width = size.width;
     var userId = localStorage.read('currentUserId');
-    int balance = localStorage.read('balance');
+    double balance = localStorage.read('balance');
     MoneyFormatter fmf = MoneyFormatter(
         amount: balance.roundToDouble(),
         settings: MoneyFormatterSettings(
@@ -452,7 +452,10 @@ class TopUpView extends GetView<TopUpController> {
                                               onPressed: () => {
                                                     Get.back(),
                                                     controller.topUp(
-                                                        userId, balance),
+                                                        userId,
+                                                        int.parse(
+                                                            balanceController
+                                                                .text)),
                                                     Get.toNamed(Routes.HOMEPAGE)
                                                   },
                                               child: Text(

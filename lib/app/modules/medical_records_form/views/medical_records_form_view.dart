@@ -37,7 +37,7 @@ class MedicalRecordsFormView extends GetView<MedicalRecordsFormController> {
           title: Text(
             'Medical Record Registration',
             style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 17),
+                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 15),
           ),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,
@@ -124,10 +124,6 @@ class MedicalRecordsFormView extends GetView<MedicalRecordsFormController> {
                             height: 22,
                           ),
                           TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[a-zA-Z]")),
-                            ],
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius:
@@ -153,10 +149,6 @@ class MedicalRecordsFormView extends GetView<MedicalRecordsFormController> {
                             height: 18,
                           ),
                           TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[a-zA-Z]")),
-                            ],
                             decoration: InputDecoration(
                                 border: const OutlineInputBorder(
                                   borderRadius:

@@ -22,7 +22,7 @@ class WithdrawView extends GetView<WithdrawController> {
     var width = size.width;
     Map<String, dynamic> userData = localStorage.read('userData');
     var userId = localStorage.read('currentUserId');
-    int balance = localStorage.read('balance');
+    double balance = localStorage.read('balance');
     MoneyFormatter fmf = MoneyFormatter(
         amount: balance.roundToDouble(),
         settings: MoneyFormatterSettings(
@@ -257,80 +257,139 @@ class WithdrawView extends GetView<WithdrawController> {
                   Center(
                     child: GestureDetector(
                       onTap: () => {
-                        if (balance < int.parse(balanceController.text))
-                          {
-                            Get.dialog(AlertDialog(
-                              title: Text(
-                                'Insufficient Balance',
-                                style: TextStyle(
-                                    fontFamily: 'SanFrancisco', fontSize: 14),
-                              ),
-                              titlePadding:
-                                  EdgeInsets.only(left: 26, right: 26, top: 30),
-                              contentPadding: EdgeInsets.only(
-                                  left: 26, right: 26, top: 16, bottom: 12),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              content: Text(
-                                  'Your balance is insufficient for withdrawn your request. Please input your withdrawn request correctly.',
+                        Get.dialog(AlertDialog(
+                          title: const Text(
+                            'Confirmation',
+                            style: TextStyle(
+                                fontFamily: 'SanFrancisco', fontSize: 14),
+                          ),
+                          titlePadding:
+                              EdgeInsets.only(left: 26, right: 26, top: 30),
+                          contentPadding: const EdgeInsets.only(
+                              left: 26, right: 26, top: 16, bottom: 12),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          content: const Text(
+                              'Are you sure want to withdrawn this amount?',
+                              style: TextStyle(
+                                  fontFamily: 'SanFrancisco.Light',
+                                  fontSize: 12)),
+                          actionsPadding:
+                              EdgeInsets.only(right: 15, top: 6, bottom: 2),
+                          actions: [
+                            TextButton(
+                                onPressed: () => {
+                                      Get.back(),
+                                    },
+                                child: Text(
+                                  'Cancel',
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco.Light',
-                                      fontSize: 12)),
-                              actionsPadding:
-                                  EdgeInsets.only(right: 12, top: 6, bottom: 2),
-                              actions: [
-                                TextButton(
-                                    onPressed: () => {Get.back()},
-                                    child: Text(
-                                      'Agreed.',
-                                      style: TextStyle(
-                                          fontFamily: 'SanFrancisco',
-                                          fontSize: 13,
-                                          color: Colors.orange),
-                                    )),
-                              ],
-                            ))
-                          }
-                        else
-                          {
-                            controller.withdrawn(
-                              userId,
-                              int.parse(balanceController.text),
-                            ),
-                            Get.dialog(AlertDialog(
-                              title: Text(
-                                'Withdrawn Success',
-                                style: TextStyle(
-                                    fontFamily: 'SanFrancisco', fontSize: 14),
-                              ),
-                              titlePadding:
-                                  EdgeInsets.only(left: 26, right: 26, top: 30),
-                              contentPadding: EdgeInsets.only(
-                                  left: 26, right: 26, top: 16, bottom: 12),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              content: Text(
-                                  'Your withdrawn request is successful. Thank you for using PawPay Coins.',
+                                      fontSize: 13,
+                                      color: Colors.orange),
+                                )),
+                            TextButton(
+                                onPressed: () => {
+                                      if (balance <
+                                          int.parse(balanceController.text))
+                                        {
+                                          Get.dialog(AlertDialog(
+                                            title: Text(
+                                              'Insufficient Balance',
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 14),
+                                            ),
+                                            titlePadding: EdgeInsets.only(
+                                                left: 26, right: 26, top: 30),
+                                            contentPadding: EdgeInsets.only(
+                                                left: 26,
+                                                right: 26,
+                                                top: 16,
+                                                bottom: 12),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            content: Text(
+                                                'Your balance is insufficient for withdrawn your request. Please input your withdrawn request correctly.',
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        'SanFrancisco.Light',
+                                                    fontSize: 12)),
+                                            actionsPadding: EdgeInsets.only(
+                                                right: 12, top: 6, bottom: 2),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () => {Get.back()},
+                                                  child: Text(
+                                                    'Agreed.',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'SanFrancisco',
+                                                        fontSize: 13,
+                                                        color: Colors.orange),
+                                                  )),
+                                            ],
+                                          ))
+                                        }
+                                      else
+                                        {
+                                          controller.withdrawn(
+                                            userId,
+                                            int.parse(balanceController.text),
+                                          ),
+                                          Get.dialog(AlertDialog(
+                                            title: Text(
+                                              'Withdrawn Success',
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 14),
+                                            ),
+                                            titlePadding: EdgeInsets.only(
+                                                left: 26, right: 26, top: 30),
+                                            contentPadding: EdgeInsets.only(
+                                                left: 26,
+                                                right: 26,
+                                                top: 16,
+                                                bottom: 12),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            content: Text(
+                                                'Your withdrawn request is successful. Thank you for using PawPay Coins.',
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        'SanFrancisco.Light',
+                                                    fontSize: 12)),
+                                            actionsPadding: EdgeInsets.only(
+                                                right: 12, top: 6, bottom: 2),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () => {
+                                                        Get.toNamed(
+                                                            Routes.HOMEPAGE),
+                                                      },
+                                                  child: Text(
+                                                    'Ok',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'SanFrancisco',
+                                                        fontSize: 13,
+                                                        color: Colors.orange),
+                                                  )),
+                                            ],
+                                          ))
+                                        }
+                                    },
+                                child: Text(
+                                  'Yes',
                                   style: TextStyle(
-                                      fontFamily: 'SanFrancisco.Light',
-                                      fontSize: 12)),
-                              actionsPadding:
-                                  EdgeInsets.only(right: 12, top: 6, bottom: 2),
-                              actions: [
-                                TextButton(
-                                    onPressed: () => {
-                                          Get.toNamed(Routes.HOMEPAGE),
-                                        },
-                                    child: Text(
-                                      'Ok',
-                                      style: TextStyle(
-                                          fontFamily: 'SanFrancisco',
-                                          fontSize: 13,
-                                          color: Colors.orange),
-                                    )),
-                              ],
-                            ))
-                          }
+                                      fontFamily: 'SanFrancisco',
+                                      fontSize: 13,
+                                      color: Colors.orange),
+                                )),
+                          ],
+                        ))
                       },
                       child: Container(
                         margin: EdgeInsets.only(top: height * 0.025),

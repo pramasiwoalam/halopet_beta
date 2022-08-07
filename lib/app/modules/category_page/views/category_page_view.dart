@@ -114,7 +114,6 @@ class CategoryPageView extends GetView<CategoryPageController> {
                                       Routes.PETSHOP_DETAIL,
                                       arguments: data[index].id),
                                   child: Container(
-                                    // color: Colors.red,
                                     height: height * 0.3,
                                     width: width,
                                     child: Column(

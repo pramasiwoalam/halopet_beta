@@ -30,16 +30,14 @@ class PackageFormView extends GetView<PackageFormController> {
           backgroundColor: Colors.white,
           elevation: 0,
         ),
-        body: argument == 'Grooming'
-            ? PackageGrooming()
-            : argument == 'Hotel'
-                ? PackageHotel()
-                : PackageSession()
-        // argument == 'Hotel'
-        // ? HotelService()
-        // : argument == 'detailGrooming'
-        //     ? DetailGroomingService()
-        //     : VetService());
-        );
+        body: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
+          child: Container(
+              child: argument == 'Grooming'
+                  ? PackageGrooming()
+                  : argument == 'Hotel'
+                      ? PackageHotel()
+                      : PackageSession()),
+        ));
   }
 }

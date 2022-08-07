@@ -368,10 +368,8 @@ class GroomingService extends StatelessWidget {
                     ),
                     child: FlatButton(
                         onPressed: () => {
-                              Get.toNamed(Routes.SERVICE_LIST),
-                              // controller.cancellation(
-                              //     localStorage.read('savedPetshopId'),
-                              //     localStorage.read('savedServiceId')),
+                              Get.toNamed(Routes.SELLER_HOME),
+
                               localStorage.write('serviceFlag', 0),
                               // localStorage.write('groomingFlag', 1)
                             },

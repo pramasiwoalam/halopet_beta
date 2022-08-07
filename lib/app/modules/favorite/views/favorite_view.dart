@@ -22,7 +22,7 @@ class FavoriteView extends GetView<FavoriteController> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Favorites',
-              style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 17)),
+              style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15)),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,
           centerTitle: true,
@@ -53,7 +53,7 @@ class FavoriteView extends GetView<FavoriteController> {
                                         Routes.PETSHOP_DETAIL,
                                         arguments: data[index].id),
                                     child: Container(
-                                        height: height * 0.2,
+                                        height: height * 0.19,
                                         width: width,
                                         decoration: BoxDecoration(
                                           border: Border.all(
@@ -64,7 +64,7 @@ class FavoriteView extends GetView<FavoriteController> {
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  top: 10.0,
+                                                  top: 5.0,
                                                   bottom: 10,
                                                   left: 6),
                                               child: Padding(
@@ -89,9 +89,7 @@ class FavoriteView extends GetView<FavoriteController> {
                                             ),
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  top: 9.0,
-                                                  bottom: 10,
-                                                  left: 10),
+                                                  top: 5, bottom: 10, left: 10),
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
                                                     top: 9, bottom: 10),
@@ -114,7 +112,7 @@ class FavoriteView extends GetView<FavoriteController> {
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 'SanFrancisco.Light',
-                                                            fontSize: 12),
+                                                            fontSize: 11),
                                                       ),
                                                       const SizedBox(
                                                         height: 4,
@@ -163,7 +161,7 @@ class FavoriteView extends GetView<FavoriteController> {
                                                         ],
                                                       ),
                                                       const SizedBox(
-                                                        height: 6,
+                                                        height: 10,
                                                       ),
                                                       Container(
                                                         height: height * 0.036,

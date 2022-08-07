@@ -76,8 +76,8 @@ class BankAccountRegView extends GetView<BankAccountRegController> {
                             floatingLabelBehavior:
                                 FloatingLabelBehavior.always),
                         validator: (value) {
-                          if (value!.contains('Wira')) {
-                            return 'Wira Dilarang daftar';
+                          if (value!.isEmpty) {
+                            return 'Cannot be null';
                           }
                         },
                         onSaved: (value) {

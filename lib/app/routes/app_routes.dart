@@ -10,7 +10,7 @@ abstract class Routes {
   static const PAYMENT = _Paths.PAYMENT;
   static const PETSHOP_DETAIL = _Paths.PETSHOP_DETAIL;
   static const CREATE_ORDER = _Paths.CREATE_ORDER;
-  static const DOCTOR_REGISTRATION = _Paths.DOCTOR_REGISTRATION;
+  static const ADDITIONAL_INFO = _Paths.ADDITIONAL_INFO;
   static const PROFILE = _Paths.PROFILE;
   static const ORDER = _Paths.ORDER;
   static const HISTORY = _Paths.HISTORY;
@@ -58,6 +58,7 @@ abstract class Routes {
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
   static const ADMIN_USER_DETAIL = _Paths.ADMIN_USER_DETAIL;
   static const EDIT_SERVICE = _Paths.EDIT_SERVICE;
+  static const EDIT_PACKAGE = _Paths.EDIT_PACKAGE;
 }
 
 abstract class _Paths {
@@ -69,7 +70,7 @@ abstract class _Paths {
   static const PAYMENT = '/payment';
   static const PETSHOP_DETAIL = '/petshop-detail';
   static const CREATE_ORDER = '/create-order';
-  static const DOCTOR_REGISTRATION = '/doctor-registration';
+  static const ADDITIONAL_INFO = '/additional-info';
   static const PROFILE = '/profile';
   static const ORDER = '/order';
   static const HISTORY = '/history';
@@ -117,4 +118,5 @@ abstract class _Paths {
   static const EDIT_PROFILE = '/edit-profile';
   static const ADMIN_USER_DETAIL = '/admin-user-detail';
   static const EDIT_SERVICE = '/edit-service';
+  static const EDIT_PACKAGE = '/edit-package';
 }

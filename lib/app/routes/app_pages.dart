@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:halopet_beta/app/modules/additional_info/bindings/doctor_registration_binding.dart';
+import 'package:halopet_beta/app/modules/additional_info/views/additional_info_view.dart';
+import 'package:halopet_beta/app/modules/additional_info/views/delivery_info.dart';
 import 'package:halopet_beta/app/modules/admin_list_users/views/admin_users_detail_view.dart';
 import 'package:halopet_beta/app/modules/bank_account_reg/bindings/bank_account_reg_binding.dart';
 import 'package:halopet_beta/app/modules/bank_account_reg/views/bank_account_reg_view.dart';
@@ -6,6 +9,8 @@ import 'package:halopet_beta/app/modules/choose_room/bindings/choose_room_bindin
 import 'package:halopet_beta/app/modules/choose_room/views/choose_room_view.dart';
 import 'package:halopet_beta/app/modules/delivery_list/bindings/delivery_list_binding.dart';
 import 'package:halopet_beta/app/modules/delivery_list/views/delivery_list_view.dart';
+import 'package:halopet_beta/app/modules/edit_package/bindings/edit_package_binding.dart';
+import 'package:halopet_beta/app/modules/edit_package/views/edit_package_view.dart';
 import 'package:halopet_beta/app/modules/edit_petshop_form/bindings/edit_petshop_form_binding.dart';
 import 'package:halopet_beta/app/modules/edit_profile/bindings/edit_profile_binding.dart';
 import 'package:halopet_beta/app/modules/edit_profile/views/edit_profile_view.dart';
@@ -43,8 +48,7 @@ import '../modules/choose_pet/bindings/choose_pet_binding.dart';
 import '../modules/choose_pet/views/choose_pet_view.dart';
 import '../modules/choose_session/bindings/choose_session_binding.dart';
 import '../modules/choose_session/views/choose_session_view.dart';
-import '../modules/doctor_registration/bindings/doctor_registration_binding.dart';
-import '../modules/doctor_registration/views/doctor_registration_view.dart';
+
 import '../modules/edit_petshop/bindings/edit_petshop_binding.dart';
 import '../modules/edit_petshop/views/edit_petshop_view.dart';
 import '../modules/edit_petshop_form/views/edit_petshop_form_view.dart';
@@ -149,9 +153,9 @@ class AppPages {
       binding: GroomingOrderBinding(),
     ),
     GetPage(
-      name: _Paths.DOCTOR_REGISTRATION,
-      page: () => DoctorRegistrationView(),
-      binding: DoctorRegistrationBinding(),
+      name: _Paths.ADDITIONAL_INFO,
+      page: () => AdditionalInfoView(),
+      binding: AdditionalInfoBinding(),
     ),
     GetPage(
       name: _Paths.PROFILE,
@@ -387,6 +391,11 @@ class AppPages {
       name: _Paths.EDIT_SERVICE,
       page: () => EditServiceView(),
       binding: EditServiceBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PACKAGE,
+      page: () => EditPackageView(),
+      binding: EditPackageBinding(),
     ),
   ];
 }

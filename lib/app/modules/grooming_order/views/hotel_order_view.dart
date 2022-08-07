@@ -180,7 +180,7 @@ class HotelOrderView extends GetView<GroomingOrderController> {
                                   height: 2,
                                 ),
                                 Text(
-                                  'Dita Gendut Petshop',
+                                  'Petshop A',
                                   style: TextStyle(
                                       fontFamily: 'SanFrancisco.Regular',
                                       fontSize: 13),
@@ -305,14 +305,11 @@ class HotelOrderView extends GetView<GroomingOrderController> {
                                                       : orderController
                                                           .createHotelOrderWithDelivery(
                                                               petId,
-                                                              orderController
-                                                                  .date
+                                                              orderController.date
                                                                   .toString(),
+                                                              "Hotel Service",
                                                               localStorage.read(
-                                                                  'serviceType'),
-                                                              localStorage
-                                                                  .read(
-                                                                      'totalCharge'),
+                                                                  'totalCharge'),
                                                               controller
                                                                   .appointmentTime
                                                                   .value,

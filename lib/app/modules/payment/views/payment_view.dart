@@ -19,6 +19,9 @@ class PaymentView extends GetView<PaymentController> {
     var height = size.height;
     var width = size.width;
     var orderId = Get.arguments;
+    var expense = localStorage.read('orderPrice');
+    var userId = localStorage.read('currentUserId');
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -138,7 +141,7 @@ class PaymentView extends GetView<PaymentController> {
                                                 fontSize: 13),
                                           ),
                                           Text(
-                                            fo.symbolOnLeft,
+                                            expense.toString(),
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: 'SanFrancisco',
@@ -220,90 +223,127 @@ class PaymentView extends GetView<PaymentController> {
                                                 blurRadius: 1,
                                                 offset: Offset(1, 2))
                                           ]),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.monetization_on,
-                                                    color: Colors.orange,
-                                                    size: 20,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Column(
+                                      child: FutureBuilder<
+                                              DocumentSnapshot<Object?>>(
+                                          future: controller.getUser(userId),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.done) {
+                                              var data = snapshot.data!.data()
+                                                  as Map<String, dynamic>;
+                                              double userBalance =
+                                                  data['balance'];
+                                              MoneyFormatter mf =
+                                                  MoneyFormatter(
+                                                      amount: userBalance,
+                                                      settings:
+                                                          MoneyFormatterSettings(
+                                                        symbol: 'Rp.',
+                                                        thousandSeparator: '.',
+                                                        decimalSeparator: ',',
+                                                        symbolAndNumberSeparator:
+                                                            ' ',
+                                                      ));
+                                              MoneyFormatterOutput fmo =
+                                                  mf.output;
+                                              return Center(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(16),
+                                                  child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                            .spaceEvenly,
                                                     children: [
-                                                      Text(
-                                                        fo.symbolOnLeft,
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade800,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                fontSize: 15),
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .monetization_on,
+                                                            color:
+                                                                Colors.orange,
+                                                            size: 20,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                fmo.symbolOnLeft
+                                                                    .toString(),
+                                                                style: GoogleFonts.roboto(
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade800,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700,
+                                                                    fontSize:
+                                                                        15),
+                                                              ),
+                                                              Text(
+                                                                'PawPay Coins',
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        'SanFrancisco.Light',
+                                                                    fontSize:
+                                                                        10,
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .shade700),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Text(
-                                                        'PawPay Coins',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'SanFrancisco',
-                                                            fontSize: 11,
-                                                            color: Colors
-                                                                .grey.shade700),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      VerticalDivider(
+                                                        color: Colors
+                                                            .grey.shade300,
+                                                        thickness: 1,
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () => {},
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons.add,
+                                                              color:
+                                                                  Colors.orange,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Text(
+                                                              'Top up PawPay',
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'SanFrancisco',
+                                                                  fontSize: 11,
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade700),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       )
                                                     ],
                                                   ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              VerticalDivider(
-                                                color: Colors.grey.shade300,
-                                                thickness: 1,
-                                              ),
-                                              InkWell(
-                                                onTap: () => {},
-                                                child: Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.add,
-                                                      color: Colors.orange,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text(
-                                                      'Top up PawPay',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'SanFrancisco',
-                                                          fontSize: 11,
-                                                          color: Colors
-                                                              .grey.shade700),
-                                                    ),
-                                                  ],
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                              );
+                                            } else {
+                                              return CircularProgressIndicator();
+                                            }
+                                          }),
                                     )
                                   : controller.paymentType.value == 'virtual'
                                       ? Center(
@@ -638,37 +678,6 @@ class PaymentView extends GetView<PaymentController> {
                                           )),
                                     ],
                                   ))
-                                  // AwesomeDialog(
-                                  //   context: context,
-                                  //   dialogType: DialogType.INFO,
-                                  //   animType: AnimType.BOTTOMSLIDE,
-                                  //   title: 'Payment Confirmation',
-                                  //   desc:
-                                  //       'Are you sure you have did your payment?.',
-                                  //   btnCancelOnPress: () => {},
-                                  //   btnCancelColor: Colors.blue,
-                                  //   btnOkColor: Color(0xffF9813A),
-                                  //   btnOkText: 'Yes',
-                                  //   buttonsTextStyle: GoogleFonts.roboto(
-                                  //       fontWeight: FontWeight.w600),
-                                  //   btnOkOnPress: () => {
-                                  //     AwesomeDialog(
-                                  //       context: context,
-                                  //       dialogType: DialogType.SUCCES,
-                                  //       animType: AnimType.BOTTOMSLIDE,
-                                  //       title: 'Thank You.',
-                                  //       desc:
-                                  //           'Thank you for your payment. Your payment will be validated automatically',
-                                  //       btnOkColor: Color(0xffF9813A),
-                                  //       btnOkText: 'Ok',
-                                  //       buttonsTextStyle: GoogleFonts.roboto(
-                                  //           fontWeight: FontWeight.w600),
-                                  //       btnOkOnPress: () {
-                                  //         controller.paymentAccepted(orderId);
-                                  //       },
-                                  //     ).show();
-                                  //   },
-                                  // ).show()
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(top: height * 0.025),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:favorite_button/favorite_button.dart';
@@ -8,10 +10,27 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../controllers/pet_form_controller.dart';
 
 class PetFormView extends GetView<PetFormController> {
+  File? image;
+
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) {
+        return;
+      }
+      final imageTemporary = File(image.path);
+      this.image = imageTemporary;
+      controller.edited.value = true;
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
   final name = TextEditingController();
   GlobalKey<FormState> form = GlobalKey<FormState>();
   Map<String, dynamic> formData = {
@@ -34,8 +53,7 @@ class PetFormView extends GetView<PetFormController> {
         appBar: AppBar(
           title: Text(
             'Pet Registration',
-            style:
-                GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 18),
+            style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15),
           ),
           backgroundColor: Color(0xffF9813A),
           elevation: 0,
@@ -44,27 +62,45 @@ class PetFormView extends GetView<PetFormController> {
           physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
-              Container(
-                height: height * 0.2,
-                child: Center(
-                  child: Column(
-                    children: [
-                      Container(
+              Stack(
+                children: [
+                  Obx(
+                    () => Center(
+                      child: Container(
                         height: height / 5,
                         width: width / 3.5,
-                        // color: Colors.blue,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
                               color: Colors.black, width: width * 0.4),
-                          image: const DecorationImage(
+                          image: DecorationImage(
                               fit: BoxFit.scaleDown,
-                              image: AssetImage('assets/images/user.png')),
+                              image: controller.edited.value == false
+                                  ? AssetImage('assets/images/user.png')
+                                  : AssetImage('assets/images/user2.png')),
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  Positioned(
+                    top: height / 8,
+                    right: 110,
+                    child: GestureDetector(
+                      onTap: () => pickImage(ImageSource.gallery),
+                      child: Container(
+                          height: height * 0.045,
+                          width: height * 0.045,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 2, color: const Color(0xFFf2f2f2)),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(40)),
+                          child: Center(
+                            child: Icon(Icons.edit),
+                          )),
+                    ),
+                  ),
+                ],
               ),
               Container(
                 height: height * 0.8,
@@ -77,10 +113,6 @@ class PetFormView extends GetView<PetFormController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[a-zA-Z]")),
-                            ],
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius:
@@ -108,18 +140,16 @@ class PetFormView extends GetView<PetFormController> {
                             height: 18,
                           ),
                           TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[a-zA-Z]")),
-                            ],
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
                                 labelText: "Pet's Description *",
-                                hintStyle: GoogleFonts.roboto(
-                                    fontSize: 14, color: Colors.grey.shade500),
+                                hintStyle: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey.shade600,
+                                    fontFamily: 'SanFrancisco.Light'),
                                 hintText: 'Write your pet description here...',
                                 contentPadding: EdgeInsets.all(18),
                                 floatingLabelBehavior:
@@ -137,18 +167,16 @@ class PetFormView extends GetView<PetFormController> {
                             height: 18,
                           ),
                           TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[a-zA-Z]")),
-                            ],
                             decoration: InputDecoration(
                                 border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
                                 labelText: "Birth / Adopted Date *",
-                                hintStyle: GoogleFonts.roboto(
-                                    fontSize: 14, color: Colors.grey.shade500),
+                                hintStyle: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey.shade600,
+                                    fontFamily: 'SanFrancisco.Light'),
                                 hintText: '26 June 2000',
                                 contentPadding: EdgeInsets.all(18),
                                 floatingLabelBehavior:
@@ -210,10 +238,6 @@ class PetFormView extends GetView<PetFormController> {
                             height: 18,
                           ),
                           TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[a-zA-Z]")),
-                            ],
                             decoration: InputDecoration(
                                 border: const OutlineInputBorder(
                                   borderRadius:
@@ -221,8 +245,10 @@ class PetFormView extends GetView<PetFormController> {
                                 ),
                                 labelText: "Pet's Species *",
                                 hintText: "Write your pet's species here...",
-                                hintStyle: GoogleFonts.roboto(
-                                    fontSize: 14, color: Colors.grey.shade500),
+                                hintStyle: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey.shade600,
+                                    fontFamily: 'SanFrancisco.Light'),
                                 contentPadding: EdgeInsets.all(18),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
@@ -260,10 +286,10 @@ class PetFormView extends GetView<PetFormController> {
                                       ),
                                       labelText: "Age *",
                                       hintText: "3 months",
-                                      hintStyle: GoogleFonts.roboto(
-                                          fontSize: 14,
-                                          color: Colors.grey.shade500),
-                                      contentPadding: EdgeInsets.all(18),
+                                      hintStyle: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey.shade600,
+                                          fontFamily: 'SanFrancisco.Light'),
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always),
                                 ),
@@ -288,9 +314,10 @@ class PetFormView extends GetView<PetFormController> {
                                       ),
                                       labelText: "Weight",
                                       hintText: "... kg(s)",
-                                      hintStyle: GoogleFonts.roboto(
-                                          fontSize: 14,
-                                          color: Colors.grey.shade500),
+                                      hintStyle: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey.shade600,
+                                          fontFamily: 'SanFrancisco.Light'),
                                       contentPadding: EdgeInsets.all(18),
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always),
@@ -309,9 +336,10 @@ class PetFormView extends GetView<PetFormController> {
                                 ),
                                 labelText: "Pet's color",
                                 hintText: "Black with orange spots",
-                                hintStyle: GoogleFonts.roboto(
-                                    fontSize: 14, color: Colors.grey.shade500),
-                                contentPadding: EdgeInsets.all(18),
+                                hintStyle: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey.shade600,
+                                    fontFamily: 'SanFrancisco.Light'),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
                             validator: (value) {

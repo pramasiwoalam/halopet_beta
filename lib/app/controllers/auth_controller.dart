@@ -90,20 +90,12 @@ class AuthController extends GetxController {
         "petshopOwner": false,
         "balance": 0,
         "address": formData['address'],
+        "district": formData['district'],
         "city": formData['city'],
         "postalCode": formData['postalCode'],
         "phone": formData['phone'],
         'img': 'assets/images/user.png'
       });
-
-      // AwesomeDialog(
-      //   context: context,
-      //   dialogType: DialogType.INFO,
-      //   animType: AnimType.BOTTOMSLIDE,
-      //   title: 'Welcome',
-      //   desc: 'Welcome to HaloPet',
-      //   btnOkOnPress: () {},
-      // )..show();
 
       Get.dialog(AlertDialog(
         title: Text(

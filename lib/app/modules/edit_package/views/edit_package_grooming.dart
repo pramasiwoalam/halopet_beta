@@ -4,13 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halopet_beta/app/modules/edit_package/controllers/edit_package_controller.dart';
 import 'package:halopet_beta/app/routes/app_pages.dart';
 
 import '../../service_form/controllers/service_form_controller.dart';
 
 class EditGrooming extends StatelessWidget {
   GlobalKey<FormState> form = GlobalKey<FormState>();
-  final controller = Get.put(ServiceFormController());
+  final controller = Get.put(EditPackageController());
   Map<String, dynamic> formData = {
     'name': null,
     'desc': null,
@@ -18,12 +19,14 @@ class EditGrooming extends StatelessWidget {
     'time': null
   };
 
+  Map<String, dynamic> groomingData = localStorage.read('groomingDataEdit');
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
-    var localStorage = GetStorage();
+    var packageId = localStorage.read('groomingDataId');
 
     return Form(
       key: form,
@@ -50,7 +53,7 @@ class EditGrooming extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         labelText: "Package Name *",
-                        hintText: 'Package Grooming A',
+                        hintText: groomingData['name'],
                         hintStyle: GoogleFonts.roboto(
                             fontSize: 14, color: Colors.grey.shade600),
                         contentPadding: EdgeInsets.all(18),
@@ -75,7 +78,7 @@ class EditGrooming extends StatelessWidget {
                         labelText: "Package Description *",
                         hintStyle: GoogleFonts.roboto(
                             fontSize: 14, color: Colors.grey.shade600),
-                        hintText: 'Blow + Hair Detailing',
+                        hintText: groomingData['desc'],
                         contentPadding: EdgeInsets.all(18),
                         floatingLabelBehavior: FloatingLabelBehavior.always),
                     validator: (value) {
@@ -94,9 +97,11 @@ class EditGrooming extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         labelText: "Package Price *",
-                        hintText: 'Rp. 100.000',
-                        hintStyle: GoogleFonts.roboto(
-                            fontSize: 14, color: Colors.grey.shade600),
+                        hintText: "Rp. ${groomingData['price'].toString()}",
+                        hintStyle: TextStyle(
+                            fontFamily: 'SanFrancisco.Light',
+                            fontSize: 14,
+                            color: Colors.grey.shade600),
                         contentPadding: EdgeInsets.all(18),
                         floatingLabelBehavior: FloatingLabelBehavior.always),
                     validator: (value) {
@@ -144,12 +149,8 @@ class EditGrooming extends StatelessWidget {
                           if (form.currentState!.validate())
                             {
                               form.currentState!.save(),
-                              controller.createGroomingServiceDetail(formData),
-                              controller.packageGroomingList.add(formData),
-                              localStorage.write('packageFlag', 1),
-                              localStorage.write('serviceFlag', 1),
-                              Get.toNamed(Routes.SERVICE_FORM,
-                                  arguments: 'Grooming')
+                              controller.updateGrooming(formData, packageId),
+                              Get.back()
                             }
                         },
                         style: ElevatedButton.styleFrom(
@@ -163,7 +164,7 @@ class EditGrooming extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Register',
+                              Text('Update',
                                   style: TextStyle(
                                       fontSize: 13,
                                       fontFamily: 'SanFrancisco',

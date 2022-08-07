@@ -8,4 +8,17 @@ class EditPackageController extends GetxController {
     CollectionReference order = firestore.collection("order");
     return order.snapshots();
   }
+
+  void updateGrooming(Map<String, dynamic> formData, String packageId) {
+    CollectionReference petshop = firestore.collection("petshop");
+
+    CollectionReference package = firestore.collection("package");
+
+    package.doc(packageId).update({
+      'name': formData['name'],
+      'desc': formData['desc'],
+      'price': formData['price'],
+      'time': formData['time'],
+    });
+  }
 }

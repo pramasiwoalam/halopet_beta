@@ -55,14 +55,14 @@ class WaitingApproval extends GetView<OrderDetailController> {
                         if (bookingType == 'Vet') {
                           charge = bookingFee;
                         } else {
-                          tax = int.parse(packageData['price']) * 10 / 100;
+                          tax = double.parse(packageData['price']) * 10 / 100;
                           charge = 0;
                           if (data['isDelivery'] == false) {
                             charge = int.parse(packageData['price']) +
                                 bookingFee +
                                 tax;
                           } else {
-                            charge = packageData['price'] +
+                            charge = double.parse(packageData['price']) +
                                 bookingFee +
                                 tax +
                                 data['deliveryFee'];
@@ -472,7 +472,7 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                                               'SanFrancisco.Light',
                                                           color: Colors
                                                               .grey.shade700)),
-                                                  Text('Dita Genday Petshop',
+                                                  Text('Petshop A',
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily:
@@ -708,86 +708,138 @@ class WaitingApproval extends GetView<OrderDetailController> {
                                     Center(
                                       child: GestureDetector(
                                         onTap: () => {
-                                          AwesomeDialog(
-                                            context: context,
-                                            dialogType: DialogType.WARNING,
-                                            animType: AnimType.BOTTOMSLIDE,
-                                            title: 'Warning',
-                                            desc:
+                                          Get.dialog(AlertDialog(
+                                            title: Text(
+                                              'Confirmation',
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 14),
+                                            ),
+                                            titlePadding: EdgeInsets.only(
+                                                left: 26, right: 26, top: 30),
+                                            contentPadding: EdgeInsets.only(
+                                                left: 26,
+                                                right: 26,
+                                                top: 16,
+                                                bottom: 12),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            content: Text(
                                                 'Are you sure want to cancel this booking?',
-                                            btnCancelOnPress: () {},
-                                            btnOkOnPress: () {
-                                              late AwesomeDialog dialog;
-                                              dialog = AwesomeDialog(
-                                                context: context,
-                                                animType: AnimType.BOTTOMSLIDE,
-                                                dialogType: DialogType.INFO,
-                                                keyboardAware: true,
-                                                body: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Column(
-                                                    children: <Widget>[
-                                                      Text(
-                                                        'Cancellation Reason',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .headline6,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Material(
-                                                        elevation: 0,
-                                                        color: Colors
-                                                            .grey.shade100,
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: TextFormField(
-                                                            controller: reasons,
-                                                            autofocus: true,
-                                                            minLines: 1,
-                                                            maxLines: null,
-                                                            keyboardType:
-                                                                TextInputType
-                                                                    .multiline,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                              border:
-                                                                  InputBorder
-                                                                      .none,
-                                                              labelText:
-                                                                  'Reason',
-                                                              prefixIcon: Icon(
-                                                                Icons.message,
-                                                                size: 20,
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        'SanFrancisco.Light',
+                                                    fontSize: 12)),
+                                            actionsPadding: EdgeInsets.only(
+                                                right: 12, top: 6, bottom: 2),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () => {Get.back()},
+                                                  child: Text(
+                                                    'Cancel',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'SanFrancisco.Light',
+                                                        fontSize: 13,
+                                                        color:
+                                                            Color(0xffF9813A)),
+                                                  )),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    late AwesomeDialog dialog;
+                                                    dialog = AwesomeDialog(
+                                                      context: context,
+                                                      animType:
+                                                          AnimType.BOTTOMSLIDE,
+                                                      dialogType:
+                                                          DialogType.INFO,
+                                                      keyboardAware: true,
+                                                      body: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          children: <Widget>[
+                                                            Text(
+                                                              'Cancellation Reason',
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .headline6,
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 10,
+                                                            ),
+                                                            Material(
+                                                              elevation: 0,
+                                                              color: Colors.grey
+                                                                  .shade100,
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        8.0),
+                                                                child:
+                                                                    TextFormField(
+                                                                  controller:
+                                                                      reasons,
+                                                                  autofocus:
+                                                                      true,
+                                                                  minLines: 1,
+                                                                  maxLines:
+                                                                      null,
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .multiline,
+                                                                  decoration:
+                                                                      const InputDecoration(
+                                                                    border:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    labelText:
+                                                                        'Reason',
+                                                                    prefixIcon:
+                                                                        Icon(
+                                                                      Icons
+                                                                          .message,
+                                                                      size: 20,
+                                                                    ),
+                                                                  ),
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
+                                                            const SizedBox(
+                                                              height: 10,
+                                                            ),
+                                                            AnimatedButton(
+                                                                isFixedHeight:
+                                                                    false,
+                                                                text: 'Submit',
+                                                                pressEvent: () {
+                                                                  controller.bookingCancellation(
+                                                                      orderId,
+                                                                      reasons
+                                                                          .text);
+                                                                  dialog
+                                                                      .dismiss();
+                                                                })
+                                                          ],
                                                         ),
                                                       ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      AnimatedButton(
-                                                          isFixedHeight: false,
-                                                          text: 'Submit',
-                                                          pressEvent: () {
-                                                            controller
-                                                                .bookingCancellation(
-                                                                    orderId,
-                                                                    reasons
-                                                                        .text);
-                                                            dialog.dismiss();
-                                                          })
-                                                    ],
-                                                  ),
-                                                ),
-                                              )..show();
-                                            },
-                                          ).show()
+                                                    )..show();
+                                                  },
+                                                  child: Text(
+                                                    'Yes',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'SanFrancisco',
+                                                        fontSize: 13,
+                                                        color:
+                                                            Color(0xffF9813A)),
+                                                  )),
+                                            ],
+                                          )),
                                         },
                                         child: Container(
                                           margin: EdgeInsets.only(

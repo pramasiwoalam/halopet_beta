@@ -39,7 +39,7 @@ class ProfileView extends GetView<ProfileController> {
           'Profile',
           style: TextStyle(
               fontFamily: 'SanFrancisco',
-              fontSize: 17,
+              fontSize: 15,
               color: Colors.grey.shade800),
         )),
         leading: Container(
@@ -122,7 +122,7 @@ class ProfileView extends GetView<ProfileController> {
                     var data = snapshot.data!.data() as Map<String, dynamic>;
                     var petshopId = data['petshopId'];
 
-                    int balance = data['balance'];
+                    double balance = data['balance'];
                     MoneyFormatter fmf = MoneyFormatter(
                         amount: balance.roundToDouble(),
                         settings: MoneyFormatterSettings(

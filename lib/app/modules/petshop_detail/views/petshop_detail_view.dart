@@ -56,7 +56,6 @@ class PetshopDetailView extends GetView<PetshopDetailController> {
                         child: Container(
                           height: height / 3,
                           width: width,
-                          // color: Colors.red,
                           decoration: BoxDecoration(
                               color: Colors.red,
                               borderRadius: BorderRadius.circular(10)),
@@ -251,149 +250,165 @@ class ShopInfo extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
+    var petshopId = localStorage.read('petshopId');
 
-    return Container(
-      height: height,
-      width: width,
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Information',
-                  style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13)),
-              Container(
-                width: width / 4.5,
-                child: Divider(
-                  thickness: 1,
-                  color: Colors.grey.shade800,
-                ),
-              ),
-              Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                  style: TextStyle(
-                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
-              const SizedBox(
-                height: 15,
-              ),
-              Text('Services',
-                  style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13)),
-              Container(
-                width: width / 4.5,
-                child: Divider(
-                  thickness: 1,
-                  color: Colors.grey.shade800,
-                ),
-              ),
-              Text('Grooming Services',
-                  style: TextStyle(
-                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
-              const SizedBox(
-                height: 2,
-              ),
-              Text('Pet Hotel Services',
-                  style: TextStyle(
-                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
-              const SizedBox(
-                height: 2,
-              ),
-              Text('Vet Available',
-                  style: TextStyle(
-                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
-              const SizedBox(
-                height: 15,
-              ),
-              Text('Location',
-                  style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13)),
-              Container(
-                width: width / 4.5,
-                child: Divider(
-                  thickness: 1,
-                  color: Colors.grey.shade800,
-                ),
-              ),
-              Text('Jl. Gang Pori No.99',
-                  style: TextStyle(
-                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
-              const SizedBox(
-                height: 3,
-              ),
-              Text('Pisangan, Jakarta Timur',
-                  style: TextStyle(
-                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
-              const SizedBox(
-                height: 15,
-              ),
-              Text('Open Days',
-                  style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13)),
-              Container(
-                width: width / 4.5,
-                child: Divider(
-                  thickness: 1,
-                  color: Colors.grey.shade800,
-                ),
-              ),
-              Text('Monday - Saturday',
-                  style: TextStyle(
-                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
-              const SizedBox(
-                height: 3,
-              ),
-              Text('09.00 - 21.00',
-                  style: TextStyle(
-                      fontFamily: 'SanFrancisco.Light', fontSize: 12)),
-              const SizedBox(
-                height: 15,
-              ),
-              Text('Photos',
-                  style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13)),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: height * 0.2,
-                width: width,
-                // color: Colors.black,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: cards.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: Container(
-                          height: height * 0.58,
-                          width: width * 0.42,
-                          decoration:
-                              BoxDecoration(border: Border.all(width: 0.05)),
-                          child: InkWell(
-                            onTap: () => {},
-                            child: Stack(
-                              children: [
-                                FullScreenWidget(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(3),
-                                    child: Image(
-                                      height: height * 0.6,
-                                      width: width * 0.42,
-                                      image:
-                                          AssetImage("${cards[index]['name']}"),
-                                      fit: BoxFit.contain,
+    return FutureBuilder<DocumentSnapshot<Object?>>(
+        future: controller.getPetshopDetail(petshopId),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            var data = snapshot.data!.data() as Map<String, dynamic>;
+            return Container(
+              height: height,
+              width: width,
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Information',
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco', fontSize: 13)),
+                      Container(
+                        width: width / 4.5,
+                        child: Divider(
+                          thickness: 1,
+                          color: Colors.grey.shade800,
+                        ),
+                      ),
+                      Text(data['desc'],
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco.Light', fontSize: 12)),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text('Services',
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco', fontSize: 13)),
+                      Container(
+                        width: width / 4.5,
+                        child: Divider(
+                          thickness: 1,
+                          color: Colors.grey.shade800,
+                        ),
+                      ),
+                      Text('Grooming Service',
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco.Light', fontSize: 12)),
+                      const SizedBox(
+                        height: 2,
+                      ),
+                      Text('Pet Hotel Services',
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco.Light', fontSize: 12)),
+                      const SizedBox(
+                        height: 2,
+                      ),
+                      Text('Vet Available',
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco.Light', fontSize: 12)),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text('Location',
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco', fontSize: 13)),
+                      Container(
+                        width: width / 4.5,
+                        child: Divider(
+                          thickness: 1,
+                          color: Colors.grey.shade800,
+                        ),
+                      ),
+                      Text(data['address'],
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco.Light', fontSize: 12)),
+                      const SizedBox(
+                        height: 3,
+                      ),
+                      Text("${data['district']}, ${data['city']}",
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco.Light', fontSize: 12)),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text('Open Days',
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco', fontSize: 13)),
+                      Container(
+                        width: width / 4.5,
+                        child: Divider(
+                          thickness: 1,
+                          color: Colors.grey.shade800,
+                        ),
+                      ),
+                      Text('Monday - Saturday',
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco.Light', fontSize: 12)),
+                      const SizedBox(
+                        height: 3,
+                      ),
+                      Text('09.00 - 21.00',
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco.Light', fontSize: 12)),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text('Photos',
+                          style: TextStyle(
+                              fontFamily: 'SanFrancisco', fontSize: 13)),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        height: height * 0.2,
+                        width: width,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: cards.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Container(
+                                  height: height * 0.58,
+                                  width: width * 0.42,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(width: 0.05)),
+                                  child: InkWell(
+                                    onTap: () => {},
+                                    child: Stack(
+                                      children: [
+                                        FullScreenWidget(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                            child: Image(
+                                              height: height * 0.6,
+                                              width: width * 0.42,
+                                              image: AssetImage(
+                                                  "${cards[index]['name']}"),
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
   }
 }
 
@@ -625,6 +640,7 @@ class Review extends StatelessWidget {
     var petshopId = localStorage.read('petshopId');
 
     return Container(
+        height: height,
         width: width,
         child: StreamBuilder<QuerySnapshot<Object?>>(
             stream: controller.streamReview(petshopId),
@@ -640,7 +656,7 @@ class Review extends StatelessWidget {
                         var dataMap =
                             data[index].data() as Map<String, dynamic>;
                         return Container(
-                          height: height * 0.2,
+                          height: height * 0.22,
                           width: width,
                           decoration: BoxDecoration(
                               border: Border.all(
@@ -649,7 +665,8 @@ class Review extends StatelessWidget {
                               ),
                               color: Colors.white),
                           child: Padding(
-                            padding: const EdgeInsets.all(28),
+                            padding: const EdgeInsets.only(
+                                left: 24, right: 24, bottom: 20, top: 18),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -666,7 +683,7 @@ class Review extends StatelessWidget {
                                           style: TextStyle(
                                               fontFamily: 'SanFrancisco',
                                               color: Colors.grey.shade700,
-                                              fontSize: 14),
+                                              fontSize: 13),
                                         ),
                                         const SizedBox(
                                           height: 3,
@@ -676,7 +693,7 @@ class Review extends StatelessWidget {
                                           style: TextStyle(
                                               fontFamily: 'SanFrancisco.Light',
                                               color: Colors.grey.shade700,
-                                              fontSize: 12),
+                                              fontSize: 11),
                                         )
                                       ],
                                     ),
@@ -693,7 +710,7 @@ class Review extends StatelessWidget {
                                             '${dataMap['rating']}',
                                             style: TextStyle(
                                                 fontFamily:
-                                                    'SanFrancisco.Regular',
+                                                    'SanFrancisco.Light',
                                                 color: Colors.white,
                                                 fontSize: 12),
                                           ),
@@ -722,7 +739,7 @@ class Review extends StatelessWidget {
                                 Text(
                                   '${dataMap['message']}',
                                   style: TextStyle(
-                                      fontFamily: 'SanFrancisco.Regular',
+                                      fontFamily: 'SanFrancisco.Light',
                                       color: Colors.grey.shade700,
                                       fontSize: 13),
                                 ),

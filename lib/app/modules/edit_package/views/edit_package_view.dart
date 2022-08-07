@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halopet_beta/app/modules/edit_package/views/edit_package_grooming.dart';
 import 'package:halopet_beta/app/modules/package_form/views/package_grooming.dart';
 import 'package:halopet_beta/app/modules/package_form/views/package_hotel.dart';
 import 'package:halopet_beta/app/modules/package_form/views/package_session_view.dart';
@@ -11,7 +12,7 @@ import 'package:halopet_beta/app/routes/app_pages.dart';
 
 import '../controllers/edit_package_controller.dart';
 
-class PackageFormView extends GetView<EditPackageController> {
+class EditPackageView extends GetView<EditPackageController> {
   final localStorage = GetStorage();
 
   var argument = Get.arguments;
@@ -31,7 +32,7 @@ class PackageFormView extends GetView<EditPackageController> {
           elevation: 0,
         ),
         body: argument == 'Grooming'
-            ? PackageGrooming()
+            ? EditGrooming()
             : argument == 'Hotel'
                 ? PackageHotel()
                 : PackageSession()

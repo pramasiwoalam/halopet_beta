@@ -470,7 +470,7 @@ class SellerOnGoing extends GetView<SellerOrderDetailController> {
                                                               'SanFrancisco.Light',
                                                           color: Colors
                                                               .grey.shade700)),
-                                                  Text('Dita Genday Petshop',
+                                                  Text('Petshop A',
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily:

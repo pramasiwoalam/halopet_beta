@@ -44,7 +44,7 @@ class MedicalListFormView extends GetView<MedicalListFormController> {
           'Medical List Registration',
           style: TextStyle(
               fontFamily: 'SanFrancisco',
-              fontSize: 16,
+              fontSize: 15,
               color: Colors.grey.shade800),
         ),
         backgroundColor: Colors.white,

@@ -117,7 +117,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                           children: [
                             Container(
                               height: size.height * 0.065,
-                              width: width * 0.43,
+                              width: width * 0.4,
                               child: TextField(
                                 readOnly: true,
                                 decoration: InputDecoration(
@@ -151,7 +151,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                             ),
                             Container(
                               height: size.height * 0.065,
-                              width: width * 0.43,
+                              width: width * 0.4,
                               child: TextField(
                                 readOnly: true,
                                 // controller: emailController,

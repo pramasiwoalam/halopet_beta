@@ -100,7 +100,7 @@ class GetAllPetshopView extends GetView<PetshopListController> {
                                               const SizedBox(
                                                 width: 4,
                                               ),
-                                              Text('5.0 (238)',
+                                              Text('5.0 (7)',
                                                   style: TextStyle(
                                                       fontFamily:
                                                           'SanFrancisco.Light',

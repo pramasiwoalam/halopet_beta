@@ -10,6 +10,7 @@ class PetFormController extends GetxController {
   var petshopId = '';
   var service = '';
   var userName = '';
+  var edited = false.obs;
 
   Future<DocumentSnapshot<Object?>> getOrder(String orderId) async {
     DocumentReference doc = firestore.collection("order").doc(orderId);

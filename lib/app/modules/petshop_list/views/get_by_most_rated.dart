@@ -72,20 +72,21 @@ class GetByMostRatedPetshopView extends GetView<PetshopListController> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            ' ${dataMap['petshopName']}',
-                                            style: GoogleFonts.roboto(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 15),
+                                          SizedBox(
+                                            height: 3,
                                           ),
+                                          Text(' ${dataMap['petshopName']}',
+                                              style: TextStyle(
+                                                  fontFamily: 'SanFrancisco',
+                                                  fontSize: 14)),
                                           const SizedBox(
                                             height: 1,
                                           ),
-                                          Text(
-                                            ' Jakarta, Indonesia',
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 13),
-                                          ),
+                                          Text(' Jakarta, Indonesia',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'SanFrancisco.Light',
+                                                  fontSize: 12)),
                                           const SizedBox(
                                             height: 4,
                                           ),
@@ -99,10 +100,11 @@ class GetByMostRatedPetshopView extends GetView<PetshopListController> {
                                               const SizedBox(
                                                 width: 4,
                                               ),
-                                              Text('5.0 (238)',
-                                                  style: GoogleFonts.roboto(
-                                                      fontWeight:
-                                                          FontWeight.w400)),
+                                              Text('5.0 (7)',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
+                                                      fontSize: 12)),
                                             ],
                                           ),
                                           const SizedBox(
@@ -118,11 +120,11 @@ class GetByMostRatedPetshopView extends GetView<PetshopListController> {
                                               const SizedBox(
                                                 width: 5,
                                               ),
-                                              Text(
-                                                'Grooming, Pet Hotel, Vet',
-                                                style: GoogleFonts.roboto(
-                                                    fontSize: 13),
-                                              ),
+                                              Text('Grooming, Pet Hotel, Vet',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'SanFrancisco.Light',
+                                                      fontSize: 12)),
                                             ],
                                           ),
                                           const SizedBox(
