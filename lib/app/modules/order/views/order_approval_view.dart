@@ -9,6 +9,8 @@ import 'package:halopet_beta/app/routes/app_pages.dart';
 import '../controllers/order_controller.dart';
 
 class ApprovalUserContainer extends StatelessWidget {
+  const ApprovalUserContainer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final orderController = Get.put(OrderController());

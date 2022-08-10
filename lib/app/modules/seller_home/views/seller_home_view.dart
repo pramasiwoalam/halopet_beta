@@ -143,16 +143,11 @@ class ApprovalContainer extends StatelessWidget {
                                     children: [
                                       Row(
                                         children: [
-                                          Text(' Grooming ',
+                                          Text(" ${dataMap['bookingType']} ",
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   color: Colors.grey.shade800,
                                                   fontFamily: 'SanFrancisco')),
-                                          Text('Service',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontFamily:
-                                                      'SanFrancisco.Light')),
                                         ],
                                       ),
                                       Container(

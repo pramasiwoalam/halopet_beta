@@ -78,7 +78,7 @@ class WaitingApproval extends GetView<SellerOrderDetailController> {
                 return FutureBuilder<DocumentSnapshot<Object?>>(
                     future: bookingType == 'Grooming Service'
                         ? controller.getPackage(data['packageId'])
-                        : bookingType == 'Vet'
+                        : bookingType == 'Vet Service'
                             ? controller.getSession(data['sessionId'])
                             : controller.getRoom(data['roomId']),
                     builder: (context, snapshot) {
@@ -88,8 +88,12 @@ class WaitingApproval extends GetView<SellerOrderDetailController> {
                         double bookingFee = 5000;
                         double charge = 0;
                         double tax = 0;
-                        if (bookingType == 'Vet') {
-                          charge = bookingFee;
+                        if (bookingType == 'Vet Service') {
+                          if (data['isDelivery'] == false) {
+                            charge = bookingFee;
+                          } else {
+                            charge = bookingFee + data['deliveryFee'];
+                          }
                         } else {
                           tax = double.parse(packageData['price']) * 10 / 100;
                           charge = 0;

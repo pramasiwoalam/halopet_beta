@@ -110,7 +110,7 @@ class RatingView extends GetView<RatingController> {
                                                       fontSize: 12),
                                                 ),
                                                 Text(
-                                                  'Deku Petshop',
+                                                  'Petshop A',
                                                   style: TextStyle(
                                                       fontFamily:
                                                           'SanFrancisco',
@@ -139,7 +139,7 @@ class RatingView extends GetView<RatingController> {
                                                       fontSize: 12),
                                                 ),
                                                 Text(
-                                                  'Grooming',
+                                                  data['bookingType'],
                                                   style: TextStyle(
                                                       fontFamily:
                                                           'SanFrancisco',

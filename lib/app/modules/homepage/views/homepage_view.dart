@@ -688,7 +688,7 @@ class Home extends StatelessWidget {
                                                                                 SizedBox(
                                                                                   width: 6,
                                                                                 ),
-                                                                                Text('4.5', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5, fontFamily: 'SanFrancisco')),
+                                                                                Text('5.0', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5, fontFamily: 'SanFrancisco')),
                                                                               ],
                                                                             ),
                                                                           )

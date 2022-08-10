@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:halopet_beta/app/modules/additional_info/bindings/doctor_registration_binding.dart';
+import 'package:halopet_beta/app/modules/additional_info/bindings/additional_info_binding.dart';
 import 'package:halopet_beta/app/modules/additional_info/views/additional_info_view.dart';
 import 'package:halopet_beta/app/modules/additional_info/views/delivery_info.dart';
 import 'package:halopet_beta/app/modules/admin_list_users/views/admin_users_detail_view.dart';

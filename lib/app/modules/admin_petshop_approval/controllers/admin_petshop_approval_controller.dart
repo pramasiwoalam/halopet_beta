@@ -9,11 +9,9 @@ class AdminPetshopApprovalController extends GetxController {
     return doc.get();
   }
 
-  void accept(String petshopId, String petshopOwnerId) {
+  void accept(String petshopId) {
     DocumentReference docRef = firestore.collection('petshop').doc(petshopId);
-    DocumentReference docRefRole =
-        firestore.collection('users').doc(petshopOwnerId);
-    docRefRole.update({'role': 'Seller', 'petshopOwner': true});
+
     docRef.update({'status': 'Approved'});
     Get.back();
     Get.back();

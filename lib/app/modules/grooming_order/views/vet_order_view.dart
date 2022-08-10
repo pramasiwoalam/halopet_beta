@@ -301,7 +301,7 @@ class VetOrderView extends GetView<GroomingOrderController> {
                                                               orderController
                                                                   .date
                                                                   .toString(),
-                                                              "Vet",
+                                                              "Vet Service",
                                                               formData[
                                                                   'symptoms'],
                                                               localStorage.read(
@@ -315,9 +315,7 @@ class VetOrderView extends GetView<GroomingOrderController> {
                                                               orderController
                                                                   .date
                                                                   .toString(),
-                                                              localStorage
-                                                                  .read(
-                                                                      'serviceType'),
+                                                              "Vet Service",
                                                               formData[
                                                                   'symptoms'],
                                                               localStorage.read(

@@ -518,7 +518,7 @@ class DeliveryListView extends GetView<DeliveryListController> {
                                         onPressed: () => {
                                               groomingController.status = 0,
                                               Get.toNamed(Routes.CREATE_ORDER,
-                                                  arguments: 'Grooming'),
+                                                  arguments: arguments),
                                             },
                                         style: ElevatedButton.styleFrom(
                                           padding: const EdgeInsets.symmetric(

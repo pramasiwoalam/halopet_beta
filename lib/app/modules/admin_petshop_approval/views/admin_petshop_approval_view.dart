@@ -262,7 +262,60 @@ class AdminPetshopApprovalView extends GetView<AdminPetshopApprovalController> {
                                                   color: Colors.orange),
                                             )),
                                         TextButton(
-                                            onPressed: () => {},
+                                            onPressed: () => {
+                                                  controller.accept(
+                                                      snapshot.data!.id),
+                                                  Get.dialog(AlertDialog(
+                                                      title: Text(
+                                                        'Approval Success',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                'SanFrancisco',
+                                                            fontSize: 14),
+                                                      ),
+                                                      titlePadding:
+                                                          EdgeInsets.only(
+                                                              left: 26,
+                                                              right: 26,
+                                                              top: 30),
+                                                      contentPadding:
+                                                          EdgeInsets.only(
+                                                              left: 26,
+                                                              right: 26,
+                                                              top: 16,
+                                                              bottom: 12),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15)),
+                                                      content: Text(
+                                                          'You have succesfully approve this petshop.',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'SanFrancisco.Light',
+                                                              fontSize: 12)),
+                                                      actionsPadding:
+                                                          EdgeInsets.only(
+                                                              right: 12,
+                                                              top: 6,
+                                                              bottom: 2),
+                                                      actions: [
+                                                        TextButton(
+                                                            onPressed: () =>
+                                                                {Get.back()},
+                                                            child: Text(
+                                                              'Ok',
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'SanFrancisco',
+                                                                  fontSize: 13,
+                                                                  color: Colors
+                                                                      .orange),
+                                                            )),
+                                                      ]))
+                                                },
                                             child: Text(
                                               'Confirm',
                                               style: TextStyle(

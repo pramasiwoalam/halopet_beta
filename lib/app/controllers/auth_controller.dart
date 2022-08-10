@@ -88,7 +88,7 @@ class AuthController extends GetxController {
         "userId": uid,
         "role": "Member",
         "petshopOwner": false,
-        "balance": 0,
+        "balance": 0.toDouble(),
         "address": formData['address'],
         "district": formData['district'],
         "city": formData['city'],

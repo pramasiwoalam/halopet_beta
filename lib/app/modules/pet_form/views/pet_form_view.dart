@@ -77,14 +77,14 @@ class PetFormView extends GetView<PetFormController> {
                               fit: BoxFit.scaleDown,
                               image: controller.edited.value == false
                                   ? AssetImage('assets/images/user.png')
-                                  : AssetImage('assets/images/user2.png')),
+                                  : AssetImage('assets/images/freddy.jpg')),
                         ),
                       ),
                     ),
                   ),
                   Positioned(
                     top: height / 8,
-                    right: 110,
+                    right: 130,
                     child: GestureDetector(
                       onTap: () => pickImage(ImageSource.gallery),
                       child: Container(

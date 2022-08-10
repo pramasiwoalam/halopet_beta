@@ -76,7 +76,7 @@ class GroomingOrderController extends GetxController {
 
     try {
       order.add({
-        "bookingType": "Vet",
+        "bookingType": "Vet Service",
         "petId": localStorage.read('petId'),
         "sessionId": localStorage.read('sessionId'),
         "medicalId": localStorage.read('medicalId'),
@@ -244,7 +244,7 @@ class GroomingOrderController extends GetxController {
 
     try {
       order.add({
-        "bookingType": "Vet",
+        "bookingType": "Vet Service",
         "petId": localStorage.read('petId'),
         "sessionId": localStorage.read('sessionId'),
         "medicalId": localStorage.read('medicalId'),
