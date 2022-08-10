@@ -52,7 +52,9 @@ class AuthController extends GetxController {
     try {
       var res = await auth.createUserWithEmailAndPassword(
           email: formData['email'], password: formData['password']);
+
       addUserCollection(formData, res.user!.uid);
+
       Get.back();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -76,12 +78,6 @@ class AuthController extends GetxController {
     CollectionReference user = firestore.collection("users");
 
     try {
-      // await user.add({
-      //   "email" : email,
-      //   "uid" : uid,
-      //   "role" : "member"
-      // });
-
       await user.doc(uid).set({
         "name": formData['name'],
         "email": formData['email'],
@@ -107,7 +103,7 @@ class AuthController extends GetxController {
             EdgeInsets.only(left: 26, right: 26, top: 16, bottom: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         content: Text(
-            'Register success. Welcome to HaloPet. The solution for your pet needs.',
+            'Register success. Welcome to HaloPet. The solution for your pet needs. \n\nReminder: \n1. The pet shop location range is LIMITED only to the DKI Jakarta province.\n2. If you are the petshop owner, you can not register your pet shop if the location range is OUTSIDE the DKI Jakarta Area.\n3. If you are a petshop owner, you just can only register service that suitable to DOG and CAT.',
             style: TextStyle(fontFamily: 'SanFrancisco.Light', fontSize: 12)),
         actionsPadding: EdgeInsets.only(right: 12, top: 6, bottom: 2),
         actions: [
